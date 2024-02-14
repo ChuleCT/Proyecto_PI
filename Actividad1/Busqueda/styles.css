@@ -1,0 +1,46 @@
+#busqueda {
+    position: relative;
+    top: -4.5em;
+    left: .7em
+}
+
+#navbar {
+    background-color: rgb(0, 0, 159);
+    position: relative;
+    left: -3em;
+}
+
+#ofertas {
+    position: relative;
+    top: -3em;
+}
+
+#carrusel {
+    position: relative;
+    top: -2em;
+    left: -6em;
+}
+
+.card img {
+    position: relative;
+    top: 3.5em;
+    left: .5em
+}
+
+.card {
+    min-height: 220px;
+    max-width: 540px;
+    position: relative;
+    top: -3em;
+    left: 7em;
+}
+
+#alojamientos {
+    width: 85%;
+    position: relative;
+    left: 7em;
+}
+
+#alojamientos img {
+    max-width: 240px;
+}
