@@ -26,7 +26,7 @@
             <div class="row" id="busqueda">
                 <div
                     class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
-                    <input type="text" name="" id="" class="border border-0">
+                    <input type="text" name="" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?">
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
                     <div class="row">
@@ -38,8 +38,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
-                    <p class="text-truncate">integrantes</p>
+                <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded"
+                    id="filtro-habitacion">
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="dropdown" id="adultos">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    1 adulto
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">2 adultos</a></li>
+                                    <li><a class="dropdown-item" href="#">3 adultos</a></li>
+                                    <li><a class="dropdown-item" href="#">4 adultos</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="dropdown" id="niños">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    0 niños
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">1 niño</a></li>
+                                    <li><a class="dropdown-item" href="#">2 niños</a></li>
+                                    <li><a class="dropdown-item" href="#">3 niños</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="dropdown" id="habitaciones">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    1 habitación
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">2 habitaciones</a></li>
+                                    <li><a class="dropdown-item" href="#">3 habitaciones</a></li>
+                                    <li><a class="dropdown-item" href="#">4 habitaciones</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
                     <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate">

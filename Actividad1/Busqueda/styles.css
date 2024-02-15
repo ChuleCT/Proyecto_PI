@@ -7,7 +7,7 @@
 #busqueda {
     position: relative;
     top: -4.5em;
-    left: .7em
+    left: .5em;
 }
 
 #busqueda input[type="text"] {
@@ -15,12 +15,36 @@
     left: 0em;
     top: .2em;
     width: 19em;
+    background-color: transparent;
 }
 
 input[type="text"]:focus {
     outline: none;
-  }
+}
 
+#filtro-habitacion {
+    width: 27%;
+}
+
+#adultos {
+    width: 80%;
+    position: relative;
+    top: -.2em;
+    left: -.4em;
+}
+
+#niños {
+    position: relative;
+    top: -.2em;
+    left: 4.5em;
+}
+
+#habitaciones {
+    position: relative;
+    top: -.2em;
+    left: 9em;
+
+}
 
 #ofertas {
     position: relative;
