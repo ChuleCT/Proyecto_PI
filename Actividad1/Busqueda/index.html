@@ -15,14 +15,30 @@
 </head>
 
 <body>
+    <!-- navbar -->
+    <div class="container-fluid color-navbar pt-3">
+        <div class="row" id="navbar">
+            <div class="col-4 offset-2">
+                <a class="navbar-brand text-light fs-4 fw-bold">Booking.com</a>
+            </div>
+            <div class="col-1 offset-1">
+                <button class="btn btn-light text-primary">Registrarse</button>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-light text-primary">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
     <main>
-        <div class="container mx-auto">
-            <div class="row mb-5">
-                <div class="col-11 offset-1" id="navbar">
-                    <h1 class="mx-3 text-light fs-2 ">Encuentra tu próxima estancia</h1>
-                    <p class="mx-3 text-light pb-5">Busca ofertas en hoteles, casas y mucho más...</p>
+        <div class="container-fluid color-navbar pt-5">
+            <div class="row mb-5" id="titulo">
+                <div class="col-8 offset-2">
+                    <h1 class="mx-5 text-light fs-2 ">Encuentra tu próxima estancia</h1>
+                    <p class="mx-5 text-light pb-5">Busca ofertas en hoteles, casas y mucho más...</p>
                 </div>
             </div>
+        </div>
+        <div class="container mx-auto">
             <div class="row" id="busqueda">
                 <div
                     class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
@@ -53,7 +69,8 @@
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
-                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate" id="btn-buscar">
+                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
+                        id="btn-buscar">
                         Buscar
                     </button>
                 </div>

@@ -1,8 +1,17 @@
-#navbar {
+.color-navbar {
     background-color: rgb(0, 0, 159);
-    position: relative;
-    left: -3em;
 }
+
+#navbar {
+    position: relative;
+    left: 6em;
+}
+
+#titulo {
+    position: relative;
+    left: 2em;
+}
+
 
 #busqueda {
     position: relative;
