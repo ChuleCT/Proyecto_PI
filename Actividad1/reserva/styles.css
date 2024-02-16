@@ -1,0 +1,26 @@
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+#navbar {
+    position: relative;
+    left: 6em;
+    height: 3.5em;
+}
+
+img {
+    height: 7em;
+    position: relative;
+    top: .2em
+}
+
+.precio {
+    position: relative;
+    left: -1.5em;
+}
+
+.ajustes {
+    position: relative;
+    left: 1.5em;
+    top: -3.2em;
+}
