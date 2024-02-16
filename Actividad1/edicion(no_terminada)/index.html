@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Edición de Alojamiento</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../edicion(no_terminada)/styles.css">
+
+</head>
+
+<body>
+
+    <!-- Se debe diseñar una página para
+    la edición de los datos de un alojamiento.
+    Para la edición de la información básica del alojamiento se deben usar los siguientes tipos de
+    campos:
+        ● Nombre alojamiento. text
+        ● Dirección: text
+        ● Teléfono: telephone
+        ● Distancia al centro: number.
+        ● Valoración media: number (float)
+        ● Descripción: text
+        ● Servicios o instalaciones ofrecidos: checkbox.
+        ● Permite mascotas: radio button -->
+
+    <!-- navbar -->
+    <div class="container-fluid color-navbar pt-3">
+        <div class="row mb-5" id="navbar">
+            <div class="col-4 offset-2">
+                <a class="navbar-brand text-light fs-4 fw-bold">Booking.com</a>
+            </div>
+            <div class="col-1 offset-1">
+                <a href="../Registro/index.html">
+                    <button class="btn btn-light text-primary">Registrarse</button>
+                </a>
+            </div>
+            <div class="col-1">
+                <a href="../inicioSesion/index.html">
+                    <button class="btn btn-light text-primary">Iniciar Sesión</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <h1 class="mb-3">Edición de Alojamiento</h1>
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="nombreAlojamiento" class="form-label">Nombre del Alojamiento</label>
+                        <input type="text" class="form-control" id="nombreAlojamiento" name="nombreAlojamiento"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="distanciaCentro" class="form-label">Distancia al centro</label>
+                        <input type="number" class="form-control" id="distanciaCentro" name="distanciaCentro" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valoracionMedia" class="form-label">Valoración media</label>
+                        <input type="number" class="form-control" id="valoracionMedia" name="valoracionMedia" step="any" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="servicios" class="form-label">Servicios o instalaciones ofrecidos</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="wifi" id="wifi" name="servicios[]">
+                            <label class="form-check label" for="wifi">Wifi</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="piscina" id="piscina"
+                                name="servicios[]">
+                            <label class="form-check label" for="piscina">Piscina</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="spa" id="spa" name="servicios[]">
+                            <label class="form-check label" for="spa">Spa</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="gimnasio" id="gimnasio"
+                                name="servicios[]">
+                            <label class="form-check label" for="gimnasio">Gimnasio</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="restaurante" id="restaurante"
+                                name="servicios[]">
+                            <label class="form-check label" for="restaurante">Restaurante</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="bar" id="bar" name="servicios[]">
+                            <label class="form-check label" for="bar">Bar</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mascotas" class="form-label">Permite mascotas</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mascotas" id="si" value="si" required>
+                                <label class="form-check label" for="si">Sí</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mascotas" id="no" value="no" required>
+                                <label class="form-check label" for="no">No</label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
