@@ -1,0 +1,21 @@
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+#navbar {
+    position: relative;
+    left: 6em;
+    height: 3.5em;
+}
+
+img {
+    height: 70%;
+}
+
+.ciudad {
+    position: relative;
+    top: -15em;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 25%;
+    border-radius: 5px;
+}
