@@ -8,14 +8,28 @@
     height: 3.5em;
 }
 
-img {
-    height: 70%;
+.col-4 img {
+    position: relative;
+    top: -2em;
 }
 
-.ciudad {
+.col-6 .ciudad {
     position: relative;
-    top: -15em;
+    top: -18em;
     background-color: rgba(0, 0, 0, 0.5);
     width: 25%;
     border-radius: 5px;
+}
+
+.col-4 .ciudad {
+    position: relative;
+    top: -17em;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 30%;
+    border-radius: 5px;
+}
+
+.col-4 img {
+    width: 102%;
+    height: 100%;
 }
