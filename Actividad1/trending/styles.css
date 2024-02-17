@@ -38,11 +38,11 @@
     display: none;
 }
 
-.btn {
+.destinations .btn {
     background-color: transparent;
 }
 
-.btn:focus {
+.destinations .btn:focus {
     background-color: #EBF3FF;
     border-color: #006CE4;
     color: #006CE4;
