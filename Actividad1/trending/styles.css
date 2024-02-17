@@ -47,3 +47,7 @@
     border-color: #006CE4;
     color: #006CE4;
 }
+
+td {
+    padding-right: 7em !important;
+}
