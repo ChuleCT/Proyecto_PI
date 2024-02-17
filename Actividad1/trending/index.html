@@ -76,43 +76,112 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-10 offset-1">
-                    <h2 class="fw-bold">Explore Spain</h2>
-                    <p>These popular destinations have a lot to offer</p>
-                    <div class="row">
-                        <div class="col-2">
-                            <img class="rounded img-fluid" src="../img/madrid.jpg" alt="">
-                            <p class="fw-bold mt-2">Madrid</p>
-                            <p>3,000 properties</p>
-                        </div>
-                        <div class="col">
-                            <img class="rounded img-fluid" src="../img/sevilla.jpg" alt="">
-                            <p class="fw-bold mt-2">Sevilla</p>
-                            <p>1,500 properties</p>
-                        </div>
-                        <div class="col">
-                            <img class="rounded img-fluid" src="../img/barcelona.jpg" alt="">
-                            <p class="fw-bold mt-2">Barcelona</p>
-                            <p>2,000 properties</p>
-                        </div>
-                        <div class="col">
-                            <img class="rounded img-fluid" src="../img/valencia.jpg" alt="">
-                            <p class="fw-bold mt-2">Valencia</p>
-                            <p>1,000 properties</p>
-                        </div>
-                        <div class="col">
-                            <img class="rounded img-fluid" src="../img/cordoba.jpg" alt="">
-                            <p class="fw-bold mt-2">Cordoba</p>
-                            <p>1,200 properties</p>
-                        </div>
-                        <div class="col">
-                            <img class="rounded img-fluid" src="../img/malaga.jpg" alt="">
-                            <p class="fw-bold mt-2">Málaga</p>
-                            <p>1,800 properties</p>
-                        </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <h2 class="fw-bold">Explore Spain</h2>
+                <p>These popular destinations have a lot to offer</p>
+                <div class="row">
+                    <div class="col-2">
+                        <img class="rounded img-fluid" src="../img/madrid.jpg" alt="">
+                        <p class="fw-bold mt-2">Madrid</p>
+                        <p>3,000 properties</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/sevilla.jpg" alt="">
+                        <p class="fw-bold mt-2">Sevilla</p>
+                        <p>1,500 properties</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/barcelona.jpg" alt="">
+                        <p class="fw-bold mt-2">Barcelona</p>
+                        <p>2,000 properties</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/valencia.jpg" alt="">
+                        <p class="fw-bold mt-2">Valencia</p>
+                        <p>1,000 properties</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/cordoba.jpg" alt="">
+                        <p class="fw-bold mt-2">Cordoba</p>
+                        <p>1,200 properties</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/malaga.jpg" alt="">
+                        <p class="fw-bold mt-2">Málaga</p>
+                        <p>1,800 properties</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-10 offset-1">
+                <h2 class="fw-bold">Browse by property type in Barcelona</h2>
+                <div class="row mt-3">
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/hotel.jpeg" alt="">
+                        <p class="fw-bold mt-2">Hotels</p>
+                        <p>6 Mar-15 Mar, 2 adults</p>
+                        <p>301 available</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/apartamento.jpg" alt="">
+                        <p class="fw-bold mt-2">Apartments</p>
+                        <p>6 Mar-15 Mar, 2 adults</p>
+                        <p>445 available</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/villa.jpg" alt="">
+                        <p class="fw-bold mt-2">Villas</p>
+                        <p>6 Mar-15 Mar, 2 adults</p>
+                        <p>2 available</p>
+                    </div>
+                    <div class="col">
+                        <img class="rounded img-fluid" src="../img/holidays.jpg" alt="">
+                        <p class="fw-bold mt-2">Holiday Homes</p>
+                        <p>6 Mar-15 Mar, 2 adults</p>
+                        <p>9 available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+
+                <h2 class="fw-bold mb-4">Destinations we love</h2>
+                <button type="button" class="btn fw-bold rounded-5 mb-3" onclick="mostrarInfo('info1')">Botón
+                    1</button>
+                <button type="button" class="btn fw-bold rounded-5 mb-3" onclick="mostrarInfo('info2')">Botón
+                    2</button>
+                <button type="button" class="btn fw-bold rounded-5 mb-3" onclick="mostrarInfo('info3')">Botón
+                    3</button>
+
+                <div id="info1" class="info">
+                    <p>Información relacionada con el Botón 1.</p>
+                </div>
+                <div id="info2" class="info">
+                    <p>Información relacionada con el Botón 2.</p>
+                </div>
+                <div id="info3" class="info">
+                    <p>Información relacionada con el Botón 3.</p>
+                </div>
+
+
+                <script>
+                    function mostrarInfo(id) {
+                        var info = document.getElementById(id);
+
+                        // Ocultar todas las otras informaciones
+                        var infos = document.getElementsByClassName('info');
+                        for (var i = 0; i < infos.length; i++) {
+                            infos[i].style.display = 'none';
+                        }
+
+                        // Mostrar la información correspondiente al botón
+                        info.style.display = 'block';
+                    }
+                </script>
             </div>
         </div>
     </div>

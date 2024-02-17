@@ -33,3 +33,17 @@
     width: 102%;
     height: 100%;
 }
+
+.info {
+    display: none;
+}
+
+.btn {
+    background-color: transparent;
+}
+
+.btn:focus {
+    background-color: #EBF3FF;
+    border-color: #006CE4;
+    color: #006CE4;
+}
