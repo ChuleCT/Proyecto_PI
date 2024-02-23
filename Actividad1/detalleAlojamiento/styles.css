@@ -45,7 +45,7 @@ input {
 }
 
 #adultos {
-    width: 115%;
+    width: 135%;
     position: relative;
     top: -.2em;
     left: -.4em;
@@ -59,7 +59,7 @@ input {
 }
 
 #habitaciones {
-    width: 170%;
+    width: 200%;
     position: relative;
     top: -.2em;
     left: -2em;
