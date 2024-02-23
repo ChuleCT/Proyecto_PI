@@ -121,5 +121,36 @@ input {
     left: 0.9em;
 }
 .bg-custom-light-blue {
-      background-color: #d8f1ff; /* Utiliza el código hexadecimal del tono de azul claro deseado */
+      background-color: #d8f1ff;
+}
+
+.bg-custom-dark-blue {
+    background-color: #4A6BC2;
+}
+
+.borde-claro {
+    border: 1px solid #d8f1ff;
+}
+
+.disponibilidad {
+    width: 105%;
+}
+
+.fa-person {
+    font-size: 1.5em;
+}
+
+.rojo {
+    color: #f00;
+}
+
+.verde {
+    color: #62A954;
+}
+
+#reservaré {
+    width: 135%;
+    font-size: 1em;
+    position: relative;
+    left: -0.8em;
 }
