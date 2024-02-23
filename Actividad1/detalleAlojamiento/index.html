@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,37 +7,382 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
         <link rel="stylesheet" href="../detalleAlojamiento/styles.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     </head>
 
     <body>
-        <iframe src="../cabecera.html" width="100%"></iframe>
+
+        <!-- navbar -->
+        <div class="container-fluid color-navbar pt-3 pb-5">
+            <div class="row" >
+                <div class="col-4 offset-2 cabecera">
+                    <a class="navbar-brand text-light fs-4 fw-bold">Booking.com</a>
+                </div>
+                <div class="col-1 offset-1 cabecera">
+                    <a href="../Registro/index.html">
+                        <button class="btn btn-light text-primary">Registrarse</button>
+                    </a>
+                </div>
+                <div class="col-1 cabecera mx-2">
+                    <a href="../inicioSesion/index.html">
+                        <button class="btn btn-light text-primary">Iniciar Sesión</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container" id="pagina">
+            <!-- Primera Row principal --> 
+            <div class="row" id="PrimeraColIzq">
+
+                <!-- Columna principal de la izquierda --> 
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-12 bg-warning">
+                            <span class="fw-bold fs-5">Buscar</span> <br>
+                            <span class="texto-default mx-1">Destino:</span> <br>
+                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mx-2 bi bi-search me-2" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                                <input type="text" name="" class="border border-0 mx-1">
+                            </div>
+                            <span class="texto-default mx-1">Fecha de entrada:</span> <br>
+                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                <input type="date" name="" class="border border-0 mx-1 pe-5">
+                            </div>
+                            <span class="texto-default mx-1">Fecha de salida:</span> <br>
+                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                <input type="date" name="" class="border border-0 mx-1 pe-5">
+                            </div>
+                            <span class="texto-default mx-1">Estancia de 2 noches:</span> <br>
+                            <div class="row bg-light border border-3 border-warning rounded mx-1">
+                                <div class="col-4">
+                                    <input type="number" name="" id="adultos" placeholder="Adultos" class="border border-0 " >
+                                </div>
+                                    <div class="col-4">
+                                        <input type="number" name="" id="niños" placeholder="Niños" class="border border-0">
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="number" name="" id="habitaciones" placeholder="Habitaciones" class="border border-0" >
+                                    </div>
+                            </div>
+                            <div class="form-check ms-2">
+                                <input class="form-check-input" type="checkbox">
+                                Casas y apartamentos enteros
+                            </div>
+                            <div class="form-check ms-2">
+                                <input class="form-check-input" type="checkbox">
+                                Viajo por trabajo
+
+                                <div class="col-lg-5 col-md-5 col-sm-5 pt-5">
+                                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
+                                                          id="btn-buscar">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <img src="../img/googleMaps.webp" class="img-fluid" alt="">
+                            <button class="btn btn-primary" id="botonImagenGoogleMaps">Ver en el mapa</button>
+                        </div>
+                    </div>
+                </div> 
+
+                <!-- Columna principal de la derecha -->
+                <div class="col-9">
+                    <div class="row ms-1 ">
+                        <div class="col-10 ">
+                            <div class="rating">
+                                <span class="star"><i class="fas fa-star"></i></span>
+                                <span class="star"><i class="fas fa-star"></i></span>
+                                <span class="star"><i class="fas fa-star"></i></span>
+                                <span class="star"><i class="fas fa-star"></i></span>
+                            </div>
+                            <h4 class="negrita">NH Collection Cáceres Palacio de Oquendo</h4>
+                            <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" id="posGeo" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                                <span>Plaza de San Juan, 11, 10003 Cáceres, España -</span>
+                            </div>
+                            <a href="" class="negrita noSubrayado">Ubicación excelente - Ver mapa</a>
+
+                        </div>
+
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary border-0 text-truncate"
+                                                  id="btn-reservar-arriba">
+                                Reserva ahora
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="row ms-1">
+                        <div class="col-4">
+                            <img class="img-fluid mb-3" src="../assets/DetalleAlojamiento1.png" alt="">
+
+                            <img class="img-fluid" src="../assets/DetalleAlojamiento2.png" alt="">
+                        </div>
+                        <div class="col-8">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="../assets/DetalleAlojamiento3.png" alt="">
+                                <div class="col-6 offset-6 textoEnImagen" >
+                                    <div class="row bg-light textoEnImagenRow">
+                                        <div class="col-8 text-end puntuacionTexto">
+                                            <b>Fabuloso</b><br>
+                                            <div class="comentarios">
+                                                4.592 comentarios
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <p class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">8,7</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-2 bg-light textoEnImagenRow">
+                                        <div class="col ">
+                                            <span class="texto-default">La ubicación es muy buena. El servicio y la habitación excelente.</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 bg-light textoEnImagenRow py-2">
+                                        <div class="col-9 pt-2">
+                                            <span class="texto-default"><b>¡Excelente ubicación!</b></span>
+                                        </div>
+                                        <div class="col-3">
+                                            <p class="border border-2 border-dark rounded puntuacionMedia fw-bold">9,6</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ms-1 mt-2">
+                        <div class="col-3">
+                            <img class="img-fluid" src="../assets/DetalleAlojamiento8.png" alt="">
+                        </div>
+                        <div class="col-3">
+                            <img class="img-fluid" src="../assets/DetalleAlojamiento5.png" alt="">
+                        </div>
+                        <div class="col-3">
+                            <img class="img-fluid" src="../assets/DetalleAlojamiento6.png" alt="">
+                        </div>
+                        <div class="col-3">
+                            <img class="img-fluid" src="../assets/DetalleAlojamiento7.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Termina la row principal de la izquierda -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col border me-2 py-2">
+                        <i class="fa-regular fa-eye"></i>
+                        <span>Vistas</span>
+                    </div>
+                    <div class="col border me-2 py-2">
+                        <i class="fa-solid fa-wifi"></i>
+                        <span>Wifi gratis</span>
+                    </div>
+                    <div class="col border me-2 py-2">
+                        <i class="fa-solid fa-umbrella-beach"></i>
+                        <span>Balcón</span>
+                    </div>
+                    <div class="col border me-2 py-2">
+                        <i class="fa-solid fa-paw"></i>
+                        <span>Admite mascotas</span>
+                    </div>
+                    <div class="col border py-2">
+                        <i class="fa-solid fa-bath"></i>
+                        <span>Bañera</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row my-2">
+                    <div class="col border me-2 py-2">
+                        <i class="fa-regular fa-snowflake"></i>
+                        <span>Aire acondicionado</span>
+                    </div>
+                    <div class="col border me-2 py-2">
+                        <i class="fa-regular fa-clock"></i>
+                        <span>Recepción 24 horas</span>
+                    </div>
+                    <div class="col border me-2 py-2">
+                        <i class="fa-solid fa-broom"></i>
+                        <span>Servicio de limpieza diario</span>
+                    </div>
+                    <div class="col border py-2">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Tarjeta de acceso</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 mt-3">
+                    <p class="texto-default">
+                    ¡Puedes conseguir un descuento Genius en NH Collection Cáceres Palacio de Oquendo! Para ahorrar en este alojamiento, solo tienes que <a href="../inicioSesion/index.html">iniciar sesión.</a>
+                    </p>
+                    <p class="texto-default">
+                    Este precioso palacio reconvertido del siglo XVI se encuentra en el centro histórico de Cáceres, junto a las antiguas murallas romanas y árabes de la ciudad. El alojamiento ofrece habitaciones elegantes con aire acondicionado, WiFi gratuita y acceso gratuito a la sala de fitness.
+                    </p>
+                    <p class="texto-default">
+                    Las habitaciones del NH Collection Cáceres Palacio de Oquendo son amplias, presentan una decoración moderna y disponen de TV de 48 pulgadas, cafetera, hervidor eléctrico con infusiones gratuitas y carta de almohadas. También incluyen baño con ducha de efecto lluvia y secador de pelo profesional.
+                    </p>
+                    <p class="texto-default">
+                    El restaurante del hotel alberga una terraza en la plaza de San Juan y sirve tapas locales tradicionales y especialidades clásicas españolas, así como cocina internacional. El bar ocupa las antiguas caballerizas y ofrece vistas a la plaza.
+                    </p>
+                    <p class="texto-default">
+                    El alojamiento está situado a solo 100 metros del centro histórico de Cáceres, declarado Patrimonio de la Humanidad por la UNESCO, y de la iglesia de San Juan. El establecimiento se halla a 10 minutos a pie de la plaza de toros.
+                    </p>
+                    <p class="texto-default">
+                    A las parejas les encanta la ubicación — Le han puesto un <b>9,6</b> para viajes de dos personas.
+                    </p>
+                    <p class="negrita mt-5">Servicios más populares</p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col border me-1">
+                                <i class="fa-solid fa-dumbbell"></i>
+                                <span>Gimnasio</span>
+                            </div>
+                            <div class="col border me-1">
+                                <i class="fa-solid fa-martini-glass-citrus"></i>
+                                <span>Bar</span>
+                            </div>
+                            <div class="col border me-1">
+                                <i class="fa-solid fa-wifi"></i>
+                                <span>Wifi gratis</span>
+                            </div>
+                            <div class="col border">
+                                <i class="fa-solid fa-utensils"></i>
+                                <span>Restaurante</span>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col border me-1">
+                                <i class="fa-solid fa-square-parking"></i>
+                                <span>Parking</span>
+                            </div>
+                            <div class="col border me-1">
+                                <i class="fa-solid fa-mug-saucer"></i>
+                                <span>Muy buen desayuno</span>
+                            </div>
+                            <div class="col border">
+                                <i class="fa-solid fa-elevator"></i>
+                                <span>Ascensor</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+
+
+                </div> <!-- Termina col-8 (texto) -->
+
+                <div class="col-4 mt-3">
+                    <div class="row">
+                        <div class="col-5 border">
+                            <span class="texto-default text-secondary">Marca/cadena de hotel</span> 
+                            <p class="texto-default negrita">NH Collection</p>
+                        </div>
+                        <div class="col-7 border">
+                            <img src="../assets/DetalleAlojamiento9.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="row my-1 bg-custom-light-blue">
+                        <div class="col-12 pt-2">
+                            <p class="negrita">Puntos fuertes del alojamiento</p>
+                            <p class="negrita texto-default">¡Ideal para estancias de dos noches!</p>
+                            <div class="row">
+                                <div class="col-1 mt-1">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="col-11">
+                                    <span class="texto-default">Situado en la zona mejor valorada de Cáceres, este hotel tiene una excelente puntuación en ubicación (9,6). </span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-1 mt-1">
+                                    <i class="fa-solid fa-bed"></i>
+                                </div>
+                                <div class="col-11">
+                                    <span class="texto-default">¿Quieres dormir a pierna suelta? Este hotel tiene una puntuación muy alta por la comodidad de sus camas.</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="row my-1 bg-custom-light-blue">
+                        <div class="col-12 pt-2">
+                            <p class="negrita">Habitaciones con:</p>
+                            <div class="row">
+                                <div class="col-1 mt-1">
+                                    <i class="fa-solid fa-tree"></i>
+                                </div>
+                                <div class="col-11">
+                                    <span class="texto-default">Vistas a un patio interior.</span>
+                                </div>
+                            </div>
+
+                            <p class="negrita pt-2">Nivel 3+ de Travel Sustainable</p>
+                            <div class="row">
+                                <div class="col-1 mt-1">
+                                   <i class="fa-solid fa-award"></i>
+                                </div>
+                                <div class="col-11">
+                                    <span class="texto-default">Este alojamiento dispone de certificaciones de sostenibilidad de terceros. <a href="">Más info.</a></span>
+                                </div>
+                            </div>
+                        </div>
+                            <button type="submit" class="btn btn-primary border-0 text-truncate mt-4"
+                                                  id="btn-reservar-arriba">
+                                Reserva ahora
+                            </button>
+
+                    </div>
+                    
+                </div>
+            </div> <!-- Termina la segunda row principal (texto y bg azul)-->
+
+            <div class="row border my-5 py-3">
+                <div class="col-10 mt-2">
+                    <p class="negrita fs-5">Inicia sesión y ahorra</p>
+                    <p>Podrías ahorrar un 20% o más en este alojamiento al iniciar sesión. </p>
+                    <div class="row">
+                        <div class="col-2">
+                            <a href="../inicioSesion/index.html">
+                                <button class="btn btn-light border border-3 text-primary">Inicia sesión</button>
+                            </a>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <a href="">Hazte una cuenta</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <img src="../assets/DetalleAlojamiento10.png" class="img-fluid" alt="">
+                </div>
+            </div>
 
 
 
+        </div> <!-- Termina el container principal -->
 
-        <!-- <section> -->
-        <!--     <div class="container"> -->
-        <!--         <!-- Primera Row principal --> 
-        <!--         <div class="row px-5"> -->
-        <!---->
-        <!--             <!-- Columna principal de la izquierda --> 
-        <!--             <div class="col-3 bg-warning py-2"> -->
-        <!--                 <div class="py-2 "> -->
-        <!--                     <span class="fw-bold fs-5">Buscar</span> <br> -->
-        <!--                     <span class="texto-default">Destino:</span> <br> -->
-        <!--                 </div> -->
-        <!---->
-        <!--             </div> -->
-        <!---->
-        <!---->
-        <!--             <!-- Columna principal de la derecha --> 
-        <!--             <div class="col-9"> -->
-        <!--                  -->
-        <!--             </div> -->
-        <!---->
-        <!--         </div> <!-- Termina la Primera Row principal --> 
-        <!--     </div> -->
-        <!-- </section> -->
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

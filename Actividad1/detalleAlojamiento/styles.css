@@ -1,5 +1,125 @@
+body {
+    overflow-x: hidden;
+}
+
+#pagina {
+    margin-left: 21%;
+    /* border: 2px solid black; */
+    width: 58%;
+    margin-top: 2em;
+    
+}
 
 #navbar {
     background-color: rgb(0, 0, 159);
         height: 4em;
+}
+
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+.cabecera {
+    position: relative;
+    left: 6em;
+}
+
+#filtro-habitacion {
+    width: 27%;
+}
+
+/* #PrimeraColIzq { */
+/*     position: relative; */
+/*     left: 4em; */
+/* } */
+
+.texto-default {
+    font-size: 0.9em;
+}
+
+input:focus {
+    outline: none;
+}
+input {
+    background-color: transparent;
+}
+
+#adultos {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.4em;
+}
+
+#niños {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.7em;
+}
+
+#habitaciones {
+    width: 170%;
+    position: relative;
+    top: -.2em;
+    left: -2em;
+
+}
+
+#btn-buscar {
+    width: 250%;
+    position: relative;
+    left: -1.5em;
+    top: -1.5em;
+
+}
+#imagenGoogleMaps {
+    width: 15.1em;
+    border-radius: 0.8em;
+}
+
+#botonImagenGoogleMaps {
+    position: relative;
+    top: -1em;
+    width: 100%;
+}
+
+.fa-star {
+    color: yellow;
+}
+
+.negrita {
+    font-weight: 900;
+}
+
+#posGeo {
+    position: relative;
+}
+
+.noSubrayado {
+    text-decoration: none;
+}
+
+.textoEnImagen {
+    position: absolute;
+    top: 1em;
+    width: 48%;
+}
+.textoEnImagenRow {
+    width: 100%;
+}
+
+.puntuacionMedia {
+    position: relative;
+    top: 0.2em;
+    font-size: 1.4em;
+    width: 1.8em;
+}
+
+.puntuacionTexto {
+    position: relative;
+    left: 0.9em;
+}
+.bg-custom-light-blue {
+      background-color: #d8f1ff; /* Utiliza el código hexadecimal del tono de azul claro deseado */
 }
