@@ -20,13 +20,13 @@
                     <a class="navbar-brand text-light fs-4 fw-bold">Booking.com</a>
                 </div>
                 <div class="col-1 offset-1 cabecera">
-                    <a href="../Registro/index.html">
-                        <button class="btn btn-light text-primary">Registrarse</button>
+                    <a href="../Registro/index.html" class="btn btn-light text-primary">
+                        Registrarse
                     </a>
                 </div>
                 <div class="col-1 cabecera mx-2">
-                    <a href="../inicioSesion/index.html">
-                        <button class="btn btn-light text-primary">Iniciar Sesión</button>
+                    <a href="../inicioSesion/index.html" class="btn btn-light text-primary">
+                        Iniciar Sesión
                     </a>
                 </div>
             </div>
@@ -38,15 +38,15 @@
             <div class="row" id="busqueda">
                 <div
                         class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
-                    <input type="text" name="" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?">
+                    <input type="text" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?">
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
                     <div class="row">
                         <div class="col-5 me-4">
-                            <input type="date" name="" id="">
+                            <input type="date">
                         </div>
                         <div class="col-5">
-                            <input type="date" name="" id="">
+                            <input type="date">
                         </div>
                     </div>
                 </div>
@@ -54,13 +54,13 @@
                      id="filtro-habitacion">
                     <div class="row">
                         <div class="col-4">
-                            <input type="number" name="" id="adultos" placeholder="Adultos">
+                            <input type="number" id="adultos" placeholder="Adultos">
                         </div>
                         <div class="col-4">
-                            <input type="number" name="" id="niños" placeholder="Niños">
+                            <input type="number" id="niños" placeholder="Niños">
                         </div>
                         <div class="col-4">
-                            <input type="number" name="" id="habitaciones" placeholder="Habitaciones">
+                            <input type="number" id="habitaciones" placeholder="Habitaciones">
                         </div>
                     </div>
                 </div>
@@ -133,37 +133,37 @@
                                         <input class="form-check-input" type="checkbox" id="casilla3">
                                         <label class="form-check-label" for="casilla3">
                                             Fantástico: 9 o más
-                                            <p class="contenido-small-small">Según los comentarios de los clientes</p>
+                                            <span class="contenido-small-small">Según los comentarios de los clientes</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="casilla3">
-                                        <label class="form-check-label" for="casilla3">
+                                        <input class="form-check-input" type="checkbox" id="casilla4">
+                                        <label class="form-check-label" for="casilla4">
                                             4 estrellas
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="casilla3">
-                                        <label class="form-check-label" for="casilla3">
+                                        <input class="form-check-input" type="checkbox" id="casilla5">
+                                        <label class="form-check-label" for="casilla5">
                                             Hostales y pensiones
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="casilla3">
-                                        <label class="form-check-label" for="casilla3">
+                                        <input class="form-check-input" type="checkbox" id="casilla6">
+                                        <label class="form-check-label" for="casilla6">
                                             Cancelación gratis
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="casilla3">
-                                        <label class="form-check-label" for="casilla3">
+                                        <input class="form-check-input" type="checkbox" id="casilla7">
+                                        <label class="form-check-label" for="casilla7">
                                             Parking
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="casilla3">
-                                        <label class="form-check-label" for="casilla3">
+                                        <input class="form-check-input" type="checkbox" id="casilla8">
+                                        <label class="form-check-label" for="casilla8">
                                             Villas
                                         </label>
                                     </div>
@@ -179,9 +179,9 @@
 
                 </div>
 
-                <!-- ------------------------------------------------- -->
+                <!-- ################################################ -->
                 <!-- Columna de la derecha principal -->
-                <!-- ------------------------------------------------- -->
+                <!-- ################################################ -->
                 <div class="col-8">
 
                     <div class="row">
@@ -217,7 +217,7 @@
                     <div class="row bordered-box informacionAlojamiento">
 
                         <div class="col-3">
-                            <img src="../assets/PalacioOquendo.png" class="my-2" id="imagenPalacio" alt="Imagen de ">
+                            <img src="../assets/PalacioOquendo.png" class="my-2 imagenesPreview" id="imagenPalacio" alt="Imagen de ">
                             <!-- Corazón  -->
                             <label for="like-checkbox-1" class="heart-label">
                                 <input type="checkbox" id="like-checkbox-1" class="heart-checkbox">
@@ -292,10 +292,10 @@
                     <div class="row bordered-box informacionAlojamiento my-2">
 
                         <div class="col-3">
-                            <img src="../assets/PlazaDeItalia.png" class="my-2" id="imagenPalacio" alt="Imagen de ">
+                            <img src="../assets/PlazaDeItalia.png" class="my-2 imagenesPreview" id="plazaDeItalia" alt="Imagen de ">
                             <!-- Corazón  -->
-                            <label for="like-checkbox-1" class="heart-label">
-                                <input type="checkbox" id="like-checkbox-1" class="heart-checkbox">
+                            <label for="like-checkbox-2" class="heart-label">
+                                <input type="checkbox" id="like-checkbox-2" class="heart-checkbox">
                                 <span class="heart-icon"><i class="fas fa-heart"></i></span>
                             </label>
                         </div>

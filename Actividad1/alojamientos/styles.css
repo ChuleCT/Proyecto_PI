@@ -155,7 +155,7 @@ input[type="text"]:focus {
     border-radius: 0.4em;
 }
 
-#imagenPalacio {
+.imagenesPreview {
     width: 11.4em;
     border-radius: 0.5em;
 }
