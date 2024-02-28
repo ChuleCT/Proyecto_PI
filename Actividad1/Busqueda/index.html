@@ -43,56 +43,55 @@
             </div>
         </div>
         <div class="container mx-auto">
-            <div class="row" id="busqueda">
-                <div
-                    class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
-                    <input type="text" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?">
-                </div>
-                <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
-                    <div class="row">
-                        <div class="col-5 me-4">
-                            <input type="date">
+            <form action="../alojamientos/index.html">
+                <div class="row" id="busqueda">
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
+                        <input type="text" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?" required>
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
+                        <div class="row">
+                            <div class="col-5 me-4">
+                                <input type="date">
+                            </div>
+                            <div class="col-5">
+                                <input type="date">
+                            </div>
                         </div>
-                        <div class="col-5">
-                            <input type="date">
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded"
+                        id="filtro-habitacion">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" id="adultos" min="0" placeholder="Adultos">
+                            </div>
+                            <div class="col-4">
+                                <input type="number" id="niños" min="0" placeholder="Niños">
+                            </div>
+                            <div class="col-4">
+                                <input type="number" id="habitaciones" min="0" placeholder="Habitaciones">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
+                        <input type="submit" type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
+                        id="btn-buscar" value="Buscar">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2 offset-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label"> Viajo por trabajo </label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label"> Busco vuelos </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded"
-                    id="filtro-habitacion">
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="number" id="adultos" min="0" placeholder="Adultos">
-                        </div>
-                        <div class="col-4">
-                            <input type="number" id="niños" min="0" placeholder="Niños">
-                        </div>
-                        <div class="col-4">
-                            <input type="number" id="habitaciones" min="0" placeholder="Habitaciones">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
-                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
-                        id="btn-buscar">
-                        Buscar
-                    </button>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-2 offset-1">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label"> Viajo por trabajo </label>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                            <label class="form-check-label"> Busco vuelos </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
             <div class="row" id="ofertas">
                 <div class="col-5 offset-1">
                     <h3>Ofertas</h3>
@@ -100,95 +99,6 @@
                 </div>
             </div>
             <div class="row">
-                <!-- 
-                    <div class="col-10 offset-2 bg-dark" id="carrusel">
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="card mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img src="../img/familia.jpg" class="img-fluid rounded-start" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">This is a wider card with supporting text below as
-                                                    a natural lead-in to additional content. This content is a little
-                                                    bit longer.</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                        ago</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                            <div class="carousel-item ">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img src="../img/familia.jpg" class="img-fluid rounded-start" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">This is a wider card with supporting text below as
-                                                    a natural lead-in to additional content. This content is a little
-                                                    bit longer.</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                        ago</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img src="../img/familia.jpg" class="img-fluid rounded-start" alt="...">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">This is a wider card with supporting text below as
-                                                    a natural lead-in to additional content. This content is a little
-                                                    bit longer.</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                        ago</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-                -->
                 <div class="col-5">
                     <div class="card mb-3">
                         <div class="row g-0">

@@ -34,11 +34,12 @@
 
         <div class="container">
 
+            <form action="index.html">
             <!-- Barra de búsqueda, filtros y buscar:  -->
             <div class="row" id="busqueda">
                 <div
                         class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
-                    <input type="text" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?">
+                    <input type="text" id="a-donde-vas" class="border border-0" placeholder="¿A dónde vas?" required>
                 </div>
                 <div class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
                     <div class="row">
@@ -65,10 +66,8 @@
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
-                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
-                                          id="btn-buscar">
-                        Buscar
-                    </button>
+                    <input type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
+                    id="btn-buscar" value="Buscar">
                 </div>
 
 
@@ -83,7 +82,7 @@
                     </div>
                 </div>
             </div>
-
+        </form>
         </div>
 
         <!-- Parte sobre el fondo blanco de la página: -->
