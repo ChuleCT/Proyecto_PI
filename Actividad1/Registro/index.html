@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-5 mx-auto">
                     <h3 class="mb-3">Crear Cuenta</h3>
-                    <form>
+                    <form action="../Busqueda/index.html">
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" placeholder="Indica tu nombre" required>
@@ -34,7 +34,8 @@
                             <input type="email" class="form-control" placeholder="Indica tu dirección de email"
                                 required>
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Indica tu contraseña" required>
+                            <input type="password" class="form-control" placeholder="Indica tu contraseña"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\w).{8,}" required>
                             <label class="form-label">País/región</label>
                             <select class="form-select" required>
                                 <option value selected>Selecciona tu país/región</option>
@@ -56,8 +57,8 @@
                             </select>
                             <label class="form-label">Teléfono</label>
                             <input type="tel" class="form-control" placeholder="Indica tu número de teléfono" required>
+                            <input type="submit" class="form-control btn btn-primary col-12" value="Crear Cuenta">
                         </div>
-                        <button type="submit" class="btn btn-primary col-12">Crear cuenta</button>
                     </form>
                 </div>
             </div>
