@@ -10,18 +10,15 @@ body {
 }
 
 #navbar {
-    background-color: rgb(0, 0, 159);
-    height: 4em;
+    position: relative;
+    left: 6em;
+    height: 3.5em;
 }
 
 .color-navbar {
     background-color: rgb(0, 0, 159);
 }
 
-.cabecera {
-    position: relative;
-    left: 6em;
-}
 
 #filtro-habitacion {
     width: 27%;
