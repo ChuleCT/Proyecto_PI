@@ -39,51 +39,52 @@
                 <!-- Columna principal de la izquierda --> 
                 <div class="col-3">
                     <div class="row">
+
                         <div class="col-12 bg-warning">
-                            <span class="fw-bold fs-5">Buscar</span> <br>
-                            <span class="texto-default mx-1">Destino:</span> <br>
-                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mx-2 bi bi-search me-2" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                </svg>
-                                <input type="text" class="border border-0 mx-1">
-                            </div>
-                            <span class="texto-default mx-1">Fecha de entrada:</span> <br>
-                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-                                <input type="date" class="border border-0 mx-1 pe-5">
-                            </div>
-                            <span class="texto-default mx-1">Fecha de salida:</span> <br>
-                            <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-                                <input type="date" class="border border-0 mx-1 pe-5">
-                            </div>
-                            <span class="texto-default mx-1">Estancia de 2 noches:</span> <br>
-                            <div class="row bg-light border border-3 border-warning rounded mx-1">
-                                <div class="col-4">
-                                    <input type="number" id="adultos" placeholder="Adultos" class="border border-0" >
+                            <form action="index.html">
+                                <span class="fw-bold fs-5">Buscar</span> <br>
+                                <span class="texto-default mx-1">Destino:</span> <br>
+                                <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mx-2 bi bi-search me-2" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    </svg>
+                                    <input type="text" id="Destino" class="border border-0 mx-1" required>
                                 </div>
-                                    <div class="col-4">
-                                        <input type="number" id="niños" placeholder="Niños" class="border border-0">
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="number" id="habitaciones" placeholder="Habitaciones" class="border border-0" >
-                                    </div>
-                            </div>
-                            <div class="form-check ms-2">
-                                <input class="form-check-input" type="checkbox">
-                                Casas y apartamentos enteros
-                            </div>
-                            <div class="form-check ms-2">
-                                <input class="form-check-input" type="checkbox">
-                                Viajo por trabajo
-
-                                <div class="col-lg-5 col-md-5 col-sm-5 pt-5">
-                                    <button type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
-                                                          id="btn-buscar">
-                                        Buscar
-                                    </button>
+                                <span class="texto-default mx-1">Fecha de entrada:</span> <br>
+                                <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                    <input type="date" class="border border-0 mx-1 pe-5">
                                 </div>
-                            </div>
+                                <span class="texto-default mx-1">Fecha de salida:</span> <br>
+                                <div class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
+                                    <input type="date" class="border border-0 mx-1 pe-5">
+                                </div>
+                                <span class="texto-default mx-1">Estancia de 2 noches:</span> <br>
+                                <div class="row bg-light border border-3 border-warning rounded mx-1">
+                                    <div class="col-4">
+                                        <input type="number" id="adultos" placeholder="Adultos" min="0" class="border border-0" >
+                                    </div>
+                                        <div class="col-4">
+                                            <input type="number" id="niños" placeholder="Niños" min="0" class="border border-0">
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="number" id="habitaciones" placeholder="Habitaciones" min="0" class="border border-0" >
+                                        </div>
+                                </div>
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="checkbox">
+                                    Casas y apartamentos enteros
+                                </div>
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="checkbox">
+                                    Viajo por trabajo
 
+                                    <div class="col-lg-5 col-md-5 col-sm-5 pt-5">
+                                        <input type="submit" class="btn btn-primary border border-3 border-warning text-truncate"
+                                                             id="btn-buscar" value="Buscar">
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
 
@@ -381,7 +382,7 @@
                             </a>
                         </div>
                         <div class="col-2 mt-2">
-                            <a href="">Hazte una cuenta</a>
+                            <a href="../Registro/index.html">Hazte una cuenta</a>
                         </div>
                     </div>
                 </div>
@@ -393,29 +394,30 @@
 
             <h3 class="negrita">Disponibilidad</h3>
 
-            <div class="row mb-5">
-                <div class="col-3 border border-warning border-3 rounded">
-                    <input type="date" class=" form-control disponibilidad border-0">
-                </div>
-                <div class="col-5 border border-warning border-3 rounded">
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="number" class=" form-control disponibilidad border-0" placeholder="Adultos -">
-                        </div>
-                        <div class="col-4">
-                            <input type="number" class=" form-control disponibilidad border-0" placeholder="Niños -">
-                        </div>
-                        <div class="col-4">
-                            <input type="number" class=" form-control disponibilidad border-0" placeholder="Habitaciones">
+            <form action="index.html">
+                <div class="row mb-5">
+                    <div class="col-3 border border-warning border-3 rounded">
+                        <input type="date" class=" form-control disponibilidad border-0" required>
+                    </div>
+                    <div class="col-5 border border-warning border-3 rounded">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class=" form-control disponibilidad border-0" placeholder="Adultos -" min="0" required>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class=" form-control disponibilidad border-0" placeholder="Niños -" min="0" required>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class=" form-control disponibilidad border-0" placeholder="Habitaciones" min="0" required>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-primary border-0 text-truncate py-2"
+                                             id="ModificarBúsqueda" value="Modificar búsqueda">
+                    </div>
                 </div>
-                <div class="col-2">
-                    <button type="submit" class="btn btn-primary border-0 text-truncate py-2">
-                        Modificar búsqueda
-                    </button>
-                </div>
-            </div>
+            </form>
 
             <!-- Tabla disponibilidad -->
             <div class="container-fluid">
