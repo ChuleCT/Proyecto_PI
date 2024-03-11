@@ -1,0 +1,246 @@
+body {
+    overflow-x: hidden;   
+}
+
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+#navbar {
+    position: relative;
+    left: 6em;
+}
+
+#titulo {
+    position: relative;
+    left: 2em;
+}
+
+#busqueda {
+    position: relative;
+    top: -1.5em;
+    left: .5em;
+}
+
+#busqueda input[type="text"] {
+    position: relative;
+    left: 0em;
+    top: .2em;
+    width: 19em;
+    background-color: transparent;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+#filtro-habitacion {
+    width: 27%;
+}
+
+#adultos {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.4em;
+}
+
+#niños {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.7em;
+}
+
+#habitaciones {
+    width: 125%;
+    position: relative;
+    top: -.2em;
+    left: -1em;
+
+}
+
+#btn-buscar {
+    position: relative;
+    top: -.2em;
+    left: 0em;
+
+}
+
+#caminoLinks {
+    position: relative;
+    left: 6.3em;
+}
+
+#caminoLinks a {
+    text-decoration: none;
+}
+
+
+#fondoBlanco {
+    position: relative;
+    top: -.5em;
+    left: 3.8em;
+}
+
+#imagenGoogleMaps {
+    width: 17em;
+    border-radius: 0.8em;
+}
+
+#botonImagenGoogleMaps {
+    position: relative;
+    top: -1em;
+    width: 97%;
+}
+
+.tablaIzquierda {
+    border-top-left-radius: 0.4em;
+    border-top-right-radius: 0.4em;
+    width: 97%;
+}
+
+.tablaIzquierdaSiguientes {
+    width: 97%;
+}
+
+.bordered-box {
+    border: 1px solid #ccc;
+}
+
+.contenido {
+    margin-top: 0.4em;
+    padding-left: 0.5em;
+}
+
+.contenido-small {
+    margin-top: 0.4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 0.9em;
+    line-height: 1em;
+}
+
+.contenido-small-small {
+    position: relative;
+    left: -0.5em;
+    margin-top: 0.4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 0.9em;
+    line-height: 1em;
+}
+
+#checkboxFiltros {
+    position: relative;
+    top: -0.5em;
+    left: 0.5em;
+}
+
+.negrita {
+    font-weight: 900;
+}
+
+.flechas {
+    transform: scale(0.8);
+}
+
+.form-select {
+    width: fit-content;
+    border-radius: 2.4em;
+    border: 1px solid #000;
+}
+
+.informacionAlojamiento {
+    border-radius: 0.4em;
+}
+
+.imagenesPreview {
+    width: 11.4em;
+    border-radius: 0.5em;
+}
+
+/* Estilos personalizados para el botón de corazón */
+.heart-label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.heart-checkbox {
+    display: none; /* Oculta el checkbox */
+}
+
+.heart-icon {
+    color: #fff; /* Color del corazón (negro por defecto) */
+    position: relative;
+    border: 0.1em solid black;
+    background-color: #ddd;
+    border-radius: 50%;
+    padding: 0.4em;
+    top: -10em; /* Cambia la posición vertical del corazón */
+    left: 8.9em; /* Cambia la posición horizontal del corazón */
+}
+
+/* Cambia el color del corazón a rojo cuando el checkbox está marcado */
+.heart-checkbox:checked + .heart-icon {
+    color: #f00; /* Color rojo */
+}
+
+#imagenPlaza {
+    width: 11.4em;
+    border-radius: 0.5em;
+}
+
+.azul {
+    color: #0d6efd;
+}
+
+.rojo {
+    color: #f00;
+}
+
+.fa-star {
+    color: yellow;
+    position: relative;
+    top: -0.5em;
+}
+
+.contenido-info {
+    margin-top: -0.5em;
+    font-size: 0.9em;
+}
+
+
+.border-left {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: 0.1em solid #ccc; /* Definimos el borde izquierdo */
+    height: 100%; /* Ajustamos la altura de la línea */
+    position: relative;
+    left: 0.5em;
+}
+
+.texto-con-linea {
+    margin-top: -0.2em;
+    padding-left: 0.2em; /* Añadimos espacio entre la línea y el texto */
+    font-size: 0.9em;
+}
+
+.comentarios {
+    font-size: 0.8em;
+}
+
+.puntuacionMedia {
+    position: relative;
+    top: 0.2em;
+    font-size: 1.4em;
+    width: 1.8em;
+}
+
+.puntuacionTexto {
+    position: relative;
+    left: 0.9em;
+}
+
+

@@ -1,0 +1,104 @@
+body {
+    overflow-x: hidden;
+}
+
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+#navbar {
+    position: relative;
+    left: 6em;
+}
+
+#titulo {
+    position: relative;
+    left: 2em;
+}
+
+
+#busqueda {
+    position: relative;
+    top: -4.5em;
+    left: .5em;
+}
+
+#busqueda input[type="text"] {
+    position: relative;
+    left: 0em;
+    top: .2em;
+    width: 19em;
+    background-color: transparent;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+#filtro-habitacion {
+    width: 27%;
+}
+
+#adultos {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.4em;
+}
+
+#niños {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.7em;
+}
+
+#habitaciones {
+    width: 125%;
+    position: relative;
+    top: -.2em;
+    left: -1em;
+
+}
+
+#btn-buscar {
+    position: relative;
+    top: -.2em;
+    left: 0em;
+
+}
+
+#ofertas {
+    position: relative;
+    top: -3em;
+}
+
+#carrusel {
+    position: relative;
+    top: -2em;
+    left: -6em;
+}
+
+.card img {
+    position: relative;
+    top: 3.5em;
+    left: .5em
+}
+
+.card {
+    min-height: 220px;
+    max-width: 540px;
+    position: relative;
+    top: -3em;
+    left: 7em;
+}
+
+#alojamientos {
+    width: 85%;
+    position: relative;
+    left: 7em;
+}
+
+#alojamientos img {
+    max-width: 240px;
+}
