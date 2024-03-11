@@ -52,7 +52,7 @@
 
                         <div class="row text-center">
                             <div class="col-5">
-                                <a href="../Registro/index.html" class="text-primary" target="_blank">¿No estás registrado?</a>
+                                <a href="RegistroServlet.do" class="text-primary" target="_blank">¿No estás registrado?</a>
                             </div>
                             <div class="col-6 offset-1">
                                 <a href="#" class="text-primary">¿Has olvidado tu contraseña?</a>
