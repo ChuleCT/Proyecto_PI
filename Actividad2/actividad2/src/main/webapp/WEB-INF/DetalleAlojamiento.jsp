@@ -96,7 +96,7 @@
 
                     <div class="row mt-3">
                         <div class="col-12">
-                            <img src="../img/googleMaps.webp" class="img-fluid" alt="google maps">
+                            <img src="images/googleMaps.webp" class="img-fluid" alt="google maps">
                             <button class="btn btn-primary" id="botonImagenGoogleMaps">Ver en el mapa</button>
                         </div>
                     </div>
@@ -143,13 +143,13 @@
 
                     <div class="row ms-1">
                         <div class="col-4">
-                            <img class="img-fluid mb-3" src="../img/DetalleAlojamiento1.png" alt="habitación alojamiento Palacio de Oquendo">
+                            <img class="img-fluid mb-3" src="images/DetalleAlojamiento1.png" alt="habitación alojamiento Palacio de Oquendo">
 
-                            <img class="img-fluid" src="../img/DetalleAlojamiento2.png" alt="interior alojamiento Palacio de Oquendo">
+                            <img class="img-fluid" src="images/DetalleAlojamiento2.png" alt="interior alojamiento Palacio de Oquendo">
                         </div>
                         <div class="col-8">
                             <div class="position-relative">
-                                <img class="img-fluid" src="../img/DetalleAlojamiento3.png" alt="fachada alojamiento Palacio de Oquendo">
+                                <img class="img-fluid" src="images/DetalleAlojamiento3.png" alt="fachada alojamiento Palacio de Oquendo">
                                 <div class="col-6 offset-6 textoEnImagen" >
                                     <div class="row bg-light textoEnImagenRow">
                                         <div class="col-8 text-end puntuacionTexto">
@@ -183,16 +183,16 @@
                     </div>
                     <div class="row ms-1 mt-2">
                         <div class="col-3">
-                            <img class="img-fluid" src="../img/DetalleAlojamiento8.png" alt="entrada alojamiento Palacio de Oquendo">
+                            <img class="img-fluid" src="images/DetalleAlojamiento8.png" alt="entrada alojamiento Palacio de Oquendo">
                         </div>
                         <div class="col-3">
-                            <img class="img-fluid" src="../img/DetalleAlojamiento5.png" alt="cuarto de baño alojamiento Palacio de Oquendo">
+                            <img class="img-fluid" src="images/DetalleAlojamiento5.png" alt="cuarto de baño alojamiento Palacio de Oquendo">
                         </div>
                         <div class="col-3">
-                            <img class="img-fluid" src="../img/DetalleAlojamiento6.png" alt="habitación alojamiento Palacio de Oquendo">
+                            <img class="img-fluid" src="images/DetalleAlojamiento6.png" alt="habitación alojamiento Palacio de Oquendo">
                         </div>
                         <div class="col-3">
-                            <img class="img-fluid" src="../img/DetalleAlojamiento7.png" alt="fachada alojamiento Palacio de Oquendo">
+                            <img class="img-fluid" src="images/DetalleAlojamiento7.png" alt="fachada alojamiento Palacio de Oquendo">
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@
                             <p class="texto-default negrita">NH Collection</p>
                         </div>
                         <div class="col-7 border">
-                            <img src="../img/DetalleAlojamiento9.png" class="img-fluid" alt="logo NH Collection">
+                            <img src="images/DetalleAlojamiento9.png" class="img-fluid" alt="logo NH Collection">
                         </div>
                     </div>
 
@@ -393,7 +393,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <img src="../img/DetalleAlojamiento10.png" class="img-fluid" alt="ahorro por iniciar sesión">
+                    <img src="images/DetalleAlojamiento10.png" class="img-fluid" alt="ahorro por iniciar sesión">
                 </div>
             </div>
 

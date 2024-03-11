@@ -95,7 +95,7 @@
 
                 <!-- Columna de la izquierda principal -->
                 <div class="col-3">
-                    <img src="../img/googleMaps.webp" id="imagenGoogleMaps" alt="google maps">
+                    <img src="images/googleMaps.webp" id="imagenGoogleMaps" alt="google maps">
                     <button class="btn btn-primary" id="botonImagenGoogleMaps">Ver en el mapa</button>
 
                     <div class="row" >
@@ -216,7 +216,7 @@
                     <div class="row bordered-box informacionAlojamiento">
 
                         <div class="col-3">
-                            <img src="../img/PalacioOquendo.png" class="my-2 imagenesPreview" id="imagenPalacio" alt="fachada Palacio de Oquendo">
+                            <img src="images/PalacioOquendo.png" class="my-2 imagenesPreview" id="imagenPalacio" alt="fachada Palacio de Oquendo">
                             <!-- Corazón  -->
                             <label for="like-checkbox-1" class="heart-label">
                                 <input type="checkbox" id="like-checkbox-1" class="heart-checkbox">
@@ -293,7 +293,7 @@
                     <div class="row bordered-box informacionAlojamiento my-2">
 
                         <div class="col-3">
-                            <img src="../img/PlazaDeItalia.png" class="my-2 imagenesPreview" id="plazaDeItalia" alt="foto hostal Plaza de Italia">
+                            <img src="images/PlazaDeItalia.png" class="my-2 imagenesPreview" id="plazaDeItalia" alt="foto hostal Plaza de Italia">
                             <!-- Corazón  -->
                             <label for="like-checkbox-2" class="heart-label">
                                 <input type="checkbox" id="like-checkbox-2" class="heart-checkbox">

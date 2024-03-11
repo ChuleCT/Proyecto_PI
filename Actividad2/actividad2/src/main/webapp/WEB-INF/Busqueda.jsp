@@ -110,7 +110,7 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="../img/familia.jpg" class="img-fluid rounded" alt="familia en puesta de sol">
+                                    <img src="images/familia.jpg" class="img-fluid rounded" alt="familia en puesta de sol">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -131,7 +131,7 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="../img/avion.jpeg" class="img-fluid rounded" alt="avión volando">
+                                    <img src="images/avion.jpeg" class="img-fluid rounded" alt="avión volando">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -155,19 +155,19 @@
                 </div>
                 <div class="row" id="alojamientos">
                     <div class="col-3">
-                        <img src="../img/hotel.jpeg" class="rounded" alt="habitación de hotel">
+                        <img src="images/hotel.jpeg" class="rounded" alt="habitación de hotel">
                         <p>Hoteles</p>
                     </div>
                     <div class="col-3">
-                        <img src="../img/apartamento.jpg" class="rounded" alt="habitación de apartamento">
+                        <img src="images/apartamento.jpg" class="rounded" alt="habitación de apartamento">
                         <p>Apartamentos</p>
                     </div>
                     <div class="col-3">
-                        <img src="../img/resort.jpeg" class="rounded" alt="habitación de resort">
+                        <img src="images/resort.jpeg" class="rounded" alt="habitación de resort">
                         <p>Resorts</p>
                     </div>
                     <div class="col-3">
-                        <img src="../img/villa.jpg" class="rounded" alt="fachada de villa">
+                        <img src="images/villa.jpg" class="rounded" alt="fachada de villa">
                         <p>Villas</p>
                     </div>
                 </div>

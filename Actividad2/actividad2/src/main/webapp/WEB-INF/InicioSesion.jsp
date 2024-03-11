@@ -40,13 +40,13 @@
 
                         <div class="row text-center mb-4">
                             <div class="col-2 offset-3">
-                                <img src="../img/facebook.png" class="img-fluid" id="facebook-logo" alt="logo facebook">
+                                <img src="images/facebook.png" class="img-fluid" id="facebook-logo" alt="logo facebook">
                             </div>
                             <div class="col-2">
-                                <img src="../img/google.jpg" class="img-fluid" id="google-logo" alt="logo google">
+                                <img src="images/google.jpg" class="img-fluid" id="google-logo" alt="logo google">
                             </div>
                             <div class="col-2">
-                                <img src="../img/apple.png" class="img-fluid" id="apple-logo" alt="logo apple">
+                                <img src="images/apple.png" class="img-fluid" id="apple-logo" alt="logo apple">
                             </div>
                         </div>
 

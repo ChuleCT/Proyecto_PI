@@ -58,7 +58,7 @@
                     <fieldset class="shadow rounded">
                         <div class="row py-3 ps-2">
                             <div class="col-2 ps-4">
-                                <img class="rounded" src="../img/ilunion.jpg" alt="foto Ilunion Suites Madrid">
+                                <img class="rounded" src="images/ilunion.jpg" alt="foto Ilunion Suites Madrid">
                             </div>
                             <div class="col">
                                 <p><span class="fw-bold">Ilunion Suites Madrid</span></p>
@@ -93,7 +93,7 @@
                     <fieldset class="shadow rounded">
                         <div class="row py-3 ps-2">
                             <div class="col-2 ps-4">
-                                <img class="rounded" src="../img/palace.jpg" alt="foto Hotel Palace Sevilla">
+                                <img class="rounded" src="images/palace.jpg" alt="foto Hotel Palace Sevilla">
                             </div>
                             <div class="col">
                                 <p><span class="fw-bold">Hotel Palace Sevilla</span></p>
@@ -128,7 +128,7 @@
                     <fieldset class="shadow rounded">
                         <div class="row py-3 ps-2">
                             <div class="col-2 ps-4">
-                                <img class="rounded" src="../img/soho.jpg" alt="foto Soho 54">
+                                <img class="rounded" src="images/soho.jpg" alt="foto Soho 54">
                             </div>
                             <div class="col">
                                 <p><span class="fw-bold">SoHo 54</span></p>
