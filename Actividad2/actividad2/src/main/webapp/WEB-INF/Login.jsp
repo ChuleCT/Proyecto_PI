@@ -29,9 +29,9 @@
                         <form action="BusquedaServlet.do">
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Indica tu dirección de email" required>
+                                <input type="email" class="form-control" placeholder="Indica tu dirección de email" name="email" id="email" required>
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" placeholder="Indica tu contraseña" required>
+                                <input type="password" class="form-control" placeholder="Indica tu contraseña" name="password" id="password" required>
                             </div>
                             <input type="submit" class="form-control btn btn-primary col-12" value="Iniciar sesión">
                         </form>

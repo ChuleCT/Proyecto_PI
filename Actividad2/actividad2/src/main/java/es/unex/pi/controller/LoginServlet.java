@@ -6,7 +6,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.sql.Connection;
+
+import es.unex.pi.model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -27,9 +32,8 @@ public class LoginServlet extends HttpServlet {
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Login.jsp");
-        view.forward(request,response);
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Login.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -37,7 +41,30 @@ public class LoginServlet extends HttpServlet {
     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        doGet(request, response);
+        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
+        UserDAO userDao = new JDBCUserDAOImpl();
+        userDao.setConnection(conn);
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");		
+
+        logger.info("credentials: "+email+" - "+password);
+
+        User user = userDao.getUserByEmail(email);
+
+        if ((user != null) 
+        && (user.getPassword().equals(password))){
+            HttpSession session = request.getSession(); //Obtenemos la sesion
+            session.setAttribute("user", user); // Establecemos el usuario en la sesión
+
+            // Redirige al Busqueda servlet.do
+            // response.sendRedirect("BusquedaServlet.do");
+        } 
+        else {
+            request.setAttribute("messages","Wrong username or password!!");
+            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+            view.forward(request,response);
+        }
     }
 
 }
