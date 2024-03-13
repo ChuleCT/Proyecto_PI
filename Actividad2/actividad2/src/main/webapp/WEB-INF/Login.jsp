@@ -25,7 +25,6 @@
             <div class="container mx-auto my-2">
                 <div class="row">
                     <div class="col-5 mx-auto">
-
                         <h3 class="mb-3">Inicia sesión o crea una cuenta</h3>
                         <form action="LoginServlet.do" method="post">
                             <div class="mb-3">
@@ -33,23 +32,10 @@
                                 <input type="email" class="form-control" placeholder="Indica tu dirección de email" name="email" id="email" required>
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" placeholder="Indica tu contraseña" name="password" id="password" required>
+                           		<h4 class="text-danger mt-2">${messages}</h4>
                             </div>
-                            <input type="submit" class="form-control btn btn-primary col-12" value="Iniciar sesión">
+                            <input type="submit" class="form-control btn btn-primary col-12 my-3" value="Iniciar sesión">
                         </form>
-                        <p class="text-center mt-3">o puedes usar una de estas opciones</p>
-
-
-                        <div class="row text-center mb-4">
-                            <div class="col-2 offset-3">
-                                <img src="images/facebook.png" class="img-fluid" id="facebook-logo" alt="logo facebook">
-                            </div>
-                            <div class="col-2">
-                                <img src="images/google.jpg" class="img-fluid" id="google-logo" alt="logo google">
-                            </div>
-                            <div class="col-2">
-                                <img src="images/apple.png" class="img-fluid" id="apple-logo" alt="logo apple">
-                            </div>
-                        </div>
 
                         <div class="row text-center">
                             <div class="col-5">

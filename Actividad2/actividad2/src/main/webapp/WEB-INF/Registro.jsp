@@ -26,21 +26,20 @@
                 <div class="row">
                     <div class="col-5 mx-auto">
                         <h3 class="mb-3">Crear Cuenta</h3>
-                        <form action="BusquedaServlet.do">
+                        <form action="RegistroServlet.do" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" placeholder="Indica tu nombre" required>
+                                <input type="text" class="form-control" placeholder="Indica tu nombre" name="name" id="name" required>
                                 <label class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" placeholder="Indica tus apellidos" required>
+                                <input type="text" class="form-control" placeholder="Indica tus apellidos" name="surname" id="surname" required>
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Indica tu dirección de email"
-                                                                         required>
+                                <input type="email" class="form-control" placeholder="Indica tu dirección de email" name="email" id="email" required>
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" placeholder="Indica tu contraseña"
-                                                                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\w).{8,}" required>
+                                                                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\w).{8,}" name="password" id="password" title="La contraseña debe contener al menos un dígito, una minúscula, una mayúscula, un carácter especial y tener al menos 8 caracteres." required>
                                 <label class="form-label">País/región</label>
                                 <select class="form-select" required>
-                                    <option value selected>Selecciona tu país/región</option>
+                                    <option selected>Selecciona tu país/región</option>
                                     <option value="1">México</option>
                                     <option value="2">Estados Unidos</option>
                                     <option value="3">Canadá</option>
@@ -66,7 +65,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-5 mx-auto">
-                        <a href="../inicioSesion/index.html" class="text-primary" target="_blank">¿Ya tienes cuenta?</a>
+                        <a href="LoginServlet.do" class="text-primary" target="_blank">¿Ya tienes cuenta?</a>
                     </div>
                 </div>
             </div>

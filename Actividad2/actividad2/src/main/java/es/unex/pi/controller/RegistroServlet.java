@@ -56,16 +56,19 @@ public class RegistroServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String surname = request.getParameter("surname");
-        Integer id = 3;
 
         User user = new User();
-        user.setId(id);
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
         user.setSurname(surname);
 
         userDAO.add(user);
+        
+        //Guardamos el usuario en la sesión
+        request.getSession().setAttribute("user", user);
+        
+        response.sendRedirect("BusquedaServlet.do");
 
 
     }
