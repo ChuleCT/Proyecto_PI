@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-5 mx-auto">
                         <h3 class="mb-3">Crear Cuenta</h3>
-                        <form action="../Busqueda/index.html">
+                        <form action="BusquedaServlet.do">
                             <div class="mb-3">
                                 <label class="form-label">Nombre</label>
                                 <input type="text" class="form-control" placeholder="Indica tu nombre" required>

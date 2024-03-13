@@ -10,7 +10,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.logging.Logger;
 
+import es.unex.pi.dao.JDBCUserDAOImpl;
+import es.unex.pi.dao.UserDAO;
 import es.unex.pi.model.User;
 
 /**
@@ -18,6 +21,7 @@ import es.unex.pi.model.User;
  */
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(HttpServlet.class.getName());
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,15 +46,15 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         Connection conn = (Connection) getServletContext().getAttribute("dbConn");
-        UserDAO userDao = new JDBCUserDAOImpl();
-        userDao.setConnection(conn);
+        UserDAO userDAO = new JDBCUserDAOImpl();
+        userDAO.setConnection(conn);
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");		
 
         logger.info("credentials: "+email+" - "+password);
 
-        User user = userDao.getUserByEmail(email);
+        User user = userDAO.getUserByEmail(email);
 
         if ((user != null) 
         && (user.getPassword().equals(password))){
@@ -58,7 +62,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user); // Establecemos el usuario en la sesión
 
             // Redirige al Busqueda servlet.do
-            // response.sendRedirect("BusquedaServlet.do");
+            response.sendRedirect("BusquedaServlet.do");
         } 
         else {
             request.setAttribute("messages","Wrong username or password!!");

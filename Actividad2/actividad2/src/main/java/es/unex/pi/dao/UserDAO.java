@@ -35,6 +35,8 @@ public interface UserDAO {
 	 * @return User object with that name.
 	 */
 	public User get(String name);
+	
+	public User getUserByEmail(String email);
 
 	/**
 	 * Gets all the users from the database.

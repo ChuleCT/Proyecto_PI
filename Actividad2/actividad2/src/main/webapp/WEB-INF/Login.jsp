@@ -25,8 +25,9 @@
             <div class="container mx-auto my-2">
                 <div class="row">
                     <div class="col-5 mx-auto">
+
                         <h3 class="mb-3">Inicia sesión o crea una cuenta</h3>
-                        <form action="BusquedaServlet.do">
+                        <form action="LoginServlet.do" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" class="form-control" placeholder="Indica tu dirección de email" name="email" id="email" required>
