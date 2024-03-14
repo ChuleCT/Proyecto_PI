@@ -34,4 +34,14 @@
     <servlet-name>BusquedaServlet</servlet-name>
     <url-pattern>/BusquedaServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditUserServlet</display-name>
+    <servlet-name>EditUserServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.EditUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUserServlet</servlet-name>
+    <url-pattern>/EditUserServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

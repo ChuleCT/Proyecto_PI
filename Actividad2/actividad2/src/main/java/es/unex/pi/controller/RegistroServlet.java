@@ -6,8 +6,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import es.unex.pi.dao.JDBCUserDAOImpl;
@@ -34,9 +38,22 @@ public class RegistroServlet extends HttpServlet {
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
-        view.forward(request,response);
+        
+    	//Obtenemos la sesión y comprobamos si existe un usuario en la sesión
+    	
+    	HttpSession session = request.getSession();
+    	User user = (User) session.getAttribute("user");
+    	
+    	//Si existe un usuario en la sesión, lo eliminamos
+    	
+		if (user != null) {
+			session.removeAttribute("user");
+		}
+		
+		//Redirigimos a la vista de registro
+		
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
+		view.forward(request, response);
     }
 
     /**
@@ -62,15 +79,27 @@ public class RegistroServlet extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         user.setSurname(surname);
-
-        userDAO.add(user);
         
-        //Guardamos el usuario en la sesión
-        request.getSession().setAttribute("user", user);
+        Map<String,String> messages = new HashMap<String,String>();
         
-        response.sendRedirect("BusquedaServlet.do");
-
-
+		if (user.validate(messages)) {
+			
+			//se añade el usuario a la base de datos
+			
+			userDAO.add(user);
+			
+			//se obtiene la sesión y se añade el usuario a la misma
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			
+			logger.info("Usuario registrado: "+user.getId());
+			
+			response.sendRedirect("BusquedaServlet.do");
+		} else {
+			request.setAttribute("messages", messages);
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
+			view.forward(request, response);
+		}
     }
-
 }

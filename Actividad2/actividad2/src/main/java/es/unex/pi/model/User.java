@@ -1,5 +1,7 @@
 package es.unex.pi.model;
 
+import java.util.Map;
+
 public class User {
 
 	private long id;
@@ -7,6 +9,16 @@ public class User {
 	private String surname;
 	private String email;
 	private String password;
+	
+	public boolean validate(Map<String, String> messages){
+		   if(name.trim().isEmpty()||name==null) {
+		      messages.put("error", "Nombre vacío");
+			     } else if(!name.trim().matches("[A-Za-záéíóúñÁÉÍÓÚ]{2,}([\\s][A-Za-záéíóúñÁÉÍÓÚ]{2,})*")) {
+			           messages.put("error", "Nombre no válido: " + name.trim());
+			     }
+		   if(messages.isEmpty()) return true; 
+			   else return false;
+		}
 	
 	public long getId() {
 		return id;
