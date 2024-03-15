@@ -1,35 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"     pageEncoding="UTF-8"%>
-<!DOCTYPE html >
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>${requestScope.CheckType} Usuario</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-<html>
-<head>
-<meta charset="utf-8">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Registro.css" />
- <title>Check Order</title>
 
-</head>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Borrar.css" />
 
-<body>
-	<header>
-		<h1> ${requestScope.CheckType} Order </h1>
-	</header>
-	<div class="centeredcontainer sizereduced">
-		<ul>
-			<li>Customer name: ${order.name}</li>
-			<li>Customer email: ${order.email}</li>
-			<li>Customer phone: ${order.tel}</li>
-			<li>Size: ${order.size}</li>
-			<li>Type: ${order.type}</li>
-			<li>Delivery time: ${order.delivery}</li>
-			<li>Comments: ${order.comments}</li>		
-		</ul>
-		<form method="POST" action="?">
-			<div class="divbutton">
-				<input id="button" class="buttonstyle" type="submit" value="${requestScope.CheckType} Order"/>
-			</div>		
-		</form>
-	</div>	
-</body>
+    </head>
+
+    <body>
+        <header class="bg-primary">
+            <h1>${requestScope.CheckType} Usuario </h1>
+        </header>
+        <div class="centeredcontainer sizereduced">
+            <ul>
+                <li>Nombre usuario: ${user.name}</li>
+                <li>Apellido usuario: ${user.surname}</li>
+                <li>Email usuario: ${user.email}</li>
+            </ul>
+      	    <form method="POST" action="?">
+                <div class="divbutton">
+                    <input class="btn btn-primary" type="submit" value="${requestScope.CheckType} Usuario"/>
+                </div>		
+            </form>
+        </div>	
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
 </html>
+
 
 

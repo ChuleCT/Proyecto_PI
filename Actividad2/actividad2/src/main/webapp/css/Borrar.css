@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #555;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+}
+
+header {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.error{
+    text-align:center;
+}
+
+.container, .centeredcontainer {
+    max-width: 60%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+fieldset{
+    border-radius: 8px;
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.gridcontainers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+@media (max-width:1000px){
+    .gridcontainers {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+.centeredcontainer{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    justify-items:center;
+}
+
+
+.gridcontainerschecks{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    font-size: 0.85em;
+}
+
+
+label {
+    margin-bottom: 8px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+input:focus, textarea:focus { 
+    background: #eee;
+}
+
+.sizereduced{
+    width: 50%;
+}
+
+.buttonstyle {
+    padding: 12px;
+    background-color: #a86e0c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    place-self: center;
+}
+
+
+.buttonstyle:hover {
+    background-color: #f5a720;
+    cursor:pointer;
+}
+
+.divbutton{
+    display:grid;
+    grid-template-columns: 1fr;
+    width: 	100%;
+    justify-items:center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}

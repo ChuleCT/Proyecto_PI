@@ -91,7 +91,7 @@
 					  					</c:choose> />
                                 <c:choose>
                                     <c:when test="${not empty user.id}">
-                                        <a href="BorrarUserServlet.do" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3">
+                                        <a href="<c:url value='BorrarUserServlet.do?id=${user.id}'/>" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3">
                                             <span class="negrita m-5 fw-bold">BORRAR cuenta</span>
                                         </a>
                                     </c:when>
