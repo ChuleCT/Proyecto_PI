@@ -44,4 +44,14 @@
     <servlet-name>EditUserServlet</servlet-name>
     <url-pattern>/EditUserServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BorrarUserServlet</display-name>
+    <servlet-name>BorrarUserServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.BorrarUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BorrarUserServlet</servlet-name>
+    <url-pattern>/BorrarUserServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

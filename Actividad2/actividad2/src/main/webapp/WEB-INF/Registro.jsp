@@ -78,14 +78,24 @@
 								<option value="15">El Salvador</option>
 							</select> <label class="form-label">Teléfono</label> <input type="tel"
 								class="form-control" placeholder="Indica tu número de teléfono"
-								required> <input type="submit"
+								required> 
+                                <input type="submit"
 								class="form-control btn btn-primary col-12"
 								value=<c:choose>
-      										<c:when test="${not empty user.id}"> "Confirmar cambios"</c:when>
+      										<c:when test="${not empty user.id}">
+                                                "Confirmar cambios"
+                                            </c:when>
     										<c:otherwise>
     											"Crear cuenta"
     										</c:otherwise>
 					  					</c:choose> />
+                                <c:choose>
+                                    <c:when test="${not empty user.id}">
+                                        <a href="BorrarUserServlet.do" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3">
+                                            <span class="negrita m-5 fw-bold">BORRAR cuenta</span>
+                                        </a>
+                                    </c:when>
+                                </c:choose>
 						</div>
 					</form>
 				</div>
