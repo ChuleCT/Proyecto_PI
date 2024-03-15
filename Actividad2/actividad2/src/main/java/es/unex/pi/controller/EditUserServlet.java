@@ -101,6 +101,13 @@ public class EditUserServlet extends HttpServlet {
 			userDAO.update(user);
 			
 			logger.info("The updated name is: "+user.getName());
+			
+			//eliminamos el atributo user de la sesión
+			request.getSession().removeAttribute("user");
+			
+			//se vuelven a cargar los datos del usuario
+			
+			request.getSession().setAttribute("user", user);
 
 			response.sendRedirect("BusquedaServlet.do");
 		} else {
