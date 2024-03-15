@@ -39,13 +39,11 @@ pageEncoding="UTF-8"%>
                 <c:choose>
                 <c:when test="${not empty user.name}">
                 <div class="col-1">
-                    <a href="EditUserServlet.do"
-                       class="btn btn-light text-primary"> ${user.name}</a>
+                    <a href="<c:url value='EditUserServlet.do?id=${user.id }'/>" class="btn btn-light text-primary"> ${user.name}</a>
                 </div>
                 </c:when>
                 <c:otherwise>
                 <div class="col-1">
-                <input type="hidden" name="id" value="${order.id }">
                     <a href="../Registro/index.html"
                        class="btn btn-light text-primary"> Registrarse </a>
                 </div>

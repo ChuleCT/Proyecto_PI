@@ -84,6 +84,8 @@ public class EditUserServlet extends HttpServlet {
 		
 		User user = new User();
 		
+		logger.info("The actual name is: " + request.getParameter("name"));
+		
 		user.setId(Long.parseLong(request.getParameter("id")));
 		user.setName(request.getParameter("name"));
 		user.setSurname(request.getParameter("surname"));
@@ -97,6 +99,8 @@ public class EditUserServlet extends HttpServlet {
 			// se actualiza el usuario en la base de datos
 
 			userDAO.update(user);
+			
+			logger.info("The updated name is: "+user.getName());
 
 			response.sendRedirect("BusquedaServlet.do");
 		} else {
