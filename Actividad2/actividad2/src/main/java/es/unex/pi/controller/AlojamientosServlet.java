@@ -44,6 +44,7 @@ public class AlojamientosServlet extends HttpServlet {
         List<Property> ListaAlojamientos = propertyDAO.getAllBySearchDestination(destino); 
 
         request.setAttribute("ListaAlojamientos", ListaAlojamientos);
+        request.setAttribute("size", ListaAlojamientos.size());
 
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Alojamientos.jsp");
         view.forward(request,response);
@@ -53,8 +54,13 @@ public class AlojamientosServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
+        
+    	String destino = request.getParameter("destino");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("destino",destino);
+
+        response.sendRedirect("AlojamientosServlet.do");
     }
 
 }

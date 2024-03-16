@@ -88,6 +88,9 @@ public class RegistroServlet extends HttpServlet {
 			
 			userDAO.add(user);
 			
+			//se obtiene el usuario recien añadido a la base de datos para cargar el id
+			user = userDAO.getUserByEmail(email);
+			
 			//se obtiene la sesión y se añade el usuario a la misma
 			
 			HttpSession session = request.getSession();
