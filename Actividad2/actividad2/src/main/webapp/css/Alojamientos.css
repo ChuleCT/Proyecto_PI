@@ -200,7 +200,7 @@ input[type="text"]:focus {
 }
 
 .fa-star {
-    color: yellow;
+    color: #b8b814;
     position: relative;
     top: -0.5em;
 }

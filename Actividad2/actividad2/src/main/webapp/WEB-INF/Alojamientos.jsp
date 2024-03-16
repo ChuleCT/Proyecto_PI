@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html lang="es">
     <head>
@@ -214,13 +215,8 @@
                     </div>
 
                     <c:forEach var="alojamiento" items="${ListaAlojamientos}"> 
-                            <p>Nombre alojamiento: ${alojamiento.name}</p>
-                            <p>Direccion alojamiento: ${alojamiento.address}</p>
-                            <p>Ciudad alojamiento: ${alojamiento.city}</p>
-                            <p>Distancia del centro alojamiento: ${alojamiento.centerDistance}</p>
-            	    </c:forEach>
                     <!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
-                    <div class="row bordered-box informacionAlojamiento">
+                    <div class="row bordered-box informacionAlojamiento mb-3">
 
                         <div class="col-3">
                             <img src="images/PalacioOquendo.png" class="my-2 imagenesPreview" id="imagenPalacio" alt="fachada Palacio de Oquendo">
@@ -232,34 +228,61 @@
                         </div>
 
                         <div class="col-6 pt-1">
-                            <h4 class="negrita azul">NH Collection Cáceres Palacio de Oquendo</h4>
+                            <h4 class="negrita azul">${alojamiento.name}</h4>
                             <div>
-                                <span class="star"><i class="fas fa-star"></i></span>
-                                <span class="star"><i class="fas fa-star"></i></span>
-                                <span class="star"><i class="fas fa-star"></i></span>
-                                <span class="star"><i class="fas fa-star"></i></span>
+                                <%-- Valoracion ESTRELLAS --%>
+                                <c:set var="estrellaEntera" value="${fn:split(alojamiento.gradesAverage, '.')[0]}" />
+                                <c:set var="estrellaMedia" value="${fn:split(alojamiento.gradesAverage, '.')[1]}" />
+                                <%-- Itera sobre la parte entera --%>
+                                <c:forEach var="i" begin="1" end="${estrellaEntera}">
+                                    <i class="fas fa-star" style="color: #b8b814; position: relative; top: -0.5em;"></i>
+                                </c:forEach>
+                                <%-- Verifica si hay una parte decimal --%>
+                                <c:if test="${not empty estrellaMedia}">
+                                    <c:choose>
+                                        <%-- Si la parte decimal es .5, añade una estrella media --%>
+                                        <c:when test="${estrellaMedia eq '5'}">
+                                            <i class="fas fa-star-half-alt" style="color: #b8b814; position: relative; top: -0.5em;"></i>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:if>
                             </div>
                             <div class="row">
                                 <div class="col-auto">
-                                    <p class="contenido-info"><a href="">Cáceres</a></p>
+                                    <p class="contenido-info"><a href="">${alojamiento.city}</a></p>
                                 </div>
                                 <div class="col-auto">
                                     <p class="contenido-info"><a href="">Mostrar en el mapa</a></p>
                                 </div>
                                 <div class="col-auto">
-                                    <p class="contenido-info">a 200m del centro</p>
+                                    <p class="contenido-info">a ${alojamiento.centerDistance}km del centro</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="bordered-box border-left">
                                     <div class="texto-con-linea negrita">
-                                        Habitación Doble Superior - 1 o 2 camas
+                                        ${alojamiento.description}
                                     </div>
                                     <div class="texto-con-linea">
-                                        Camas: 1 doble o 2 individuales
+                                        <c:choose>
+                                            <c:when test="${alojamiento.petFriendly eq 1}">
+                                                Permite mascotas
+                                            </c:when>
+                                            <c:otherwise>
+                                                No permite mascotas
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="texto-con-linea negrita rojo">
-                                        Solo queda 1 habitación a este precio en nuestra web
+                                        <c:choose>
+                                            <c:when test="${alojamiento.available eq 1}">
+                                                Disponible al menos una habitación
+                                            </c:when>
+                                            <c:otherwise>
+                                                No disponible en el momento
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
@@ -282,9 +305,8 @@
                             </div>
                             <div class="row">
                                 <div class="col pt-2 me-1 text-end  pb-4">
-                                    <span class="comentarios">2 noches, 2 adultos </span> <br>
-                                    <span class="fw-bold fs-4 precio">€ 285</span> <br>
-                                    <span class="comentarios">Incluye impuestos y cargos</span>
+                                    <i class="fa-solid fa-phone ms-2"></i>
+                                    <span>${alojamiento.telephone}</span>
                                     <a href="../detalleAlojamiento/index.html" class="btn btn-primary col-12">
                                         Ver disponibilidad >
                                     </a>
@@ -293,84 +315,7 @@
 
                         </div>
                     </div>
-
-
-
-
-
-                    <!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
-
-                    <div class="row bordered-box informacionAlojamiento my-2">
-
-                        <div class="col-3">
-                            <img src="images/PlazaDeItalia.png" class="my-2 imagenesPreview" id="plazaDeItalia" alt="foto hostal Plaza de Italia">
-                            <!-- Corazón  -->
-                            <label for="like-checkbox-2" class="heart-label">
-                                <input type="checkbox" id="like-checkbox-2" class="heart-checkbox">
-                                <span class="heart-icon"><i class="fas fa-heart"></i></span>
-                            </label>
-                        </div>
-
-                        <div class="col-6 pt-1">
-                            <h4 class="negrita azul">Hostal Plaza de Italia</h4>
-                            <div class="rating">
-                                <span class="star"><i class="fas fa-star"></i></span>
-                                <span class="star"><i class="fas fa-star"></i></span>
-                                <span class="star"><i class="fas fa-star"></i></span>
-                            </div>
-                            <div class="row">
-                                <div class="col-auto">
-                                    <p class="contenido-info"><a href="">Cáceres</a></p>
-                                </div>
-                                <div class="col-auto">
-                                    <p class="contenido-info"><a href="">Mostrar en el mapa</a></p>
-                                </div>
-                                <div class="col-auto">
-                                    <p class="contenido-info">a 400m del centro</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="bordered-box border-left">
-                                    <div class="texto-con-linea negrita">
-                                        Habitación doble económica
-                                    </div>
-                                    <div class="texto-con-linea">
-                                        1 cama doble
-                                    </div>
-                                    <div class="texto-con-linea negrita rojo">
-                                        Solo queda 1 habitación a este precio en nuestra web
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-3">
-                            <div class="row pt-1">
-                                <div class="col-8 text-end puntuacionTexto">
-                                    <b>Muy bien</b><br>
-                                    <div class="comentarios">
-                                        808 comentarios
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <p class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">8,3</p>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col pt-2 me-1 text-end  pb-4">
-                                    <span class="comentarios">2 noches, 2 adultos </span> <br>
-                                    <span class="fw-bold fs-4 precio">€ 149</span> <br>
-                                    <span class="comentarios">Incluye impuestos y cargos</span>
-                                    <a href="../detalleAlojamiento/index.html" class="btn btn-primary col-12">
-                                        Ver disponibilidad >
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+            	    </c:forEach>
 
                 </div>
 
