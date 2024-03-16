@@ -8,25 +8,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import es.unex.pi.model.Property;
+import es.unex.pi.dao.PropertyDAO;
+import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 import java.util.logging.Logger;
 
-import es.unex.pi.dao.JDBCUserDAOImpl;
-import es.unex.pi.dao.UserDAO;
-import es.unex.pi.model.User;
-
 /**
- * Servlet implementation class BusquedaServlet
+ * Servlet implementation class AlojamientosServlet
  */
-public class BusquedaServlet extends HttpServlet {
+public class AlojamientosServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(HttpServlet.class.getName());
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusquedaServlet() {
+    public AlojamientosServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,10 +35,17 @@ public class BusquedaServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        HttpSession session = request.getSession();
+        String destino = (String) session.getAttribute("destino");
 
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Busqueda.jsp");
+        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
+        PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
+        propertyDAO.setConnection(conn);
+        List<Property> ListaAlojamientos = propertyDAO.getAllBySearchDestination(destino); 
+
+        request.setAttribute("ListaAlojamientos", ListaAlojamientos);
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Alojamientos.jsp");
         view.forward(request,response);
     }
 
@@ -46,12 +53,8 @@ public class BusquedaServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String destino = request.getParameter("destino");
-
-        HttpSession session = request.getSession();
-        session.setAttribute("destino",destino);
-
-        response.sendRedirect("AlojamientosServlet.do");
+        // TODO Auto-generated method stub
+        doGet(request, response);
     }
 
 }

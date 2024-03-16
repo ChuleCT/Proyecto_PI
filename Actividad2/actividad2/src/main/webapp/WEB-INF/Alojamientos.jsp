@@ -183,6 +183,7 @@
                 <!-- ################################################ -->
                 <div class="col-8">
 
+
                     <div class="row">
                         <h4 class="negrita">Cáceres: 44 alojamientos encontrados </h4>
                         <select class="form-select" aria-label="Default select example">
@@ -212,6 +213,12 @@
                         </div>
                     </div>
 
+                    <c:forEach var="alojamiento" items="${ListaAlojamientos}"> 
+                            <p>Nombre alojamiento: ${alojamiento.name}</p>
+                            <p>Direccion alojamiento: ${alojamiento.address}</p>
+                            <p>Ciudad alojamiento: ${alojamiento.city}</p>
+                            <p>Distancia del centro alojamiento: ${alojamiento.centerDistance}</p>
+            	    </c:forEach>
                     <!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
                     <div class="row bordered-box informacionAlojamiento">
 
@@ -286,6 +293,9 @@
 
                         </div>
                     </div>
+
+
+
 
 
                     <!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->

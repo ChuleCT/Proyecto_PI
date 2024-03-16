@@ -54,4 +54,14 @@
     <servlet-name>BorrarUserServlet</servlet-name>
     <url-pattern>/BorrarUserServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AlojamientosServlet</display-name>
+    <servlet-name>AlojamientosServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.AlojamientosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AlojamientosServlet</servlet-name>
+    <url-pattern>/AlojamientosServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

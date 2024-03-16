@@ -88,6 +88,31 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
         return properties;
     }
 
+    //TODO getAllByNombre, Descripcion, Localidad      
+    public List<Property> getAllBySearchDestination(String search) {
+        search = search.toUpperCase();
+        if (conn == null)
+        return null;
+        ArrayList<Property> properties = new ArrayList<Property>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM properties WHERE UPPER(city) LIKE '%" + search + "%' OR " +
+                "UPPER(name) LIKE '%" + search + "%' OR " +
+                "UPPER(description) LIKE '%" + search + "%'");
+            while (rs.next()) {
+                Property property = new Property();
+                fromRsToPropertyObject(rs,property);
+                properties.add(property);
+                logger.info("fetching property: "+property.getId());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return properties;
+    }
+
+
 
 
     public List<Property> getAllByUser(long idu) {
@@ -126,7 +151,7 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
             try {
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='properties'");			 
-            if (!rs.next()) return -1; 
+                if (!rs.next()) return -1; 
                 lastid=rs.getInt("seq");
 
             } catch (SQLException e) {
@@ -148,8 +173,8 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
             try {
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='properties'");			 
-            if (!rs.next()) return -1; 
-            id=rs.getInt("seq");
+                if (!rs.next()) return -1; 
+                id=rs.getInt("seq");
                 if (id<=lastid) return -1;
 
                 logger.info("CREATING property("+id+"): "+property.getName());
