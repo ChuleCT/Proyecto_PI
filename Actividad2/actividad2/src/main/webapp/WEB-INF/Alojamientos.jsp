@@ -29,7 +29,7 @@
 		<div class="row" id="navbar">
 			<div class="col-4 offset-2">
 				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="../Busqueda/index.html">Booking.com</a>
+					href="BusquedaServlet.do">Booking.com</a>
 			</div>
 			<div class="col-1">
 				<a href="../carrito/index.html"
@@ -74,7 +74,7 @@
 		</form>
 		<div class="row mt-2" id="caminoLinks">
 			<div class="col-10">
-				<a href="../Busqueda/index.html">Inicio</a> > <a href="">España</a>
+				<a href="BusquedaServlet.do">Inicio</a> > <a href="">España</a>
 				> <a href="">Extremadura</a> > <a href="">Cáceres</a> > Resultados
 				de la búsqueda
 			</div>

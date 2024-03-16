@@ -64,4 +64,34 @@
     <servlet-name>AlojamientosServlet</servlet-name>
     <url-pattern>/AlojamientosServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditPropertyServlet</display-name>
+    <servlet-name>EditPropertyServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.EditPropertyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPropertyServlet</servlet-name>
+    <url-pattern>/EditPropertyServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreatePropertyServlet</display-name>
+    <servlet-name>CreatePropertyServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.CreatePropertyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreatePropertyServlet</servlet-name>
+    <url-pattern>/CreatePropertyServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListaAlojamientosServlet</display-name>
+    <servlet-name>ListaAlojamientosServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.ListaAlojamientosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListaAlojamientosServlet</servlet-name>
+    <url-pattern>/ListaAlojamientosServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

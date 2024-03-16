@@ -22,16 +22,16 @@ import jakarta.servlet.annotation.WebListener;
 @WebListener
 public class ServletContextListener implements jakarta.servlet.ServletContextListener {
 
-	
-	private static final Logger logger = Logger.getLogger(ServletContextListener.class.getName());
-	
 
-	public void contextInitialized(ServletContextEvent event) {
+    private static final Logger logger = Logger.getLogger(ServletContextListener.class.getName());
 
-		logger.info("Connecting DB");
-		Connection conn = null;
-		
-		try {
+
+    public void contextInitialized(ServletContextEvent event) {
+
+        logger.info("Connecting DB");
+        Connection conn = null;
+
+        try {
             Class.forName("org.sqlite.JDBC");
             String dbURL = "jdbc:sqlite:file:"+System.getProperty("user.home")+"/sqlite_dbs/Booking.db";
             conn = DriverManager.getConnection(dbURL);
@@ -50,42 +50,42 @@ public class ServletContextListener implements jakarta.servlet.ServletContextLis
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-		
-		logger.info("DB connected");
-	}
-	
+
+        logger.info("DB connected");
+    }
+
 
     public void contextDestroyed(ServletContextEvent arg0)  { 
-		logger.info("Destroying DB");
-		try {
-			logger.info("DB shutdown start");
-	   		ServletContext sc = arg0.getServletContext();
-	   		Connection conn = (Connection) sc.getAttribute("dbConn");
-			conn.close();
-			Enumeration<Driver> drivers = DriverManager.getDrivers();
-			while (drivers.hasMoreElements()) {
-				logger.info("DB deregistering drivers");
-				Driver driver = drivers.nextElement();
-				try {
-					DriverManager.deregisterDriver(driver);
-					logger.info(String.format("deregistering jdbc driver: %s", driver));
-				} catch (SQLException e) {
-					logger.severe(String.format("Error deregistering driver %s %s", driver, e));
-				}
+        logger.info("Destroying DB");
+        try {
+            logger.info("DB shutdown start");
+            ServletContext sc = arg0.getServletContext();
+            Connection conn = (Connection) sc.getAttribute("dbConn");
+            conn.close();
+            Enumeration<Driver> drivers = DriverManager.getDrivers();
+            while (drivers.hasMoreElements()) {
+                logger.info("DB deregistering drivers");
+                Driver driver = drivers.nextElement();
+                try {
+                    DriverManager.deregisterDriver(driver);
+                    logger.info(String.format("deregistering jdbc driver: %s", driver));
+                } catch (SQLException e) {
+                    logger.severe(String.format("Error deregistering driver %s %s", driver, e));
+                }
 
-			}
+            }
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		logger.info("DB destroyed");
-	}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	
-   
-	
-	
+        logger.info("DB destroyed");
+    }
+
+
+
+
+
 
 }

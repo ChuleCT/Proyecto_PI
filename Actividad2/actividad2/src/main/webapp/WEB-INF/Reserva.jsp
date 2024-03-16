@@ -45,10 +45,7 @@
         <div class="container mb-5">
             <div class="row">
                 <div class="col-3 offset-2">
-                    <h3 class="fw-bold">Reservas y viajes</h3>
-                </div>
-                <div class="col-3 offset-3 pt-2">
-                    <p><span class="text-primary">¿No encuentras una reserva?</span></p>
+                    <h3 class="fw-bold">${requestScope.CheckType}</h3>
                 </div>
             </div>
             <div class="row mt-4">
