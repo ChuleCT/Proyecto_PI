@@ -39,16 +39,16 @@ pageEncoding="UTF-8"%>
                 <c:choose>
                 <c:when test="${not empty user.name}">
                 <div class="col-1">
-                    <a href="<c:url value='EditUserServlet.do?id=${user.id }'/>" class="btn btn-light text-primary"> ${user.name}</a>
+                    <a href="<c:url value='EditUserServlet.do?id=${user.id}'/>" class="btn btn-light text-primary"> ${user.name}</a>
                 </div>
                 </c:when>
                 <c:otherwise>
                 <div class="col-1">
-                    <a href="../Registro/index.html"
+                    <a href="RegistroServlet.do"
                        class="btn btn-light text-primary"> Registrarse </a>
                 </div>
                 <div class="col-2">
-                    <a href="../inicioSesion/index.html"
+                    <a href="LoginServlet.do"
                        class="btn btn-light text-primary"> Iniciar Sesión </a>
                 </div>
                 </c:otherwise>
@@ -68,39 +68,11 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <div class="container mx-auto">
-                <form action="../alojamientos/index.html">
+                <form action="BusquedaServlet.do" method="post" >
                     <div class="row" id="busqueda">
-                        <div
-                                class="col-lg-3 col-md-2 col-sm-2 col-2 offset-1 pt-2 bg-light border border-3 border-warning rounded">
-                            <input type="text" id="a-donde-vas" class="border border-0"
+                        <div class="col-9 bg-primary offset-1 pt-2 bg-light border border-3 border-warning rounded">
+                            <input type="text" id="destino" name="destino" class="border border-0"
                                                                 placeholder="¿A dónde vas?" required>
-                        </div>
-                        <div
-                                class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded">
-                            <div class="row">
-                                <div class="col-5 me-4">
-                                    <input type="date">
-                                </div>
-                                <div class="col-5">
-                                    <input type="date">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                                class="col-lg-3 col-md-2 col-sm-2 col-2 pt-2 bg-light border border-3 border-warning rounded"
-                                id="filtro-habitacion">
-                            <div class="row">
-                                <div class="col-4">
-                                    <input type="number" id="adultos" min="0" placeholder="Adultos">
-                                </div>
-                                <div class="col-4">
-                                    <input type="number" id="niños" min="0" placeholder="Niños">
-                                </div>
-                                <div class="col-4">
-                                    <input type="number" id="habitaciones" min="0"
-                                                                           placeholder="Habitaciones">
-                                </div>
-                            </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 pt-1">
                             <input type="submit" type="submit"
