@@ -42,7 +42,7 @@
 
 					<h4 class="mb-2 text-danger">${messages.error}</h4>
 					<form action="?" method="post">
-					<input type="hidden" name="id" value="${user.id }">
+					<input type="hidden" name="id" value="${user.id}">
 						<div class="mb-3">
 							<label class="form-label">Nombre</label> <input type="text"
 								class="form-control" placeholder="Indica tu nombre" name="name"
