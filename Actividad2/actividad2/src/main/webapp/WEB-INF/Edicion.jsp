@@ -30,7 +30,7 @@
 		<div class="row mb-5" id="navbar">
 			<div class="col-4 offset-2">
 				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="../Busqueda/index.html">Booking.com</a>
+					href="BusquedaServlet.do">Booking.com</a>
 			</div>
 			<div class="col-1 offset-1">
 				<a href="../Registro/index.html" class="btn btn-light text-primary">
@@ -46,11 +46,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				<h1 class="mb-3">Edición de Alojamiento</h1>
-				<form method="post" action="" class="pb-5">
+                <h1 class="mb-3">${requestScope.CheckType} de Alojamiento</h1>
+				<form method="post" action="?" class="pb-5">
 				<input type="hidden" name="id" value="${property.id}">
 				<input type="hidden" name="idu" value="${property.idu}">
-				<input type="hidden" name="city" value="${property.city}">
 					<div class="mb-3">
 						<label for="nombreAlojamiento" class="form-label">Nombre
 							del Alojamiento</label> <input type="text" class="form-control" id="name"
@@ -67,12 +66,16 @@
 					<div class="mb-3">
 						<label for="distanciaCentro" class="form-label">Distancia
 							al centro</label> <input type="number" class="form-control"
-							id="centerDistance" name="centerDistance" min="0" value="${property.centerDistance}" required>
+							id="centerDistance" name="centerDistance" step="any" min="0" value="${property.centerDistance}" required>
 					</div>
 					<div class="mb-3">
 						<label for="valoracionMedia" class="form-label">Valoración
 							media</label> <input type="number" class="form-control"
 							id="gradesAverage" name="gradesAverage" step="any" min="0" value="${property.gradesAverage}" required>
+					</div>
+					<div class="mb-3">
+						<label for="ciudad" class="form-label">Ciudad</label> <input
+							type="text" class="form-control" id="city" name="city" value="${property.city}" required>
 					</div>
 					<div class="mb-3">
 						<label for="descripcion" class="form-label">Descripción</label> <input

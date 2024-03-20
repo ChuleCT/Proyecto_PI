@@ -76,16 +76,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CreatePropertyServlet</display-name>
-    <servlet-name>CreatePropertyServlet</servlet-name>
-    <servlet-class>es.unex.pi.controller.CreatePropertyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CreatePropertyServlet</servlet-name>
-    <url-pattern>/CreatePropertyServlet.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ListaAlojamientosServlet</display-name>
     <servlet-name>ListaAlojamientosServlet</servlet-name>
     <servlet-class>es.unex.pi.controller.ListaAlojamientosServlet</servlet-class>
@@ -93,5 +83,25 @@
   <servlet-mapping>
     <servlet-name>ListaAlojamientosServlet</servlet-name>
     <url-pattern>/ListaAlojamientosServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CrearPropiedadServlet</display-name>
+    <servlet-name>CrearPropiedadServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.CrearPropiedadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CrearPropiedadServlet</servlet-name>
+    <url-pattern>/CrearPropiedadServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeletePropertyServlet</display-name>
+    <servlet-name>DeletePropertyServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeletePropertyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePropertyServlet</servlet-name>
+    <url-pattern>/DeletePropertyServlet.do</url-pattern>
   </servlet-mapping>
 </web-app>

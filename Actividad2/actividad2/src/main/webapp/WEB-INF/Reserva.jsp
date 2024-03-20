@@ -29,7 +29,7 @@
 		<div class="row" id="navbar">
 			<div class="col-4 offset-2">
 				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="../Busqueda/index.html">Booking.com</a>
+					href="BusquedaServlet.do">Booking.com</a>
 			</div>
 			<div class="col-1">
 				<a href="../carrito/index.html"
@@ -48,9 +48,12 @@
 
 	<div class="container mb-5">
 		<div class="row">
-			<div class="col-3 offset-2">
+			<div class="col-10 offset-2">
 				<h3 class="fw-bold">${requestScope.CheckType}</h3>
 			</div>
+            <c:if test="${requestScope.CheckType=='Mis alojamientos'}">
+                    <a href="CrearPropiedadServlet.do" class="btn btn-primary col-2 offset-2">Nuevo alojamiento</a>
+            </c:if>
 		</div>
 		<c:forEach items="${ListaAlojamientos}" var="alojamiento">
 		<div class="row mt-4">

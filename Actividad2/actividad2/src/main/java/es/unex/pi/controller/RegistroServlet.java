@@ -38,22 +38,22 @@ public class RegistroServlet extends HttpServlet {
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        
-    	//Obtenemos la sesión y comprobamos si existe un usuario en la sesión
-    	
-    	HttpSession session = request.getSession();
-    	User user = (User) session.getAttribute("user");
-    	
-    	//Si existe un usuario en la sesión, lo eliminamos
-    	
-		if (user != null) {
-			session.removeAttribute("user");
-		}
-		
-		//Redirigimos a la vista de registro
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
-		view.forward(request, response);
+
+        //Obtenemos la sesión y comprobamos si existe un usuario en la sesión
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        //Si existe un usuario en la sesión, lo eliminamos
+
+        if (user != null) {
+            session.removeAttribute("user");
+        }
+
+        //Redirigimos a la vista de registro
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
+        view.forward(request, response);
     }
 
     /**
@@ -79,30 +79,30 @@ public class RegistroServlet extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         user.setSurname(surname);
-        
+
         Map<String,String> messages = new HashMap<String,String>();
-        
-		if (user.validate(messages)) {
-			
-			//se añade el usuario a la base de datos
-			
-			userDAO.add(user);
-			
-			//se obtiene el usuario recien añadido a la base de datos para cargar el id
-			user = userDAO.getUserByEmail(email);
-			
-			//se obtiene la sesión y se añade el usuario a la misma
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			
-			logger.info("Usuario registrado: "+user.getId());
-			
-			response.sendRedirect("BusquedaServlet.do");
-		} else {
-			request.setAttribute("messages", messages);
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
-			view.forward(request, response);
-		}
+
+        if (user.validate(messages)) {
+
+            //se añade el usuario a la base de datos
+
+            userDAO.add(user);
+
+            //se obtiene el usuario recien añadido a la base de datos para cargar el id
+            user = userDAO.getUserByEmail(email);
+
+            //se obtiene la sesión y se añade el usuario a la misma
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            logger.info("Usuario registrado: "+user.getId());
+
+            response.sendRedirect("BusquedaServlet.do");
+        } else {
+            request.setAttribute("messages", messages);
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
+            view.forward(request, response);
+        }
     }
 }

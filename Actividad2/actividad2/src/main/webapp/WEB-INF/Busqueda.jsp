@@ -42,7 +42,7 @@ pageEncoding="UTF-8"%>
                         <a href="<c:url value='EditUserServlet.do?id=${user.id}'/>" class="btn btn-light text-primary"> ${user.name}</a>
                     </div>
                     <div class="col-1">
-                        <a href="<c:url value='ListaAlojamientosServlet.do?id=${user.id}'/>" class="btn btn-light text-primary">Mis alojamientos</a>
+                        <a href="ListaAlojamientosServlet.do" class="btn btn-light text-primary">Mis alojamientos</a>
                     </div>
                 </c:when>
                 <c:otherwise>

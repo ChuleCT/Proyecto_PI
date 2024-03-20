@@ -15,17 +15,30 @@
 
     <body>
         <header class="bg-primary">
-            <h1>${requestScope.CheckType} Usuario </h1>
+            <h1>${requestScope.CheckType} </h1>
         </header>
         <div class="centeredcontainer sizereduced">
-            <ul>
-                <li>Nombre usuario: ${user.name}</li>
-                <li>Apellido usuario: ${user.surname}</li>
-                <li>Email usuario: ${user.email}</li>
-            </ul>
-      	    <form method="POST" action="?">
+            <c:choose>
+                <c:when test="${requestScope.CheckType=='Borrar Usuario'}">
+                    <ul>
+                        <li>Nombre usuario: ${user.name}</li>
+                        <li>Apellido usuario: ${user.surname}</li>
+                        <li>Email usuario: ${user.email}</li>
+                    </ul>
+                </c:when>
+                <c:otherwise>
+                    <ul>
+                        <li>Nombre del alojamiento: ${property.name}</li>
+                        <li>Dirección: ${property.address}</li>
+                        <li>Teléfono: ${property.telephone}</li>
+                        <li>Descipción: ${property.description}</li>
+                        <li>Ciudad: ${property.city}</li>
+                    </ul>
+                </c:otherwise>	
+            </c:choose>
+            <form method="POST" action="?">
                 <div class="divbutton">
-                    <input class="btn btn-primary" type="submit" value="${requestScope.CheckType} Usuario"/>
+                    <input class="btn btn-primary" type="submit" value="${requestScope.CheckType}"/>
                 </div>		
             </form>
         </div>	

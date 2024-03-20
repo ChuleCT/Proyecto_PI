@@ -22,7 +22,7 @@
         <div class="container-fluid color-navbar pt-3">
             <div class="row" id="navbar">
                 <div class="col-4 offset-2">
-                    <a class="navbar-brand text-light fs-4 fw-bold" href="../Busqueda/index.html">Booking.com</a>
+                    <a class="navbar-brand text-light fs-4 fw-bold" href="BusquedaServlet.do">Booking.com</a>
                 </div>
                 <div class="col-1">
                     <a href="../carrito/index.html" class="btn btn-light text-primary ms-4">

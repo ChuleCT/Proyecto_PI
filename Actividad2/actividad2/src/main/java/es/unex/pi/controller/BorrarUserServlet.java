@@ -47,7 +47,7 @@ public class BorrarUserServlet extends HttpServlet {
             if (user != null){
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
-                request.setAttribute("CheckType", "Borrar");
+                request.setAttribute("CheckType", "Borrar Usuario");
 
                 RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
                 view.forward(request,response);
@@ -80,7 +80,6 @@ public class BorrarUserServlet extends HttpServlet {
         if (user!=null) {
 
             userDAO.delete(user.getId());
-
 
             session.removeAttribute("user");
             user=null;
