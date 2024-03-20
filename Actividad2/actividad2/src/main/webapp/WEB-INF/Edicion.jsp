@@ -85,36 +85,13 @@
 
 					<div class="mb-3">
 						<p>Servicios o instalaciones ofrecidos</p>
+						<c:forEach items="${services}" var="service">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="wifi"
-								id="wifi" name="servicios[]"> <label
-								class="form-check label" for="wifi">Wifi</label>
+							<input class="form-check-input" type="checkbox" value="${service.name}}"
+								id="${service.name}" name="servicios[]"> <label
+								class="form-check label" for="${service.name}">${service.name}</label>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="piscina"
-								id="piscina" name="servicios[]"> <label
-								class="form-check label" for="piscina">Piscina</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="spa"
-								id="spa" name="servicios[]"> <label
-								class="form-check label" for="spa">Spa</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="gimnasio"
-								id="gimnasio" name="servicios[]"> <label
-								class="form-check label" for="gimnasio">Gimnasio</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="restaurante" id="restaurante" name="servicios[]">
-							<label class="form-check label" for="restaurante">Restaurante</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="bar"
-								id="bar" name="servicios[]"> <label
-								class="form-check label" for="bar">Bar</label>
-						</div>
+						</c:forEach>
 					</div>
 
 					<div class="mb-3">
