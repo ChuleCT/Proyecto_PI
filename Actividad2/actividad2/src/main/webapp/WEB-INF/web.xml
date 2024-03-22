@@ -104,4 +104,14 @@
     <servlet-name>DeletePropertyServlet</servlet-name>
     <url-pattern>/DeletePropertyServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

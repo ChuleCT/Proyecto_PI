@@ -20,6 +20,8 @@ pageEncoding="UTF-8"%>
 
         <link rel="stylesheet"
               href="${pageContext.request.contextPath}/css/Busqueda.css">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -30,14 +32,17 @@ pageEncoding="UTF-8"%>
                     <a class="navbar-brand text-light fs-4 fw-bold"
                        href="BusquedaServlet.do">Booking.com</a>
                 </div>
-                <div class="col-1">
-                    <a href="../carrito/index.html"
-                    
-                       class="btn btn-light text-primary ms-4"> Carrito </a>
-                </div>
 
                 <c:choose>
                 <c:when test="${not empty user.name}">
+                    <div class="col-1">
+                        <a href="LogoutServlet.do" class="btn btn-light text-primary ms-4">
+                            <i class="fa-solid fa-power-off"></i>
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <a href="../carrito/index.html" class="btn btn-light text-primary ms-4"> Carrito </a>
+                    </div>
                     <div class="col-1">
                         <a href="<c:url value='EditUserServlet.do?id=${user.id}'/>" class="btn btn-light text-primary"> ${user.name}</a>
                     </div>
@@ -46,7 +51,7 @@ pageEncoding="UTF-8"%>
                     </div>
                 </c:when>
                 <c:otherwise>
-                <div class="col-1">
+                <div class="col-1 offset-1">
                     <a href="RegistroServlet.do"
                        class="btn btn-light text-primary"> Registrarse </a>
                 </div>

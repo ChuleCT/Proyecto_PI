@@ -5,7 +5,7 @@
 <html lang="es">
 
 <head>
-<title>Edición de Alojamiento</title>
+<title>${requestScope.CheckType} de Alojamiento</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"

@@ -39,7 +39,7 @@ public class CrearPropiedadServlet extends HttpServlet {
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String alojamiento = (String) session.getAttribute("property");
+        Property alojamiento = (Property) session.getAttribute("property");
 
         if (alojamiento != null) {
             session.removeAttribute("property");
