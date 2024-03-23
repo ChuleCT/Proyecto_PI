@@ -8,10 +8,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.Arrays;
 
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.dao.PropertyDAO;
@@ -20,6 +22,12 @@ import es.unex.pi.model.Property;
 import es.unex.pi.dao.JDBCServiceDAOImpl;
 import es.unex.pi.dao.ServiceDAO;
 import es.unex.pi.model.Service;
+
+import es.unex.pi.dao.JDBCPropertiesServicesDAOImpl;
+import es.unex.pi.dao.PropertiesServicesDAO;
+import es.unex.pi.model.PropertiesServices;
+
+
 
 /**
  * Servlet implementation class EditPropertyServlet
@@ -52,6 +60,12 @@ public class EditPropertyServlet extends HttpServlet {
         List<Service> services = serviceDAO.getAll();
         request.setAttribute("services", services);
 
+        PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
+        propertiesServicesDAO.setConnection(conn);
+        List <String> checkedServices = new ArrayList<String>();
+        checkedServices = propertiesServicesDAO.getCheckedServices(Long.parseLong(request.getParameter("id")));
+        request.setAttribute("checkedServices", checkedServices);
+
         try {
             String id = request.getParameter("id");
             logger.info("get parameter id (" + id + ")");
@@ -59,6 +73,7 @@ public class EditPropertyServlet extends HttpServlet {
             oid = Long.parseLong(id);
             Property property = propertyDAO.get(oid);
             if (property != null) {
+
                 request.setAttribute("property", property);
                 request.setAttribute("CheckType", "Edición");
                 RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Edicion.jsp");
@@ -82,6 +97,10 @@ public class EditPropertyServlet extends HttpServlet {
         Connection conn = (Connection) getServletContext().getAttribute("dbConn");
         PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
         propertyDAO.setConnection(conn);
+        ServiceDAO serviceDAO = new JDBCServiceDAOImpl();
+        serviceDAO.setConnection(conn);
+        PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
+        propertiesServicesDAO.setConnection(conn);
 
         Property property = new Property();
 
@@ -96,6 +115,35 @@ public class EditPropertyServlet extends HttpServlet {
         property.setCenterDistance(Double.parseDouble(request.getParameter("centerDistance")));
         property.setGradesAverage(Double.parseDouble(request.getParameter("gradesAverage")));
         property.setDescription(request.getParameter("description"));
+        property.setPetFriendly(Integer.parseInt(request.getParameter("petFriendly")));
+
+
+
+        List <String> oldCheckedServices = new ArrayList<String>();
+        oldCheckedServices = propertiesServicesDAO.getCheckedServices(Long.parseLong(request.getParameter("id")));// Vieja lista de servicios seleccionados
+
+        String [] checkedServices = request.getParameterValues("listServices");// Nueva lista de servicios seleccionados
+
+        // ACTUALIZA LOS SERVICIOS SELECCIONADOS
+        for (String service : checkedServices) {
+            if (!oldCheckedServices.contains(service) ){
+                // Si el servicio no estaba seleccionado antes, se añade
+                Service s = serviceDAO.get(service);
+                PropertiesServices ps = new PropertiesServices();
+                ps.setIds(s.getId());
+                ps.setIdp(property.getId());
+                propertiesServicesDAO.add(ps);
+            }
+        }
+        for (String service : oldCheckedServices) {
+            if (!Arrays.asList(checkedServices).contains(service) ) {
+                // Si el servicio estaba seleccionado antes y ya no lo está, se elimina
+                Service s = serviceDAO.get(service);
+                PropertiesServices ps = propertiesServicesDAO.get(property.getId(), s.getId());
+                propertiesServicesDAO.delete(ps.getIdp(), ps.getIds());
+            }
+        }
+
 
         Map<String, String> messages = new HashMap<String, String>();
         if (property.validate(messages)){

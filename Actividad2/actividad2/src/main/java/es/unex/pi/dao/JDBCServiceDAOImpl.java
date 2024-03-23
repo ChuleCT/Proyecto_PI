@@ -57,24 +57,6 @@ public class JDBCServiceDAOImpl implements ServiceDAO {
         return Service;
     }
 
-    public Service getServiceByEmail(String email) {
-        if (conn == null) return null;
-
-        Service Service = null;		
-
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM services WHERE email ='"+email+"'");			 
-            if (!rs.next()) return null; 
-            Service  = new Service();	 
-            fromRsToServiceObject(rs,Service);
-            logger.info("fetching Service by email: "+ email + " -> "+ Service.getId()+" "+Service.getName()+" "+Service.getIcon());
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return Service;
-    }
 
     public List<Service> getAll() {
 

@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.dao.PropertyDAO;
 import es.unex.pi.model.Property;
+import es.unex.pi.dao.JDBCPropertiesServicesDAOImpl;
+import es.unex.pi.dao.PropertiesServicesDAO;
 
 /**
  * Servlet implementation class DeletePropertyServlet
@@ -82,6 +84,8 @@ public class DeletePropertyServlet extends HttpServlet {
         Connection conn = (Connection) getServletContext().getAttribute("dbConn");
         PropertyDAO propertydDao = new JDBCPropertyDAOImpl();
         propertydDao.setConnection(conn);
+        PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
+        propertiesServicesDAO.setConnection(conn);
 
         HttpSession session = request.getSession();
         logger.info("Confirmed property to delete with session id: " + session.getId());
@@ -89,6 +93,7 @@ public class DeletePropertyServlet extends HttpServlet {
 
         if (property != null) {
             propertydDao.delete(property.getId());
+            propertiesServicesDAO.deleteByIdp(property.getId());
             session.removeAttribute("property");
             property = null;
         }

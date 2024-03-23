@@ -33,8 +33,26 @@ pageEncoding="UTF-8"%>
                        href="BusquedaServlet.do">Booking.com</a>
                 </div>
 
+
                 <c:choose>
-                <c:when test="${not empty user.name}">
+                    <c:when test="${not empty user.name}">
+    
+                        <div class="col-1">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${user.name}
+                                </button>
+                                <div class="dropdown-menu bg-secondary">
+                                    <a class="dropdown-item fw-bold" href="<c:url value='EditUserServlet.do?id=${user.id}'/>">Mi perfil</a>
+                                    <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do">Mis alojamientos</a>
+                                    <a class="dropdown-item fw-bold" href="">Mis reservas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item fw-bold" href="LogoutServlet.do">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:when>
+                <%--
                     <div class="col-1">
                         <a href="LogoutServlet.do" class="btn btn-light text-primary ms-4">
                             <i class="fa-solid fa-power-off"></i>
@@ -50,6 +68,7 @@ pageEncoding="UTF-8"%>
                         <a href="ListaAlojamientosServlet.do" class="btn btn-light text-primary">Mis alojamientos</a>
                     </div>
                 </c:when>
+                --%>
                 <c:otherwise>
                 <div class="col-1 offset-1">
                     <a href="RegistroServlet.do"
@@ -61,6 +80,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 </c:otherwise>
                 </c:choose>
+                            
 
             </div>
         </div>
@@ -191,6 +211,7 @@ pageEncoding="UTF-8"%>
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
                 integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
                 crossorigin="anonymous"></script>
+
     </body>
 
 </html>
