@@ -33,54 +33,38 @@ pageEncoding="UTF-8"%>
                        href="BusquedaServlet.do">Booking.com</a>
                 </div>
 
-
                 <c:choose>
                     <c:when test="${not empty user.name}">
     
+                        <div class="col-1 offset-1">
+                            <a href="../carrito/index.html" class="btn btn-light ms-4 fw-bold"><i class="fa-solid fa-cart-shopping"></i> Carrito </a>
+                        </div>
                         <div class="col-1">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-light dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ${user.name}
                                 </button>
                                 <div class="dropdown-menu bg-secondary">
-                                    <a class="dropdown-item fw-bold" href="<c:url value='EditUserServlet.do?id=${user.id}'/>">Mi perfil</a>
-                                    <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do">Mis alojamientos</a>
-                                    <a class="dropdown-item fw-bold" href="">Mis reservas</a>
+                                    <a class="dropdown-item fw-bold" href="<c:url value='EditUserServlet.do?id=${user.id}'/>"><i class="fa-solid fa-user"></i>Mi perfil</a>
+                                    <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do"><i class="fa-solid fa-house"></i> Mis alojamientos</a>
+                                    <a class="dropdown-item fw-bold" href=""><i class="fa-solid fa-list"></i> Mis reservas</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fw-bold" href="LogoutServlet.do">Logout</a>
+                                    <a class="dropdown-item fw-bold" href="LogoutServlet.do"><i class="fa-solid fa-power-off"></i> Logout</a>
                                 </div>
                             </div>
                         </div>
                     </c:when>
-                <%--
-                    <div class="col-1">
-                        <a href="LogoutServlet.do" class="btn btn-light text-primary ms-4">
-                            <i class="fa-solid fa-power-off"></i>
-                        </a>
-                    </div>
-                    <div class="col-1">
-                        <a href="../carrito/index.html" class="btn btn-light text-primary ms-4"> Carrito </a>
-                    </div>
-                    <div class="col-1">
-                        <a href="<c:url value='EditUserServlet.do?id=${user.id}'/>" class="btn btn-light text-primary"> ${user.name}</a>
-                    </div>
-                    <div class="col-1">
-                        <a href="ListaAlojamientosServlet.do" class="btn btn-light text-primary">Mis alojamientos</a>
-                    </div>
-                </c:when>
-                --%>
-                <c:otherwise>
-                <div class="col-1 offset-1">
-                    <a href="RegistroServlet.do"
-                       class="btn btn-light text-primary"> Registrarse </a>
-                </div>
-                <div class="col-2">
-                    <a href="LoginServlet.do"
-                       class="btn btn-light text-primary"> Iniciar Sesión </a>
-                </div>
-                </c:otherwise>
+                    <c:otherwise>
+                        <div class="col-1 offset-1">
+                            <a href="RegistroServlet.do"
+                               class="btn btn-light text-primary"> Registrarse </a>
+                        </div>
+                        <div class="col-2">
+                            <a href="LoginServlet.do"
+                               class="btn btn-light text-primary"> Iniciar Sesión </a>
+                        </div>
+                    </c:otherwise>
                 </c:choose>
-                            
 
             </div>
         </div>
