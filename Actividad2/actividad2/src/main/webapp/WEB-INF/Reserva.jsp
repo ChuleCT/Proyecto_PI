@@ -56,33 +56,38 @@
             </c:if>
 		</div>
 		<c:forEach items="${ListaAlojamientos}" var="alojamiento">
-		<div class="row mt-4">
-			<div class="col-8 offset-2">
-				<h4 class="fw-bold">${alojamiento.city}</h4>
-				<fieldset class="shadow rounded">
-					<div class="row py-3 ps-2">
-						<div class="col-2 ps-4">
-							<img class="rounded mt-2" src="images/ilunion.jpg"
-								alt="foto Ilunion Suites Madrid">
-						</div>
-						<div class="col">
-							<p>
-								<span class="fw-bold">${alojamiento.name}</span>
-							</p>
-								<span>${alojamiento.address}</span>
-								<p>${alojamiento.telephone}</p>
-								<p class="contenido-info">a ${alojamiento.centerDistance}km
-										del centro</p>
-							</div>
-						<div class="col text-end pe-5">
-							<a href="<c:url value='EditPropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Editar</a>
-							<br>
-							<a href="<c:url value='DeletePropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-danger mt-3" >Eliminar</a>
-						</div>
-					</div>
-				</fieldset>
-			</div>
-		</div>
+		    <div class="row mt-4">
+			    <div class="col-8 offset-2">
+				    <h4 class="fw-bold">${alojamiento.city}</h4>
+				    <fieldset class="shadow rounded">
+					    <div class="row pt-3 ps-2">
+						    <div class="col-2 ps-4">
+							    <img class="rounded mt-2" src="images/ilunion.jpg"
+								    alt="foto Ilunion Suites Madrid">
+						    </div>
+						    <div class="col">
+							    <p>
+								    <span class="fw-bold">${alojamiento.name}</span>
+							    </p>
+								    <span>${alojamiento.address}</span>
+								    <p>${alojamiento.telephone}</p>
+								    <p class="contenido-info">a ${alojamiento.centerDistance}km
+										    del centro</p>
+                            </div>
+						    <div class="col text-end pe-5">
+							    <a href="<c:url value='EditPropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Editar</a>
+							    <br>
+							    <a href="<c:url value='DeletePropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-danger mt-3" >Eliminar</a>
+						    </div>
+					    </div>
+                        <div class="row ps-2 pb-3">
+                            <div class="col-4 ps-4">
+                                <a href="<c:url value='ManageAcommodationsServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Gestionar habitaciones</a>
+                            </div>
+                        </div>
+				    </fieldset>
+			    </div>
+		    </div>
 		</c:forEach>
 	</div>
 

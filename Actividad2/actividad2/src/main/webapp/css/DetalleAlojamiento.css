@@ -2,7 +2,7 @@ body {
     overflow-x: hidden;
 }
 
-#pagina {
+.pagina {
     margin-left: 21%;
     /* border: 2px solid black; */
     width: 58%;
@@ -112,7 +112,7 @@ input {
     left: 0.9em;
 }
 .bg-custom-light-blue {
-      background-color: #d8f1ff;
+    background-color: #d8f1ff;
 }
 
 .table {
@@ -143,6 +143,10 @@ input {
 
 .verde {
     color: #62A954;
+}
+
+.azul {
+    color: #0d6efd;
 }
 
 #reservaré {

@@ -36,9 +36,9 @@ import java.sql.Connection;
  */
 @WebServlet("/ListPropertiesServlet.do")
 public class ListPropertiesServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(HttpServlet.class.getName());
-    
+    private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(HttpServlet.class.getName());
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,62 +47,62 @@ public class ListPropertiesServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		logger.info("Atendiendo GET");
-		
-		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
-		UserDAO userDAO = new JDBCUserDAOImpl();
-		userDAO.setConnection(conn);
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		PropertyDAO PropertyDAO = new JDBCPropertyDAOImpl();
-		PropertyDAO.setConnection(conn);
-		
-		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
-		categoryDAO.setConnection(conn);
-		
-		PropertiesCategoriesDAO propertiesCategoriesDAO = new JDBCPropertiesCategoriesDAOImpl();
-		propertiesCategoriesDAO.setConnection(conn);
-		
-		List<Property> propertiesList = PropertyDAO.getAll();
-		
-		Iterator<Property> itPropertyList = propertiesList.iterator();
 
-		List<Triplet<Property, User, List<PropertiesCategories>>> propertiesUserList = new ArrayList<Triplet<Property, User, List<PropertiesCategories>>>();
+        logger.info("Atendiendo GET");
 
-		while(itPropertyList.hasNext()) {
-			Property property = (Property) itPropertyList.next();
-			User user = userDAO.get(property.getIdu());
-			List<PropertiesCategories> propertiesCategories = propertiesCategoriesDAO.getAllByProperty(property.getId());
-			
-			logger.info("User " + user.getName());
+        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
+        UserDAO userDAO = new JDBCUserDAOImpl();
+        userDAO.setConnection(conn);
 
-			propertiesUserList.add(new Triplet<Property, User, List<PropertiesCategories>>(property,user,propertiesCategories));
-		}
-		
-		
-		List<User> listUser = new ArrayList<User>();
-		listUser = userDAO.getAll();
-		Iterator<User> itUser = listUser.iterator();
-		Map<User,List<Property>> userPropertiesMap = new HashMap<User,List<Property>>();
-		
-		while(itUser.hasNext()) {
-			User user = itUser.next();
-			propertiesList = PropertyDAO.getAllByUser(user.getId());
-			userPropertiesMap.put(user, propertiesList);
-		}
-		
-		request.setAttribute("propertiesList",propertiesUserList);
-		request.setAttribute("usersMap", userPropertiesMap);
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/ListPropertiesUser.jsp");
-		view.forward(request,response);
-		
-	}
+        PropertyDAO PropertyDAO = new JDBCPropertyDAOImpl();
+        PropertyDAO.setConnection(conn);
 
-	
+        CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
+        categoryDAO.setConnection(conn);
+
+        PropertiesCategoriesDAO propertiesCategoriesDAO = new JDBCPropertiesCategoriesDAOImpl();
+        propertiesCategoriesDAO.setConnection(conn);
+
+        List<Property> propertiesList = PropertyDAO.getAll();
+
+        Iterator<Property> itPropertyList = propertiesList.iterator();
+
+        List<Triplet<Property, User, List<PropertiesCategories>>> propertiesUserList = new ArrayList<Triplet<Property, User, List<PropertiesCategories>>>();
+
+        while(itPropertyList.hasNext()) {
+            Property property = (Property) itPropertyList.next();
+            User user = userDAO.get(property.getIdu());
+            List<PropertiesCategories> propertiesCategories = propertiesCategoriesDAO.getAllByProperty(property.getId());
+
+            logger.info("User " + user.getName());
+
+            propertiesUserList.add(new Triplet<Property, User, List<PropertiesCategories>>(property,user,propertiesCategories));
+        }
+
+
+        List<User> listUser = new ArrayList<User>();
+        listUser = userDAO.getAll();
+        Iterator<User> itUser = listUser.iterator();
+        Map<User,List<Property>> userPropertiesMap = new HashMap<User,List<Property>>();
+
+        while(itUser.hasNext()) {
+            User user = itUser.next();
+            propertiesList = PropertyDAO.getAllByUser(user.getId());
+            userPropertiesMap.put(user, propertiesList);
+        }
+
+        request.setAttribute("propertiesList",propertiesUserList);
+        request.setAttribute("usersMap", userPropertiesMap);
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/ListPropertiesUser.jsp");
+        view.forward(request,response);
+
+    }
+
+
 }

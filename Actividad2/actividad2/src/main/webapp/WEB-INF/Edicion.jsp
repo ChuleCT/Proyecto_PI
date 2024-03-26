@@ -48,8 +48,8 @@
 			<div class="col-8 mx-auto">
 				<h1 class="mb-3">${requestScope.CheckType}deAlojamiento</h1>
 				<form method="post" action="?" class="pb-5">
-					<input type="hidden" name="id" value="${property.id}"> <input
-						type="hidden" name="idu" value="${property.idu}">
+					<input type="hidden" name="id" value="${property.id}"> 
+                    <input type="hidden" name="idu" value="${property.idu}">
 					<div class="mb-3">
 						<label for="nombreAlojamiento" class="form-label">Nombre
 							del Alojamiento</label> <input type="text" class="form-control" id="name"

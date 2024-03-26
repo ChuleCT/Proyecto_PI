@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="container mb-5" id="pagina">
+        <div class="container mb-5 pagina">
             <!-- Primera Row principal --> 
             <div class="row" id="PrimeraColIzq">
 

@@ -114,4 +114,34 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageAcommodationsServlet</display-name>
+    <servlet-name>ManageAcommodationsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.ManageAcommodationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageAcommodationsServlet</servlet-name>
+    <url-pattern>/ManageAcommodationsServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAccommodationServlet</display-name>
+    <servlet-name>EditAccommodationServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.EditAccommodationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAccommodationServlet</servlet-name>
+    <url-pattern>/EditAccommodationServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAccommodationServlet</display-name>
+    <servlet-name>DeleteAccommodationServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteAccommodationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccommodationServlet</servlet-name>
+    <url-pattern>/DeleteAccommodationServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
