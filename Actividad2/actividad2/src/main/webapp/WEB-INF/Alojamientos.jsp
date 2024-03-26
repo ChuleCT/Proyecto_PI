@@ -276,7 +276,7 @@
 							</div>
 							<div class="row">
 								<div class="bordered-box border-left">
-									<div class="texto-con-linea negrita">
+									<div class="texto-con-linea negrita text-truncate">
 										${alojamiento.description}</div>
 									<div class="texto-con-linea">
 										<c:choose>
@@ -311,7 +311,7 @@
 								</div>
 								<div class="col-3">
 									<p
-										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">9,6</p>
+										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${alojamiento.gradesAverage}</p>
 								</div>
 								<p class="text-end negrita azul">Ubicación 9,6</p>
 
@@ -319,7 +319,7 @@
 							<div class="row">
 								<div class="col pt-2 me-1 text-end  pb-4">
 									<i class="fa-solid fa-phone ms-2"></i> <span>${alojamiento.telephone}</span>
-									<a href="../detalleAlojamiento/index.html"
+									<a href="<c:url value='PropertyDetailsServlet.do?id=${alojamiento.id}'/>"
 										class="btn btn-primary col-12"> Ver disponibilidad > </a>
 								</div>
 							</div>

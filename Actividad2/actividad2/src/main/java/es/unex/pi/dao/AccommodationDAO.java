@@ -54,6 +54,14 @@ public interface AccommodationDAO {
 	 */	
 	public List<Accommodation> getAllBySearchName(String search);
 
+	
+	 
+	/**
+	 * Gets all the accomodations from the database that are in a property.
+	 * @param idp
+	 * @return List of all the accomodations from the database that are in a property.
+	 */
+	 public List<Accommodation> getAllByProperty(long idp);
 
 	/**
 	 * Adds a accommodation to the database.
