@@ -39,7 +39,14 @@ public interface BookingDAO {
 	 */
 	public Booking get(long idu,int totalPrice);
 
-
+	/**
+	 * Gets all the bookinges from the database using idu.
+	 * 
+	 * @param idu User Identifier.
+	 * 
+	 * @return List of all the bookinges from the database with that idu.
+	 */
+	public List<Booking> getAllByIdu(long idu);
 	
 	/**
 	 * Gets all the bookinges from the database.

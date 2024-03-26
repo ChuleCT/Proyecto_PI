@@ -51,6 +51,29 @@ public class JDBCBookingDAOImpl implements BookingDAO {
 		}
 		return booking;
 	}
+	
+	@Override
+	public List<Booking> getAllByIdu(long idu) {
+		if (conn == null)
+			return null;
+
+		ArrayList<Booking> bookings = new ArrayList<Booking>();
+		try {
+			Statement stmt;
+			ResultSet rs;
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM bookings WHERE idu =" + idu);
+			while (rs.next()) {
+				Booking booking = new Booking();
+				fromRsToBookingObject(rs, booking);
+				bookings.add(booking);
+				logger.info("fetching Bookings by idu: " + booking.getId());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bookings;
+	}
 
 	
 	public List<Booking> getAll() {

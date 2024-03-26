@@ -114,4 +114,34 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PropertyDetailsServlet</display-name>
+    <servlet-name>PropertyDetailsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.PropertyDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PropertyDetailsServlet</servlet-name>
+    <url-pattern>/PropertyDetailsServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShoppingCartServlet</display-name>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.ShoppingCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <url-pattern>/ShoppingCartServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BookingsServlet</display-name>
+    <servlet-name>BookingsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.BookingsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookingsServlet</servlet-name>
+    <url-pattern>/BookingsServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

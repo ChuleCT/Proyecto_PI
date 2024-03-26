@@ -16,6 +16,12 @@ body {
     left: 2em;
 }
 
+img{
+	max-width: 10%;
+    position: relative;
+    top: .2em
+}
+
 
 #busqueda {
     position: relative;

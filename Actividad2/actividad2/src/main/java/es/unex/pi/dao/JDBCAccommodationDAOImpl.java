@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import es.unex.pi.model.Accommodation;
+import es.unex.pi.model.PropertiesServices;
 
 
 public class JDBCAccommodationDAOImpl implements AccommodationDAO {
@@ -101,7 +102,30 @@ public class JDBCAccommodationDAOImpl implements AccommodationDAO {
 		return accommodations;
 	}
 	
+	 @Override
+	    public List<Accommodation> getAllByProperty(long idp) {
 
+	        if (conn == null) return null;
+
+	        ArrayList<Accommodation> accommodationsList = new ArrayList<Accommodation>();
+	        try {
+	            Statement stmt = conn.createStatement();
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM accommodations WHERE idp="+idp);
+
+	            while ( rs.next() ) {
+	                Accommodation accommodation = new Accommodation();
+	                fromRsToAccommodationObject(rs,accommodation);
+	                accommodationsList.add(accommodation);
+	                logger.info("fetching all Accommodations by idp: "+accommodation.getIdp()+"-> "+accommodation.getId());
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return accommodationsList;
+	    }
+	
 	@Override
 	public long add(Accommodation accommodation) {
 		long id=-1;
