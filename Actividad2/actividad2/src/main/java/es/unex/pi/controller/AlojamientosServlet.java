@@ -11,6 +11,12 @@ import jakarta.servlet.http.HttpSession;
 import es.unex.pi.model.Property;
 import es.unex.pi.dao.PropertyDAO;
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
+import es.unex.pi.model.User;
+import es.unex.pi.dao.UserFavoritesPropertiesDAO;
+import es.unex.pi.dao.JDBCUserFavoritesPropertiesDAOImpl;
+import es.unex.pi.model.UserFavoritesProperties;
+
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
@@ -43,8 +49,18 @@ public class AlojamientosServlet extends HttpServlet {
         propertyDAO.setConnection(conn);
         List<Property> ListaAlojamientos = propertyDAO.getAllBySearchDestination(destino); 
 
+        UserFavoritesPropertiesDAO userFavoritesPropertiesDAO = new JDBCUserFavoritesPropertiesDAOImpl();
+        userFavoritesPropertiesDAO.setConnection(conn);
+
         request.setAttribute("ListaAlojamientos", ListaAlojamientos);
         request.setAttribute("size", ListaAlojamientos.size());
+
+        User user = (User) session.getAttribute("user");
+        Long id = user.getId();
+
+        // Recuperar lista de favoritos
+        List <UserFavoritesProperties> ListaFavoritos = userFavoritesPropertiesDAO.getAllByUser(id);
+        request.setAttribute("ListaFavoritos", ListaFavoritos);
 
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Alojamientos.jsp");
         view.forward(request,response);
@@ -54,8 +70,8 @@ public class AlojamientosServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	String destino = request.getParameter("destino");
+
+        String destino = request.getParameter("destino");
 
         HttpSession session = request.getSession();
         session.setAttribute("destino",destino);

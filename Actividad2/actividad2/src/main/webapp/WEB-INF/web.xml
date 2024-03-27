@@ -144,4 +144,14 @@
     <servlet-name>BookingsServlet</servlet-name>
     <url-pattern>/BookingsServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FavoritesPropertiesServlet</display-name>
+    <servlet-name>FavoritesPropertiesServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.FavoritesPropertiesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavoritesPropertiesServlet</servlet-name>
+    <url-pattern>/FavoritesPropertiesServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

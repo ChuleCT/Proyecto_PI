@@ -157,11 +157,6 @@
 
 					</div>
 
-					<div class="col-2">
-						<a href="../edicion/index.html"
-							class="btn btn-danger border-0 text-truncate mt-5 ms-4">
-							Editar </a>
-					</div>
 				</div>
 
 				<div class="row ms-1">

@@ -75,9 +75,20 @@
 										del centro</p>
 							</div>
 						<div class="col text-end pe-5">
-							<a href="<c:url value='EditPropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Editar</a>
-							<br>
-							<a href="<c:url value='DeletePropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-danger mt-3" >Eliminar</a>
+                            <c:choose>
+                                <c:when test="${requestScope.CheckType=='Mis alojamientos'}">
+							        <a href="<c:url value='EditPropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Editar</a>
+							        <br>
+							        <a href="<c:url value='DeletePropertyServlet.do?id=${alojamiento.id}'/>" class="btn btn-danger mt-3" >Eliminar</a>
+                                </c:when>
+                                <c:when test="${requestScope.CheckType=='Mis alojamientos favoritos'}">
+							            <a href="<c:url value='PropertyDetailsServlet.do?id=${alojamiento.id}'/>" class="btn btn-primary mt-4" >Ver alojamiento</a>
+							            <br>
+                                        <a href="#" onclick="eliminarDeFavoritos(${alojamiento.id}); return false;" class="btn btn-danger mt-3">Eliminar de favoritos</a>
+                                </c:when>
+                                <c:otherwise>
+                                </c:otherwise>
+                            </c:choose>
 						</div>
 					</div>
 				</fieldset>
@@ -85,6 +96,30 @@
 		</div>
 		</c:forEach>
 	</div>
+
+    <script>
+        function eliminarDeFavoritos(idAlojamiento) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "<c:url value='FavoritesPropertiesServlet.do'/>");
+    
+            var hiddenField1 = document.createElement("input");
+            hiddenField1.setAttribute("type", "hidden");
+            hiddenField1.setAttribute("name", "propertieId");
+            hiddenField1.setAttribute("value", idAlojamiento);
+    
+            var hiddenField2 = document.createElement("input");
+            hiddenField2.setAttribute("type", "hidden");
+            hiddenField2.setAttribute("name", "desdeAlojamiento");
+            hiddenField2.setAttribute("value", "no");
+    
+            form.appendChild(hiddenField1);
+            form.appendChild(hiddenField2);
+    
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

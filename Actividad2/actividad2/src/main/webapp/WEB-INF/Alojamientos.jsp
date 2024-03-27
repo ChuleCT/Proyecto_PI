@@ -221,16 +221,42 @@
 
 				<c:forEach var="alojamiento" items="${ListaAlojamientos}">
 					<!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
+	                <c:set var="checked" value="no" />
 					<div class="row bordered-box informacionAlojamiento mb-3">
 
 						<div class="col-3">
 							<img src="images/PalacioOquendo.png" class="my-2 imagenesPreview"
 								id="imagenPalacio" alt="fachada Palacio de Oquendo">
 							<!-- Corazón  -->
-							<label for="like-checkbox-1" class="heart-label"> <input
-								type="checkbox" id="like-checkbox-1" class="heart-checkbox">
-								<span class="heart-icon"><i class="fas fa-heart"></i></span>
-							</label>
+                            <form action="FavoritesPropertiesServlet.do" method="post">
+                                <input type="hidden" name="propertieId" value="${alojamiento.id}">
+                                <input type="hidden" name="desdeAlojamiento" value="si">
+                                <c:if test="${fn:length(ListaFavoritos) > 0}">
+                                    <c:forEach var="favorito" items="${ListaFavoritos}">
+                                        <c:if test="${favorito.idp eq alojamiento.id}">
+                                            <c:set var="checked" value="yes" />
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                                <c:choose>
+                                    <c:when test="${checked == 'yes'}">
+                                        <label for="like-checkbox-${alojamiento.id}" class="heart-label"> 
+                                            <input type="checkbox" id="like-checkbox-${alojamiento.id}" checked class="heart-checkbox" name="favorito${alojamiento.id}" onchange="submitForm('like-checkbox-${alojamiento.id}')">
+                                            <span class="heart-icon">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </label>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <label for="like-checkbox-${alojamiento.id}" class="heart-label"> 
+                                            <input type="checkbox" id="like-checkbox-${alojamiento.id}" class="heart-checkbox" name="favorito${alojamiento.id}" onchange="submitForm('like-checkbox-${alojamiento.id}')">
+                                            <span class="heart-icon">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </label>
+                                    </c:otherwise>
+                                </c:choose>
+                            </form>
 						</div>
 
 						<div class="col-6 pt-1">
@@ -335,8 +361,11 @@
 	</div>
 
 
-
-
+    <script>
+        function submitForm(checkboxId) {
+            document.getElementById(checkboxId).form.submit();
+        }
+    </script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
