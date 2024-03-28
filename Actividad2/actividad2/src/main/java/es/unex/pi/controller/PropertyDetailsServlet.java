@@ -115,10 +115,11 @@ public class PropertyDetailsServlet extends HttpServlet {
 		for (int i = 0; i < accommodations2.size(); i++) {
 			String cantidadParam = request.getParameter("cantidad" + i); 
 			int cantidad = Integer.parseInt(cantidadParam);
+			if (cantidad > 0) {
 			Accommodation accommodation = accommodations2.get(i);
-
 			// Asocia el alojamiento con su cantidad en el mapa
 			accommodationQuantityMap.put(accommodation, cantidad);
+			}
 		}
 		
 		logger.info("\n\n\n\n\n\n\n\n\n\n\n");

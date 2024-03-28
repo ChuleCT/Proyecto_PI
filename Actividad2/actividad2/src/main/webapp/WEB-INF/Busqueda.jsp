@@ -37,7 +37,7 @@ pageEncoding="UTF-8"%>
                     <c:when test="${not empty user.name}">
     
                         <div class="col-1 offset-1">
-                            <a href="../carrito/index.html" class="btn btn-light ms-4 fw-bold"><i class="fa-solid fa-cart-shopping"></i> Carrito </a>
+                            <a href="ShoppingCartServlet.do" class="btn btn-light ms-4 fw-bold"><i class="fa-solid fa-cart-shopping"></i> Carrito </a>
                         </div>
                         <div class="col-1">
                             <div class="btn-group">

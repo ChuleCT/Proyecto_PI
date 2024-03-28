@@ -51,75 +51,131 @@
 		</div>
 	</div>
 
-	<div class="container mt-5">
-		<div class="row">
-			<div class="col-4 mx-auto">
-				<div class="row">
-					<div class="col border rounded">
-						<h5 class="fw-bold mt-3">${property.name}</h5>
-							<p>${property.address}</p>
-							<p class="text-success">Excelente ubicación -
-								${property.gradesAverage}</p>
-							<p>
-								<span
-									class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${property.gradesAverage}</span>
-								Fabuloso - 4559 comentarios
-							</p>
+	<c:choose>
+		<c:when test="${not empty property.name}">
 
-							<c:forEach var="service" items="${services}">
-								<p class="me-2">
-									<i class="fa fa-paw me-2" aria-hidden="true"></i>${service}</p>
-							</c:forEach>
-					</div>
-				</div>
-				<div class="row mt-3">
-					<div class="col border rounded">
-						<h5 class="fw-bold mb-3 mt-3">Los datos de tu reserva</h5>
-						<p>Has seleccionado:</p>
-						<div class="list-group list-group-flush">
-							<c:forEach var="entry" items="${selectedAccommodations}">
-								<p href="#"
-									class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-									<span>${entry.key.name}</span> <span
-									class="badge bg-primary rounded-pill">${entry.value}
-										Habitaciones</span>
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col-4 mx-auto">
+						<div class="row">
+							<div class="col border rounded">
+								<h5 class="fw-bold mt-3">${property.name}</h5>
+								<p>${property.address}</p>
+								<p class="text-success">Excelente ubicación -
+									${property.gradesAverage}</p>
+								<p>
+									<span
+										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${property.gradesAverage}</span>
+									Fabuloso - 4559 comentarios
 								</p>
-							</c:forEach>
+
+								<c:forEach var="service" items="${services}">
+									<p class="me-2">
+										<i class="fa fa-paw me-2" aria-hidden="true"></i>${service}</p>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col border rounded">
+								<h5 class="fw-bold mb-3 mt-3">Los datos de tu reserva</h5>
+								<p>Has seleccionado:</p>
+								<div class="list-group list-group-flush">
+									<c:forEach var="entry" items="${selectedAccommodations}">
+										<div
+											class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+											<div class="row w-100">
+												<div class="col-9 d-flex align-items-center text-truncate">
+													<span>${entry.key.name}</span>
+												</div>
+												<div
+													class="col-3 d-flex justify-content-end align-items-center">
+													<span class="badge bg-primary rounded-pill">${entry.value}
+														Habitaciones</span>
+													<button type="button" class="btn btn-link ms-2"
+														onclick="eliminar('${entry.key.id}', true)">
+														<i class="fa fa-trash text-danger"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mt-3 mb-5">
+							<div class="col border rounded">
+								<h5 class="fw-bold mb-3 mt-3">Desglose del precio</h5>
+								<div class="row fondo mb-3">
+									<div class="col">
+										<h4 class="fw-bold mt-3">Total</h4>
+									</div>
+									<div class="col">
+										<h4 class="fw-bold text-end mt-3">€ ${totalPrice}</h4>
+										<p>Incluye impuestos y cargos</p>
+									</div>
+								</div>
+								<h6 class="fw-bold">Información sobre el precio</h6>
+								<p>
+									<i class="fa fa-credit-card" aria-hidden="true"></i> Incluye €
+									${totalPrice * 0.10} de impuestos y cargos
+								</p>
+								<p>10% de IVA // € ${totalPrice * 0.10}</p>
+								<form action="ShoppingCartServlet.do" method="post">
+									<input type="hidden" name="totalPrice" value="${totalPrice}">
+									<button type="submit" class="btn btn-primary w-100 mb-2">Reservar</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row mt-3 mb-5">
-					<div class="col border rounded">
-						<h5 class="fw-bold mb-3 mt-3">
-							Desglose del precio
-							</h5>
-							<div class="row fondo mb-3">
-								<div class="col">
-									<h4 class="fw-bold mt-3">Total</h4>
-								</div>
-								<div class="col">
-									<h4 class="fw-bold text-end mt-3">€ ${totalPrice}</h4>
-									<p>Incluye impuestos y cargos</p>
-								</div>
+			</div>
+
+		</c:when>
+		<c:otherwise>
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col-4 mx-auto">
+						<div class="row">
+							<div class="col border
+								rounded">
+								<h5 class="fw-bold mt-3">No hay datos de reserva</h5>
 							</div>
-							<h6 class="fw-bold">Información sobre el precio</h6>
-							<p>
-								<i class="fa fa-credit-card" aria-hidden="true"></i> Incluye €
-								${totalPrice * 0.10} de impuestos y cargos
-							</p>
-							<p>10% de IVA // € ${totalPrice * 0.10}</p>
-							<form action="ShoppingCartServlet.do" method="post">
-								<input type="hidden" name="totalPrice" value="${totalPrice}">
-								<button type="submit" class="btn btn-primary w-100 mb-2">Reservar</button>
-							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</c:otherwise>
+	</c:choose>
 
 
 
+	<script>
+		function eliminar(id, eliminarHabitacion) {
+			// Crea un formulario oculto
+			var form = document.createElement("form");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "ShoppingCartServlet.do");
+
+			// Crea un campo oculto para enviar el ID del alojamiento
+			var inputId = document.createElement("input");
+			inputId.setAttribute("type", "hidden");
+			inputId.setAttribute("name", "accommodationId");
+			inputId.setAttribute("value", id);
+			form.appendChild(inputId);
+
+			// Crea un campo oculto para indicar si se debe eliminar la habitación
+			var inputEliminar = document.createElement("input");
+			inputEliminar.setAttribute("type", "hidden");
+			inputEliminar.setAttribute("name", "eliminarHabitacion");
+			inputEliminar.setAttribute("value", eliminarHabitacion);
+			form.appendChild(inputEliminar);
+
+			// Agrega el formulario al cuerpo del documento y envíalo
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
