@@ -56,11 +56,14 @@ public class AlojamientosServlet extends HttpServlet {
         request.setAttribute("size", ListaAlojamientos.size());
 
         User user = (User) session.getAttribute("user");
-        Long id = user.getId();
+        
+		if (user != null) {
+			Long id = user.getId();
 
-        // Recuperar lista de favoritos
-        List <UserFavoritesProperties> ListaFavoritos = userFavoritesPropertiesDAO.getAllByUser(id);
-        request.setAttribute("ListaFavoritos", ListaFavoritos);
+	        // Recuperar lista de favoritos
+	        List <UserFavoritesProperties> ListaFavoritos = userFavoritesPropertiesDAO.getAllByUser(id);
+	        request.setAttribute("ListaFavoritos", ListaFavoritos);
+		}
 
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Alojamientos.jsp");
         view.forward(request,response);

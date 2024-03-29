@@ -39,7 +39,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<c:set var="propertyPost" value="${property}" />
 
 	<div class="container mb-5" id="pagina">
@@ -301,7 +301,7 @@
 		<!-- Tabla disponibilidad -->
 		<div class="container-fluid">
 			<form action="PropertyDetailsServlet.do" method="post">
-			<input type="hidden" name="id" value="${property.id}">
+				<input type="hidden" name="id" value="${property.id}">
 				<table class="table border">
 					<thead class=" bg-primary">
 						<tr>
@@ -369,8 +369,76 @@
 			</form>
 		</div>
 		<!-- finaliza la tabla de disponibilidad -->
+
+		<%-- Verificar si el usuario actual es propietario de la propiedad --%>
+		<c:if test="${not empty user.name && user.id ne property.idu}">
+			<div class="row justify-content-center">
+				<div class="col">
+					<div class="card">
+						<div class="card-header">Deja tu opinión</div>
+						<div class="card-body">
+							<form action="ReviewServlet.do" method="post">
+								<input type="hidden" name="idPropertyReviewed" value="${property.id}">
+								<div class="form-group row">
+									<label for="grade"
+										class="col-md-3 col-form-label text-md-right">Calificación</label>
+									<div class="col-9">
+										<select id="grade" name="grade" class="form-control">
+											<option value="1"
+												${userReview != null && userReview.grade == 1 ? "selected" : ""}>1</option>
+											<option value="2"
+												${userReview != null && userReview.grade == 2 ? "selected" : ""}>2</option>
+											<option value="3"
+												${userReview != null && userReview.grade == 3 ? "selected" : ""}>3</option>
+											<option value="4"
+												${userReview != null && userReview.grade == 4 ? "selected" : ""}>4</option>
+											<option value="5"
+												${userReview != null && userReview.grade == 5 ? "selected" : ""}>5</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row mt-2">
+									<label for="comment"
+										class="col-md-3 col-form-label text-md-right">Comentario</label>
+									<div class="col-md-9">
+										<textarea id="comment" name="comment" class="form-control"
+											placeholder="Escribe tu comentario aquí" rows="4">${userReview != null ? userReview.review : ""}</textarea>
+									</div>
+								</div>
+								<div class="form-group row mt-2">
+									<div class="col-md-12 offset-md-3">
+										<button type="submit" class="btn btn-primary">${userReview != null ? "Modificar review" : "Enviar"}</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</c:if>
+
+
+
+		<!-- Mostrar opiniones existentes -->
+		<div class="row mt-5">
+			<div class="col-12">
+				<h3 class="negrita">Opiniones de otros usuarios</h3>
+				<c:forEach var="review" items="${reviews}" varStatus="status">
+					<div class="card mb-3">
+						<div class="card-header">Usuario: ${users[status.index]}</div>
+						<div class="card-body">
+							<h5 class="card-title">Calificación: ${review.grade}</h5>
+							<p class="card-text">Comentario: ${review.review}</p>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+
+
+
 	</div>
-	<!-- Termina el container principal -->
 
 
 

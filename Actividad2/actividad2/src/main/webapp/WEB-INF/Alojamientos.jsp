@@ -74,9 +74,9 @@
 		</form>
 		<div class="row mt-2" id="caminoLinks">
 			<div class="col-10">
-				<a href="BusquedaServlet.do">Inicio</a> > <a href="">España</a>
-				> <a href="">Extremadura</a> > <a href="">Cáceres</a> > Resultados
-				de la búsqueda
+				<a href="BusquedaServlet.do">Inicio</a> > <a href="">España</a> > <a
+					href="">Extremadura</a> > <a href="">Cáceres</a> > Resultados de la
+				búsqueda
 			</div>
 		</div>
 	</div>
@@ -178,7 +178,7 @@
 			<div class="col-8">
 
 
-				<div class="row">
+				<div class="row mb-5">
 					<c:choose>
 						<c:when test="${size eq 1}">
 							<h4 class="negrita">${size} alojamiento encontrados</h4>
@@ -196,67 +196,54 @@
 						</option>
 						<!-- <option value="1"></option> -->
 					</select>
-
-					<div class="alert alert-light alert-dismissible fade show mt-4"
-						role="alert">
-						<strong>Un 79% de los alojamientos ya no están
-							disponibles en nuestra web para esas fechas.</strong>
-						<button type="button" class="btn-close" data-bs-dismiss="alert"
-							aria-label="Close"></button>
-					</div>
-
-					<div class="alert alert-secondary alert-dismissible fade show "
-						role="alert">
-						<div class="contenido-small">La comisión que pagan los
-							alojamientos por las reservas y otros factores pueden influir en
-							su puesto en el ranking.</div>
-						<div class="contenido-small">
-							Descubre más sobre los parámetros del ranking y cómo
-							seleccionarlos y modificarlos. <a href="">Más información</a>
-						</div>
-						<button type="button" class="btn-close" data-bs-dismiss="alert"
-							aria-label="Close"></button>
-					</div>
 				</div>
 
 				<c:forEach var="alojamiento" items="${ListaAlojamientos}">
 					<!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
-	                <c:set var="checked" value="no" />
+					<c:set var="checked" value="no" />
 					<div class="row bordered-box informacionAlojamiento mb-3">
 
 						<div class="col-3">
 							<img src="images/PalacioOquendo.png" class="my-2 imagenesPreview"
 								id="imagenPalacio" alt="fachada Palacio de Oquendo">
 							<!-- Corazón  -->
-                            <form action="FavoritesPropertiesServlet.do" method="post">
-                                <input type="hidden" name="propertieId" value="${alojamiento.id}">
-                                <input type="hidden" name="desdeAlojamiento" value="si">
-                                <c:if test="${fn:length(ListaFavoritos) > 0}">
-                                    <c:forEach var="favorito" items="${ListaFavoritos}">
-                                        <c:if test="${favorito.idp eq alojamiento.id}">
-                                            <c:set var="checked" value="yes" />
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
-                                <c:choose>
-                                    <c:when test="${checked == 'yes'}">
-                                        <label for="like-checkbox-${alojamiento.id}" class="heart-label"> 
-                                            <input type="checkbox" id="like-checkbox-${alojamiento.id}" checked class="heart-checkbox" name="favorito${alojamiento.id}" onchange="submitForm('like-checkbox-${alojamiento.id}')">
-                                            <span class="heart-icon">
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </label>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <label for="like-checkbox-${alojamiento.id}" class="heart-label"> 
-                                            <input type="checkbox" id="like-checkbox-${alojamiento.id}" class="heart-checkbox" name="favorito${alojamiento.id}" onchange="submitForm('like-checkbox-${alojamiento.id}')">
-                                            <span class="heart-icon">
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </label>
-                                    </c:otherwise>
-                                </c:choose>
-                            </form>
+							<c:if test="${not empty user.name}">
+								<form action="FavoritesPropertiesServlet.do" method="post">
+									<input type="hidden" name="propertieId"
+										value="${alojamiento.id}"> <input type="hidden"
+										name="desdeAlojamiento" value="si">
+									<c:if test="${fn:length(ListaFavoritos) > 0}">
+										<c:forEach var="favorito" items="${ListaFavoritos}">
+											<c:if test="${favorito.idp eq alojamiento.id}">
+												<c:set var="checked" value="yes" />
+											</c:if>
+										</c:forEach>
+									</c:if>
+									<c:choose>
+										<c:when test="${checked == 'yes'}">
+											<label for="like-checkbox-${alojamiento.id}"
+												class="heart-label"> <input type="checkbox"
+												id="like-checkbox-${alojamiento.id}" checked
+												class="heart-checkbox" name="favorito${alojamiento.id}"
+												onchange="submitForm('like-checkbox-${alojamiento.id}')">
+												<span class="heart-icon"> <i class="fas fa-heart"></i>
+											</span>
+											</label>
+										</c:when>
+										<c:otherwise>
+											<label for="like-checkbox-${alojamiento.id}"
+												class="heart-label"> <input type="checkbox"
+												id="like-checkbox-${alojamiento.id}" class="heart-checkbox"
+												name="favorito${alojamiento.id}"
+												onchange="submitForm('like-checkbox-${alojamiento.id}')">
+												<span class="heart-icon"> <i class="fas fa-heart"></i>
+											</span>
+											</label>
+										</c:otherwise>
+									</c:choose>
+								</form>
+							</c:if>
+
 						</div>
 
 						<div class="col-6 pt-1">
@@ -345,7 +332,8 @@
 							<div class="row">
 								<div class="col pt-2 me-1 text-end  pb-4">
 									<i class="fa-solid fa-phone ms-2"></i> <span>${alojamiento.telephone}</span>
-									<a href="<c:url value='PropertyDetailsServlet.do?id=${alojamiento.id}'/>"
+									<a
+										href="<c:url value='PropertyDetailsServlet.do?id=${alojamiento.id}'/>"
 										class="btn btn-primary col-12"> Ver disponibilidad > </a>
 								</div>
 							</div>
@@ -361,11 +349,11 @@
 	</div>
 
 
-    <script>
-        function submitForm(checkboxId) {
-            document.getElementById(checkboxId).form.submit();
-        }
-    </script>
+	<script>
+		function submitForm(checkboxId) {
+			document.getElementById(checkboxId).form.submit();
+		}
+	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
