@@ -117,8 +117,10 @@ public class CrearPropiedadServlet extends HttpServlet {
         }
         else {
             request.setAttribute("CheckType", "Creación");
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Edicion.jsp");
-            view.forward(request, response);
+            request.setAttribute("messages", messages);
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Edicion.jsp");
+//            view.forward(request, response);
+            doGet(request, response);
         }
 
     }

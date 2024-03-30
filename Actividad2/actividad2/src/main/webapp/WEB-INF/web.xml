@@ -204,4 +204,14 @@
     <servlet-name>CreateAccommodation</servlet-name>
     <url-pattern>/CreateAccommodation.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateAccommodationServlet</display-name>
+    <servlet-name>CreateAccommodationServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.CreateAccommodationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateAccommodationServlet</servlet-name>
+    <url-pattern>/CreateAccommodationServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

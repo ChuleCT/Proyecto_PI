@@ -51,6 +51,8 @@ public class EditAccommodationServlet extends HttpServlet {
 
             if (accommodation != null) {
                 request.setAttribute("accommodation", accommodation);
+                request.setAttribute("CheckType", "Edición de Habitación");
+                request.setAttribute("idp", accommodation.getIdp());
                 RequestDispatcher view = request.getRequestDispatcher("WEB-INF/EdicionHabitacion.jsp");
                 view.forward(request, response);
             } else {
@@ -91,9 +93,12 @@ public class EditAccommodationServlet extends HttpServlet {
 
             response.sendRedirect("ListaAlojamientosServlet.do");
         }else{
-            request.setAttribute("accommodation", accommodation);
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/EdicionHabitacion.jsp");
-            view.forward(request, response);
+//            request.setAttribute("accommodation", accommodation);
+//            request.setAttribute("CheckType", "Edición de ");
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/EdicionHabitacion.jsp");
+//            view.forward(request, response);
+        	request.setAttribute("messages", messages);
+        	doGet(request, response);
         }
     }
 

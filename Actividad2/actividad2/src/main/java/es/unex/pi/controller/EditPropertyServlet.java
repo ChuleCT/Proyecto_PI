@@ -158,10 +158,11 @@ public class EditPropertyServlet extends HttpServlet {
             response.sendRedirect("ListaAlojamientosServlet.do");
         }else{
             request.setAttribute("messages", messages);
-            request.setAttribute("property", property);
             request.setAttribute("CheckType", "Edición");
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Edicion.jsp");
-            view.forward(request, response);
+//            request.setAttribute("property", property);
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Edicion.jsp");
+//            view.forward(request, response);
+            doGet(request, response);
         }
     }
 

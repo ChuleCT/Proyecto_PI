@@ -43,6 +43,7 @@ public class ManageAccommodationsServlet extends HttpServlet {
         List<Accommodation> accommodationsList = accommodationDao.getAllByProperty(idp);
 
         request.setAttribute("accommodationsList", accommodationsList);
+        request.setAttribute("idp", idp);
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/GestionarHabitaciones.jsp");
         rd.forward(request, response);
     }

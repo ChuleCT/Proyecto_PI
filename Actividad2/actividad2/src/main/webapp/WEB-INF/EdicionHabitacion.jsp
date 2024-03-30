@@ -5,7 +5,7 @@
 <html lang="es">
     
     <head>
-        <title>Edición de habitación</title>
+        <title>${requestScope.CheckType}</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport"
@@ -46,10 +46,11 @@
 	    <div class="container">
 		    <div class="row">
 			    <div class="col-8 mx-auto">
-				    <h1 class="mb-3">Edición de habitación</h1>
+				    <h1 class="mb-3">${requestScope.CheckType}</h1>
+				    <h4 class="mb-2 text-danger">${messages.error}</h4>
 				    <form method="post" action="?" class="pb-5">
 					    <input type="hidden" name="id" value="${accommodation.id}"> 
-                        <input type="hidden" name="idp" value="${accommodation.idp}">
+                        <input type="hidden" name="idp" value="${idp}">
 					    <div class="mb-3">
                             <label for="nombreHabitacion" class="form-label">Nombre de la habitación</label>
                             <input type="text" class="form-control" id="name" name="name" value="${accommodation.name}" required>

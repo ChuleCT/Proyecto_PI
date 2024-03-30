@@ -46,7 +46,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				<h1 class="mb-3">${requestScope.CheckType}deAlojamiento</h1>
+				<h1 class="mb-3">${requestScope.CheckType} de Alojamiento</h1>
+				<h4 class="mb-2 text-danger">${messages.error}</h4>
 				<form method="post" action="?" class="pb-5">
 					<input type="hidden" name="id" value="${property.id}"> <input
 						type="hidden" name="idu" value="${property.idu}">
