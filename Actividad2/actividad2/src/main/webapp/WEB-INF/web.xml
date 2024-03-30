@@ -164,4 +164,44 @@
     <servlet-name>ReviewServlet</servlet-name>
     <url-pattern>/ReviewServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAccommodationServlet</display-name>
+    <servlet-name>DeleteAccommodationServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteAccommodationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccommodationServlet</servlet-name>
+    <url-pattern>/DeleteAccommodationServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageAccommodationsServlet</display-name>
+    <servlet-name>ManageAccommodationsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.ManageAccommodationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageAccommodationsServlet</servlet-name>
+    <url-pattern>/ManageAccommodationsServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAccommodationServlet</display-name>
+    <servlet-name>EditAccommodationServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.EditAccommodationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAccommodationServlet</servlet-name>
+    <url-pattern>/EditAccommodationServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateAccommodation</display-name>
+    <servlet-name>CreateAccommodation</servlet-name>
+    <servlet-class>es.unex.pi.controller.CreateAccommodation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateAccommodation</servlet-name>
+    <url-pattern>/CreateAccommodation.do</url-pattern>
+  </servlet-mapping>
 </web-app>

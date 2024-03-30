@@ -2,7 +2,7 @@ body {
     overflow-x: hidden;
 }
 
-#pagina {
+.pagina {
     margin-left: 21%;
     /* border: 2px solid black; */
     width: 58%;

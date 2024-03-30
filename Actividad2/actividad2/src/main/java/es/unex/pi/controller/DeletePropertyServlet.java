@@ -67,8 +67,6 @@ public class DeletePropertyServlet extends HttpServlet {
         } catch (Exception e) {
             logger.info("parameter id is not a number");
 
-            // TODO: Redirect to the ListOrderServlet.do
-
             response.sendRedirect("ListaAlojamientosServlet.do");
         }
     }
