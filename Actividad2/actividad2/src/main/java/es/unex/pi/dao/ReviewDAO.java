@@ -37,26 +37,26 @@ public interface ReviewDAO {
 	/**
 	 * Gets all the Review that contains an specific property.
 	 * 
-	 * @param idr
+	 * @param idp
 	 *            Property Identifier
 	 * 
 	 * @return List of all the Review that contains an specific property
 	 */
-	public List<Review> getAllByProperty(long idr);
+	public List<Review> getAllByProperty(long idp);
 
 	/**
 	 * Gets a Review from the DB using idr and idu.
 	 * 
-	 * @param idr 
+	 * @param idp 
 	 *            property identifier.
 	 *            
 	 * @param idu
 	 *            User Identifier
 	 * 
-	 * @return Review with that idr and idu.
+	 * @return Review with that idp and idu.
 	 */
 	
-	public Review get(long idr,long idu);
+	public Review get(long idp,long idu);
 
 	/**
 	 * Adds an Review to the database.
@@ -83,7 +83,7 @@ public interface ReviewDAO {
 	/**
 	 * Deletes an Review from the database.
 	 * 
-	 * @param idr
+	 * @param idp
 	 *            Property identifier.
 	 *            
 	 * @param idu
@@ -92,5 +92,5 @@ public interface ReviewDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean delete(long idr, long idu);
+	public boolean delete(long idp, long idu);
 }

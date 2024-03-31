@@ -406,8 +406,11 @@
 									</div>
 								</div>
 								<div class="form-group row mt-2">
-									<div class="col-md-12 offset-md-3">
-										<button type="submit" class="btn btn-primary">${userReview != null ? "Modificar review" : "Enviar"}</button>
+									<div class="col-md-3 offset-md-3">
+										<button id="submitButton" type="submit"
+											class="btn btn-primary">${userReview != null ? "Modificar review" : "Enviar"}</button>
+										<button type="button" class="btn btn-danger"
+											onclick="borrarReview()">Borrar review</button>
 									</div>
 								</div>
 							</form>
@@ -439,6 +442,17 @@
 
 
 	</div>
+
+	<script>
+    function borrarReview() {
+        // Realizar acciones adicionales si es necesario antes de enviar la solicitud POST
+        
+        // Enviar la solicitud POST al servlet
+        fetch('ReviewServlet.do', {
+            method: 'POST',
+    }
+    
+	</script>
 
 
 
