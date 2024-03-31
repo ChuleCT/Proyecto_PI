@@ -9,9 +9,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
+import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.dao.JDBCReviewDAOImpl;
+import es.unex.pi.dao.PropertyDAO;
 import es.unex.pi.dao.ReviewDAO;
+import es.unex.pi.model.Property;
 import es.unex.pi.model.Review;
 import es.unex.pi.model.User;
 
@@ -78,7 +82,36 @@ public class ReviewServlet extends HttpServlet {
 			}
 		}
 
+		List <Review> reviews = reviewDAO.getAllByProperty(idp);
+		double media = 0;
+		for (int i = 0; i < reviews.size(); i++) {
+			Review r = reviews.get(i);
+			media += r.getGrade();
+		}
+		logger.info("suma: " + media + " reviews.size(): " + reviews.size());
+		media = media / reviews.size();
+		logger.info("media: " + media);
+
+		media = Math.floor(media * 10) / 10;
 		
+		logger.info("media redondeada: " + media);
+		
+		PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
+		propertyDAO.setConnection(conn);
+		
+	    Property p = propertyDAO.get(idp);
+	    p.setId(idp);
+	    p.setIdu(p.getIdu());
+	    p.setCity(p.getCity());
+	    p.setName(p.getName());
+	    p.setAddress(p.getAddress());
+	    p.setTelephone(p.getTelephone());
+	    p.setCenterDistance(p.getCenterDistance());
+	    p.setGradesAverage(media);
+	    p.setDescription(p.getDescription());
+	    p.setPetFriendly(p.getPetFriendly());
+
+	    propertyDAO.update(p);
 		
 		// Redirijo a la página de la propiedad
 		response.sendRedirect("PropertyDetailsServlet.do?id=" + idp);

@@ -227,7 +227,7 @@
 								<c:if test="${not empty estrellaMedia}">
 									<c:choose>
 										<%-- Si la parte decimal es .5, añade una estrella media --%>
-										<c:when test="${estrellaMedia eq '5'}">
+										<c:when test="${estrellaMedia ge '5'}">
 											<i class="fas fa-star-half-alt"
 												style="color: #b8b814; position: relative; top: -0.5em;"></i>
 										</c:when>
