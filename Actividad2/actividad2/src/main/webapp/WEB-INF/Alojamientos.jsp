@@ -24,39 +24,9 @@
 </head>
 <body>
 
-	<!-- navbar -->
-	<div class="container-fluid color-navbar pt-3 pb-5">
-		<div class="row" id="navbar">
-			<div class="col-4 offset-2">
-				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="BusquedaServlet.do">Booking.com</a>
-			</div>
-			<div class="col-1">
-				<a href="../carrito/index.html"
-					class="btn btn-light text-primary ms-4"> Carrito </a>
-			</div>
-			<c:choose>
-				<c:when test="${not empty user.name}">
-					<div class="col-1">
-						<a href="<c:url value='EditUserServlet.do?id=${user.id}'/>"
-							class="btn btn-light text-primary"> ${user.name}</a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="col-1">
-						<a href="RegistroServlet.do" class="btn btn-light text-primary">
-							Registrarse </a>
-					</div>
-					<div class="col-2">
-						<a href="LoginServlet.do" class="btn btn-light text-primary">
-							Iniciar Sesión </a>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+	<%@ include file="Cabecera.jsp" %>
 
-	<div class="container">
+	<div class="container mt-4">
 
 		<form action="AlojamientosServlet.do" method="post"">
 			<!-- Barra de búsqueda, filtros y buscar:  -->
@@ -72,13 +42,7 @@
 						id="btn-buscar" value="Buscar">
 				</div>
 		</form>
-		<div class="row mt-2" id="caminoLinks">
-			<div class="col-10">
-				<a href="BusquedaServlet.do">Inicio</a> > <a href="">España</a> > <a
-					href="">Extremadura</a> > <a href="">Cáceres</a> > Resultados de la
-				búsqueda
-			</div>
-		</div>
+		
 	</div>
 	</div>
 

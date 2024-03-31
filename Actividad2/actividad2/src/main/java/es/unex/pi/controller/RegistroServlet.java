@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;
+import es.unex.pi.model.Accommodation;
 import es.unex.pi.model.User;
 
 /**
@@ -97,6 +98,10 @@ public class RegistroServlet extends HttpServlet {
             session.setAttribute("user", user);
 
             logger.info("Usuario registrado: "+user.getId());
+            
+            // Se crea el mapa para que no de error al entrar al carrito sin haber añadido alojamientos
+            Map<Accommodation, Integer> accommodationQuantityMap = new HashMap<>();
+            session.setAttribute("accommodationQuantityMap", accommodationQuantityMap);
 
             response.sendRedirect("BusquedaServlet.do");
         } else {

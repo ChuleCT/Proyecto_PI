@@ -25,23 +25,7 @@
 
 <body>
 
-	<!-- navbar -->
-	<div class="container-fluid color-navbar pt-3">
-		<div class="row mb-5" id="navbar">
-			<div class="col-4 offset-2">
-				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="BusquedaServlet.do">Booking.com</a>
-			</div>
-			<div class="col-1 offset-1">
-				<a href="../Registro/index.html" class="btn btn-light text-primary">
-					Registrarse </a>
-			</div>
-			<div class="col-2">
-				<a href="../inicioSesion/index.html"
-					class="btn btn-light text-primary"> Iniciar Sesión </a>
-			</div>
-		</div>
-	</div>
+	<%@ include file="Cabecera.jsp" %>
 
 	<div class="container">
 		<div class="row">
@@ -150,16 +134,7 @@
 	</div>
 
 
-	<!-- Bootstrap JavaScript Libraries -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
 </body>
 
 </html>

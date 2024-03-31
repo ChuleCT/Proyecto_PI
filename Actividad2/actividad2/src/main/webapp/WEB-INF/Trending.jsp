@@ -18,29 +18,7 @@
 
     <body>
 
-        <!-- navbar -->
-        <div class="container-fluid color-navbar pt-3">
-            <div class="row" id="navbar">
-                <div class="col-4 offset-2">
-                    <a class="navbar-brand text-light fs-4 fw-bold" href="BusquedaServlet.do">Booking.com</a>
-                </div>
-                <div class="col-1">
-                    <a href="../carrito/index.html" class="btn btn-light text-primary ms-4">
-                        Carrito
-                    </a>
-                </div>
-                <div class="col-1">
-                    <a href="../Registro/index.html" class="btn btn-light text-primary">
-                        Registrarse
-                    </a>
-                </div>
-                <div class="col-2">
-                    <a href="../inicioSesion/index.html" class="btn btn-light text-primary">
-                        Iniciar Sesión
-                    </a>
-                </div>
-            </div>
-        </div>
+        <%@ include file="Cabecera.jsp" %>
 
         <div class="container mb-5">
             <div class="row">

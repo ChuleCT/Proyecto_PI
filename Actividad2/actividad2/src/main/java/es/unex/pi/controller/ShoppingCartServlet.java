@@ -130,6 +130,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
 			String accommodationIdToDelete = request.getParameter("accommodationId");
 
+		
 			// Elimina la habitación de la lista de reserva
 			for (Iterator<Map.Entry<Accommodation, Integer>> iterator = shoppingCart.entrySet().iterator(); iterator
 					.hasNext();) {
@@ -177,6 +178,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			Map<Accommodation, Integer> shoppingCart = (Map<Accommodation, Integer>) session
 					.getAttribute("accommodationQuantityMap");
 
+			
 			for (Map.Entry<Accommodation, Integer> entry : shoppingCart.entrySet()) {
 				Accommodation accommodation = entry.getKey();
 				int quantity = entry.getValue();
@@ -192,6 +194,10 @@ public class ShoppingCartServlet extends HttpServlet {
 			}
 
 			session.removeAttribute("accommodationQuantityMap");
+            // Se crea el mapa para que no de error al entrar al carrito sin haber añadido alojamientos
+            Map<Accommodation, Integer> accommodationQuantityMap = new HashMap<>();
+            session.setAttribute("accommodationQuantityMap", accommodationQuantityMap);
+            
 			response.sendRedirect("BookingsServlet.do");
 		}
 	}

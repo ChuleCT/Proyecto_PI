@@ -30,26 +30,34 @@
 	background-color: #cfeeff;
 }
 </style>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-	<!-- navbar -->
-	<div class="container-fluid color-navbar pt-3">
-		<div class="row mb-5" id="navbar">
-			<div class="col-4 offset-2">
-				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="BusquedaServlet.do">Booking.com</a>
-			</div>
-			<div class="col-1 offset-1">
-				<a href="../Registro/index.html" class="btn btn-light text-primary">
-					Registrarse </a>
-			</div>
-			<div class="col-2">
-				<a href="../inicioSesion/index.html"
-					class="btn btn-light text-primary"> Iniciar Sesión </a>
-			</div>
-		</div>
-	</div>
+<div class="container-fluid color-navbar pt-3">
+            <div class="row" id="navbar">
+                <div class="col-4 offset-2">
+                    <a class="navbar-brand text-light fs-4 fw-bold"
+                       href="BusquedaServlet.do">Booking.com</a>
+                </div>
+                        <div class="col-1 offset-1">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-light dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${user.name}
+                                </button>
+                                <div class="dropdown-menu bg-secondary">
+                                    <a class="dropdown-item fw-bold" href="<c:url value='EditUserServlet.do?id=${user.id}'/>"><i class="fa-solid fa-user"></i>Mi perfil</a>
+                                    <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do"><i class="fa-solid fa-house"></i> Mis alojamientos</a>
+                                    <a class="dropdown-item fw-bold" href="BookingsServlet.do"><i class=""></i> Mis reservas</a>
+                                    <a class="dropdown-item fw-bold" href="FavoritesPropertiesServlet.do"><i class="fa-solid fa-heart"></i> Mis favoritos</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item fw-bold" href="LogoutServlet.do"><i class="fa-solid fa-power-off"></i> Logout</a>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
 
 	<c:choose>
 		<c:when test="${not empty property.name}">

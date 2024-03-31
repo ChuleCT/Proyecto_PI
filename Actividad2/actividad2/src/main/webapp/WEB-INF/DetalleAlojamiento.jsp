@@ -22,23 +22,7 @@
 
 <body>
 
-	<!-- navbar -->
-	<div class="container-fluid color-navbar pt-3">
-		<div class="row" id="navbar">
-			<div class="col-4 offset-2">
-				<a class="navbar-brand text-light fs-4 fw-bold"
-					href="BusquedaServlet.do">Booking.com</a>
-			</div>
-			<div class="col-1">
-				<a href="../Registro/index.html" class="btn btn-light text-primary">
-					Registrarse </a>
-			</div>
-			<div class="col-2">
-				<a href="../inicioSesion/index.html"
-					class="btn btn-light text-primary"> Iniciar Sesión </a>
-			</div>
-		</div>
-	</div>
+	<%@ include file="Cabecera.jsp" %>
 
 	<c:set var="propertyPost" value="${property}" />
 
@@ -409,8 +393,11 @@
 									<div class="col-md-3 offset-md-3">
 										<button id="submitButton" type="submit"
 											class="btn btn-primary">${userReview != null ? "Modificar review" : "Enviar"}</button>
-										<button type="button" class="btn btn-danger"
-											onclick="borrarReview()">Borrar review</button>
+											
+										<button type="button" class="btn btn-link ms-2"
+											onclick="eliminar(true)">
+											<i class="fa fa-trash text-danger"></i>
+										</button>
 									</div>
 								</div>
 							</form>
@@ -444,14 +431,29 @@
 	</div>
 
 	<script>
-    function borrarReview() {
-        // Realizar acciones adicionales si es necesario antes de enviar la solicitud POST
-        
-        // Enviar la solicitud POST al servlet
-        fetch('ReviewServlet.do', {
-            method: 'POST',
-    }
-    
+		function eliminar( seBorra) {
+			// Crea un formulario oculto
+			var form = document.createElement("form");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "ReviewServlet.do");
+
+			var inputId = document.createElement("input");
+			inputId.setAttribute("type", "hidden");
+			inputId.setAttribute("name", "idPropertyReviewed");
+			inputId.setAttribute("value", "${property.id}");
+			form.appendChild(inputId);
+			
+			// Crea un campo oculto para indicar si se debe eliminar la habitación
+			var inputEliminar = document.createElement("input");
+			inputEliminar.setAttribute("type", "hidden");
+			inputEliminar.setAttribute("name", "seBorra");
+			inputEliminar.setAttribute("value", seBorra);
+			form.appendChild(inputEliminar);
+
+			// Agrega el formulario al cuerpo del documento y envíalo
+			document.body.appendChild(form);
+			form.submit();
+		}
 	</script>
 
 

@@ -46,49 +46,39 @@ public class ReviewServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
 		long idu = u.getId();
-		
-		// Obtengo el id de la propiedad que se ha valorado
-		long idp = Long.parseLong(request.getParameter("idPropertyReviewed"));
-		// Obtengo el comentario
-		String review = request.getParameter("comment");
-		// Obtengo la puntuación
-		int grade = Integer.parseInt(request.getParameter("grade"));
-		
-		Review r = new Review();
-		r.setIdp(idp);
-		r.setIdu(idu);
-		r.setReview(review);
-		r.setGrade(grade);
-		
 		ReviewDAO reviewDAO = new JDBCReviewDAOImpl();
 		reviewDAO.setConnection(conn);
 		
-		// Compruebo si el usuario ya ha valorado la propiedad
-		Review reviewExistente = reviewDAO.get(idp, idu);
-		if (reviewExistente != null) {
-			String seBorra = request.getParameter("seBorra");
-			logger.info("Se borra: " + seBorra);
-			if ("si".equals(seBorra)) {
-				reviewDAO.delete(idp, idu);
-			}
-			else {
-				reviewDAO.update(r);
-			}
+		// Obtengo el id de la propiedad que se ha valorado
+		long idp = Long.parseLong(request.getParameter("idPropertyReviewed"));
+		
+		boolean seBorra = Boolean.parseBoolean(request.getParameter("seBorra"));
+		if (seBorra) {
+			reviewDAO.delete(idp, idu);
 		}
 		else {
-			reviewDAO.add(r);
+			// Obtengo el comentario
+			String review = request.getParameter("comment");
+			// Obtengo la puntuación
+			int grade = Integer.parseInt(request.getParameter("grade"));
+			
+			Review r = new Review();
+			r.setIdp(idp);
+			r.setIdu(idu);
+			r.setReview(review);
+			r.setGrade(grade);
+
+			// Compruebo si el usuario ya ha valorado la propiedad
+			Review reviewExistente = reviewDAO.get(idp, idu);
+			if (reviewExistente != null) {
+				reviewDAO.update(r);
+			}
+			else {
+				reviewDAO.add(r);
+			}
 		}
+
 		
-		// Guardo la review
-//		boolean isWorking = reviewDAO.add(r);
-//		logger.info("\n\n\n\n\n\n\n\n");
-//		if (!isWorking) {
-//			logger.info("Error al insertar la review");
-//		} else {
-//			logger.info("Review insertada correctamente");
-//		}
-//		logger.info("\n\n\n\n\n\n\n\n");
-//		
 		
 		// Redirijo a la página de la propiedad
 		response.sendRedirect("PropertyDetailsServlet.do?id=" + idp);
