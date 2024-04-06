@@ -105,15 +105,18 @@ public class EditPropertyServlet extends HttpServlet {
         Property property = new Property();
 
         logger.info("The actual name of the property is: "+request.getParameter("name"));
+        
+        property = propertyDAO.get(Long.parseLong(request.getParameter("id")));
+        double gradesAverage = property.getGradesAverage();
 
         property.setId(Long.parseLong(request.getParameter("id")));
         property.setIdu(Long.parseLong(request.getParameter("idu")));
         property.setCity(request.getParameter("city"));
+        property.setGradesAverage(gradesAverage);
         property.setName(request.getParameter("name"));
         property.setAddress(request.getParameter("address"));
         property.setTelephone(request.getParameter("telephone"));
         property.setCenterDistance(Double.parseDouble(request.getParameter("centerDistance")));
-        property.setGradesAverage(Double.parseDouble(request.getParameter("gradesAverage")));
         property.setDescription(request.getParameter("description"));
         property.setPetFriendly(Integer.parseInt(request.getParameter("petFriendly")));
 

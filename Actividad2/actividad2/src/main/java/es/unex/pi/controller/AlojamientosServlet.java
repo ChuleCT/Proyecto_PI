@@ -19,6 +19,8 @@ import es.unex.pi.model.UserFavoritesProperties;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -51,6 +53,11 @@ public class AlojamientosServlet extends HttpServlet {
 
         UserFavoritesPropertiesDAO userFavoritesPropertiesDAO = new JDBCUserFavoritesPropertiesDAOImpl();
         userFavoritesPropertiesDAO.setConnection(conn);
+        
+        boolean seOrdena = Boolean.parseBoolean(request.getParameter("seOrdena"));
+        if (seOrdena) {
+        	Collections.sort(ListaAlojamientos, Comparator.comparing(Property::getGradesAverage).reversed());
+        }
 
         request.setAttribute("ListaAlojamientos", ListaAlojamientos);
         request.setAttribute("size", ListaAlojamientos.size());

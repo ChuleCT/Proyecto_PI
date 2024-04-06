@@ -24,7 +24,7 @@
 </head>
 <body>
 
-	<%@ include file="Cabecera.jsp" %>
+	<%@ include file="Cabecera.jsp"%>
 
 	<div class="container mt-4">
 
@@ -42,7 +42,7 @@
 						id="btn-buscar" value="Buscar">
 				</div>
 		</form>
-		
+
 	</div>
 	</div>
 
@@ -145,21 +145,15 @@
 				<div class="row mb-5">
 					<c:choose>
 						<c:when test="${size eq 1}">
-							<h4 class="negrita">${size} alojamiento encontrados</h4>
+							<h4 class="negrita">${size}alojamiento encontrados</h4>
 						</c:when>
 						<c:otherwise>
-							<h4 class="negrita">${size} alojamientos encontrados</h4>
+							<h4 class="negrita">${size}alojamientos encontrados</h4>
 						</c:otherwise>
 					</c:choose>
-					<select class="form-select" aria-label="Default select example">
-						<option selected>
-							<!-- <div class="icon-container"> -->
-							<!--     <i class="fas fa-arrow-up flechas"></i> -->
-							<!--     <i class="fas fa-arrow-down flechas"></i> -->
-							<!-- </div> --> Ordenar por: Nuestros destacados
-						</option>
-						<!-- <option value="1"></option> -->
-					</select>
+					<button type="button" class="btn btn-primary"
+						onclick="ordenar(true)">Ordenar por valoración</button>
+
 				</div>
 
 				<c:forEach var="alojamiento" items="${ListaAlojamientos}">
@@ -319,6 +313,32 @@
 		}
 	</script>
 
+	<script>
+		function ordenar(seOrdena) {
+			// Crea un formulario oculto
+			var form = document.createElement("form");
+			form.setAttribute("method", "get");
+			form.setAttribute("action", "AlojamientosServlet.do");
+
+			var inputId = document.createElement("input");
+			inputId.setAttribute("type", "hidden");
+			inputId.setAttribute("name", "destino");
+			inputId.setAttribute("value", "${destino}");
+			form.appendChild(inputId);
+
+			// Crea un campo oculto para indicar si se debe eliminar la habitación
+			var inputEliminar = document.createElement("input");
+			inputEliminar.setAttribute("type", "hidden");
+			inputEliminar.setAttribute("name", "seOrdena");
+			inputEliminar.setAttribute("value", seOrdena);
+			form.appendChild(inputEliminar);
+
+			// Agrega el formulario al cuerpo del documento y envíalo
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -334,4 +354,3 @@
 
 </body>
 </html>
-

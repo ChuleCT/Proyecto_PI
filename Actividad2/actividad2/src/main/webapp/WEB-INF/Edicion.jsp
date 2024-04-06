@@ -57,12 +57,6 @@
 							value="${property.centerDistance}" required>
 					</div>
 					<div class="mb-3">
-						<label for="valoracionMedia" class="form-label">Valoración
-							media</label> <input type="number" class="form-control"
-							id="gradesAverage" name="gradesAverage" step="any" min="0"
-							value="${property.gradesAverage}" required>
-					</div>
-					<div class="mb-3">
 						<label for="ciudad" class="form-label">Ciudad</label> <input
 							type="text" class="form-control" id="city" name="city"
 							value="${property.city}" required>
