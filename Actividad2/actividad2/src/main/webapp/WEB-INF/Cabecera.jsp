@@ -34,7 +34,7 @@
                                     ${user.name}
                                 </button>
                                 <div class="dropdown-menu bg-secondary">
-                                    <a class="dropdown-item fw-bold" href="<c:url value='EditUserServlet.do?id=${user.id}'/>"><i class="fa-solid fa-user"></i>Mi perfil</a>
+                                    <a class="dropdown-item fw-bold" href="EditUserServlet.do"><i class="fa-solid fa-user"></i>Mi perfil</a>
                                     <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do"><i class="fa-solid fa-house"></i> Mis alojamientos</a>
                                     <a class="dropdown-item fw-bold" href="BookingsServlet.do"><i class=""></i> Mis reservas</a>
                                     <a class="dropdown-item fw-bold" href="FavoritesPropertiesServlet.do"><i class="fa-solid fa-heart"></i> Mis favoritos</a>

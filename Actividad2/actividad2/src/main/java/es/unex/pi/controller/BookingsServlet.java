@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import es.unex.pi.dao.BookingDAO;
 import es.unex.pi.dao.JDBCBookingDAOImpl;
 import es.unex.pi.model.Booking;
+import es.unex.pi.model.BookingPropertyInfo;
 import es.unex.pi.model.BookingsAccommodations;
 import es.unex.pi.model.User;
 
@@ -35,103 +37,111 @@ import es.unex.pi.dao.PropertyDAO;
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.model.Property;
 
-
 /**
  * Servlet implementation class BookingsServlet
  */
 public class BookingsServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private final static Logger logger = Logger.getLogger(BookingsServlet.class.getName());
+	private static final long serialVersionUID = 1L;
+	private final static Logger logger = Logger.getLogger(BookingsServlet.class.getName());
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BookingsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public BookingsServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-    */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Obtener la conexión de la base de datos desde el contexto de servlet
+		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
 
-        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
-        BookingDAO bookingDAO = new JDBCBookingDAOImpl();
-        bookingDAO.setConnection(conn);
+		// Crear instancias de los DAO necesarios
+		BookingDAO bookingDAO = new JDBCBookingDAOImpl();
+		bookingDAO.setConnection(conn);
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+		BookingsAccommodationsDAO bookingsAccommodationsDAO = new JDBCBookingsAccommodationsDAOImpl();
+		bookingsAccommodationsDAO.setConnection(conn);
 
-        //Obtenemos todas las reservas del usuario
-        List<Booking> bookings = bookingDAO.getAllByIdu(user.getId());
+		AccommodationDAO accommodationDAO = new JDBCAccommodationDAOImpl();
+		accommodationDAO.setConnection(conn);
 
-        BookingsAccommodationsDAO bookingsAccommodationsDAO = new JDBCBookingsAccommodationsDAOImpl();
-        bookingsAccommodationsDAO.setConnection(conn);
+		PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
+		propertyDAO.setConnection(conn);
 
-        //Obtenemos las habitaciones reservadas
-        List<BookingsAccommodations> bookingsAccommodations = new ArrayList<BookingsAccommodations>();
-        for (Booking booking : bookings) {
-            bookingsAccommodations.addAll(bookingsAccommodationsDAO.getAllByBooking(booking.getId()));
-        }		
+		// Obtener la sesión y el usuario actual
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 
-        //Se obtienen las propiedades a las que pertenecen las habitaciones reservadas
-        List<Accommodation> accommodations = new ArrayList<Accommodation>();
-        AccommodationDAO accommodationDAO = new JDBCAccommodationDAOImpl();
-        accommodationDAO.setConnection(conn);
+		// Obtener todas las reservas del usuario
+		List<Booking> bookings = bookingDAO.getAllByIdu(user.getId());
 
-        for (BookingsAccommodations ba : bookingsAccommodations) {
-            accommodations.add(accommodationDAO.get(ba.getIdacc()));
-        }
+		// Crear una lista de BookingPropertyInfo para almacenar la información de la
+		// reserva y la propiedad
 
-        //Se obtienen las propiedades a las que pertenecen las habitaciones reservadas
-        Set<Property> properties = new HashSet<Property>();
-        PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
-        propertyDAO.setConnection(conn);
+		List<BookingPropertyInfo> bookingsProperties = new ArrayList<BookingPropertyInfo>();
 
-        for (Accommodation a : accommodations) {
-            properties.add(propertyDAO.get(a.getIdp()));
-        }
+		//muestra el tamaño de la lista de reservas
+		
+				logger.info("\n\n\n\n\n\n\n\n\n");
+				
+				logger.info("Tamaño de la lista de reservas: " + bookings.size());
+				
+				logger.info("\n\n\n\n\n\n\n\n\n");
 
-        //Se asocia en un mapa cada reserva con la propiedad a la que pertenece
-        Map<Booking, Property> bookingsProperties = new HashMap<Booking, Property>();
-        for (Booking b : bookings) {
-            for (BookingsAccommodations ba : bookingsAccommodations) {
-            if (b.getId() == ba.getIdb()) {
-                    for (Accommodation a : accommodations) {
-                        if (ba.getIdacc() == a.getId()) {
-                            for (Property p : properties) {
-                                if (a.getIdp() == p.getId()) {
-                                bookingsProperties.put(b, p);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+		if (bookings != null) {
+			for (Booking booking : bookings) {
+				// Por cada reserva obtener la propiedad asociada
+				List<BookingsAccommodations> bookingsAccommodations = bookingsAccommodationsDAO
+						.getAllByBooking(booking.getId());
 
-        logger.info("\n\n\n\n\n\n\nEl tamaño de bookingsProperties es: " + bookingsProperties.size());
-        for (Map.Entry<Booking, Property> entry : bookingsProperties.entrySet()) {
-            logger.info(
-                "La reserva " + entry.getKey().getId() + " pertenece a la propiedad " + entry.getValue().getName());
-        }
-        logger.info("\n\n\n\n\n\n\n");
+				// Verificar si la lista de bookingsAccommodations está vacía
+				if (!bookingsAccommodations.isEmpty()) {
+					BookingsAccommodations bookingAccommodation = bookingsAccommodations.get(0);
+					Accommodation accommodation = accommodationDAO.get(bookingAccommodation.getIdacc());
+					Property property = propertyDAO.get(accommodation.getIdp());
+					BookingPropertyInfo bookingPropertyInfo = new BookingPropertyInfo(booking, property);
+					bookingsProperties.add(bookingPropertyInfo);
+				} else {
+					// Manejar el caso donde no hay ninguna bookingAccommodation asociada a la
+					// reserva
+					logger.info("No hay ninguna bookingAccommodation asociada a la reserva con ID: " + booking.getId());
+				}
+			}
+		} else {
+			logger.info("No se encontraron reservas para el usuario con ID: " + user.getId());
+		}
+		
+		
+		//muestra el tamaño de la lista de reservas
+		
+		logger.info("\n\n\n\n\n\n\n\n\n");
+		
+		logger.info("Tamaño de la lista de reservas: " + bookingsProperties.size());
+		
+		logger.info("\n\n\n\n\n\n\n\n\n");
 
-        request.setAttribute("bookingsProperties", bookingsProperties);
+		// Colocar la lista de BookingPropertyInfo en el atributo de la solicitud
+		request.setAttribute("bookingsProperties", bookingsProperties);
 
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Reservas.jsp");
-        view.forward(request, response);
-    }
+		// Enviar la solicitud y la respuesta al JSP para mostrar los datos
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Reservas.jsp");
+		view.forward(request, response);
+	}
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-    */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
-    }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

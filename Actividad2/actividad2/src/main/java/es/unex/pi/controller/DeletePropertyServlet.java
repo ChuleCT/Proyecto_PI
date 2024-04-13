@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.dao.PropertyDAO;
 import es.unex.pi.model.Property;
+import es.unex.pi.model.User;
 import es.unex.pi.dao.JDBCPropertiesServicesDAOImpl;
 import es.unex.pi.dao.PropertiesServicesDAO;
 
@@ -22,80 +23,88 @@ import es.unex.pi.dao.PropertiesServicesDAO;
  * Servlet implementation class DeletePropertyServlet
  */
 public class DeletePropertyServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private final static Logger logger = Logger.getLogger(DeletePropertyServlet.class.getName());
+	private static final long serialVersionUID = 1L;
+	private final static Logger logger = Logger.getLogger(DeletePropertyServlet.class.getName());
 
-    /**
-     * @see HttpServlet#HttpServlet()
-    */
-    public DeletePropertyServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public DeletePropertyServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-    */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
-        PropertyDAO propertydDao = new JDBCPropertyDAOImpl();
-        propertydDao.setConnection(conn);
+		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		PropertyDAO propertydDao = new JDBCPropertyDAOImpl();
+		propertydDao.setConnection(conn);
 
-        try {
-            String id = request.getParameter("id");
-            logger.info("get parameter id (" + id + ")");
-            long oid = 0;
-            oid = Long.parseLong(id);
-            logger.info("get parameter id (" + id + ") and casting " + oid);
-            Property property = propertydDao.get(oid);
-            if (property != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("property", property);
-                request.setAttribute("CheckType", "Borrar Alojamiento");
-                // TODO: Dispatch the request to the Borrar.jsp
+		try {
+			String id = request.getParameter("id");
+			logger.info("get parameter id (" + id + ")");
+			long oid = 0;
+			oid = Long.parseLong(id);
+			logger.info("get parameter id (" + id + ") and casting " + oid);
+			Property property = propertydDao.get(oid);
+			if (property != null) {
 
-                RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
-                view.forward(request, response);
-            } else {
-                // TODO Redirect to ListOrderServlet.do
+				// Controlo que el alojamiento a borrar sea del usuario que ha iniciado sesión
+				if (property.getIdu() != user.getId()) {
+					RequestDispatcher view = request.getRequestDispatcher("WEB-INF/ErrorPermiso.jsp");
+					view.forward(request, response);
+				} else {
+					session.setAttribute("property", property);
+					request.setAttribute("CheckType", "Borrar Alojamiento");
+					// TODO: Dispatch the request to the Borrar.jsp
 
-                response.sendRedirect("ListaAlojamientosServlet.do");
-            }
-        } catch (Exception e) {
-            logger.info("parameter id is not a number");
+					RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
+					view.forward(request, response);
+				}
+			} else {
+				// TODO Redirect to ListOrderServlet.do
 
-            response.sendRedirect("ListaAlojamientosServlet.do");
-        }
-    }
+				response.sendRedirect("ListaAlojamientosServlet.do");
+			}
+		} catch (Exception e) {
+			logger.info("parameter id is not a number");
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-    */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+			response.sendRedirect("ListaAlojamientosServlet.do");
+		}
+	}
 
-        logger.info("Handling POST");
-        Connection conn = (Connection) getServletContext().getAttribute("dbConn");
-        PropertyDAO propertydDao = new JDBCPropertyDAOImpl();
-        propertydDao.setConnection(conn);
-        PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
-        propertiesServicesDAO.setConnection(conn);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        logger.info("Confirmed property to delete with session id: " + session.getId());
-        Property property = (Property) session.getAttribute("property");
+		logger.info("Handling POST");
+		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
+		PropertyDAO propertydDao = new JDBCPropertyDAOImpl();
+		propertydDao.setConnection(conn);
+		PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
+		propertiesServicesDAO.setConnection(conn);
 
-        if (property != null) {
-            propertydDao.delete(property.getId());
-            propertiesServicesDAO.deleteByIdp(property.getId());
-            session.removeAttribute("property");
-            property = null;
-        }
-        response.sendRedirect("ListaAlojamientosServlet.do");
-    }
+		HttpSession session = request.getSession();
+		logger.info("Confirmed property to delete with session id: " + session.getId());
+		Property property = (Property) session.getAttribute("property");
+
+		if (property != null) {
+			propertydDao.delete(property.getId());
+			propertiesServicesDAO.deleteByIdp(property.getId());
+			session.removeAttribute("property");
+			property = null;
+		}
+		response.sendRedirect("ListaAlojamientosServlet.do");
+	}
 
 }

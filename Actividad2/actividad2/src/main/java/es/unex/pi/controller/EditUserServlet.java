@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -45,29 +47,14 @@ public class EditUserServlet extends HttpServlet {
         UserDAO userDAO = new JDBCUserDAOImpl();
         userDAO.setConnection(conn);
 
-        try{
-            String id = request.getParameter("id");
-            logger.info("get parameter id ("+id+")");
-            long oid = 0;
-            oid = Long.parseLong(id); 
-            logger.info("get parameter id ("+id+") and casting "+oid);
-            User user = userDAO.get(oid);
-            if (user != null){
-                request.setAttribute("user",user);
-
-                RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
-                view.forward(request, response);
-            }
-            else { 
-
-                response.sendRedirect("BusquedaServlet.do");
-            }	
-        }
-        catch (NumberFormatException e) {
-            logger.info("parameter id is not a number");
-
-            response.sendRedirect("BusquedaServlet.do");
-        }
+        //Se obtiene el usuario de la sesión
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        request.setAttribute("user", user);
+        
+        //Se redirige a la página de edición de usuario
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Registro.jsp");
+        view.forward(request, response);
     }
 
     /**

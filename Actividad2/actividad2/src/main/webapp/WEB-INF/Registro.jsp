@@ -23,10 +23,19 @@
 </head>
 
 <body>
-	<nav class="navbar mb-5" id="navbar">
-		<a class="navbar-brand active" href="#" aria-current="page"><span
-			class="text-light m-5 fw-bold">Booking.com</span></a>
-	</nav>
+	<c:choose>
+		<c:when test="${not empty user.name}">
+			<nav class="navbar mb-5" id="navbar">
+				<a class="navbar-brand active" href="BusquedaServlet.do"
+					aria-current="page"><span class="text-light m-5 fw-bold">Booking.com</span></a>
+			</nav>
+		</c:when>
+		<c:otherwise>
+			<nav class="navbar mb-5" id="navbar">
+				<span class="text-light ms-5 fw-bold fs-4">Booking.com</span>
+			</nav>
+		</c:otherwise>
+	</c:choose>
 	<main>
 		<div class="container mx-auto my-3">
 			<div class="row">
@@ -42,7 +51,7 @@
 
 					<h4 class="mb-2 text-danger">${messages.error}</h4>
 					<form action="?" method="post">
-					<input type="hidden" name="id" value="${user.id}">
+						<input type="hidden" name="id" value="${user.id}">
 						<div class="mb-3">
 							<label class="form-label">Nombre</label> <input type="text"
 								class="form-control" placeholder="Indica tu nombre" name="name"
@@ -58,28 +67,7 @@
 								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\w).{8,}"
 								name="password" id="password" value="${user.password}"
 								title="La contraseña debe contener al menos un dígito, una minúscula, una mayúscula, un carácter especial y tener al menos 8 caracteres."
-								required> <label class="form-label">País/región</label>
-							<select class="form-select" required>
-								<option selected>Selecciona tu país/región</option>
-								<option value="1">México</option>
-								<option value="2">Estados Unidos</option>
-								<option value="3">Canadá</option>
-								<option value="4">España</option>
-								<option value="5">Colombia</option>
-								<option value="6">Argentina</option>
-								<option value="7">Chile</option>
-								<option value="8">Perú</option>
-								<option value="9">Ecuador</option>
-								<option value="10">Guatemala</option>
-								<option value="11">Cuba</option>
-								<option value="12">República Dominicana</option>
-								<option value="13">Honduras</option>
-								<option value="14">Bolivia</option>
-								<option value="15">El Salvador</option>
-							</select> <label class="form-label">Teléfono</label> <input type="tel"
-								class="form-control" placeholder="Indica tu número de teléfono"
-								required> 
-                                <input type="submit"
+								required> <input type="submit"
 								class="form-control btn btn-primary col-12"
 								value=<c:choose>
       										<c:when test="${not empty user.id}">
@@ -89,13 +77,14 @@
     											"Crear cuenta"
     										</c:otherwise>
 					  					</c:choose> />
-                                <c:choose>
-                                    <c:when test="${not empty user.id}">
-                                        <a href="<c:url value='BorrarUserServlet.do?id=${user.id}'/>" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3">
-                                            <span class="negrita m-5 fw-bold">BORRAR cuenta</span>
-                                        </a>
-                                    </c:when>
-                                </c:choose>
+							<c:choose>
+								<c:when test="${not empty user.id}">
+									<a href="BorrarUserServlet.do"
+										class="btn btn-danger col-12 btn-block border-0 text-truncate my-3">
+										<span class="negrita m-5 fw-bold">BORRAR cuenta</span>
+									</a>
+								</c:when>
+							</c:choose>
 						</div>
 					</form>
 				</div>

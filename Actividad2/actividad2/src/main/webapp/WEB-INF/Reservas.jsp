@@ -27,43 +27,41 @@
 </head>
 
 <body>
-	<%@ include file="Cabecera.jsp" %>
+    <%@ include file="Cabecera.jsp" %>
 
-	<div class="container mb-5">
-		<div class="row mt-3">
-			<div class="col-3 offset-2">
-				<h3 class="fw-bold">Reservas y viajes</h3>
-			</div>
-		</div>
-		<c:forEach var="entry" items="${bookingsProperties}">
-			<div class="row mt-4">
-				<div class="col-8 offset-2">
-					<h4 class="fw-bold">${entry.value.city}</h4>
-					<fieldset class="shadow rounded">
-						<div class="row py-3 ps-2">
-							<div class="col-2 ps-4">
-								<img class="rounded" src="images/DetalleAlojamiento3.png" alt="foto ${entry.value.name}">
-							</div>
-							<div class="col ms-5">
-								<p>
-									<span class="fw-bold">${entry.value.name}</span>
-								</p>
-								<p>${entry.value.address}</p>
-								<p>${entry.value.description}</p>
-								
-							</div>
-							<div class="col text-end pe-5">
-								<p class="fw-bold fs-5 precio mt-5">Precio: ${entry.key.totalPrice}€</p>
-							</div>
-						</div>
-					</fieldset>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-
-
-
+    <div class="container mb-5">
+        <div class="row mt-3">
+            <div class="col-3 offset-2">
+                <h3 class="fw-bold">Reservas y viajes</h3>
+            </div>
+        </div>
+        <c:forEach var="bookingPropertyInfo" items="${bookingsProperties}">
+            <div class="row mt-4">
+                <div class="col-8 offset-2">
+                    <h4 class="fw-bold">${bookingPropertyInfo.property.city}</h4>
+                    <fieldset class="shadow rounded">
+                        <div class="row py-3 ps-2">
+                            <div class="col-2 ps-4">
+                                <img class="rounded" src="images/DetalleAlojamiento3.png" alt="foto ${bookingPropertyInfo.property.name}">
+                            </div>
+                            <div class="col ms-5">
+                                <p>
+                                    <span class="fw-bold">${bookingPropertyInfo.property.name}</span>
+                                </p>
+                                <p>${bookingPropertyInfo.property.address}</p>
+                                <p>${bookingPropertyInfo.property.description}</p>
+                                
+                            </div>
+                            <div class="col text-end pe-5">
+                                <p class="fw-bold fs-5 precio mt-5">Precio: ${bookingPropertyInfo.booking.totalPrice}€</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
 </body>
+
 
 </html>
