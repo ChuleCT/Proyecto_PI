@@ -19,14 +19,12 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
 	rel="stylesheet">
-
-<!-- glyphicon glyphicon-arrow-up -->
 </head>
 <body>
 
 	<%@ include file="Cabecera.jsp"%>
 
-	<div class="container mt-4">
+	<div class="container mt-5">
 
 		<form action="AlojamientosServlet.do" method="post"">
 			<!-- Barra de búsqueda, filtros y buscar:  -->
@@ -50,94 +48,41 @@
 	<div class="container">
 		<div class="row px-5" id="fondoBlanco">
 
-			<!-- Columna de la izquierda principal -->
-			<div class="col-3">
-				<img src="images/googleMaps.webp" id="imagenGoogleMaps"
-					alt="google maps">
-				<button class="btn btn-primary" id="botonImagenGoogleMaps">Ver
-					en el mapa</button>
 
+			<div class="col-3">
 				<div class="row">
 					<div class="col-12">
-						<div class="bordered-box tablaIzquierda">
-							<p class="contenido">
-								<strong>Filtrar por:</strong>
-							</p>
-
+						<div class="bordered-box p-2 tablaIzquierda">
+							<p class="font-weight-bold mb-0">Filtrar por:</p>
 						</div>
-						<div class="bordered-box tablaIzquierdaSiguientes">
-							<p class="contenido-small">
-								<b>Tu presupuesto (por noche)</b>
-							</p>
-							<p class="contenido-small">€ 30 - € 400+</p>
-
-							<form>
-								<div class="form-group contenido-small">
-									<br> <input type="range" class="form-range"
-										id="rangoNumerico" min="0" max="100" step="1" value="100">
-								</div>
-							</form>
-						</div>
-
-						<div class="bordered-box tablaIzquierdaSiguientes">
-							<p class="contenido-small">
-								<strong>Filtros populares:</strong>
-							</p>
-
-							<div id="checkboxFiltros">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla1">
-									<label class="form-check-label" for="casilla1"> Hoteles
-									</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla2">
-									<label class="form-check-label" for="casilla2">
-										Desayuno incluido </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla3">
-									<label class="form-check-label" for="casilla3">
-										Fantástico: 9 o más <span class="contenido-small-small">Según
-											los comentarios de los clientes</span>
-									</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla4">
-									<label class="form-check-label" for="casilla4"> 4
-										estrellas </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla5">
-									<label class="form-check-label" for="casilla5">
-										Hostales y pensiones </label>
-								</div>
-
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla6">
-									<label class="form-check-label" for="casilla6">
-										Cancelación gratis </label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla7">
-									<label class="form-check-label" for="casilla7"> Parking
-									</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="casilla8">
-									<label class="form-check-label" for="casilla8"> Villas
-									</label>
-								</div>
-
+						<div class="bordered-box p-2 tablaIzquierdaSiguientes">
+							<div class="btn-group-vertical" data-toggle="buttons">
+								<label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion1"
+									value="Todos"
+									<c:if test="${'Todos' eq opcionDisponibilidad}">checked</c:if>>
+									Todos
+								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion2"
+									value="Con disponibilidad"
+									<c:if test="${'Con disponibilidad' eq opcionDisponibilidad}">checked</c:if>>
+									Con disponibilidad
+								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion3"
+									value="Sin disponibilidad"
+									<c:if test="${'Sin disponibilidad' eq opcionDisponibilidad}">checked</c:if>>
+									Sin disponibilidad
+								</label>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 
+
+
 			<!-- ################################################ -->
-			<!-- Columna de la derecha principal -->
+			<!-- Columna principal -->
 			<!-- ################################################ -->
 			<div class="col-8">
 
@@ -145,13 +90,13 @@
 				<div class="row mb-5">
 					<c:choose>
 						<c:when test="${size eq 1}">
-							<h4 class="negrita">${size}alojamiento encontrados</h4>
+							<h4 class="negrita">${size} alojamiento encontrados</h4>
 						</c:when>
 						<c:otherwise>
-							<h4 class="negrita">${size}alojamientos encontrados</h4>
+							<h4 class="negrita">${size} alojamientos encontrados</h4>
 						</c:otherwise>
 					</c:choose>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-primary mt-3"
 						onclick="ordenar(true)">Ordenar por valoración</button>
 
 				</div>
@@ -167,9 +112,13 @@
 							<!-- Corazón  -->
 							<c:if test="${not empty user.name}">
 								<form action="FavoritesPropertiesServlet.do" method="post">
+								
 									<input type="hidden" name="propertieId"
 										value="${alojamiento.id}"> <input type="hidden"
 										name="desdeAlojamiento" value="si">
+									<input type="hidden" name="opcionParaFavoritos"
+										value="${opcionDisponibilidad}">
+										
 									<c:if test="${fn:length(ListaFavoritos) > 0}">
 										<c:forEach var="favorito" items="${ListaFavoritos}">
 											<c:if test="${favorito.idp eq alojamiento.id}">
@@ -219,30 +168,24 @@
 								</c:forEach>
 								<%-- Verifica si hay una parte decimal --%>
 								<c:if test="${not empty estrellaMedia}">
-									<c:choose>
 										<%-- Si la parte decimal es .5, añade una estrella media --%>
-										<c:when test="${estrellaMedia ge '5'}">
+										<c:if test="${estrellaMedia ge '5'}">
 											<i class="fas fa-star-half-alt"
 												style="color: #b8b814; position: relative; top: -0.5em;"></i>
-										</c:when>
-										<c:otherwise></c:otherwise>
-									</c:choose>
+										</c:if>
 								</c:if>
 							</div>
 							<div class="row">
 								<div class="col-auto">
-									<p class="contenido-info">
-										<a href="">${alojamiento.city}</a>
+									<p class="contenido-info negrita azul">
+										${alojamiento.city}
 									</p>
 								</div>
 								<div class="col-auto">
 									<p class="contenido-info">
-										<a href="">Mostrar en el mapa</a>
+										<i class="fa-solid fa-location-dot"></i>
+										a ${alojamiento.centerDistance}km del centro
 									</p>
-								</div>
-								<div class="col-auto">
-									<p class="contenido-info">a ${alojamiento.centerDistance}km
-										del centro</p>
 								</div>
 							</div>
 							<div class="row">
@@ -284,11 +227,11 @@
 									<p
 										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${alojamiento.gradesAverage}</p>
 								</div>
-								<p class="text-end negrita azul">Ubicación 9,6</p>
+								
 
 							</div>
 							<div class="row">
-								<div class="col pt-2 me-1 text-end  pb-4">
+								<div class="col pt-5 me-1 text-end  pb-4">
 									<i class="fa-solid fa-phone ms-2"></i> <span>${alojamiento.telephone}</span>
 									<a
 										href="<c:url value='PropertyDetailsServlet.do?id=${alojamiento.id}'/>"
@@ -319,12 +262,12 @@
 			var form = document.createElement("form");
 			form.setAttribute("method", "get");
 			form.setAttribute("action", "AlojamientosServlet.do");
-
-			var inputId = document.createElement("input");
-			inputId.setAttribute("type", "hidden");
-			inputId.setAttribute("name", "destino");
-			inputId.setAttribute("value", "${destino}");
-			form.appendChild(inputId);
+			
+			var inputOpcion = document.createElement("input");
+			inputOpcion.setAttribute("type", "hidden");
+			inputOpcion.setAttribute("name", "opcion");
+			inputOpcion.setAttribute("value", "${opcionDisponibilidad}");
+			form.appendChild(inputOpcion);
 
 			// Crea un campo oculto para indicar si se debe eliminar la habitación
 			var inputEliminar = document.createElement("input");
@@ -338,6 +281,37 @@
 			form.submit();
 		}
 	</script>
+
+<script>
+    function enviarFiltro(opcionSeleccionada) {
+ 
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "AlojamientosServlet.do");
+
+        var inputOpcion = document.createElement("input");
+        inputOpcion.setAttribute("type", "hidden"); // Aquí estaba el error
+        inputOpcion.setAttribute("name", "opcion");
+        inputOpcion.setAttribute("value", opcionSeleccionada);
+        form.appendChild(inputOpcion);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    // Obtener los radio buttons
+    const radioButtons = document.querySelectorAll('input[name="filtro"]');
+    
+    radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('click', function () {
+            // Obtener el valor del radio button seleccionado
+            const selectedValue = this.value;
+            // Llamar a la función para enviar el filtro seleccionado al servlet
+            enviarFiltro(selectedValue);
+        });
+    });
+</script>
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

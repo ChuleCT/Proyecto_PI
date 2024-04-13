@@ -12,19 +12,18 @@
     </head>
 
     <body>
-        <header class="bg-primary">
-            <h1>Borrar habitación</h1>
-        </header>
+        <%@ include file="Cabecera.jsp"%>
+        
         <div class="centeredcontainer sizereduced">
             <ul>
-                <li>Nombre de la habitación: ${accommodation.name}</li>
-                <li>Precio de la habitación: ${accommodation.price}</li>
-                <li>Descripción de la habitación: ${accommodation.description}</li>
-                <li>Número de habitaciones disponibles: ${accommodation.numAccommodations}</li>
+                <li><span class="negrita">Nombre de la habitación:</span> ${accommodation.name}</li>
+                <li><span class="negrita">Precio de la habitación:</span> ${accommodation.price}</li>
+                <li><span class="negrita">Descripción de la habitación:</span> ${accommodation.description}</li>
+                <li><span class="negrita">Número de habitaciones disponibles:</span> ${accommodation.numAccommodations}</li>
             </ul>
             <form method="POST" action="<c:url value='DeleteAccommodationServlet.do?id=${accommodation.id}'/>">
                 <div class="divbutton">
-                    <input class="btn btn-primary" type="submit" value="Borrar Habitación" />
+                    <input class="btn btn-danger" type="submit" value="Borrar Habitación" />
                 </div>		
             </form>
         </div>	

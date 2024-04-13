@@ -88,7 +88,7 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
         return properties;
     }
 
-    //TODO getAllByNombre, Descripcion, Localidad      
+     
     public List<Property> getAllBySearchDestination(String search) {
         search = search.toUpperCase();
         if (conn == null)
@@ -112,6 +112,51 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
         return properties;
     }
 
+	public List<Property> getAllBySearchDestinationAndAvailable(String search) {
+        search = search.toUpperCase();
+        if (conn == null)
+        return null;
+        ArrayList<Property> properties = new ArrayList<Property>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM properties WHERE (UPPER(city) LIKE '%" + search + "%' OR " +
+                "UPPER(name) LIKE '%" + search + "%' OR " +
+                "UPPER(description) LIKE '%" + search + "%') AND available = 1");
+            while (rs.next()) {
+                Property property = new Property();
+                fromRsToPropertyObject(rs,property);
+                properties.add(property);
+                logger.info("fetching property: "+property.getId());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return properties;
+	}
+	
+	public List<Property> getAllBySearchDestinationAndNotAvailable(String search) {
+        search = search.toUpperCase();
+        if (conn == null)
+        return null;
+        ArrayList<Property> properties = new ArrayList<Property>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM properties WHERE (UPPER(city) LIKE '%" + search + "%' OR " +
+                "UPPER(name) LIKE '%" + search + "%' OR " +
+                "UPPER(description) LIKE '%" + search + "%') AND available = 0");
+            while (rs.next()) {
+                Property property = new Property();
+                fromRsToPropertyObject(rs,property);
+                properties.add(property);
+                logger.info("fetching property: "+property.getId());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return properties;
+	}
 
 
 

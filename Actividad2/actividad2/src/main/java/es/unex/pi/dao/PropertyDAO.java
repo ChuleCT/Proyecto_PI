@@ -43,8 +43,38 @@ public interface PropertyDAO {
     */	
     public List<Property> getAllBySearchName(String search);
 
+	/**
+	 * Gets all the properties from the database that contain certain destination.
+	 * 
+	 * @param search Search string .
+	 * 
+	 * @return List of all the properties from the database that contain a text
+	 *         either in the destination.
+	 */
     public List<Property> getAllBySearchDestination(String search); 
+    
+	/**
+	 * Gets all the properties from the database that contain a text in the name and
+	 * are available.
+	 * 
+	 * @param search Search string .
+	 * 
+	 * @return List of all the properties from the database that contain a text
+	 *         either in the name and are available.
+	 */
+    public List<Property> getAllBySearchDestinationAndAvailable(String search);
 
+	/**
+	 * Gets all the properties from the database that contain a text in the name and
+	 * are not available.
+	 * 
+	 * @param search Search string .
+	 * 
+	 * @return List of all the properties from the database that contain a text
+	 *         either in the name and are not available.
+	 */
+    public List<Property> getAllBySearchDestinationAndNotAvailable(String search);
+    
     /**
      * Gets all the properties from the database that belong to a user.
      * 

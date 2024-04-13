@@ -2,13 +2,14 @@ body {
     overflow-x: hidden;   
 }
 
-.color-navbar {
-    background-color: rgb(0, 0, 159);
-}
-
 #navbar {
     position: relative;
     left: 6em;
+    height: 3.5em;
+}
+
+.color-navbar {
+    background-color: rgb(0, 0, 159);
 }
 
 #titulo {
@@ -34,31 +35,6 @@ input[type="text"]:focus {
     outline: none;
 }
 
-#filtro-habitacion {
-    width: 27%;
-}
-
-#adultos {
-    width: 115%;
-    position: relative;
-    top: -.2em;
-    left: -.4em;
-}
-
-#niños {
-    width: 115%;
-    position: relative;
-    top: -.2em;
-    left: -.7em;
-}
-
-#habitaciones {
-    width: 125%;
-    position: relative;
-    top: -.2em;
-    left: -1em;
-
-}
 
 #btn-buscar {
     position: relative;
@@ -67,41 +43,21 @@ input[type="text"]:focus {
 
 }
 
-#caminoLinks {
-    position: relative;
-    left: 6.3em;
-}
-
-#caminoLinks a {
-    text-decoration: none;
-}
-
-
 #fondoBlanco {
     position: relative;
     top: -.5em;
     left: 3.8em;
 }
 
-#imagenGoogleMaps {
-    width: 17em;
-    border-radius: 0.8em;
-}
-
-#botonImagenGoogleMaps {
-    position: relative;
-    top: -1em;
-    width: 97%;
-}
 
 .tablaIzquierda {
     border-top-left-radius: 0.4em;
     border-top-right-radius: 0.4em;
-    width: 97%;
+    width: 90%;
 }
 
 .tablaIzquierdaSiguientes {
-    width: 97%;
+    width: 90%;
 }
 
 .bordered-box {
@@ -242,5 +198,6 @@ input[type="text"]:focus {
     position: relative;
     left: 0.9em;
 }
+
 
 

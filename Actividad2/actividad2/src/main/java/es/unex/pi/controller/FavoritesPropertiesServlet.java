@@ -97,7 +97,10 @@ public class FavoritesPropertiesServlet extends HttpServlet {
                     userFavoritesPropertiesDAO.delete(user.getId(), oid);
                     System.out.println("Eliminado de favoritos.");
                 }
-                response.sendRedirect("AlojamientosServlet.do");
+                String opcionDisponibilidad = request.getParameter("opcionParaFavoritos");
+
+                response.sendRedirect("AlojamientosServlet.do?opcion=" + opcionDisponibilidad);
+
             }
             else{
                 userFavoritesPropertiesDAO.delete(user.getId(), oid);

@@ -14,36 +14,51 @@
     </head>
 
     <body>
-        <header class="bg-primary">
-            <h1>${requestScope.CheckType} </h1>
-        </header>
-        <div class="centeredcontainer sizereduced">
-            <c:choose>
-                <c:when test="${requestScope.CheckType=='Borrar Usuario'}">
-                    <ul>
-                        <li>Nombre usuario: ${user.name}</li>
-                        <li>Apellido usuario: ${user.surname}</li>
-                        <li>Email usuario: ${user.email}</li>
-                    </ul>
-                </c:when>
-                <c:otherwise>
-                    <ul>
-                        <li>Nombre del alojamiento: ${property.name}</li>
-                        <li>Dirección: ${property.address}</li>
-                        <li>Teléfono: ${property.telephone}</li>
-                        <li>Descipción: ${property.description}</li>
-                        <li>Ciudad: ${property.city}</li>
-                    </ul>
-                </c:otherwise>	
-            </c:choose>
-            <form method="POST" action="?">
-                <div class="divbutton">
-                    <input class="btn btn-primary" type="submit" value="${requestScope.CheckType}"/>
-                </div>		
-            </form>
-        </div>	
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    </body>
+       <%@ include file="Cabecera.jsp"%>
+
+	<div class="centeredcontainer sizereduced">
+		<c:choose>
+			<c:when test="${requestScope.CheckType=='Borrar Usuario'}">
+				<ul>
+					<li><span class="negrita">Nombre usuario:</span> ${user.name}</li>
+					<li><span class="negrita">Apellido usuario:</span> ${user.surname}</li>
+					<li><span class="negrita">Email usuario:</span> ${user.email}</li>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<ul>
+					<li><span class="negrita">Nombre del alojamiento:</span>
+						${property.name}</li>
+					<li><span class="negrita">Dirección:</span>
+						${property.address}</li>
+					<li><span class="negrita">Teléfono:</span>
+						${property.telephone}</li>
+					<li><span class="negrita">Descipción:</span>
+						${property.description}</li>
+					<li><span class="negrita">Ciudad:</span> ${property.city}</li>
+				</ul>
+			</c:otherwise>
+		</c:choose>
+		<form method="POST" action="?">
+			<div class="divbutton">
+				<input class="btn btn-danger" type="submit"
+					value="${requestScope.CheckType}" />
+			</div>
+		</form>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+</body>
 </html>
 
 

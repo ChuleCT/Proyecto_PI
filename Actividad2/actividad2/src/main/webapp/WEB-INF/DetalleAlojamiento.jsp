@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!doctype html>
 <html lang="es">
 <head>
@@ -30,113 +31,42 @@
 		<!-- Primera Row principal -->
 		<div class="row" id="PrimeraColIzq">
 
-			<!-- Columna principal de la izquierda -->
-			<div class="col-3">
-				<div class="row">
-
-					<div class="col-12 bg-warning">
-						<form action="index.html">
-							<span class="fw-bold fs-5">Buscar</span> <br> <span
-								class="texto-default mx-1">Destino:</span> <br>
-							<div
-								class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-									fill="currentColor" class="mx-2 bi bi-search me-2"
-									viewBox="0 0 16 16">
-                                        <path
-										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                    </svg>
-								<input type="text" id="Destino" class="border border-0 mx-1"
-									required>
-							</div>
-							<span class="texto-default mx-1">Fecha de entrada:</span> <br>
-							<div
-								class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-								<input type="date" class="border border-0 mx-1 pe-5">
-							</div>
-							<span class="texto-default mx-1">Fecha de salida:</span> <br>
-							<div
-								class="pt-2 bg-light border border-3 border-warning rounded d-flex align-items-center">
-								<input type="date" class="border border-0 mx-1 pe-5">
-							</div>
-							<span class="texto-default mx-1">Estancia de 2 noches:</span> <br>
-							<div
-								class="row bg-light border border-3 border-warning rounded mx-1">
-								<div class="col-4">
-									<input type="number" id="adultos" placeholder="Adultos" min="0"
-										class="border border-0">
-								</div>
-								<div class="col-4">
-									<input type="number" id="niños" placeholder="Niños" min="0"
-										class="border border-0">
-								</div>
-								<div class="col-4">
-									<input type="number" id="habitaciones"
-										placeholder="Habitaciones" min="0" class="border border-0">
-								</div>
-							</div>
-							<div class="form-check ms-2">
-								<input class="form-check-input" type="checkbox"> Casas y
-								apartamentos enteros
-							</div>
-							<div class="form-check ms-2">
-								<input class="form-check-input" type="checkbox"> Viajo
-								por trabajo
-
-								<div class="col-lg-5 col-md-5 col-sm-5 pt-5">
-									<input type="submit"
-										class="btn btn-primary border border-3 border-warning text-truncate"
-										id="btn-buscar" value="Buscar">
-								</div>
-							</div>
-
-						</form>
-					</div>
-				</div>
-
-				<div class="row mt-3">
-					<div class="col-12">
-						<img src="images/googleMaps.webp" class="img-fluid"
-							alt="google maps">
-						<button class="btn btn-primary" id="botonImagenGoogleMaps">Ver
-							en el mapa</button>
-					</div>
-				</div>
-			</div>
-
+			
 			<!-- Columna principal de la derecha -->
-			<div class="col-9">
+			<div class="col-12">
 				<div class="row ms-1 ">
 					<div class="col-10 ">
-						<div class="rating">
-							<span class="star"><i class="fas fa-star"></i></span> <span
-								class="star"><i class="fas fa-star"></i></span> <span
-								class="star"><i class="fas fa-star"></i></span> <span
-								class="star"><i class="fas fa-star"></i></span>
+						<div>
+							<%-- Valoracion ESTRELLAS --%>
+							<c:set var="estrellaEntera"
+								value="${fn:split(property.gradesAverage, '.')[0]}" />
+							<c:set var="estrellaMedia"
+								value="${fn:split(property.gradesAverage, '.')[1]}" />
+							<%-- Itera sobre la parte entera --%>
+							<c:forEach var="i" begin="1" end="${estrellaEntera}">
+								<i class="fas fa-star"
+									style="color: #b8b814; position: relative; top: -0.5em;"></i>
+							</c:forEach>
+							<%-- Verifica si hay una parte decimal --%>
+							<c:if test="${not empty estrellaMedia}">
+
+								<%-- Si la parte decimal es .5, añade una estrella media --%>
+								<c:if test="${estrellaMedia ge '5'}">
+									<i class="fas fa-star-half-alt"
+										style="color: #b8b814; position: relative; top: -0.5em;"></i>
+								</c:if>
+
+
+							</c:if>
 						</div>
 						<h4 class="negrita">${property.name}</h4>
 						<div class="d-flex align-items-center">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-								fill="currentColor" class="bi bi-geo-alt" id="posGeo"
-								viewBox="0 0 16 16">
-                                    <path
-									d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                    <path
-									d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                                </svg>
-							<span>${property.address}</span> <i
+							<i class="fa-solid fa-location-dot"></i>
+							<span> ${property.address}</span> <i
 								class="fa-solid fa-phone ms-2 me-2"></i> <span>${property.telephone}</span>
 						</div>
-						<a href="" class="negrita noSubrayado">Ubicación excelente -
-							Ver mapa</a>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-							fill="currentColor" class="bi bi-geo-alt" id="posGeo"
-							viewBox="0 0 16 16">
-                                <path
-								d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-                                <path
-								d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
+						
+						<i class="fa-solid fa-location-dot"></i>
 						<span>A ${property.centerDistance} kms del centro</span>
 
 					</div>
@@ -192,7 +122,7 @@
 		</div>
 		<!-- Termina la row principal de la izquierda -->
 
-		<div class="container">
+		<div class="container mt-3">
 			<div class="row">
 				<c:set var="index" value="${0}" />
 				<c:forEach var="service" items="${services}">
@@ -247,40 +177,7 @@
 		</div>
 
 
-		<h3 class="negrita">Disponibilidad</h3>
-
-		<form action="index.html">
-			<div class="row mb-5">
-				<div class="col-3 border border-warning border-3 rounded">
-					<input type="date" class=" form-control disponibilidad border-0"
-						required>
-				</div>
-				<div class="col-5 border border-warning border-3 rounded">
-					<div class="row">
-						<div class="col-4">
-							<input type="number"
-								class=" form-control disponibilidad border-0"
-								placeholder="Adultos -" min="0" required>
-						</div>
-						<div class="col-4">
-							<input type="number"
-								class=" form-control disponibilidad border-0"
-								placeholder="Niños -" min="0" required>
-						</div>
-						<div class="col-4">
-							<input type="number"
-								class=" form-control disponibilidad border-0"
-								placeholder="Habitaciones" min="0" required>
-						</div>
-					</div>
-				</div>
-				<div class="col-2">
-					<input type="submit"
-						class="btn btn-primary border-0 text-truncate py-2"
-						id="ModificarBúsqueda" value="Modificar búsqueda">
-				</div>
-			</div>
-		</form>
+		
 
 		<!-- Tabla disponibilidad -->
 		<div class="container-fluid">
