@@ -215,12 +215,73 @@
     <url-pattern>/CreateAccommodationServlet.do</url-pattern>
   </servlet-mapping>
   <security-constraint>
-	  <web-resource-collection>
-		  <web-resource-name>Entire Application</web-resource-name>
-          <url-pattern>/*</url-pattern>
-	  </web-resource-collection>
-	  <user-data-constraint>
-		  <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-	  </user-data-constraint>
+    <web-resource-collection>
+      <web-resource-name>Entire Application</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
   </security-constraint>
+  <filter>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>es.unex.pi.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/LoginFilter</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>LogoutServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>BookingsServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>CrearPropiedadServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>BorrarUserServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>CreateAccommodationServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>DeleteAccommodationServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>DeletePropertyServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>EditAccommodationServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>EditPropertyServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>EditUserServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>FavoritesPropertiesServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>ListaAlojamientosServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>ManageAccommodationsServlet</servlet-name>
+  </filter-mapping>
 </web-app>
