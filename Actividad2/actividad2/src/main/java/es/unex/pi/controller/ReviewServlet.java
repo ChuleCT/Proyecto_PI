@@ -84,17 +84,21 @@ public class ReviewServlet extends HttpServlet {
 
 		List <Review> reviews = reviewDAO.getAllByProperty(idp);
 		double media = 0;
-		for (int i = 0; i < reviews.size(); i++) {
-			Review r = reviews.get(i);
-			media += r.getGrade();
-		}
-		logger.info("suma: " + media + " reviews.size(): " + reviews.size());
-		media = media / reviews.size();
-		logger.info("media: " + media);
+		if (reviews.isEmpty()) {
+			logger.info("No hay reviews");
+		} else {
+			for (int i = 0; i < reviews.size(); i++) {
+				Review r = reviews.get(i);
+				media += r.getGrade();
+			}
+			logger.info("suma: " + media + " reviews.size(): " + reviews.size());
+			media = media / reviews.size();
+			logger.info("media: " + media);
 
-		media = Math.floor(media * 10) / 10;
-		
-		logger.info("media redondeada: " + media);
+			media = Math.floor(media * 10) / 10;
+			
+			logger.info("media redondeada: " + media);
+		}
 		
 		PropertyDAO propertyDAO = new JDBCPropertyDAOImpl();
 		propertyDAO.setConnection(conn);
