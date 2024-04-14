@@ -97,10 +97,10 @@ input {
 .textoEnImagen {
     position: absolute;
     top: 1em;
-    width: 48%;
+    width: 38%;
 }
 .textoEnImagenRow {
-    width: 100%;
+    width: 60%;
 }
 
 .puntuacionMedia {

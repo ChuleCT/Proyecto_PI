@@ -222,13 +222,25 @@
 						<div class="col-3">
 							<div class="row pt-1">
 								<div class="col-8 text-end puntuacionTexto pt-2">
-									<b>Fabuloso</b><br>
+									<c:choose>
+										<c:when test="${alojamiento.gradesAverage ge 4}">
+											<b>Fabuloso</b><br>
+										</c:when>
+										<c:when test="${alojamiento.gradesAverage ge 2.5}">
+											<b>Aceptable</b>
+											<br>
+										</c:when>
+										<c:otherwise>
+											<b>Regular</b>
+											<br>
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div class="col-3">
 									<p
 										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${alojamiento.gradesAverage}</p>
 								</div>
-								
+
 
 							</div>
 							<div class="row">

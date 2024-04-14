@@ -84,7 +84,7 @@
 						<div class="position-relative">
 							<img class="img-fluid" src="images/DetalleAlojamiento3.png"
 								alt="fachada alojamiento Palacio de Oquendo">
-							<div class="col-6 offset-6 textoEnImagen">
+							<div class="col-6 offset-8 textoEnImagen mt-3">
 								<div class="row bg-light textoEnImagenRow">
 									<div class="col-8 text-end puntuacionTexto pt-2">
 										<b>Fabuloso</b><br>										
