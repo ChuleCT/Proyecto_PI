@@ -78,6 +78,7 @@ public class AlojamientosServlet extends HttpServlet {
     	request.setAttribute("ListaAlojamientos", ListaAlojamientos);
     	request.setAttribute("size", ListaAlojamientos.size());
     	request.setAttribute("opcionDisponibilidad", opcionDisponibilidad);
+    	request.setAttribute("seOrdena", seOrdena);
 
     	User user = (User) session.getAttribute("user");
     	

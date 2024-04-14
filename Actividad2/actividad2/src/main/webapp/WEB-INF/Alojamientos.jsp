@@ -118,6 +118,8 @@
 										name="desdeAlojamiento" value="si">
 									<input type="hidden" name="opcionParaFavoritos"
 										value="${opcionDisponibilidad}">
+										<input type="hidden" name="seOrdena"
+										value="${seOrdena}">
 										
 									<c:if test="${fn:length(ListaFavoritos) > 0}">
 										<c:forEach var="favorito" items="${ListaFavoritos}">
@@ -219,9 +221,8 @@
 
 						<div class="col-3">
 							<div class="row pt-1">
-								<div class="col-8 text-end puntuacionTexto">
+								<div class="col-8 text-end puntuacionTexto pt-2">
 									<b>Fabuloso</b><br>
-									<div class="comentarios">4.592 comentarios</div>
 								</div>
 								<div class="col-3">
 									<p

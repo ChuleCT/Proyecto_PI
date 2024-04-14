@@ -284,4 +284,8 @@
     <filter-name>LoginFilter</filter-name>
     <servlet-name>ManageAccommodationsServlet</servlet-name>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+  </filter-mapping>
 </web-app>

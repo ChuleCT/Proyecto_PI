@@ -69,17 +69,15 @@
 							<div class="col border rounded">
 								<h5 class="fw-bold mt-3">${property.name}</h5>
 								<p>${property.address}</p>
-								<p class="text-success">Excelente ubicación -
-									${property.gradesAverage}</p>
 								<p>
 									<span
 										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">${property.gradesAverage}</span>
-									Fabuloso - 4559 comentarios
+									Fabuloso
 								</p>
 
 								<c:forEach var="service" items="${services}">
 									<p class="me-2">
-										<i class="fa fa-paw me-2" aria-hidden="true"></i>${service}</p>
+										<i class="${service.icon} me-2" aria-hidden="true"></i>${service.name}</p>
 								</c:forEach>
 							</div>
 						</div>

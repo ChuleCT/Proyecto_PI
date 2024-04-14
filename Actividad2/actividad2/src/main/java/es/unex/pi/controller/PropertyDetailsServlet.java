@@ -74,7 +74,7 @@ public class PropertyDetailsServlet extends HttpServlet {
 				PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
 				propertiesServicesDAO.setConnection(conn);
 
-				List<String> services = propertiesServicesDAO.getCheckedServices(oid);
+				List<Service> services = propertiesServicesDAO.getCheckedServices2(oid);
 				request.setAttribute("services", services);
 
 				// Obtengo las habitaciones de la propiedad

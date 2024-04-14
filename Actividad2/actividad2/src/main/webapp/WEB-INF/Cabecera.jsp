@@ -36,7 +36,7 @@
                                 <div class="dropdown-menu bg-secondary">
                                     <a class="dropdown-item fw-bold" href="EditUserServlet.do"><i class="fa-solid fa-user"></i>Mi perfil</a>
                                     <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do"><i class="fa-solid fa-house"></i> Mis alojamientos</a>
-                                    <a class="dropdown-item fw-bold" href="BookingsServlet.do"><i class=""></i> Mis reservas</a>
+                                    <a class="dropdown-item fw-bold" href="BookingsServlet.do"><i class="fa-solid fa-list"></i> Mis reservas</a>
                                     <a class="dropdown-item fw-bold" href="FavoritesPropertiesServlet.do"><i class="fa-solid fa-heart"></i> Mis favoritos</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fw-bold" href="LogoutServlet.do"><i class="fa-solid fa-power-off"></i> Logout</a>

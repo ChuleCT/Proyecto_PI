@@ -33,6 +33,8 @@ import es.unex.pi.dao.JDBCBookingsAccommodationsDAOImpl;
 import es.unex.pi.dao.BookingsAccommodationsDAO;
 import es.unex.pi.model.BookingsAccommodations;
 
+import es.unex.pi.model.Service;
+
 /**
  * Servlet implementation class ShoppingCartServlet
  */
@@ -78,7 +80,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			PropertiesServicesDAO propertiesServicesDAO = new JDBCPropertiesServicesDAOImpl();
 			propertiesServicesDAO.setConnection(conn);
 
-			List<String> services = propertiesServicesDAO.getCheckedServices(property.getId());
+			List<Service> services = propertiesServicesDAO.getCheckedServices2(property.getId());
 			request.setAttribute("services", services);
 
 			// Parte de "Has seleccionado" (me quedo solo con los accommodations con

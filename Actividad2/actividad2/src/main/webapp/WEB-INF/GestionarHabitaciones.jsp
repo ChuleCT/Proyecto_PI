@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
 						<div class="row pt-3 mb-4">
 							<div class="col-8 ps-4">
 								<p class="azul negrita">${accommodation.name}</p>
-								<span class="negrita">${accommodation.description}</span>
+								<p class="negrita text-truncate">${accommodation.description}</p>
 								<p>
 									Precio de la habitación:<span class="negrita">
 										${accommodation.price}€</span>
@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
 											disponibles: ${accommodation.numAccommodations} </span>
 									</c:when>
 									<c:when test="${accommodation.numAccommodations == 1}">
-										<span class=" negrita">Número de habitaciones
+										<span class=" negrita text-warning">Número de habitaciones
 											disponibles: ${accommodation.numAccommodations} </span>
 									</c:when>
 									<c:otherwise>

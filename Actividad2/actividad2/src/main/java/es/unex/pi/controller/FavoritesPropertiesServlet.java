@@ -98,8 +98,10 @@ public class FavoritesPropertiesServlet extends HttpServlet {
                     System.out.println("Eliminado de favoritos.");
                 }
                 String opcionDisponibilidad = request.getParameter("opcionParaFavoritos");
+                
+                Boolean seOrdena = Boolean.parseBoolean(request.getParameter("seOrdena"));
 
-                response.sendRedirect("AlojamientosServlet.do?opcion=" + opcionDisponibilidad);
+                response.sendRedirect("AlojamientosServlet.do?opcion=" + opcionDisponibilidad + "&seOrdena=" + seOrdena);
 
             }
             else{

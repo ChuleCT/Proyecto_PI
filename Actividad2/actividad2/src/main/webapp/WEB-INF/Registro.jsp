@@ -89,12 +89,14 @@
 					</form>
 				</div>
 			</div>
-			<div class="row mt-2">
-				<div class="col-5 mx-auto">
-					<a href="LoginServlet.do" class="text-primary" target="_blank">¿Ya
-						tienes cuenta?</a>
+			<c:if test="${empty user.name}">
+				<div class="row mt-2">
+					<div class="col-5 mx-auto">
+						<a href="LoginServlet.do" class="text-primary">¿Ya
+							tienes cuenta?</a>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 	</main>
 	<footer>

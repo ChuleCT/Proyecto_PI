@@ -58,6 +58,26 @@ public class JDBCPropertiesServicesDAOImpl implements PropertiesServicesDAO {
         }
         return checkedServices;
     }
+    
+    @Override
+    public List<Service> getCheckedServices2(Long idp){
+
+        if (conn == null) return null;
+
+        List<PropertiesServices> propertiesServicesList;
+        propertiesServicesList = getAllByProperty(idp);
+
+        List<Service> checkedServices = new ArrayList<Service>();
+
+        for (PropertiesServices ps: propertiesServicesList){
+            ServiceDAO serviceDAO = new JDBCServiceDAOImpl();
+            serviceDAO.setConnection(conn);
+            Service s = serviceDAO.get(ps.getIds()); // Obtiene el servicio
+            logger.info("\n\n\n\nfetching all PropertiesServices by idp: "+ps.getIds()+ "el name del servicio es: "+ s.getName() + "\n\n\n\n");
+            checkedServices.add(s);
+        }
+        return checkedServices;
+    }
 
     @Override
     public List<PropertiesServices> getAllByService(long ids) {

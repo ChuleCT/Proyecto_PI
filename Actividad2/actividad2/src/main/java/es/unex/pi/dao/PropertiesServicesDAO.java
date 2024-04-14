@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import es.unex.pi.model.PropertiesServices;
+import es.unex.pi.model.Service;
 
 
 public interface PropertiesServicesDAO {
@@ -30,6 +31,16 @@ public interface PropertiesServicesDAO {
      * @return List of all the services associated to a property.
     */
     public List<String> getCheckedServices(Long idp);
+    
+    
+	/**
+	 * Gets all the services associated to a property.
+	 * 
+	 * @param idp property identifier
+	 * 
+	 * @return List of all the services associated to a property.
+	 */
+    public List<Service> getCheckedServices2(Long idp);
 
     /**
      *Gets all the PropertyService that are related to a service.

@@ -44,12 +44,12 @@
                             <div class="col-2 ps-4">
                                 <img class="rounded" src="images/DetalleAlojamiento3.png" alt="foto ${bookingPropertyInfo.property.name}">
                             </div>
-                            <div class="col ms-5">
+                            <div class="col-5 ms-5">
                                 <p>
-                                    <span class="fw-bold">${bookingPropertyInfo.property.name}</span>
+                                    <span class="fw-bold azul">${bookingPropertyInfo.property.name}</span>
                                 </p>
                                 <p>${bookingPropertyInfo.property.address}</p>
-                                <p>${bookingPropertyInfo.property.description}</p>
+                                <p class="text-truncate fw-bold">${bookingPropertyInfo.property.description}</p>
                                 
                             </div>
                             <div class="col text-end pe-5">

@@ -139,23 +139,27 @@ public class EditPropertyServlet extends HttpServlet {
 
 		String[] checkedServices = request.getParameterValues("listServices");// Nueva lista de servicios seleccionados
 
-		// ACTUALIZA LOS SERVICIOS SELECCIONADOS
-		for (String service : checkedServices) {
-			if (!oldCheckedServices.contains(service)) {
-				// Si el servicio no estaba seleccionado antes, se añade
-				Service s = serviceDAO.get(service);
-				PropertiesServices ps = new PropertiesServices();
-				ps.setIds(s.getId());
-				ps.setIdp(property.getId());
-				propertiesServicesDAO.add(ps);
+		if (checkedServices == null) {
+			checkedServices = new String[0];
+		}else {
+			// ACTUALIZA LOS SERVICIOS SELECCIONADOS
+			for (String service : checkedServices) {
+				if (!oldCheckedServices.contains(service)) {
+					// Si el servicio no estaba seleccionado antes, se añade
+					Service s = serviceDAO.get(service);
+					PropertiesServices ps = new PropertiesServices();
+					ps.setIds(s.getId());
+					ps.setIdp(property.getId());
+					propertiesServicesDAO.add(ps);
+				}
 			}
-		}
-		for (String service : oldCheckedServices) {
-			if (!Arrays.asList(checkedServices).contains(service)) {
-				// Si el servicio estaba seleccionado antes y ya no lo está, se elimina
-				Service s = serviceDAO.get(service);
-				PropertiesServices ps = propertiesServicesDAO.get(property.getId(), s.getId());
-				propertiesServicesDAO.delete(ps.getIdp(), ps.getIds());
+			for (String service : oldCheckedServices) {
+				if (!Arrays.asList(checkedServices).contains(service)) {
+					// Si el servicio estaba seleccionado antes y ya no lo está, se elimina
+					Service s = serviceDAO.get(service);
+					PropertiesServices ps = propertiesServicesDAO.get(property.getId(), s.getId());
+					propertiesServicesDAO.delete(ps.getIdp(), ps.getIds());
+				}
 			}
 		}
 

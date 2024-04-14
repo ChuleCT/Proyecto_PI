@@ -87,12 +87,12 @@ input[type="text"]:focus {
 
 .card img {
     position: relative;
-    top: 3.5em;
+    top: 1.5em;
     left: .5em
 }
 
 .card {
-    min-height: 220px;
+    min-height: 140px;
     max-width: 540px;
     position: relative;
     top: -3em;

@@ -53,7 +53,7 @@
 					<div class="mb-3">
 						<label for="distanciaCentro" class="form-label">Distancia
 							al centro</label> <input type="number" class="form-control"
-							id="centerDistance" name="centerDistance" step="any" min="0"
+							id="centerDistance" name="centerDistance" step="any" min="0" max="999999999"
 							value="${property.centerDistance}" required>
 					</div>
 					<div class="mb-3">
@@ -62,9 +62,8 @@
 							value="${property.city}" required>
 					</div>
 					<div class="mb-3">
-						<label for="descripcion" class="form-label">Descripción</label> <input
-							type="text" class="form-control" id="description"
-							name="description" value="${property.description}" required>
+						<label for="descripcion" class="form-label">Descripción</label>
+							<textarea class="form-control" id="description" name="description" required>${property.description}</textarea>
 					</div>
 
 					<div class="mb-3">

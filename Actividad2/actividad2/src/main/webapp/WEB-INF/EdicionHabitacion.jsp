@@ -41,7 +41,7 @@
 					    </div>
 					    <div class="mb-3">
 						    <label for="precio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="price" name="price" step="1" min="0" value="${accommodation.price}" required>
+                            <input type="number" class="form-control" id="price" name="price" step="1" min="0" max="999999999" value="${accommodation.price}" required>
 					    </div>
 					    <div class="mb-3">
 						    <label for="descripcion" class="form-label">Descripción</label> 
@@ -49,7 +49,7 @@
 					    </div>
 					    <div class="mb-3">
 						    <label for="precio" class="form-label">Número de habitaciones disponibles</label>
-                            <input type="number" class="form-control" id="numAccommodations" name="numAccommodations" step="1" min="0" value="${accommodation.numAccommodations}" required>
+                            <input type="number" class="form-control" id="numAccommodations" name="numAccommodations" step="1" min="0" max="999999999" value="${accommodation.numAccommodations}" required>
 					    </div>
     
     

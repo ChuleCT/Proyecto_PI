@@ -23,7 +23,7 @@
 
 <body>
 
-	<%@ include file="Cabecera.jsp" %>
+	<%@ include file="Cabecera.jsp"%>
 
 	<c:set var="propertyPost" value="${property}" />
 
@@ -31,7 +31,7 @@
 		<!-- Primera Row principal -->
 		<div class="row" id="PrimeraColIzq">
 
-			
+
 			<!-- Columna principal de la derecha -->
 			<div class="col-12">
 				<div class="row ms-1 ">
@@ -61,13 +61,13 @@
 						</div>
 						<h4 class="negrita">${property.name}</h4>
 						<div class="d-flex align-items-center">
-							<i class="fa-solid fa-location-dot"></i>
-							<span> ${property.address}</span> <i
-								class="fa-solid fa-phone ms-2 me-2"></i> <span>${property.telephone}</span>
+							<i class="fa-solid fa-location-dot"></i> <span>
+								${property.address}</span> <i class="fa-solid fa-phone ms-2 me-2"></i>
+							<span>${property.telephone}</span>
 						</div>
-						
-						<i class="fa-solid fa-location-dot"></i>
-						<span>A ${property.centerDistance} kms del centro</span>
+
+						<i class="fa-solid fa-location-dot"></i> <span>A
+							${property.centerDistance} kms del centro</span>
 
 					</div>
 
@@ -86,9 +86,8 @@
 								alt="fachada alojamiento Palacio de Oquendo">
 							<div class="col-6 offset-6 textoEnImagen">
 								<div class="row bg-light textoEnImagenRow">
-									<div class="col-8 text-end puntuacionTexto">
-										<b>Fabuloso</b><br>
-										<div class="comentarios">4.592 comentarios</div>
+									<div class="col-8 text-end puntuacionTexto pt-2">
+										<b>Fabuloso</b><br>										
 									</div>
 									<div class="col-3">
 										<p
@@ -126,20 +125,22 @@
 			<div class="row">
 				<c:set var="index" value="${0}" />
 				<c:forEach var="service" items="${services}">
-					<c:if test="${index eq 5}">
-						<div class="mb-1"></div>
-						<c:set var="index" value="${0}" />
-					</c:if>
-					<div class="col border me-2 py-2">
-						<i class="fa-regular fa-eye"></i> <span>${service}</span>
+					<div class="col-2">
+						<c:if test="${index eq 5}">
+							<div class="mb-1"></div>
+							<c:set var="index" value="${0}" />
+						</c:if>
+						<div class="col border me-2 py-2 ps-2 mb-2">
+							<i class="${service.icon}"></i> <span>${service.name}</span>
+						</div>
+						<c:set var="index" value="${index + 1}" />
 					</div>
-					<c:set var="index" value="${index + 1}" />
 				</c:forEach>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-8 mt-3">
+			<div class="col-12 mt-3">
 				<p class="texto-default">${property.description}</p>
 
 			</div>
@@ -150,34 +151,36 @@
 		<!-- Termina la segunda row principal (texto y bg azul)-->
 
 
-		<div class="row border my-5 py-3">
-			<div class="col-10 mt-2">
-				<p class="negrita fs-5">Inicia sesión y ahorra</p>
-				<p>Podrías ahorrar un 20% o más en este alojamiento al iniciar
-					sesión.</p>
-				<div class="row">
-					<div class="col-2">
-						<!-- <a href="../inicioSesion/index.html"> -->
-						<!--     <button class="btn btn-light border border-3 text-primary">Inicia sesión</button> -->
-						<!-- </a> -->
+			<c:if test="${empty user.name}">
+				<div class="row border my-5 py-3">
+					<div class="col-10 mt-2">
+						<p class="negrita fs-5">Inicia sesión y ahorra</p>
+						<p>Podrías ahorrar un 20% o más en este alojamiento al iniciar
+							sesión.</p>
+						<div class="row">
+							<div class="col-2">
+								<!-- <a href="../inicioSesion/index.html"> -->
+								<!--     <button class="btn btn-light border border-3 text-primary">Inicia sesión</button> -->
+								<!-- </a> -->
 
-						<a href="../inicioSesion/index.html"
-							class="btn btn-light text-primary border border-3"> Inicia
-							sesión </a>
+								<a href="../inicioSesion/index.html"
+									class="btn btn-light text-primary border border-3"> Inicia
+									sesión </a>
+							</div>
+							<div class="col-2 mt-2">
+								<a href="../Registro/index.html">Hazte una cuenta</a>
+							</div>
+						</div>
 					</div>
-					<div class="col-2 mt-2">
-						<a href="../Registro/index.html">Hazte una cuenta</a>
+					<div class="col-2">
+						<img src="images/DetalleAlojamiento10.png" class="img-fluid"
+							alt="ahorro por iniciar sesión">
 					</div>
 				</div>
-			</div>
-			<div class="col-2">
-				<img src="images/DetalleAlojamiento10.png" class="img-fluid"
-					alt="ahorro por iniciar sesión">
-			</div>
-		</div>
+			</c:if>
 
 
-		
+
 
 		<!-- Tabla disponibilidad -->
 		<div class="container-fluid">
@@ -199,7 +202,7 @@
 							varStatus="loop">
 							<tr>
 								<!-- Tipo de alojamiento -->
-								<td>
+								<td class="col-5">
 									<p>
 										<span class="negrita azul">${accommodation.name}</span>
 									</p>
@@ -223,7 +226,7 @@
 											<c:forEach var="service" items="${services}">
 												<div class="col-auto">
 													<i class="fa-solid fa-check verde"></i> <span
-														class="texto-default">${service}</span>
+														class="texto-default">${service.name}</span>
 												</div>
 											</c:forEach>
 										</div>
@@ -259,7 +262,8 @@
 						<div class="card-header">Deja tu opinión</div>
 						<div class="card-body">
 							<form action="ReviewServlet.do" method="post">
-								<input type="hidden" name="idPropertyReviewed" value="${property.id}">
+								<input type="hidden" name="idPropertyReviewed"
+									value="${property.id}">
 								<div class="form-group row">
 									<label for="grade"
 										class="col-md-3 col-form-label text-md-right">Calificación</label>
@@ -290,7 +294,7 @@
 									<div class="col-md-3 offset-md-3">
 										<button id="submitButton" type="submit"
 											class="btn btn-primary">${userReview != null ? "Modificar review" : "Enviar"}</button>
-											
+
 										<button type="button" class="btn btn-link ms-2"
 											onclick="eliminar(true)">
 											<i class="fa fa-trash text-danger"></i>
@@ -328,7 +332,7 @@
 	</div>
 
 	<script>
-		function eliminar( seBorra) {
+		function eliminar(seBorra) {
 			// Crea un formulario oculto
 			var form = document.createElement("form");
 			form.setAttribute("method", "post");
@@ -339,7 +343,7 @@
 			inputId.setAttribute("name", "idPropertyReviewed");
 			inputId.setAttribute("value", "${property.id}");
 			form.appendChild(inputId);
-			
+
 			// Crea un campo oculto para indicar si se debe eliminar la habitación
 			var inputEliminar = document.createElement("input");
 			inputEliminar.setAttribute("type", "hidden");
