@@ -55,7 +55,7 @@ public class ListaAlojamientosServlet extends HttpServlet {
         request.setAttribute("size", ListaAlojamientos.size());
 
         request.setAttribute("CheckType", "Mis alojamientos");
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Reserva.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/AlojamientosUsuario.jsp");
         view.forward(request, response);
     }
 

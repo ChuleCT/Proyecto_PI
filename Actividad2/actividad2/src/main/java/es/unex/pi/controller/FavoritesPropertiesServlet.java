@@ -63,7 +63,7 @@ public class FavoritesPropertiesServlet extends HttpServlet {
         request.setAttribute("size", ListaAlojamientos.size());
 
         request.setAttribute("CheckType", "Mis alojamientos favoritos");
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Reserva.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/AlojamientosUsuario.jsp");
         view.forward(request, response);
     }
 
@@ -98,7 +98,7 @@ public class FavoritesPropertiesServlet extends HttpServlet {
                     System.out.println("Eliminado de favoritos.");
                 }
                 String opcionDisponibilidad = request.getParameter("opcionParaFavoritos");
-                
+
                 Boolean seOrdena = Boolean.parseBoolean(request.getParameter("seOrdena"));
 
                 response.sendRedirect("AlojamientosServlet.do?opcion=" + opcionDisponibilidad + "&seOrdena=" + seOrdena);
