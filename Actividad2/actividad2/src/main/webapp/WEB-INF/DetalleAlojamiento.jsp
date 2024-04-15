@@ -87,7 +87,20 @@
 							<div class="col-6 offset-8 textoEnImagen mt-3">
 								<div class="row bg-light textoEnImagenRow">
 									<div class="col-8 text-end puntuacionTexto pt-2">
-										<b>Fabuloso</b><br>										
+										<c:choose>
+											<c:when test="${property.gradesAverage ge 4}">
+												<b>Fabuloso</b>
+												<br>
+											</c:when>
+											<c:when test="${property.gradesAverage ge 2.5}">
+												<b>Aceptable</b>
+												<br>
+											</c:when>
+											<c:otherwise>
+												<b>Regular</b>
+												<br>
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<div class="col-3">
 										<p
