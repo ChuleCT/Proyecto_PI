@@ -18,9 +18,8 @@
 
     <body>
         <nav class="navbar mb-5" id="navbar">
-            <a class="navbar-brand active" href="#" aria-current="page"><span
-                                                    class="text-light m-5 fw-bold">Booking.com</span></a>
-        </nav>
+				<span class="text-light ms-5 fw-bold fs-4">Booking.com</span>
+			</nav>
         <main>
             <div class="container mx-auto my-2">
                 <div class="row">

@@ -12,179 +12,179 @@ import es.unex.pi.model.PropertiesCategories;
 
 public class JDBCPropertiesCategoriesDAOImpl implements PropertiesCategoriesDAO {
 
-	private Connection conn;
-	private static final Logger logger = Logger.getLogger(JDBCPropertiesCategoriesDAOImpl.class.getName());
+    private Connection conn;
+    private static final Logger logger = Logger.getLogger(JDBCPropertiesCategoriesDAOImpl.class.getName());
 
-	@Override
-	public List<PropertiesCategories> getAll() {
+    @Override
+    public List<PropertiesCategories> getAll() {
 
-		if (conn == null) return null;
-						
-		ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories");
-						
-			while ( rs.next() ) {
-				PropertiesCategories propertiesCategories = new PropertiesCategories();
-				fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
-				propertiesCategoriesList.add(propertiesCategories);
-				logger.info("fetching all PropertiesCategories: "+propertiesCategories.getIdp()+" "+propertiesCategories.getIdct());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return propertiesCategoriesList;
-	}
+        if (conn == null) return null;
 
-	@Override
-	public List<PropertiesCategories> getAllByCategory(long idct) {
-		
-		if (conn == null) return null;
-						
-		ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idct="+idct);
+        ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories");
 
-			while ( rs.next() ) {
-				PropertiesCategories propertiesCategories = new PropertiesCategories();
-				fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
-				propertiesCategoriesList.add(propertiesCategories);
-				logger.info("fetching all PropertiesCategories by idp: "+propertiesCategories.getIdp()+"->"+propertiesCategories.getIdct());
-			}
+            while ( rs.next() ) {
+                PropertiesCategories propertiesCategories = new PropertiesCategories();
+                fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
+                propertiesCategoriesList.add(propertiesCategories);
+                logger.info("fetching all PropertiesCategories: "+propertiesCategories.getIdp()+" "+propertiesCategories.getIdct());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return propertiesCategoriesList;
+    }
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    @Override
+    public List<PropertiesCategories> getAllByCategory(long idct) {
 
-		return propertiesCategoriesList;
-	}
-	
-	@Override
-	public List<PropertiesCategories> getAllByProperty(long idp) {
-		
-		if (conn == null) return null;
-						
-		ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idp="+idp);
+        if (conn == null) return null;
 
-			while ( rs.next() ) {
-				PropertiesCategories propertiesCategories = new PropertiesCategories();
-				fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
-				propertiesCategoriesList.add(propertiesCategories);
-				logger.info("fetching all PropertiesCategories by idct: "+propertiesCategories.getIdct()+"-> "+propertiesCategories.getIdp());
-			}
+        ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idct="+idct);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            while ( rs.next() ) {
+                PropertiesCategories propertiesCategories = new PropertiesCategories();
+                fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
+                propertiesCategoriesList.add(propertiesCategories);
+                logger.info("fetching all PropertiesCategories by idp: "+propertiesCategories.getIdp()+"->"+propertiesCategories.getIdct());
+            }
 
-		return propertiesCategoriesList;
-	}
-	
-	
-	@Override
-	public PropertiesCategories get(long idp,long idct) {
-		if (conn == null) return null;
-		
-		PropertiesCategories propertiesCategories = null;		
-		
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idp="+idp+" AND idct="+idct);			 
-			if (!rs.next()) return null;
-			propertiesCategories= new PropertiesCategories();
-			fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
-			logger.info("fetching PropertiesCategories by idp: "+propertiesCategories.getIdp()+"  and idct: "+propertiesCategories.getIdct());
-		
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
-		return propertiesCategories;
-	}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	@Override
-	public boolean add(PropertiesCategories propertiesCategories) {
-		boolean done = false;
-		if (conn != null){
-			
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("INSERT INTO PropertiesCategories (idp,idct) VALUES('"+
-									propertiesCategories.getIdp()+"','"+
-									propertiesCategories.getIdct()+"')");
-						
-				logger.info("creating PropertiesCategories:("+propertiesCategories.getIdp()+" "+propertiesCategories.getIdct());
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return done;
-	}
+        return propertiesCategoriesList;
+    }
 
-	@Override
-	public boolean update(PropertiesCategories dbObject, PropertiesCategories newObject) {
-		boolean done = false;
-		if (conn != null){
+    @Override
+    public List<PropertiesCategories> getAllByProperty(long idp) {
 
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				
-				stmt.executeUpdate("UPDATE PropertiesCategories SET idct="+newObject.getIdct()
-				+" WHERE idp = "+dbObject.getIdp() + " AND idct = " + dbObject.getIdct());
-				
-				logger.info("updating PropertiesCategories:("+dbObject.getIdp()+" "+dbObject.getIdct());
-				
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return done;
-	}
+        if (conn == null) return null;
 
-	@Override
-	public boolean delete(long idp, long idct) {
-		boolean done = false;
-		if (conn != null){
+        ArrayList<PropertiesCategories> propertiesCategoriesList = new ArrayList<PropertiesCategories>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idp="+idp);
 
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("DELETE FROM PropertiesCategories WHERE idp ="+idp+" AND idct="+idct);
-				logger.info("deleting PropertiesCategories: "+idp+" , idct="+idct);
-				done= true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return done;
-	}
+            while ( rs.next() ) {
+                PropertiesCategories propertiesCategories = new PropertiesCategories();
+                fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
+                propertiesCategoriesList.add(propertiesCategories);
+                logger.info("fetching all PropertiesCategories by idct: "+propertiesCategories.getIdct()+"-> "+propertiesCategories.getIdp());
+            }
 
-	public void fromRsToPropertiesCategoriesObject(ResultSet rs, PropertiesCategories propertiesCategories) throws SQLException {
-		propertiesCategories.setIdp(rs.getInt("idp"));
-		propertiesCategories.setIdct(rs.getInt("idct"));
-				
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	}
-	
-	@Override
-	public void setConnection(Connection conn) {
-		// TODO Auto-generated method stub
-		this.conn = conn;
-	}
-	
+        return propertiesCategoriesList;
+    }
+
+
+    @Override
+    public PropertiesCategories get(long idp,long idct) {
+        if (conn == null) return null;
+
+        PropertiesCategories propertiesCategories = null;		
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PropertiesCategories WHERE idp="+idp+" AND idct="+idct);			 
+            if (!rs.next()) return null;
+            propertiesCategories= new PropertiesCategories();
+            fromRsToPropertiesCategoriesObject(rs,propertiesCategories);
+            logger.info("fetching PropertiesCategories by idp: "+propertiesCategories.getIdp()+"  and idct: "+propertiesCategories.getIdct());
+
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+        return propertiesCategories;
+    }
+
+    @Override
+    public boolean add(PropertiesCategories propertiesCategories) {
+        boolean done = false;
+        if (conn != null){
+
+            Statement stmt;
+            try {
+                stmt = conn.createStatement();
+                stmt.executeUpdate("INSERT INTO PropertiesCategories (idp,idct) VALUES('"+
+                    propertiesCategories.getIdp()+"','"+
+                    propertiesCategories.getIdct()+"')");
+
+                logger.info("creating PropertiesCategories:("+propertiesCategories.getIdp()+" "+propertiesCategories.getIdct());
+                done= true;
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return done;
+    }
+
+    @Override
+    public boolean update(PropertiesCategories dbObject, PropertiesCategories newObject) {
+        boolean done = false;
+        if (conn != null){
+
+            Statement stmt;
+            try {
+                stmt = conn.createStatement();
+
+                stmt.executeUpdate("UPDATE PropertiesCategories SET idct="+newObject.getIdct()
+                    +" WHERE idp = "+dbObject.getIdp() + " AND idct = " + dbObject.getIdct());
+
+                logger.info("updating PropertiesCategories:("+dbObject.getIdp()+" "+dbObject.getIdct());
+
+                done= true;
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return done;
+    }
+
+    @Override
+    public boolean delete(long idp, long idct) {
+        boolean done = false;
+        if (conn != null){
+
+            Statement stmt;
+            try {
+                stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM PropertiesCategories WHERE idp ="+idp+" AND idct="+idct);
+                logger.info("deleting PropertiesCategories: "+idp+" , idct="+idct);
+                done= true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return done;
+    }
+
+    public void fromRsToPropertiesCategoriesObject(ResultSet rs, PropertiesCategories propertiesCategories) throws SQLException {
+        propertiesCategories.setIdp(rs.getInt("idp"));
+        propertiesCategories.setIdct(rs.getInt("idct"));
+
+
+    }
+
+    @Override
+    public void setConnection(Connection conn) {
+        // TODO Auto-generated method stub
+        this.conn = conn;
+    }
+
 }

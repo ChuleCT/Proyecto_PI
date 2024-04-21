@@ -10,10 +10,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;
+import es.unex.pi.model.Accommodation;
 import es.unex.pi.model.User;
 
 /**
@@ -63,6 +66,10 @@ public class LoginServlet extends HttpServlet {
 		if ((user != null) && (user.getPassword().equals(password))) {
 			HttpSession session = request.getSession(); // Obtenemos la sesion
 			session.setAttribute("user", user); // Establecemos el usuario en la sesión
+			
+            // Se crea el mapa para que no de error al entrar al carrito sin haber añadido alojamientos
+            Map<Accommodation, Integer> accommodationQuantityMap = new HashMap<>();
+            session.setAttribute("accommodationQuantityMap", accommodationQuantityMap);
 
 			// Redirige al Busqueda servlet.do
 			response.sendRedirect("BusquedaServlet.do");

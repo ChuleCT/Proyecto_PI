@@ -38,8 +38,25 @@ public interface BookingDAO {
 	 * @return Booking object with that id.
 	 */
 	public Booking get(long idu,int totalPrice);
+	
+	/**
+	 * Gets the latest booking from the DB using idu and totalPrice.
+	 * 
+	 * @param idu        User Identifier.
+	 * @param totalPrice Booking total price.
+	 * 
+	 * @return Booking object with that id.
+	 */
+	public Booking getLatestBooking(long idu, int totalPrice);
 
-
+	/**
+	 * Gets all the bookinges from the database using idu.
+	 * 
+	 * @param idu User Identifier.
+	 * 
+	 * @return List of all the bookinges from the database with that idu.
+	 */
+	public List<Booking> getAllByIdu(long idu);
 	
 	/**
 	 * Gets all the bookinges from the database.

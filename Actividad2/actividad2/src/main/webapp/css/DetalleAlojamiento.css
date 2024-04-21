@@ -2,7 +2,7 @@ body {
     overflow-x: hidden;
 }
 
-#pagina {
+.pagina {
     margin-left: 21%;
     /* border: 2px solid black; */
     width: 58%;
@@ -76,8 +76,11 @@ input {
 }
 
 .fa-star {
-    color: yellow;
+    color: #b8b814;
+    position: relative;
+    top: -0.5em;
 }
+
 
 .negrita {
     font-weight: 900;
@@ -94,10 +97,10 @@ input {
 .textoEnImagen {
     position: absolute;
     top: 1em;
-    width: 48%;
+    width: 38%;
 }
 .textoEnImagenRow {
-    width: 100%;
+    width: 60%;
 }
 
 .puntuacionMedia {
@@ -143,6 +146,10 @@ input {
 
 .verde {
     color: #62A954;
+}
+
+.azul {
+    color: #0d6efd;
 }
 
 #reservaré {

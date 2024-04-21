@@ -39,30 +39,38 @@ public class BorrarUserServlet extends HttpServlet {
         UserDAO userDAO = new JDBCUserDAOImpl();
         userDAO.setConnection(conn);
 
-        try{
-            String id = request.getParameter("id");
-            long oid = 0;
-            oid = Long.parseLong(id); 
-            User user = userDAO.get(oid);
-            if (user != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user);
-                request.setAttribute("CheckType", "Borrar");
+//        try{
+//            String id = request.getParameter("id");
+//            long oid = 0;
+//            oid = Long.parseLong(id); 
+//            User user = userDAO.get(oid);
+//            if (user != null){
+//                HttpSession session = request.getSession();
+//                session.setAttribute("user",user);
+//                request.setAttribute("CheckType", "Borrar Usuario");
+//
+//                RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
+//                view.forward(request,response);
+//            }
+//            else { 
+//
+//                response.sendRedirect("RegistroServlet.do");
+//            }	
+//        }
+//        catch (Exception e) {
+//            logger.info("parameter id is not a number");
+//
+//
+//            response.sendRedirect("RegistroServlet.do");
+//        }
+        
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		request.setAttribute("user", user);
+		request.setAttribute("CheckType", "Borrar Usuario");
 
-                RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
-                view.forward(request,response);
-            }
-            else { 
-
-                response.sendRedirect("RegistroServlet.do");
-            }	
-        }
-        catch (Exception e) {
-            logger.info("parameter id is not a number");
-
-
-            response.sendRedirect("RegistroServlet.do");
-        }
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/Borrar.jsp");
+		view.forward(request, response);
     }
 
     /**
@@ -80,7 +88,6 @@ public class BorrarUserServlet extends HttpServlet {
         if (user!=null) {
 
             userDAO.delete(user.getId());
-
 
             session.removeAttribute("user");
             user=null;
