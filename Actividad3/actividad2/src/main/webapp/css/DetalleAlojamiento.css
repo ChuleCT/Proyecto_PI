@@ -1,0 +1,159 @@
+body {
+    overflow-x: hidden;
+}
+
+.pagina {
+    margin-left: 21%;
+    /* border: 2px solid black; */
+    width: 58%;
+    margin-top: 2em;
+}
+
+#navbar {
+    position: relative;
+    left: 6em;
+    height: 3.5em;
+}
+
+.color-navbar {
+    background-color: rgb(0, 0, 159);
+}
+
+
+#filtro-habitacion {
+    width: 27%;
+}
+
+.texto-default {
+    font-size: 0.9em;
+}
+
+input:focus {
+    outline: none;
+}
+input {
+    background-color: transparent;
+}
+
+#adultos {
+    width: 135%;
+    position: relative;
+    top: -.2em;
+    left: -.4em;
+}
+
+#niños {
+    width: 115%;
+    position: relative;
+    top: -.2em;
+    left: -.7em;
+}
+
+#habitaciones {
+    width: 200%;
+    position: relative;
+    top: -.2em;
+    left: -2em;
+
+}
+
+#btn-buscar {
+    width: 250%;
+    position: relative;
+    left: -1.5em;
+    top: -1.5em;
+
+}
+#imagenGoogleMaps {
+    width: 15.1em;
+    border-radius: 0.8em;
+}
+
+#botonImagenGoogleMaps {
+    position: relative;
+    top: -1em;
+    width: 100%;
+}
+
+.fa-star {
+    color: #b8b814;
+    position: relative;
+    top: -0.5em;
+}
+
+
+.negrita {
+    font-weight: 900;
+}
+
+#posGeo {
+    position: relative;
+}
+
+.noSubrayado {
+    text-decoration: none;
+}
+
+.textoEnImagen {
+    position: absolute;
+    top: 1em;
+    width: 38%;
+}
+.textoEnImagenRow {
+    width: 60%;
+}
+
+.puntuacionMedia {
+    position: relative;
+    top: 0.2em;
+    font-size: 1.4em;
+    width: 1.8em;
+}
+
+.puntuacionTexto {
+    position: relative;
+    left: 0.9em;
+}
+.bg-custom-light-blue {
+      background-color: #d8f1ff;
+}
+
+.table {
+    width: 102%;
+    position: relative;
+    left: -1.04em;
+}
+.table th {
+    background-color: #4A6BC2;
+    border: 3px solid #d8f1ff;
+    vertical-align: top;
+}
+.table td {
+    border: 3px solid #d8f1ff;
+}
+
+.disponibilidad {
+    width: 105%;
+}
+
+.fa-person {
+    font-size: 1.5em;
+}
+
+.rojo {
+    color: #f00;
+}
+
+.verde {
+    color: #62A954;
+}
+
+.azul {
+    color: #0d6efd;
+}
+
+#reservaré {
+    width: 100%;
+    font-size: 1em;
+    position: relative;
+}
