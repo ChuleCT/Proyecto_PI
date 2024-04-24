@@ -64,6 +64,25 @@ public class UsersResource {
         }
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserSessionJSON(@Context HttpServletRequest request) {
+		
+		User user = null;
+		HttpSession session = request.getSession();
+		user = (User) session.getAttribute("user");
+		
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		UserDAO userDao = new JDBCUserDAOImpl();
+		userDao.setConnection(conn);
+		if (user != null) {
+			User user2 = userDao.get(user.getId());
+			return user2;
+		} else {
+			throw new WebApplicationException(Response.Status.FORBIDDEN);
+		}
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response post(User user, @Context HttpServletRequest request) throws Exception{
@@ -126,6 +145,31 @@ public class UsersResource {
 			return Response.status(Response.Status.OK)
 					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}")
 					.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(userid)).build()).build();
+		} else {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
+	
+	// Put sin path, ya que no se necesita id porque se modifica el usuario de la sesion
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response put(User user, @Context HttpServletRequest request) {
+		Response response = null;
+
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		UserDAO userDao = new JDBCUserDAOImpl();
+		userDao.setConnection(conn);
+
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+		if (u != null) {
+			user.setId(u.getId());
+			userDao.update(user);
+			String message = "User updated";
+			return Response.status(Response.Status.OK)
+					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}")
+					.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(u.getId())).build()).build();
 		} else {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
