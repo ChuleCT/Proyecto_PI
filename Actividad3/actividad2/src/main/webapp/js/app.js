@@ -22,8 +22,7 @@ angular.module('bookingApp', ['ngRoute'])
     		controllerAs: "userVM",
     		templateUrl: "UserTemplate.html",
     	})
-    	//deleteUser by ID
-		.when("/deleteUser/:id", {
+		.when("/deleteUser", {
 			controller: "userCtrl",
 			controllerAs: "userVM",
 			templateUrl: "UserTemplate.html",
