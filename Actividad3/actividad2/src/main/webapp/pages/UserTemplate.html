@@ -1,0 +1,32 @@
+<div class="container mx-auto my-3">
+	<div class="row">
+		<div class="col-5 mx-auto">
+			<h3 class="mb-3">Editar Cuenta</h3>
+			<!-- <h4 class="mb-2 text-danger">${messages.error}</h4> -->
+			<form data-ng-submit="userVM.functions.userHandlerMethod()">
+				<!-- 						<input type="hidden" name="id" value="${user.id}"> -->
+				<div class="mb-3">
+					<label class="form-label">Nombre</label> <input type="text" class="form-control"
+						placeholder="Indica tu nombre" name="name" id="name" data-ng-model="userVM.user.name" data-ng-readonly="userVM.functions.where('/deleteUser')" required>
+					<label class="form-label">Apellidos</label> <input type="text" class="form-control"
+						placeholder="Indica tus apellidos" name="surname" id="surname" data-ng-model="userVM.user.surname" data-ng-readonly="userVM.functions.where('/deleteUser')"
+						required>
+					<label class="form-label">Email</label> <input type="email" class="form-control"
+						placeholder="Indica tu dirección de email" name="email" id="email" data-ng-model="userVM.user.email" data-ng-readonly="userVM.functions.where('/deleteUser')"
+						required>
+					<label class="form-label">Password</label> <input type="password" class="form-control"
+						placeholder="Indica tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\w).{8,}"
+						name="password" id="password" data-ng-model="userVM.user.password" data-ng-readonly="userVM.functions.where('/deleteUser')"
+						title="La contraseña debe contener al menos un dígito, una minúscula, una mayúscula, un carácter especial y tener al menos 8 caracteres."
+						required> <input type="submit" class="form-control btn btn-primary col-12"
+						value="Confirmar cambios" data-ng-show="userVM.functions.where('/editUser')">
+						<input type="submit" class="form-control btn btn-primary col-12"
+						value="Borrar cuenta" data-ng-show="userVM.functions.where('/deleteUser')">
+					<a href="#!/deleteUser" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3" data-ng-show="userVM.functions.where('/editUser')">
+						<span class="negrita m-5 fw-bold">BORRAR cuenta</span>
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

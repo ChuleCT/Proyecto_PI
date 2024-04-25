@@ -1,0 +1,21 @@
+#navbar {
+    background-color: rgb(0, 0, 159);
+    height: 4em;
+}
+
+.line {
+    border-top: 1px solid black;
+    margin: 20px 0;
+}
+
+#facebook-logo {
+    width: 100px;
+}
+
+#google-logo {
+    width: 100px;
+}
+
+#apple-logo {
+    width: 75%;
+}
