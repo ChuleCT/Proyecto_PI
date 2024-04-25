@@ -175,9 +175,9 @@ public class UsersResource {
 		}
 	}
 	
+	// Delete sin path, ya que no se necesita id porque se borra el usuario de la sesion
 	@DELETE
-	@Path("/{userid: [0-9]+}")
-	public Response delete(@PathParam("userid") long userid, @Context HttpServletRequest request) {
+	public Response delete(@Context HttpServletRequest request) {
 		Response response = null;
 
 		Connection conn = (Connection) sc.getAttribute("dbConn");
@@ -185,9 +185,10 @@ public class UsersResource {
 		UserDAO userDao = new JDBCUserDAOImpl();
 		userDao.setConnection(conn);
 
-		User u = userDao.get(userid);
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
 		if (u != null) {
-			userDao.delete(userid);
+			userDao.delete(u.getId());
 			String message = "User deleted";
 			return Response.status(Response.Status.OK)
 					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}").build();
@@ -195,5 +196,7 @@ public class UsersResource {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 	}
+	
+	
         
 }
