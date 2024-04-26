@@ -52,7 +52,22 @@ angular.module('bookingApp')
 			},
 			
 			//Habría que hacer ahora el switch para las distintas rutas
+			propertyHandlerMethod: function() {
+				if (propertyVM.functions.where('/properties')) {
+					propertyVM.functions.getPropertiesByUser();
+				} else if (propertyVM.functions.where('/createProperty')) {
+					propertyVM.property = {};
+				} else if (propertyVM.functions.where('/editProperty/+propertyVM.property.id')) {
+					propertyVM.functions.updateProperty();
+				} else if (propertyVM.functions.where('/properties/search')) {
+					propertyVM.functions.getPropertiesBySearch($routeParams.search);
+				} else if (propertyVM.functions.where('/deleteProperty/+propertyVM.property.id')) {
+					propertyVM.functions.deleteProperty(propertyVM.property.id);
+				}
+			},
 			
 		}
+		
+		propertyVM.functions.propertyHandlerMethod();
 		
 		}]);
