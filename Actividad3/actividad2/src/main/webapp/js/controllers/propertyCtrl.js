@@ -3,6 +3,7 @@ angular.module('bookingApp')
 		
 		var propertyVM = this;
 		propertyVM.property = {};
+		propertyVM.search = "";
 		propertyVM.functions = {
 			
 			where : function (route){
@@ -59,8 +60,8 @@ angular.module('bookingApp')
 					propertyVM.property = {};
 				} else if (propertyVM.functions.where('/editProperty/+propertyVM.property.id')) {
 					propertyVM.functions.updateProperty();
-				} else if (propertyVM.functions.where('/properties/search')) {
-					propertyVM.functions.getPropertiesBySearch($routeParams.search);
+				} else if (propertyVM.functions.where('/properties/+propertyVM.search')) {
+					propertyVM.functions.getPropertiesBySearch(propertyVM.search);
 				} else if (propertyVM.functions.where('/deleteProperty/+propertyVM.property.id')) {
 					propertyVM.functions.deleteProperty(propertyVM.property.id);
 				}

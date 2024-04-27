@@ -12,6 +12,12 @@ angular.module('bookingApp')
 						userVM.user = response;
 					});
 			},
+			createUser: function() {
+				usersFactory.postUser(userVM.user)
+					.then(function(response) {
+						console.log("User created, status: " + response);
+					});
+			},
 			updateUser: function () {
 				usersFactory.putUser(userVM.user)
 					.then(function (response) {
@@ -25,18 +31,23 @@ angular.module('bookingApp')
 					});
 			},
 			userHandlerMethod: function(){
+				if (userVM.functions.where("/createUser")) {
+					console.log("Create user, path:" + $location.path());
+					userVM.functions.createUser();
+				}
 				if(userVM.functions.where("/editUser")){
 					console.log("Edit user, path:" + $location.path());
 					userVM.functions.updateUser();
+					$location.path("/");
 				}
 				if(userVM.functions.where("/deleteUser")){
 					console.log("Delete user, path:" + $location.path());
 					userVM.functions.deleteUser();
+					$location.path("/");
 				}
 				else {
 					console.log($location.path());
 				}
-				$location.path("/");
 			}
 		}
 		userVM.functions.getUser();

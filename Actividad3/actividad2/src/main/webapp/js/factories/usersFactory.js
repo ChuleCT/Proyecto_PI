@@ -14,6 +14,13 @@ angular.module('bookingApp')
 
 
 			},
+			postUser: function(user) {
+				url = url;
+				return $http.post(url, user)
+					.then(function(response) {
+						return response.status;
+					});
+			},
 			putUser: function (user) {
 				url = url;
 				return $http.put(url, user)
