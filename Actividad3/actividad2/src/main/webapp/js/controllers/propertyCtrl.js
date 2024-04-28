@@ -55,9 +55,16 @@ angular.module('bookingApp')
 			
 			getPropertiesBySearch: function(search) {
 				propertiesFactory.getPropertyBySearch(search)
-					.then(function(response) {
-						propertyVM.property = response;
-					});
+					  .then(function(response) {
+                    propertyVM.property = response;
+                    console.log("Propiedades encontradas:", propertyVM.property);
+                    propertyVM.size = propertyVM.property.length;
+                    console.log("Número de propiedades encontradas:", propertyVM.size);
+                    $location.path('/search/' + propertyVM.search);
+                })
+                .catch(function(error) {
+                    console.log("Error al obtener las propiedades:", error);
+                });
 			},
 			
 			updateProperty: function() {
@@ -101,9 +108,12 @@ angular.module('bookingApp')
 		}
 		
 		
+		propertyVM.search = $routeParams.Search;
 		if (propertyVM.functions.where('/editProperty/' + $routeParams.ID)) {
 			propertyVM.functions.getProperty($routeParams.ID);
-		} else {
+		} else if (propertyVM.functions.where('/search/'+propertyVM.search)){
+			propertyVM.functions.getPropertiesBySearch(propertyVM.search);
+		}else{
 			propertyVM.functions.propertyHandlerMethod();
 		}
 		

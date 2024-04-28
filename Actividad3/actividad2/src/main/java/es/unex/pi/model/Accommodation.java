@@ -1,7 +1,9 @@
 package es.unex.pi.model;
 
 import java.util.Map;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Accommodation {
 
     private long id;

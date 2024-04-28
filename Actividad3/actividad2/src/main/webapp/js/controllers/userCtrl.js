@@ -28,6 +28,7 @@ angular.module('bookingApp')
 				usersFactory.deleteUser(userVM.user)
 					.then(function (response) {
 						console.log("User deleted, status: " + response);
+						window.location.pathname = '/actividad2/LogoutServlet.do';
 					});
 			},
 			userHandlerMethod: function(){
@@ -43,7 +44,6 @@ angular.module('bookingApp')
 				if(userVM.functions.where("/deleteUser")){
 					console.log("Delete user, path:" + $location.path());
 					userVM.functions.deleteUser();
-					$location.path("/");
 				}
 				else {
 					console.log($location.path());
