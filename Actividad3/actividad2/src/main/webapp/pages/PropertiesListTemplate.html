@@ -1,0 +1,85 @@
+<head>
+<title>Lista de alojamientos</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS v5.2.1 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="../css/Reserva.css">
+</head>
+
+<body>
+
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-10 offset-2">
+				<h3 class="fw-bold">Mis alojamientos</h3>
+			</div>
+            <a href="CrearPropiedadServlet.do" class="btn btn-primary col-2 offset-2">Nuevo alojamiento</a>
+		</div>
+<!-- 		<c:forEach items="${ListaAlojamientos}" var="alojamiento"> -->
+		
+		<div class="row mt-4" data-ng-repeat="property in propertyVM.property" >
+			<div class="col-8 offset-2">
+				<h4 class="fw-bold">{{ property.city }}</h4>
+					<fieldset class="shadow rounded">
+						<div class="row py-3 ps-2">
+							<div class="col-2 ps-4">
+								<img class="rounded mt-2" src="../images/ilunion.jpg"
+									alt="foto Ilunion Suites Madrid">
+							</div>
+							<div class="col">
+								<p>
+									<span class="fw-bold">{{ property.name }} </span>
+								</p>
+								<span>{{ property.address }}</span>
+								<p>{{ property.telephone }}</p>
+								<p class="contenido-info">a {{ property.centerDistance }} km
+									del centro</p>
+							</div>
+							<div class="col text-end pe-5">
+								
+										<a
+											data-ng-href="#!/editProperty/{{property.id}}"
+											class="btn btn-primary mt-4">Editar</a>
+											
+											
+											<a href="#!/deleteUser" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3 mt-2" data-ng-show="userVM.functions.where('/editUser')">
+						<span class="negrita m-5 fw-bold">BORRAR cuenta</span>
+					</a>
+					
+					
+										<br>
+										<a
+											href="<c:url value='DeletePropertyServlet.do?id=${alojamiento.id}'/>"
+											class="btn btn-danger mt-3">Eliminar</a>
+									
+							</div>
+						</div>
+						<c:if test="${requestScope.CheckType=='Mis alojamientos'}">
+							<div class="row ps-2 pb-3">
+								<div class="col-4 ps-4">
+									<a href="<c:url value='ManageAccommodationsServlet.do?id=${alojamiento.id}'/>"
+										class="btn btn-primary mt-4">Gestionar habitaciones</a>
+								</div>
+							</div>
+						</c:if>
+					</fieldset>
+				</div>
+		</div>
+<!-- 		 </c:forEach> -->
+	</div>
+
+
+
+</body>
+
+</html>

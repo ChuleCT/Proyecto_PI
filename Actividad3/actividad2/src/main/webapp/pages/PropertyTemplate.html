@@ -1,0 +1,89 @@
+<head>
+<title>Edición de Alojamiento</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS v5.2.1 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="../css/Edicion.css">
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8 mx-auto">
+				<h1 class="mb-3">Edición de Alojamiento</h1>
+				<form data-ng-submit="propertyVM.functions.propertyHandlerMethod()">
+				
+					<div class="mb-3">
+					<label class="form-label">Nombre del Alojamiento</label>
+					<input type="text" class="form-control" placeholder="Indica el nombre del alojamiento" 
+					name="name" id="name" data-ng-model="propertyVM.property.name" 
+					data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required>
+					</div>
+					
+					<div class="mb-3">
+						<label for="direccion" class="form-label">Dirección</label> 
+						<input type="text" class="form-control" placeholder="Indica la dirección" 
+							id="address" name="address" data-ng-model="propertyVM.property.address" 
+							data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required>
+					</div>
+					<div class="mb-3">
+						<label for="telefono" class="form-label">Teléfono</label>
+						<input type="tel" class="form-control" id="telephone" name="telephone" data-ng-model="propertyVM.property.telephone"
+							data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required>
+					</div>
+					<div class="mb-3">
+						<label for="distanciaCentro" class="form-label">Distancia
+							al centro</label> <input type="number" class="form-control" id="centerDistance" name="centerDistance" step="any"
+							min="0" max="999999999" data-ng-model="propertyVM.property.centerDistance"
+							data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required>
+						
+					</div>
+					<div class="mb-3">
+						<label for="ciudad" class="form-label">Ciudad</label> 
+						<input type="text" class="form-control" id="city" name="city"
+							data-ng-model="propertyVM.property.city"
+							data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required>
+						
+					</div>
+					<div class="mb-3">
+					   <label for="descripcion" class="form-label">Descripción</label>
+					    <textarea class="form-control" id="description" name="description" data-ng-model="propertyVM.property.description"
+                        	data-ng-readonly="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)" required></textarea>
+					</div>
+
+
+					<div class="mb-3">
+						<p>Servicios o instalaciones ofrecidos</p>
+						<div class="form-check" data-ng-repeat="service in propertyVM.allServices">
+							<input class="form-check-input" type="checkbox"
+											value="{{ service.name }}" id="{{ service.name }}"
+											name="listServices" 
+											data-ng-checked="propertyVM.functions.isServiceChecked(service)">
+							<label class="form-check-label" for="{{ service.name }}"> {{ service.name }}</label>
+						</div>
+					</div>
+
+					<input type="submit" class="form-control btn btn-primary col-12"
+						value="Guardar">
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

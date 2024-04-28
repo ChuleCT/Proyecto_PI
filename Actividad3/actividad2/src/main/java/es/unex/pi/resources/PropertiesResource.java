@@ -55,9 +55,9 @@ public class PropertiesResource {
 
 	// Get para todas las propiedades por el destino (getALLBySearchDestination)
 	@GET
-	@Path("/{search}")
+	@Path("/{search: [a-zA-Z0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Property> getPropertiesByDestinationJSON(@PathParam("search") String search) {
+	public List<Property> getPropertiesByDestinationJSON(@PathParam("search") String search, @Context HttpServletRequest request) {
 		List<Property> properties = null;
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
@@ -65,15 +65,19 @@ public class PropertiesResource {
 		propertyDao.setConnection(conn);
 
 		properties = propertyDao.getAllBySearchDestination(search);
+		
+		for (Property p : properties) {
+			System.out.println("Property: " + p);
+		}
 
 		return properties;
 	}
 
 	// Get para una propiedad en concreto
 	@GET
-	@Path("/{propertyid: [0-9]+}")
+	@Path("/2/{propertyid: [0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Property getPropertyJSON(@PathParam("propertyid") long propertyid) {
+	public Property getPropertyJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
 		Property property = null;
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
@@ -81,7 +85,6 @@ public class PropertiesResource {
 		propertyDao.setConnection(conn);
 
 		property = propertyDao.get(propertyid);
-
 		return property;
 	}
 

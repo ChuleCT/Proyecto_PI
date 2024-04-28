@@ -2,8 +2,8 @@ angular.module('bookingApp', ['ngRoute'])
 .config(function($routeProvider){
 	$routeProvider
     	.when("/", {
-    		controller: "searchCtrl",
-    		controllerAs: "searchVM",
+    		controller: "propertyCtrl",
+    		controllerAs: "propertyVM",
     		templateUrl: "WelcomeTemplate.html",
     		resolve: {
     			// produce 500 miliseconds (0,5 seconds) of delay that should be enough to allow the server
@@ -32,27 +32,27 @@ angular.module('bookingApp', ['ngRoute'])
 			templateUrl: "UserTemplate.html",
 			})
 		.when("/search/:Search", {
-			controller: "propertiesCtrl",
+			controller: "propertyCtrl",
 			controllerAs: "propertyVM",
 			templateUrl: "SearchTemplate.html",
 		})
 		.when("/myProperties", {
-			controller: "propertiesCtrl",
+			controller: "propertyCtrl",
 			controllerAs: "propertyVM",
-			templateUrl: "PropertyTemplate.html",
+			templateUrl: "PropertiesListTemplate.html",
 		})
 		.when("/createProperty", {
-			controller: "propertiesCtrl",
+			controller: "propertyCtrl",
 			controllerAs: "propertyVM",
 			templateUrl: "PropertyTemplate.html",
 		})
 		.when("/editProperty/:ID", {
-			controller: "propertiesCtrl",
+			controller: "propertyCtrl",
 			controllerAs: "propertyVM",
 			templateUrl: "PropertyTemplate.html",
 		})
 		.when("/deleteProperty/:ID", {
-			controller: "propertiesCtrl",
+			controller: "propertyCtrl",
 			controllerAs: "propertyVM",
 			templateUrl: "PropertyTemplate.html",
 		})
