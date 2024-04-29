@@ -1,6 +1,6 @@
 angular.module('bookingApp')
 	.factory("accommodationsFactory", ['$http', function($http) {
-		var url = 'https://localhost:8443/actividad2/rest/orders/';
+		var url = 'https://localhost:8443/actividad2/rest/accommodations/';
 		var accommodationsInterface = {
 
 			//get all accommodations of a property
@@ -13,7 +13,7 @@ angular.module('bookingApp')
 			
 			// get an accommodation by id
 			getAccommodation: function(id) {
-				return $http.get(url + id)
+				return $http.get(url + "2/" + id)
 					.then(function(response) {
 						return response.data;
 					});

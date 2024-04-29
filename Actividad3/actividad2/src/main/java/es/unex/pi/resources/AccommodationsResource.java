@@ -40,36 +40,36 @@ public class AccommodationsResource {
 	UriInfo uriInfo;
 	
 	// Get que devuelve las habitaciones de una propiedad (ahora mismo esto es ambiguo, ya que no sabe si el ID que se le pasa es de una propiedad o de una habitación(por el GET de abajo))
-//	@GET
-//	@Path("/{propertyid:[0-9]+}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Accommodation> getAccommodationsJSON(@PathParam("propertyid") long propertyid) {
-//        List<Property> properties = null;
-//        Connection conn = (Connection) sc.getAttribute("dbConn");
-//        
-//        PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
-//        propertyDao.setConnection(conn);
-//        
-//        Property property = propertyDao.get(propertyid);
-//        
-//        List<Accommodation> accommodations = null;
-//        
-//        if (property != null) {
-//            AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
-//            accommodationDao.setConnection(conn);
-//            
-//            accommodations = accommodationDao.getAllByProperty(property.getId());
-//     
-//        } else {
-//            throw new WebApplicationException(Response.Status.NOT_FOUND);
-//        }
-//
-//        return accommodations;
-//	}
+	@GET
+	@Path("/{propertyid:[0-9]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Accommodation> getAccommodationsJSON(@PathParam("propertyid") long propertyid) {
+        List<Property> properties = null;
+        Connection conn = (Connection) sc.getAttribute("dbConn");
+        
+        PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+        propertyDao.setConnection(conn);
+        
+        Property property = propertyDao.get(propertyid);
+        
+        List<Accommodation> accommodations = null;
+        
+        if (property != null) {
+            AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
+            accommodationDao.setConnection(conn);
+            
+            accommodations = accommodationDao.getAllByProperty(property.getId());
+     
+        } else {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return accommodations;
+	}
 	
 	// Get que devuelve una habitación en concreto
 	@GET
-	@Path("/{accommodationid:[0-9]+}")
+	@Path("/2/{accommodationid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Accommodation getAccommodationJSON(@PathParam("accommodationid") long accommodationid) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
