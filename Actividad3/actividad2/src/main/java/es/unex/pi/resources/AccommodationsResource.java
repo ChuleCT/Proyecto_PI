@@ -44,7 +44,6 @@ public class AccommodationsResource {
 	@Path("/{propertyid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Accommodation> getAccommodationsJSON(@PathParam("propertyid") long propertyid) {
-        List<Property> properties = null;
         Connection conn = (Connection) sc.getAttribute("dbConn");
         
         PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
@@ -63,6 +62,10 @@ public class AccommodationsResource {
         } else {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+        
+		for (Accommodation a : accommodations) {
+			System.out.println(a.toString());
+		}
 
         return accommodations;
 	}

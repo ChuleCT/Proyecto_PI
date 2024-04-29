@@ -56,7 +56,7 @@ angular.module('bookingApp', ['ngRoute'])
 				controllerAs: "propertyVM",
 				templateUrl: "PropertyTemplate.html",
 			})
-			.when("/myAccommodations", {
+			.when("/myAccommodations/:ID", {
 				controller: "accommodationCtrl",
 				controllerAs: "accommodationVM",
 				templateUrl: "AccommodationsListTemplate.html",

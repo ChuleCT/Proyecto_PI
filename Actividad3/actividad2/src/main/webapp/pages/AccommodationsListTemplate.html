@@ -13,61 +13,50 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/DetalleAlojamiento.css">
+	href="../css/DetalleAlojamiento.css">
 </head>
 
 <body>
 
-	<%@ include file="Cabecera.jsp" %>
-
-	<div class="container mb-5 pagina">
+	<div class="container mb-5 pagina" data-ng-repeat="accommodation in accommodationVM.accommodations">
 		<div class="row">
 			<div class="col-12">
 				<h3 class="fw-bold">Gestión de habitaciones</h3>
 			</div>
-			<a href="<c:url value='CreateAccommodationServlet.do?idp=${idp}'/>"
+			<a data-ng-href="#!/createAccommodation"
 				class="btn btn-primary col-2 fw-bold">Nueva habitación +</a>
 		</div>
 		<div class="row">
-			<c:forEach items="${accommodationsList}" var="accommodation">
 				<div class="col-6 mt-4">
 					<fieldset class="shadow rounded">
 						<div class="row pt-3 mb-4">
 							<div class="col-8 ps-4">
-								<p class="azul negrita">${accommodation.name}</p>
-								<p class="negrita text-truncate">${accommodation.description}</p>
+								<p class="azul negrita">{{accommodation.name}}</p>
+								<p class="negrita text-truncate">{{accommodation.description}}</p>
 								<p>
 									Precio de la habitación:<span class="negrita">
-										${accommodation.price}€</span>
+										{{accommodation.price}}€</span>
 								</p>
-								<c:choose>
-									<c:when test="${accommodation.numAccommodations > 1}">
-										<span class="verde negrita">Número de habitaciones
-											disponibles: ${accommodation.numAccommodations} </span>
-									</c:when>
-									<c:when test="${accommodation.numAccommodations == 1}">
-										<span class=" negrita text-warning">Número de
-											habitaciones disponibles: ${accommodation.numAccommodations}
+
+								<span class="verde negrita" data-ng-show="accommodation.numAccommodations > 1">Número de habitaciones
+											disponibles: {{accommodation.numAccommodations}}</span>
+								<span class=" negrita text-warning" data-ng-show="accommodation.numAccommodations == 1">Número de
+											habitaciones disponibles: {{accommodation.numAccommodations}}
 										</span>
-									</c:when>
-									<c:otherwise>
-										<span class="rojo negrita">No quedan habitaciones
+								<span class="rojo negrita" data-ng-show="accommodation.numAccommodations == 0">No quedan habitaciones
 											disponibles</span>
-									</c:otherwise>
-								</c:choose>
 							</div>
 							<div class="col text-end pe-5 mt-5">
 								<a
-									href="<c:url value='EditAccommodationServlet.do?id=${accommodation.id}'/>"
+									href=""
 									class="btn btn-primary mb-2 negrita">Editar</a> <br> <br>
 								<a
-									href="<c:url value='DeleteAccommodationServlet.do?id=${accommodation.id}'/>"
+									href=""
 									class="btn btn-danger">Eliminar</a>
 							</div>
 						</div>
 					</fieldset>
 				</div>
-			</c:forEach>
 		</div>
 	</div>
 

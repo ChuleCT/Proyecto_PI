@@ -43,4 +43,6 @@ angular.module('bookingApp')
                     });
             }
 		}
+		
+		return accommodationsInterface;
 	}])

@@ -67,7 +67,7 @@
 						<c:if test="${requestScope.CheckType=='Mis alojamientos'}">
 							<div class="row ps-2 pb-3">
 								<div class="col-4 ps-4">
-									<a href="<c:url value='ManageAccommodationsServlet.do?id=${alojamiento.id}'/>"
+									<a data-ng-href="#!/myAccommodations/{{property.id}}"
 										class="btn btn-primary mt-4">Gestionar habitaciones</a>
 								</div>
 							</div>
