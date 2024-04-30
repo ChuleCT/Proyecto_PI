@@ -20,8 +20,8 @@ angular.module('bookingApp')
 			},
 			
 			// add an accommodation
-			postAccommodation: function(accommodation) {
-				return $http.post(url, accommodation)
+			postAccommodation: function(accommodation, id) {
+				return $http.post(url + id, accommodation)
 					.then(function(response) {
 						return response.status;
 					});

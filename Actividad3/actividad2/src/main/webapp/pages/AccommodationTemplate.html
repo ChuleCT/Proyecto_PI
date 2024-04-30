@@ -13,44 +13,46 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/Edicion.css">
+	href="../css/Edicion.css">
 
 </head>
 
 <body>
 
-	<%@ include file="Cabecera.jsp" %>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				<h1 class="mb-3">${requestScope.CheckType}</h1>
-				<h4 class="mb-2 text-danger">${messages.error}</h4>
-				<form method="post" action="?" class="pb-5">
-					<input type="hidden" name="id" value="${accommodation.id}">
-					<input type="hidden" name="idp" value="${idp}">
+				<h1 class="mb-3" data-ng-show="accommodationVM.functions.where('/createAccommodation')">Crear Habitación</h1>
+				<h1 class="mb-3" data-ng-show="accommodationVM.functions.where('/editAccommodation/'+accommodationVM.accommodations.id)">Editar Habitación</h1>
+				<h1 class="mb-3" data-ng-show="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)">Borrar Habitación</h1>
+<!-- 				<h4 class="mb-2 text-danger">${messages.error}</h4> -->
+				<form data-ng-submit="accommodationVM.functions.accommodationHandlerMethod()">
 					<div class="mb-3">
 						<label for="nombreHabitacion" class="form-label">Nombre de
 							la habitación</label> <input type="text" class="form-control" id="name"
-							name="name" value="${accommodation.name}" required>
+							name="name" data-ng-model="accommodationVM.accommodations.name" 
+					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)" required>
 					</div>
 					<div class="mb-3">
 						<label for="precio" class="form-label">Precio</label> <input
 							type="number" class="form-control" id="price" name="price"
-							step="1" min="0" max="999999999" value="${accommodation.price}"
+							step="1" min="0" max="999999999" data-ng-model="accommodationVM.accommodations.price" 
+					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
 							required>
 					</div>
 					<div class="mb-3">
 						<label for="descripcion" class="form-label">Descripción</label> <input
 							type="text" class="form-control" id="description"
-							name="description" value="${accommodation.description}" required>
+							name="description" data-ng-model="accommodationVM.accommodations.description" 
+					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"" required>
 					</div>
 					<div class="mb-3">
 						<label for="precio" class="form-label">Número de
 							habitaciones disponibles</label> <input type="number"
 							class="form-control" id="numAccommodations"
 							name="numAccommodations" step="1" min="0" max="999999999"
-							value="${accommodation.numAccommodations}" required>
+							data-ng-model="accommodationVM.accommodations.numAccommodations"" 
+					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)" required>
 					</div>
 
 

@@ -83,6 +83,7 @@ public class AccommodationsResource {
 		Accommodation accommodation = accommodationDao.get(accommodationid);
 
 		if (accommodation != null) {
+			System.out.println(accommodation.toString());
 			return accommodation;
 		} else {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -92,12 +93,16 @@ public class AccommodationsResource {
 	
 	// Post para añadir una habitación a una propiedad
 	@POST
+	@Path("/{idp:[0-9]+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response post(Accommodation accommodation, @Context HttpServletRequest request) {
+	public Response post(Accommodation accommodation, @PathParam("idp") long idp, @Context HttpServletRequest request) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
 		AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
 		accommodationDao.setConnection(conn);
+		
+		//comprobar que la propiedad existe y me pertenece
+		accommodation.setIdp(idp);
 
 		accommodationDao.add(accommodation);
 

@@ -4,7 +4,7 @@ angular.module('bookingApp')
 
 			var accommodationVM = this;
 			accommodationVM.accommodations = {};
-			accommodationVM.propertyId = undefined;
+			accommodationVM.propertyID = undefined;
 			accommodationVM.functions = {
 
 				where: function(route) {
@@ -19,39 +19,69 @@ angular.module('bookingApp')
 						});
 
 				},
-				
+
 				getAccommodation: function(id) {
 					accommodationsFactory.getAccommodation(id)
 						.then(function(response) {
-							accommodationVM.accommodation = response;
+							accommodationVM.accommodations = response;
+							console.log(accommodationVM.accommodations);
 						});
 				},
 				
+				getAccommodationVacia: function(id) {
+					accommodationsFactory.getAccommodationVacia(id)
+						.then(function(response) {
+							accommodationVM.accommodations = response;
+							console.log(accommodationVM.accommodations);
+						});
+				},
+
 				updateAccommodation: function(accommodation) {
 					accommodationsFactory.putAccommodation(accommodation)
 						.then(function(response) {
 							accommodationVM.accommodation = response;
 						});
 				},
-				
+
 				createAccommodation: function(accommodation) {
-					accommodationsFactory.postAccommodation(accommodation)
+					console.log("Habiatcion:", accommodation);
+					accommodationsFactory.postAccommodation(accommodation, $routeParams.ID)
 						.then(function(response) {
 							accommodationVM.accommodation = response;
 						});
 				},
-				
+
 				deleteAccommodation: function(id) {
 					accommodationsFactory.deleteAccommodation(id)
 						.then(function(response) {
 							accommodationVM.accommodation = response;
 						});
+				},
+
+				accommodationHandlerMethod: function() {
+					console.log("He entrado en el accommodationHandlerMethod");
+					if (accommodationVM.functions.where('/editAccommodation/' + $routeParams.ID)) {
+						console.log($location.path());
+						accommodationVM.functions.updateAccommodation(accommodationVM.accommodations);
+						$location.path('/myAccommodations/' + $routeParams.ID);
+					} else if (accommodationVM.functions.where('/createAccommodation/'+ $routeParams.ID)) {
+						console.log($location.path());
+						accommodationVM.functions.createAccommodation(accommodationVM.accommodations);
+						$location.path('/myProperties');
+					} else if (accommodationVM.functions.where('/deleteAccommodation/' + $routeParams.ID)) {
+						console.log($location.path());
+						accommodationVM.functions.deleteAccommodation(accommodationVM.accommodations.id);
+						$location.path('/myProperties');
+					}
 				}
 			}
 
 			if (accommodationVM.functions.where('/myAccommodations/' + $routeParams.ID)) {
-				accommodationVM.propertyId = $routeParams.ID;
-				accommodationVM.functions.getAccommodationsByProperty(accommodationVM.propertyId);
+				accommodationVM.propertyID = $routeParams.ID;
+				accommodationVM.functions.getAccommodationsByProperty($routeParams.ID);
+			} else if (accommodationVM.functions.where('/editAccommodation/' + $routeParams.ID) || accommodationVM.functions.where('/deleteAccommodation/' + $routeParams.ID)) {
+				console.log("He entrado en el if");
+				accommodationVM.functions.getAccommodation($routeParams.ID);
 			}
 
 		}]);

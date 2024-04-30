@@ -18,15 +18,15 @@
 
 <body>
 
-	<div class="container mb-5 pagina" data-ng-repeat="accommodation in accommodationVM.accommodations">
+	<div class="container mb-5 pagina">
 		<div class="row">
 			<div class="col-12">
 				<h3 class="fw-bold">Gestión de habitaciones</h3>
 			</div>
-			<a data-ng-href="#!/createAccommodation"
+			<a data-ng-href="#!/createAccommodation/{{accommodationVM.propertyID}}"
 				class="btn btn-primary col-2 fw-bold">Nueva habitación +</a>
 		</div>
-		<div class="row">
+		<div class="row" data-ng-repeat="accommodation in accommodationVM.accommodations">
 				<div class="col-6 mt-4">
 					<fieldset class="shadow rounded">
 						<div class="row pt-3 mb-4">
@@ -48,10 +48,10 @@
 							</div>
 							<div class="col text-end pe-5 mt-5">
 								<a
-									href=""
+									data-ng-href="#!/editAccommodation/{{accommodation.id}}"
 									class="btn btn-primary mb-2 negrita">Editar</a> <br> <br>
 								<a
-									href=""
+									data-ng-href="#!/deleteAccommodation/{{accommodation.id}}"
 									class="btn btn-danger">Eliminar</a>
 							</div>
 						</div>
