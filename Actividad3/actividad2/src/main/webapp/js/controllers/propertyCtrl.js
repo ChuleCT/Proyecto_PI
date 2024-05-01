@@ -113,6 +113,8 @@ angular.module('bookingApp')
 			propertyVM.functions.getProperty($routeParams.ID);
 		} else if (propertyVM.functions.where('/search/'+propertyVM.search)){
 			propertyVM.functions.getPropertiesBySearch(propertyVM.search);
+		} else if (propertyVM.functions.where('/propertyDetails/' + $routeParams.ID)) {
+			propertyVM.functions.getProperty($routeParams.ID);
 		}else{
 			propertyVM.functions.propertyHandlerMethod();
 		}

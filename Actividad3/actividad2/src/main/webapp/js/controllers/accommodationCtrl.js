@@ -63,7 +63,7 @@ angular.module('bookingApp')
 					if (accommodationVM.functions.where('/editAccommodation/' + $routeParams.ID)) {
 						console.log($location.path());
 						accommodationVM.functions.updateAccommodation(accommodationVM.accommodations);
-						$location.path('/myAccommodations/' + $routeParams.ID);
+						$location.path('/myProperties');
 					} else if (accommodationVM.functions.where('/createAccommodation/'+ $routeParams.ID)) {
 						console.log($location.path());
 						accommodationVM.functions.createAccommodation(accommodationVM.accommodations);
