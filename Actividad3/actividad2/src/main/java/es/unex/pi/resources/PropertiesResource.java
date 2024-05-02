@@ -89,26 +89,28 @@ public class PropertiesResource {
 	}
 
 	// Post para añadir una propiedad
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response post(Property property, @Context HttpServletRequest request) {
-		Response res = null;
-		Connection conn = (Connection) sc.getAttribute("dbConn");
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response post(Property property, @Context HttpServletRequest request) {
+			Response res = null;
+			Connection conn = (Connection) sc.getAttribute("dbConn");
 
-		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
-		propertyDao.setConnection(conn);
+			PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+			propertyDao.setConnection(conn);
 
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
 
-		property.setIdu(user.getId());
-		long id = propertyDao.add(property);
+			property.setIdu(user.getId());
+			long id = propertyDao.add(property);
 
-		String message = "Property added";
-		return Response.status(Response.Status.CREATED)
-				.entity("{\"status\" : \"201\", \"message\" : \"" + message + "\"}")
-				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build()).build();
-	}
+			String message = "Property added";
+			
+			// Devuelve el id de la propiedad creada
+			return Response.status(Response.Status.CREATED)
+					.entity("{\"status\" : \"201\", \"message\" : \"" + message + "\", \"id\" : " + id + "}")
+					.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build()).build();
+		}
 	
 	// Post para añadir una propiedad con un formulario
 	@POST

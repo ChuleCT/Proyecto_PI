@@ -31,7 +31,7 @@ angular.module('bookingApp')
 			postProperty: function(property) {
 				return $http.post(url, property)
 					.then(function(response) {
-						return response.status;
+						return response.data;
 					});
 			},
 			

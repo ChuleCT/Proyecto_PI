@@ -40,6 +40,13 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "propertyCtrl",
 				controllerAs: "propertyVM",
 				templateUrl: "PropertiesListTemplate.html",
+				resolve: {
+					delay: function($q, $timeout) {
+						var delay = $q.defer();
+						$timeout(delay.resolve, 500);
+						return delay.promise;
+					}
+				},
 			})
 			.when("/createProperty", {
 				controller: "propertyCtrl",
