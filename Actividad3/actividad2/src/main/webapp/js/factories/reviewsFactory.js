@@ -5,25 +5,40 @@ angular.module('bookingApp')
 
 			// get reviews from a property
 			getReviews: function(id) {
-				return $http.get(url + id);
+				return $http.get(url + id)
+					.then(function(response) {
+						return response.data;
+					});
 			},
 
-            // get a specific review
-			getReviews: function(id) {
-				return $http.get(url +"2/"+ id);
+            // get the review of the session's user for a property
+			getReview: function(id) {
+				return $http.get(url +"myReview/"+ id)
+					.then(function(response) {
+						return response.data;
+					});
 			},
 
 			postReview: function(review, id) {
-				return $http.post(url + id, review);
+				return $http.post(url + id, review)
+					.then(function(response) {
+						return response.status;
+					});
 			},
 
 			putReview: function(review, id) {
-				return $http.put(url + id, review);
+				return $http.put(url + id, review)
+					.then(function(response) {
+						return response.status;
+					});
 			},
 
 			deleteReview: function(id) {
-				return $http.delete(url + id);
+				return $http.delete(url + id)
+					.then(function(response) {
+						return response.status;
+					});
 			}
-		};
+		}
 		return reviewsInterface;
-	}]);
+	}])

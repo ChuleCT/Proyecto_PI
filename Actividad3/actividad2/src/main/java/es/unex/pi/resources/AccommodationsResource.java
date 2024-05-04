@@ -39,7 +39,6 @@ public class AccommodationsResource {
 	@Context
 	UriInfo uriInfo;
 	
-	// Get que devuelve las habitaciones de una propiedad (ahora mismo esto es ambiguo, ya que no sabe si el ID que se le pasa es de una propiedad o de una habitación(por el GET de abajo))
 	@GET
 	@Path("/{propertyid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)

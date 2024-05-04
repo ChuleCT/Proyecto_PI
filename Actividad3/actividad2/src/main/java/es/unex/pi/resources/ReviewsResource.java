@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import es.unex.pi.model.User;
+import es.unex.pi.dao.UserDAO;
+import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.model.Property;
 import es.unex.pi.dao.JDBCPropertyDAOImpl;
 import es.unex.pi.dao.PropertyDAO;
@@ -46,11 +48,15 @@ public class ReviewsResource {
 	@GET
 	@Path("/{propertyid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Review> getReviewsJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
+	public Map<Review, String> getReviewsJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
+		
+		Map<Review, String> map = new HashMap<Review, String>();
 
 		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
 		propertyDao.setConnection(conn);
+		UserDAO userDao = new JDBCUserDAOImpl();
+		userDao.setConnection(conn);
 
 		Property property = propertyDao.get(propertyid);
 		
@@ -65,21 +71,21 @@ public class ReviewsResource {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 
-			if (user != null) {
-				for (Review r : reviews) {
-					if (r.getIdu() == user.getId()) {
-						reviews.remove(r);
-					}
+			User useraux = new User();
+			for (int i = 0; i < reviews.size(); i++) {
+				    if (reviews.get(i).getIdu() != user.getId()) {
+				    	useraux = userDao.get(reviews.get(i).getIdu()); 
+				    	map.put(reviews.get(i), useraux.getName());
 				}
 			}
 		}
 
-		return reviews;
+		return map;
 	}
 	
-	// Get que obtiene una review por el id de la propiedad y del usuario
+	// Get que obtiene la review del usuario de la sesion en una propiedad
 	@GET
-	@Path("/2/{propertyid:[0-9]+}")
+	@Path("/myReview/{propertyid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Review getReviewJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
@@ -102,6 +108,8 @@ public class ReviewsResource {
 				review = reviewDao.get(property.getId(), user.getId());
 			}
 		}
+		
+		System.out.println("Mi review: "+review);
 
 		return review;
 	}

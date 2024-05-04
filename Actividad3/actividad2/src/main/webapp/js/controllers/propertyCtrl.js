@@ -1,16 +1,28 @@
 angular.module('bookingApp')
-	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', '$routeParams', '$location',
-		function(usersFactory, propertiesFactory, servicesFactory, $routeParams, $location) {
+	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', 'reviewsFactory', '$routeParams', '$location', '$window',
+		function(usersFactory, propertiesFactory, servicesFactory, reviewsFactory, $routeParams, $location, $window) {
 
 			var propertyVM = this;
+			propertyVM.user = {}; // en el propertyDetails se usa para mostrar el nombre del usuario de las reviews y controlar si es el dueño de la propiedad
 			propertyVM.property = {};
 			propertyVM.search = "";
 			propertyVM.servicesChecked = [];
 			propertyVM.allServices = [];
+			propertyVM.myOpinion = undefined;
+			propertyVM.yaValorada = false;
+			propertyVM.otherOpinions = undefined;
 			propertyVM.functions = {
 
 				where: function(route) {
 					return $location.path() == route;
+				},
+
+				getUser: function() {
+					usersFactory.getUser()
+						.then(function(response) {
+							propertyVM.user = response;
+							console.log("User: ", propertyVM.user);
+						});
 				},
 
 				getPropertiesByUser: function() {
@@ -30,13 +42,13 @@ angular.module('bookingApp')
 							servicesFactory.getServicesByPropertyId(id)
 								.then(function(response) {
 									propertyVM.servicesChecked = response;
-									console.log("getServicesByPropertyId: ", propertyVM.servicesChecked);
+									//console.log("getServicesByPropertyId: ", propertyVM.servicesChecked);
 
 
 									servicesFactory.getAllServices()
 										.then(function(response) {
 											propertyVM.allServices = response;
-											console.log("All Services: ", propertyVM.allServices);
+											//console.log("All Services: ", propertyVM.allServices);
 
 											// Luego de obtener los servicios asociados, llama a initializeCheckedServices
 											propertyVM.functions.initializeCheckedServices();
@@ -56,15 +68,15 @@ angular.module('bookingApp')
 				},
 
 				initializeCheckedServices: function() {
-					console.log("Services Checked: ", propertyVM.servicesChecked);
+					//console.log("Services Checked: ", propertyVM.servicesChecked);
 
 					propertyVM.allServices.forEach(function(service) {
 						var isChecked = propertyVM.servicesChecked.some(function(checkedService) {
-							console.log("Comparing:", service.name, checkedService.name);
+							//console.log("Comparing:", service.name, checkedService.name);
 							return checkedService.name === service.name;
 						});
 						service.checked = isChecked;
-						console.log("Service:", service.name, " Checked:", service.checked);
+						//console.log("Service:", service.name, " Checked:", service.checked);
 					});
 				},
 
@@ -90,20 +102,20 @@ angular.module('bookingApp')
 					if (service.checked) {
 						// Agrega el servicio a servicesChecked si no está presente
 						if (!propertyVM.servicesChecked.some(function(checkedService) {
-							console.log("Añade servicio: ", checkedService.name, service.name);
+							//console.log("Añade servicio: ", checkedService.name, service.name);
 							return checkedService.name === service.name;
 						})) {
-							console.log("Hace push de servicio: ", service.name);
+							//console.log("Hace push de servicio: ", service.name);
 							propertyVM.servicesChecked.push(service);
 						}
 					} else {
 						// Elimina el servicio de servicesChecked si está presente
 						var index = propertyVM.servicesChecked.findIndex(function(checkedService) {
-							console.log("Elimina servicio: ", checkedService.name, service.name);
+							//console.log("Elimina servicio: ", checkedService.name, service.name);
 							return checkedService.name === service.name;
 						});
 						if (index !== -1) {
-							console.log("Hace splice de servicio: ", service.name);
+							//console.log("Hace splice de servicio: ", service.name);
 							propertyVM.servicesChecked.splice(index, 1);
 						}
 					}
@@ -116,9 +128,9 @@ angular.module('bookingApp')
 					propertiesFactory.getPropertyBySearch(search)
 						.then(function(response) {
 							propertyVM.property = response;
-							console.log("Propiedades encontradas:", propertyVM.property);
+							//console.log("Propiedades encontradas:", propertyVM.property);
 							propertyVM.size = propertyVM.property.length;
-							console.log("Número de propiedades encontradas:", propertyVM.size);
+							//console.log("Número de propiedades encontradas:", propertyVM.size);
 							$location.path('/search/' + propertyVM.search);
 						})
 						.catch(function(error) {
@@ -133,7 +145,7 @@ angular.module('bookingApp')
 
 							servicesFactory.putServices(propertyVM.property.id, propertyVM.servicesChecked)
 								.then(function(response) {
-									console.log("Updating services, " + response);
+									//console.log("Updating services, " + response);
 								});
 						});
 				},
@@ -141,12 +153,12 @@ angular.module('bookingApp')
 				createProperty: function() {
 					propertiesFactory.postProperty(propertyVM.property)
 						.then(function(response) {
-							console.log("Creating property, " + response);
+							//console.log("Creating property, " + response);
 							var newPropertyId = response.id;
 
 							servicesFactory.postServices(newPropertyId, propertyVM.servicesChecked)
 								.then(function(response) {
-									console.log("Creating services, " + response);
+									//console.log("Creating services, " + response);
 								});
 
 						})
@@ -161,6 +173,55 @@ angular.module('bookingApp')
 					propertiesFactory.deleteProperty(id)
 						.then(function(response) {
 							console.log("Deleting property, " + response);
+						});
+				},
+
+				//Metodos para las reviews 
+
+				getMyOpinion: function(propertyId) {
+					reviewsFactory.getReview(propertyId)
+						.then(function(response) {
+							propertyVM.myOpinion = response;
+							console.log("Mi opinión: ", propertyVM.myOpinion);
+							if (propertyVM.myOpinion.review != undefined) {
+								propertyVM.yaValorada = true;
+							}else{
+								propertyVM.myOpinion = {
+									"review": "",
+									"grade": undefined
+								};
+							}
+							console.log("Ya valorada: ", propertyVM.yaValorada);
+						});
+				},
+
+				getOtherOpinions: function(propertyId) {
+					reviewsFactory.getReviews(propertyId)
+						.then(function(response) {
+							propertyVM.otherOpinions = response;
+							console.log("Opiniones de otros usuarios: ", propertyVM.otherOpinions);
+						});
+				},
+
+				createOpinion: function(opinion, propertyId) {
+					reviewsFactory.postReview(opinion, propertyId)
+						.then(function(response) {
+							console.log("Creating opinion, " + response);
+						});
+				},
+
+				updateOpinion: function(opinion, propertyId) {
+					reviewsFactory.putReview(opinion, propertyId)
+						.then(function(response) {
+							console.log("Updating opinion, " + response);
+						});
+				},
+
+				deleteOpinion: function() {
+					reviewsFactory.deleteReview(propertyVM.property.id)
+						.then(function(response) {
+							console.log("Deleting opinion, " + response);
+							$window.location.reload();
 						});
 				},
 
@@ -182,6 +243,18 @@ angular.module('bookingApp')
 					}
 				},
 
+				//Metodos para las reviews
+				reviewHandlerMethod: function() {
+					if (propertyVM.yaValorada) {
+						propertyVM.functions.updateOpinion(propertyVM.myOpinion, propertyVM.property.id);
+						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
+					} else {
+						propertyVM.functions.createOpinion(propertyVM.myOpinion, propertyVM.property.id);
+						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
+					}
+					$window.location.reload();
+				}
+
 			}
 
 
@@ -201,6 +274,11 @@ angular.module('bookingApp')
 				propertyVM.functions.propertyHandlerMethod();
 			} else if (propertyVM.functions.where('/propertyDetails/' + $routeParams.ID)) {
 				propertyVM.functions.getProperty($routeParams.ID);
+				// Obtener usuario
+				propertyVM.functions.getUser();
+				// Obtener opiniones de la propiedad seleccionada
+				propertyVM.functions.getMyOpinion($routeParams.ID);
+				propertyVM.functions.getOtherOpinions($routeParams.ID);
 			}
 
 		}]);
