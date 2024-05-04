@@ -140,6 +140,8 @@ public class ReviewsResource {
 			}
 		}
 		
+		modifyGradesAverage(propertyid, conn);
+		
 		String message = "Review added";
 
 		return Response.status(Response.Status.CREATED)
@@ -176,6 +178,8 @@ public class ReviewsResource {
 				}
 			}
 		}
+		
+		modifyGradesAverage(propertyid, conn);
 
 		String message = "Review updated";
 
@@ -209,11 +213,41 @@ public class ReviewsResource {
 				}
 			}
 		}
+		
+		modifyGradesAverage(propertyid, conn);
 
 		String message = "Review deleted";
 
 		return Response.status(Response.Status.OK).entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}")
 				.build();
+	}
+	
+	//Funcion auxiliar que modifica el gradesAverage de una propiedad (se llama cuando se añade una review, se modifica o se borra)
+	public void modifyGradesAverage(long propertyid, Connection conn) {
+		ReviewDAO reviewDao = new JDBCReviewDAOImpl();
+		reviewDao.setConnection(conn);
+
+		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+		propertyDao.setConnection(conn);
+
+		Property property = propertyDao.get(propertyid);
+
+		if (property != null) {
+			List<Review> reviews = reviewDao.getAllByProperty(propertyid);
+
+			double gradesAverage = 0;
+			for (int i = 0; i < reviews.size(); i++) {
+				gradesAverage += reviews.get(i).getGrade();
+			}
+			gradesAverage = gradesAverage / reviews.size();
+			
+			// 1 decimal
+			gradesAverage = Math.floor(gradesAverage * 10) / 10;
+
+			property.setGradesAverage(gradesAverage);
+
+			propertyDao.update(property);
+		}
 	}
 
 }
