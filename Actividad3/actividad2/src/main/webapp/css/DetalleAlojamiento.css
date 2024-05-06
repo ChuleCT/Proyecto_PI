@@ -70,6 +70,12 @@ input {
 	left: -7em;
 }
 
+.miOpinion {
+	position: relative;
+	left: 0em;
+	top: -1em;
+}
+
 .fa-star {
     color: #b8b814;
     position: relative;

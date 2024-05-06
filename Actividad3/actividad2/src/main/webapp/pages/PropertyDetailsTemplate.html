@@ -164,7 +164,7 @@
 
 
 		<!-- Tabla disponibilidad -->
-		<!-- 			<div class="container-fluid"> -->
+		<!-- 			<div class="container-fluid" data-ng-controller="accommodationCtrl as accommodationVM"> -->
 		<!-- 				<form data-ng-submit=""> -->
 		<!-- 					<table class="table border"> -->
 		<!-- 						<thead class=" bg-primary"> -->
@@ -236,9 +236,9 @@
 
 		<!-- Verificar si el usuario actual es propietario de la propiedad -->
 		<div data-ng-show="propertyVM.property.idu !== propertyVM.user.id">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center mt-5">
 				<div class="col">
-					<div class="card">
+					<div class="card miOpinion">
 						<div class="card-header">Deja tu opinión</div>
 						<div class="card-body">
 							<form data-ng-submit="propertyVM.functions.reviewHandlerMethod()">
@@ -271,15 +271,15 @@
 									</div>
 								</div>
 								<div class="form-group row mt-2">
-									<div class="col-md-3 offset-md-3">
+									<div class="offset-md-3">
 										<button id="submitButton" type="submit"
-											class="btn btn-primary" value="Modificar review"
+											class="btn btn-primary col-4" value="Modificar review"
 											data-ng-show="propertyVM.yaValorada">Modificar Review</button>
 										<button id="submitButton" type="submit"
-											class="btn btn-primary" value="Enviar review"
+											class="btn btn-primary col-4" value="Enviar review"
 											data-ng-hide="propertyVM.yaValorada">Enviar Review</button>
 
-											<button type="button" class="btn btn-link ms-2"
+											<button type="button" class="btn btn-link ms-2 col-1"
 												data-ng-click="propertyVM.functions.deleteOpinion()">
 												<i class="fa fa-trash text-danger"></i>
 											</button>
@@ -299,7 +299,7 @@
 		<h3>Opiniones de otros usuarios</h3>
 		<div class="row mt-5">
 			<div class="col">
-				<div class=" opiniones mt-2"
+				<div class="opiniones mt-2"
 					data-ng-repeat="review in propertyVM.otherOpinions">
 					<div class="card mb-3">
 						<div class="card-header">Usuario: {{ review.value }}</div>

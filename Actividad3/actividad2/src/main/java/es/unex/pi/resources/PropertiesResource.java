@@ -55,7 +55,7 @@ public class PropertiesResource {
 
 	// Get para todas las propiedades por el destino (getALLBySearchDestination)
 	@GET
-	@Path("/{search: [a-zA-Z0-9]+}")
+	@Path("/{search: [a-zA-Z0-9\s%20]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Property> getPropertiesByDestinationJSON(@PathParam("search") String search, @Context HttpServletRequest request) {
 		List<Property> properties = null;
