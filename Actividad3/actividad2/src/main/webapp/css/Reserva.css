@@ -12,10 +12,15 @@ body {
     height: 3.5em;
 }
 
+/* img { */
+/*     height: 7em; */
+/*     position: relative; */
+/*     top: .2em */
+/* } */
 img {
-    height: 7em;
-    position: relative;
-    top: .2em
+    max-width: 100%;
+    height: auto; 
+    border-radius: 0.5em;
 }
 
 .precio {

@@ -1,6 +1,6 @@
 <body>
 
-<link rel="stylesheet" href="../css/Alojamientos.css">
+	<link rel="stylesheet" href="../css/Alojamientos.css">
 
 	<div class="container mt-5">
 
@@ -81,6 +81,19 @@
 							<img src="../images/PalacioOquendo.png"
 								class="my-2 imagenesPreview" id="imagenPalacio"
 								alt="fachada Palacio de Oquendo">
+							<!-- Propiedades favoritas -->
+							<input type="checkbox" id="like-checkbox-{{alojamiento.id}}"
+								class="heart-checkbox" data-ng-model="alojamiento.favorite"
+								data-ng-change="propertyVM.functions.toggleFavorite(alojamiento.id)"> <label
+								for="like-checkbox-{{alojamiento.id}}" class="heart-label">
+								<span class="heart-icon"
+								data-ng-class="{'heart-red': alojamiento.favorite, 'heart-gray': !alojamiento.favorite}">
+									<i class="fas fa-heart"></i>
+							</span>
+							</label> 
+							
+
+
 							<!-- 							Corazón  -->
 							<!-- 							<c:if test="${not empty user.name}"> -->
 							<!-- 								<form action="FavoritesPropertiesServlet.do" method="post"> -->
@@ -217,7 +230,8 @@
 							<div class="row">
 								<div class="col pt-5 me-1 text-end  pb-4">
 									<i class="fa-solid fa-phone ms-2"></i> <span>{{alojamiento.telephone}}</span>
-									<a data-ng-href="#!/propertyDetails/{{alojamiento.id}}" class="btn btn-primary col-12"> Ver disponibilidad </a>
+									<a data-ng-href="#!/propertyDetails/{{alojamiento.id}}"
+										class="btn btn-primary col-12"> Ver disponibilidad </a>
 								</div>
 							</div>
 

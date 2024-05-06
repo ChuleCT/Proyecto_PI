@@ -27,6 +27,7 @@ angular.module('bookingApp')
 					});
 			},
 			
+		
 			//create a new property
 			postProperty: function(property) {
 				return $http.post(url, property)

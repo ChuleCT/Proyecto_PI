@@ -112,9 +112,11 @@ input[type="text"]:focus {
 }
 
 .imagenesPreview {
-    width: 11.4em;
+    max-width: 100%;
+    height: auto; 
     border-radius: 0.5em;
 }
+
 
 /* Estilos personalizados para el botón de corazón */
 .heart-label {
@@ -140,6 +142,10 @@ input[type="text"]:focus {
 /* Cambia el color del corazón a rojo cuando el checkbox está marcado */
 .heart-checkbox:checked + .heart-icon {
     color: #f00; /* Color rojo */
+}
+.heart-red {
+    color: red; /* Cambia el color del ícono del corazón a rojo */
+    /* Otros estilos que desees aplicar al corazón cuando esté marcado como favorito */
 }
 
 #imagenPlaza {

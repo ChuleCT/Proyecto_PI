@@ -35,6 +35,7 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "propertyCtrl",
 				controllerAs: "propertyVM",
 				templateUrl: "SearchTemplate.html",
+				
 			})
 			.when("/myProperties", {
 				controller: "propertyCtrl",
@@ -92,5 +93,12 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "propertyCtrl",
 				controllerAs: "propertyVM",
 				templateUrl: "PropertyDetailsTemplate.html",
+			})
+			.when("/favoritesProperties", {
+				controller: "propertyCtrl",
+				controllerAs: "propertyVM",
+				templateUrl: "FavoritesListTemplate.html",
+				
+			
 			})
 	});

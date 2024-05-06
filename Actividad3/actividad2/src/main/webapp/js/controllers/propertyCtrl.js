@@ -1,6 +1,6 @@
 angular.module('bookingApp')
-	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', 'reviewsFactory', '$routeParams', '$location', '$window',
-		function(usersFactory, propertiesFactory, servicesFactory, reviewsFactory, $routeParams, $location, $window) {
+	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', 'reviewsFactory', 'favoritesFactory', '$routeParams', '$location', '$window',
+		function(usersFactory, propertiesFactory, servicesFactory, reviewsFactory, favoritesFactory, $routeParams, $location, $window) {
 
 			var propertyVM = this;
 			propertyVM.user = {}; // en el propertyDetails se usa para mostrar el nombre del usuario de las reviews y controlar si es el dueño de la propiedad
@@ -11,6 +11,7 @@ angular.module('bookingApp')
 			propertyVM.myOpinion = undefined;
 			propertyVM.yaValorada = false;
 			propertyVM.otherOpinions = undefined;
+			propertyVM.userFavorites = [];
 			propertyVM.functions = {
 
 				where: function(route) {
@@ -131,6 +132,8 @@ angular.module('bookingApp')
 							//console.log("Propiedades encontradas:", propertyVM.property);
 							propertyVM.size = propertyVM.property.length;
 							//console.log("Número de propiedades encontradas:", propertyVM.size);
+
+							propertyVM.functions.getFavorites();
 							$location.path('/search/' + propertyVM.search);
 						})
 						.catch(function(error) {
@@ -185,7 +188,7 @@ angular.module('bookingApp')
 							console.log("Mi opinión: ", propertyVM.myOpinion);
 							if (propertyVM.myOpinion.review != undefined) {
 								propertyVM.yaValorada = true;
-							}else{
+							} else {
 								propertyVM.myOpinion = {
 									"review": "",
 									"grade": undefined
@@ -224,6 +227,90 @@ angular.module('bookingApp')
 							$window.location.reload();
 						});
 				},
+
+				getFavorites: function() {
+					favoritesFactory.getFavorites()
+						.then(function(response) {
+							propertyVM.userFavorites = response;
+							console.log("Favoritos: ", propertyVM.userFavorites);
+
+							propertyVM.functions.initializeFavorites();
+						});
+				},
+
+				// initializeFavorites pero ahora el userFavorites es una lista con un solo valor Long, que es el id de la propiedad
+				initializeFavorites: function() {
+					propertyVM.property.forEach(function(property) {
+						property.isFavorite = propertyVM.userFavorites.some(function(favorite) {
+							return favorite === property.id;
+						});
+						property.favorite = property.isFavorite;
+					});
+				},
+
+
+				toggleFavorite: function(propertyId) {
+					var index = propertyVM.userFavorites.indexOf(propertyId);
+					if (index === -1) {
+						// Si no está en los favoritos, agrégalo
+						propertyVM.userFavorites.push(propertyId);
+						favoritesFactory.postFavorite(propertyId)
+							.then(function(response) {
+								console.log("Property added to favorites: ", response);
+							})
+							.catch(function(error) {
+								console.error("Error adding property to favorites: ", error);
+							});
+					} else {
+						// Si está en los favoritos, quítalo
+						propertyVM.userFavorites.splice(index, 1);
+						favoritesFactory.deleteFavorite(propertyId)
+							.then(function(response) {
+								console.log("Property removed from favorites: ", response);
+							})
+							.catch(function(error) {
+								console.error("Error removing property from favorites: ", error);
+							});
+					}
+				},
+				
+				deleteFavorite: function(propertyId) {
+					var index = propertyVM.userFavorites.indexOf(propertyId);
+					if (index !== -1) {
+						// Si está en los favoritos, quítalo
+						propertyVM.userFavorites.splice(index, 1);
+						favoritesFactory.deleteFavorite(propertyId)
+							.then(function(response) {
+								console.log("Property removed from favorites: ", response);
+								$window.location.reload();
+							})
+							.catch(function(error) {
+								console.error("Error removing property from favorites: ", error);
+							});
+					}
+				},
+
+				getFavoritesProperties: function() {
+					favoritesFactory.getFavorites()
+						.then(function(response) {
+							propertyVM.userFavorites = response;
+							console.log("Favoritos: ", propertyVM.userFavorites);
+
+							
+           					propertyVM.property = [];
+							angular.forEach(propertyVM.userFavorites, function(property) {
+								console.log("Property del inicio del foreach: ", property);
+
+								propertiesFactory.getProperty(property)
+									.then(function(response) {
+                    				    propertyVM.property.push(response);
+										console.log("Property: ", propertyVM.property);
+									});
+
+							});
+						});
+				},
+
 
 				//Habría que hacer ahora el switch para las distintas rutas
 				propertyHandlerMethod: function() {
@@ -270,8 +357,10 @@ angular.module('bookingApp')
 			}
 			else if (propertyVM.functions.where('/search/' + propertyVM.search)) {
 				propertyVM.functions.getPropertiesBySearch(propertyVM.search);
+
 			} else if (propertyVM.functions.where('/myProperties')) {
 				propertyVM.functions.propertyHandlerMethod();
+
 			} else if (propertyVM.functions.where('/propertyDetails/' + $routeParams.ID)) {
 				propertyVM.functions.getProperty($routeParams.ID);
 				// Obtener usuario
@@ -279,6 +368,12 @@ angular.module('bookingApp')
 				// Obtener opiniones de la propiedad seleccionada
 				propertyVM.functions.getMyOpinion($routeParams.ID);
 				propertyVM.functions.getOtherOpinions($routeParams.ID);
+
+			} else if (propertyVM.functions.where('/favoritesProperties')) {
+				propertyVM.functions.getFavoritesProperties();
+				console.log("Property en el else if este : ", propertyVM.property);
+
 			}
+
 
 		}]);

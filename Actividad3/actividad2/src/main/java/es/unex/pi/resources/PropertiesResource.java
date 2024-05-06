@@ -87,6 +87,7 @@ public class PropertiesResource {
 		property = propertyDao.get(propertyid);
 		return property;
 	}
+	
 
 	// Post para añadir una propiedad
 		@POST
