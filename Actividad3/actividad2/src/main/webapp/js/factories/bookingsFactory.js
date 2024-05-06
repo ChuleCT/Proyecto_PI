@@ -9,6 +9,13 @@ angular.module('bookingApp')
 						return response.data;
 					});
 			},
+			
+			getProvisionalBookings: function() {
+				return $http.get(url + 'provisional')
+					.then(function(response) {
+						return response.data;
+					});
+			},
 		}
 		
 		return bookingsInterface;

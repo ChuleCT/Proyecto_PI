@@ -20,6 +20,9 @@ import es.unex.pi.dao.JDBCBookingsAccommodationsDAOImpl;
 import es.unex.pi.dao.BookingsAccommodationsDAO;
 import es.unex.pi.dao.JDBCAccommodationDAOImpl;
 import es.unex.pi.dao.AccommodationDAO;
+import es.unex.pi.model.ProvisionalBookings;
+import es.unex.pi.dao.JDBCProvisionalBookingsDAOImpl;
+import es.unex.pi.dao.ProvisionalBookingsDAO;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -94,6 +97,23 @@ public class BookingsResource {
 		}
 
 		return bookingsInfo;
+
+	}
+	
+	// Get que devuelve las reservas provisionales de un usuario (aunque no hace falta el usuario)
+	
+	@GET
+	@Path("/provisional")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ProvisionalBookings> getProvisionalBookingsJSON(@Context HttpServletRequest request) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
+		provisionalBookingDao.setConnection(conn);
+
+		List<ProvisionalBookings> provisionalBookings = provisionalBookingDao.getAll();
+
+		return provisionalBookings;
 
 	}
 }

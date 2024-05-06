@@ -98,7 +98,10 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "propertyCtrl",
 				controllerAs: "propertyVM",
 				templateUrl: "FavoritesListTemplate.html",
-				
-			
+			})
+			.when("/shoppingCart", {
+				controller: "bookingCtrl",
+				controllerAs: "bookingVM",
+				templateUrl: "ShoppingCartTemplate.html",
 			})
 	});

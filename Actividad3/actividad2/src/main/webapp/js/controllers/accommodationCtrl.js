@@ -44,7 +44,7 @@ angular.module('bookingApp')
 				},
 
 				createAccommodation: function(accommodation) {
-					console.log("Habiatcion:", accommodation);
+					console.log("Habitacion:", accommodation);
 					accommodationsFactory.postAccommodation(accommodation, $routeParams.ID)
 						.then(function(response) {
 							accommodationVM.accommodation = response;
