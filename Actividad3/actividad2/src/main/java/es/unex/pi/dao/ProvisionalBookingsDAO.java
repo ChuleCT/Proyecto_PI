@@ -33,6 +33,8 @@ public interface ProvisionalBookingsDAO {
      * 
      * @return True if the provisional booking was added successfully, false otherwise.
     */
+    
+    public ProvisionalBookings get(long ida);
 
     public boolean add(ProvisionalBookings provisionalBooking);
     

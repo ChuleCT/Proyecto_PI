@@ -27,7 +27,7 @@ angular.module('bookingApp')
 							console.log(accommodationVM.accommodations);
 						});
 				},
-				
+
 				getAccommodationVacia: function(id) {
 					accommodationsFactory.getAccommodationVacia(id)
 						.then(function(response) {
@@ -64,7 +64,7 @@ angular.module('bookingApp')
 						console.log($location.path());
 						accommodationVM.functions.updateAccommodation(accommodationVM.accommodations);
 						$location.path('/myProperties');
-					} else if (accommodationVM.functions.where('/createAccommodation/'+ $routeParams.ID)) {
+					} else if (accommodationVM.functions.where('/createAccommodation/' + $routeParams.ID)) {
 						console.log($location.path());
 						accommodationVM.functions.createAccommodation(accommodationVM.accommodations);
 						$location.path('/myProperties');
@@ -82,8 +82,6 @@ angular.module('bookingApp')
 			} else if (accommodationVM.functions.where('/editAccommodation/' + $routeParams.ID) || accommodationVM.functions.where('/deleteAccommodation/' + $routeParams.ID)) {
 				console.log("He entrado en el if");
 				accommodationVM.functions.getAccommodation($routeParams.ID);
-			} else if (accommodationVM.functions.where('/propertyDetails/' + $routeParams.ID)){
-				accommodationVM.functions.getAccommodationsByProperty($routeParams.ID);
 			}
 		}]);
 

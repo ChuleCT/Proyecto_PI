@@ -1,6 +1,6 @@
 angular.module('bookingApp')
-	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', 'reviewsFactory', 'favoritesFactory', '$routeParams', '$location', '$window',
-		function(usersFactory, propertiesFactory, servicesFactory, reviewsFactory, favoritesFactory, $routeParams, $location, $window) {
+	.controller('propertyCtrl', ['usersFactory', 'propertiesFactory', 'servicesFactory', 'reviewsFactory', 'favoritesFactory', 'accommodationsFactory', 'bookingsFactory', '$routeParams', '$location', '$window',
+		function(usersFactory, propertiesFactory, servicesFactory, reviewsFactory, favoritesFactory, accommodationsFactory, bookingsFactory, $routeParams, $location, $window) {
 
 			var propertyVM = this;
 			propertyVM.user = {}; // en el propertyDetails se usa para mostrar el nombre del usuario de las reviews y controlar si es el dueño de la propiedad
@@ -12,6 +12,8 @@ angular.module('bookingApp')
 			propertyVM.yaValorada = false;
 			propertyVM.otherOpinions = undefined;
 			propertyVM.userFavorites = [];
+			propertyVM.accommodations = [];
+			propertyVM.accommodationsSelected = {};
 			propertyVM.functions = {
 
 				where: function(route) {
@@ -273,7 +275,7 @@ angular.module('bookingApp')
 							});
 					}
 				},
-				
+
 				deleteFavorite: function(propertyId) {
 					var index = propertyVM.userFavorites.indexOf(propertyId);
 					if (index !== -1) {
@@ -296,14 +298,14 @@ angular.module('bookingApp')
 							propertyVM.userFavorites = response;
 							console.log("Favoritos: ", propertyVM.userFavorites);
 
-							
-           					propertyVM.property = [];
+
+							propertyVM.property = [];
 							angular.forEach(propertyVM.userFavorites, function(property) {
 								console.log("Property del inicio del foreach: ", property);
 
 								propertiesFactory.getProperty(property)
 									.then(function(response) {
-                    				    propertyVM.property.push(response);
+										propertyVM.property.push(response);
 										console.log("Property: ", propertyVM.property);
 									});
 
@@ -340,9 +342,26 @@ angular.module('bookingApp')
 						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
 					}
 					$window.location.reload();
-				}
+				},
 
+				//Metodo para gestionar las reservas de habitaciones
+				getAccommodations: function(propertyId) {
+					accommodationsFactory.getAccommodations(propertyId)
+						.then(function(response) {
+							propertyVM.accommodations = response;
+							console.log("Alojamientos: ", propertyVM.accommodations);
+						});
+				},
+
+				crearReservaProvisional: function() {
+					console.log("Reserva provisional: ", propertyVM.accommodationsSelected);
+					  for (var clave in propertyVM.accommodationsSelected) {
+						  	bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave])
+						  }
+				}
 			}
+
+
 
 
 			propertyVM.search = $routeParams.Search;
@@ -365,6 +384,8 @@ angular.module('bookingApp')
 				propertyVM.functions.getProperty($routeParams.ID);
 				// Obtener usuario
 				propertyVM.functions.getUser();
+				//Obtengo las habitaciones de la propiedad
+				propertyVM.functions.getAccommodations($routeParams.ID);
 				// Obtener opiniones de la propiedad seleccionada
 				propertyVM.functions.getMyOpinion($routeParams.ID);
 				propertyVM.functions.getOtherOpinions($routeParams.ID);

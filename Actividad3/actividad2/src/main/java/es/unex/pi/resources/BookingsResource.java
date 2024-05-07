@@ -116,4 +116,33 @@ public class BookingsResource {
 		return provisionalBookings;
 
 	}
+	
+	// return $http.post(url + 'provisional/' + ida, numAccommodations)
+	@POST
+	@Path("/provisional/{ida:[0-9]+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response postProvisionalBookings(int num, @PathParam("ida") long ida,
+			@Context HttpServletRequest request) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
+		provisionalBookingDao.setConnection(conn);
+		
+		ProvisionalBookings provisionalBooking = new ProvisionalBookings();
+		
+		//Si ya hay una reserva provisional con ese ida, borramos la anterior
+		if (provisionalBookingDao.get(ida) != null) {
+			provisionalBookingDao.delete(ida);
+		}
+		
+		//Se crea una nueva reserva provisional
+		
+		provisionalBooking = new ProvisionalBookings();
+
+		provisionalBooking.setIda(ida);
+		provisionalBooking.setNum(num);
+		provisionalBookingDao.add(provisionalBooking);
+
+		return Response.created(uriInfo.getAbsolutePath()).build();
+	}
 }

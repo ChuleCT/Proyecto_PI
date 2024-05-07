@@ -39,6 +39,29 @@ public class JDBCProvisionalBookingsDAOImpl implements ProvisionalBookingsDAO {
 		}
 		return provisionalBookingsList;
 	}
+	
+	@Override
+	public ProvisionalBookings get(long ida) {
+		if (conn == null)
+			return null;
+
+		ProvisionalBookings provisionalBooking = new ProvisionalBookings();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ProvisionalBookings WHERE ida=" + ida);
+
+			if (!rs.next())
+				return null;
+
+			fromRsToProvisionalBookingsObject(rs, provisionalBooking);
+			logger.info(
+					"fetching ProvisionalBookings: " + provisionalBooking.getIda() + " " + provisionalBooking.getNum());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return provisionalBooking;
+	}
 
 	@Override
 	public boolean add(ProvisionalBookings provisionalBooking) {
