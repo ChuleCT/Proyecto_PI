@@ -98,6 +98,23 @@ public class JDBCProvisionalBookingsDAOImpl implements ProvisionalBookingsDAO {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean deleteAll() {
+		if (conn == null)
+			return false;
+
+		try {
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM ProvisionalBookings");
+			logger.info("deleting all ProvisionalBookings");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public void fromRsToProvisionalBookingsObject(ResultSet rs, ProvisionalBookings provisionalBooking)
 			throws SQLException {

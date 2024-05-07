@@ -13,7 +13,7 @@ angular.module('bookingApp')
 			
 			// get an accommodation by id
 			getAccommodation: function(id) {
-				return $http.get(url + "2/" + id)
+				return $http.get(url + "accommodation/" + id)
 					.then(function(response) {
 						return response.data;
 					});

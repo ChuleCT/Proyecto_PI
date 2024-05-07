@@ -36,6 +36,13 @@ public interface ProvisionalBookingsDAO {
     
     public ProvisionalBookings get(long ida);
 
+	/**
+	 * Gets a provisional booking from the database.
+	 * 
+	 * @param ida (accommodation identifier)
+	 * 
+	 * @return Provisional booking from the database.
+	 */
     public boolean add(ProvisionalBookings provisionalBooking);
     
     
@@ -48,5 +55,14 @@ public interface ProvisionalBookingsDAO {
 	 * @return True if the provisional booking was deleted successfully, false otherwise.
 	 */
     public boolean delete (long ida);
+    
+    
+	/**
+	 * Deletes all provisional bookings from the database.
+	 * 
+	 * @return True if all provisional bookings were deleted successfully, false
+	 *         otherwise.
+	 */
+    public boolean deleteAll();
 
 }

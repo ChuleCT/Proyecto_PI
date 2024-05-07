@@ -117,7 +117,28 @@ public class BookingsResource {
 
 	}
 	
-	// return $http.post(url + 'provisional/' + ida, numAccommodations)
+	//El id que se le pasa por parametro es de una habitacion
+	
+	@GET
+	@Path("/{ida:[0-9]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Property getProperty(@PathParam("ida") long ida) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
+		accommodationDao.setConnection(conn);
+		
+		Accommodation accommodation = accommodationDao.get(ida);
+		
+		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+		propertyDao.setConnection(conn);
+		
+		Property property = propertyDao.get(accommodation.getIdp());
+
+		return property;
+	}
+	
+	
 	@POST
 	@Path("/provisional/{ida:[0-9]+}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -144,5 +165,33 @@ public class BookingsResource {
 		provisionalBookingDao.add(provisionalBooking);
 
 		return Response.created(uriInfo.getAbsolutePath()).build();
+	}
+	
+	
+	@DELETE
+	@Path("/provisional/{ida:[0-9]+}")
+	public Response deleteProvisionalBookings(@PathParam("ida") long ida, @Context HttpServletRequest request) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
+		provisionalBookingDao.setConnection(conn);
+
+		provisionalBookingDao.delete(ida);
+
+		return Response.noContent().build();
+	}
+	
+	
+	@DELETE
+	@Path("/provisional")
+	public Response deleteAllProvisionalBookings(@Context HttpServletRequest request) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
+		provisionalBookingDao.setConnection(conn);
+
+		provisionalBookingDao.deleteAll();
+
+		return Response.noContent().build();
 	}
 }

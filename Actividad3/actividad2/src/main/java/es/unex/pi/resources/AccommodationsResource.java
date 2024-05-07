@@ -71,7 +71,7 @@ public class AccommodationsResource {
 	
 	// Get que devuelve una habitación en concreto
 	@GET
-	@Path("/2/{accommodationid:[0-9]+}")
+	@Path("/accommodation/{accommodationid:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Accommodation getAccommodationJSON(@PathParam("accommodationid") long accommodationid) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
