@@ -211,6 +211,26 @@ public class JDBCAccommodationDAOImpl implements AccommodationDAO {
         }
         return done;
     }
+    
+    @Override
+	public boolean checkAvailability(long idp) {
+		if (conn == null)
+			return false;
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM accommodations WHERE idp = " + idp);
+			while (rs.next()) {
+				Accommodation accommodation = new Accommodation();
+				fromRsToAccommodationObject(rs, accommodation);
+				if (accommodation.getNumAccommodations() > 0) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
     public void fromRsToAccommodationObject(ResultSet rs, Accommodation accommodation) throws SQLException{
         accommodation.setId(rs.getInt("id"));

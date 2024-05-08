@@ -249,7 +249,19 @@ public class BookingsResource {
 			accommodation.setNumAccommodations(accommodation.getNumAccommodations() - provisionalBooking.getNum());
 			accommodationDao.update(accommodation);
 		}
-
+		
+		// Una vez reducido el numero de alojamientos disponibles en la tabla de alojamientos, se comprueba si la propiedad sigue teniendo alojamientos disponibles
+		ProvisionalBookings provisionalBooking = provisionalBookings.get(0);
+		long idp = provisionalBooking.getIdp();
+		
+		if(!accommodationDao.checkAvailability(idp)) {
+			//Si la propiedad no tiene alojamientos disponibles se pone en estado no disponible
+			Property property = propertyDao.get(idp);
+			property.setAvailable(0);
+			propertyDao.update(property);
+		}
+		
+	
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 

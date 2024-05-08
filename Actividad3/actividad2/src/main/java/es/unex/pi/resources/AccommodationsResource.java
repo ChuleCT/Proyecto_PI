@@ -106,6 +106,18 @@ public class AccommodationsResource {
 		accommodationDao.add(accommodation);
 
 		String message = "Accommodation added";
+		
+		// Si la habitacion que se ha añadido tiene numAccommodations > 0 y la disponibilidad de la propiedad es false, se cambia a true
+		
+		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+		propertyDao.setConnection(conn);
+		
+		Property property = propertyDao.get(idp);
+		
+		if (accommodation.getNumAccommodations() > 0 && property.getAvailable() == 0) {
+			property.setAvailable(1);
+			propertyDao.update(property);
+		}
 
 		return Response.status(Response.Status.CREATED)
 				.entity("{\"status\" : \"201\", \"message\" : \"" + message + "\"}")
@@ -130,6 +142,25 @@ public class AccommodationsResource {
 			accommodationDao.update(accommodation);
 
 			String message = "Accommodation updated";
+			
+			
+		    // Si la habitacion que se ha modificado tiene numAccommodations > 0 y la disponibilidad de la propiedad es false, se cambia a true
+			PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+			propertyDao.setConnection(conn);
+			
+			Property property = propertyDao.get(oldAccommodation.getIdp());
+			
+			if (accommodation.getNumAccommodations() > 0 && property.getAvailable() == 0) {
+				property.setAvailable(1);
+				propertyDao.update(property);
+			}
+			
+			// Si la habitacion que se ha modificado tiene numAccommodations = 0 y el resto de habitaciones de la propiedad también, se cambia a false en caso de que estuviera a true
+			
+			if (!accommodationDao.checkAvailability(accommodation.getIdp()) && property.getAvailable() == 1) {
+				property.setAvailable(0);
+				propertyDao.update(property);
+			}
 
 			return Response.status(Response.Status.OK)
 					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}")
@@ -155,6 +186,16 @@ public class AccommodationsResource {
 			accommodationDao.delete(accommodationid);
 
 			String message = "Accommodation deleted";
+			
+		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+		propertyDao.setConnection(conn);
+		
+		Property property = propertyDao.get(accommodation.getIdp());
+			
+	    if(!accommodationDao.checkAvailability(accommodation.getIdp()) && property.getAvailable() == 1) {
+	    	property.setAvailable(0);
+	    	propertyDao.update(property);
+	    }
 
 			return Response.status(Response.Status.OK)
 					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}").build();

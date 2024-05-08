@@ -98,4 +98,13 @@ public interface AccommodationDAO {
     */
 
     public boolean delete(long id);
+    
+    /**
+     * Checks if the property is available.
+     * @param idp
+     * @return True if the property is available, false otherwise.
+     */
+    
+    public boolean checkAvailability(long idp);
+    
 }

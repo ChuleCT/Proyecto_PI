@@ -280,7 +280,7 @@ public class JDBCPropertyDAOImpl implements PropertyDAO {
         }
         return done;
     }
-
+    
     public void fromRsToPropertyObject(ResultSet rs,Property property) throws SQLException{
         property.setId(rs.getInt("id"));
         property.setName(rs.getString("name"));
