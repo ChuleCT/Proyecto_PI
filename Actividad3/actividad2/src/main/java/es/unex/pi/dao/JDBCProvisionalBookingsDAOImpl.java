@@ -70,10 +70,11 @@ public class JDBCProvisionalBookingsDAOImpl implements ProvisionalBookingsDAO {
 
 		try {
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("INSERT INTO ProvisionalBookings (ida,num) VALUES('" + provisionalBooking.getIda()
-					+ "','" + provisionalBooking.getNum() + "')");
-			logger.info(
-					"adding ProvisionalBookings: " + provisionalBooking.getIda() + " " + provisionalBooking.getNum());
+			stmt.executeUpdate("INSERT INTO ProvisionalBookings (ida, num, idp, price, name) VALUES ('"
+					+ provisionalBooking.getIda() + "', '" + provisionalBooking.getNum() + "', '"
+					+ provisionalBooking.getIdp() + "', '" + provisionalBooking.getPrice() + "', '"
+					+ provisionalBooking.getName() + "')");
+			logger.info("adding ProvisionalBookings: " + provisionalBooking.getIda() + " " + provisionalBooking.getNum());
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -121,6 +122,9 @@ public class JDBCProvisionalBookingsDAOImpl implements ProvisionalBookingsDAO {
 		try {
 			provisionalBooking.setIda(rs.getLong("ida"));
 			provisionalBooking.setNum(rs.getInt("num"));
+			provisionalBooking.setIdp(rs.getLong("idp"));
+			provisionalBooking.setPrice(rs.getLong("price"));
+			provisionalBooking.setName(rs.getString("name"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

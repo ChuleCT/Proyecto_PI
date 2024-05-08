@@ -358,6 +358,7 @@ angular.module('bookingApp')
 					  for (var clave in propertyVM.accommodationsSelected) {
 						  	bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave])
 						  }
+						  $location.path('/shoppingCart');
 				}
 			}
 

@@ -75,7 +75,7 @@ public class BookingsResource {
 
 		// Se obtienen todas las reservas del usuario
 		List<Booking> bookings = bookingDao.getAllByIdu(user.getId());
-		
+
 		System.out.println("Numero de reservas: " + bookings.size());
 
 		// Se crea una lista de BookingPropertyInfo para almacenar la informacion de la
@@ -99,13 +99,13 @@ public class BookingsResource {
 		return bookingsInfo;
 
 	}
-	
-	// Get que devuelve las reservas provisionales de un usuario (aunque no hace falta el usuario)
-	
+
+	// Obtiene todos los provisional bookings
+
 	@GET
 	@Path("/provisional")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProvisionalBookings> getProvisionalBookingsJSON(@Context HttpServletRequest request) {
+	public List<ProvisionalBookings> getProvisionalBookings(@Context HttpServletRequest request) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
 		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
@@ -114,11 +114,10 @@ public class BookingsResource {
 		List<ProvisionalBookings> provisionalBookings = provisionalBookingDao.getAll();
 
 		return provisionalBookings;
-
 	}
-	
-	//El id que se le pasa por parametro es de una habitacion
-	
+
+	// El id que se le pasa por parametro es de una habitacion
+
 	@GET
 	@Path("/{ida:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -127,47 +126,133 @@ public class BookingsResource {
 
 		AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
 		accommodationDao.setConnection(conn);
-		
+
 		Accommodation accommodation = accommodationDao.get(ida);
-		
+
 		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
 		propertyDao.setConnection(conn);
-		
+
 		Property property = propertyDao.get(accommodation.getIdp());
 
 		return property;
 	}
-	
-	
+
 	@POST
 	@Path("/provisional/{ida:[0-9]+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response postProvisionalBookings(int num, @PathParam("ida") long ida,
-			@Context HttpServletRequest request) {
+	public Response postProvisionalBookings(int num, @PathParam("ida") long ida, @Context HttpServletRequest request) {
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
 		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
 		provisionalBookingDao.setConnection(conn);
-		
+
 		ProvisionalBookings provisionalBooking = new ProvisionalBookings();
-		
-		//Si ya hay una reserva provisional con ese ida, borramos la anterior
+
+		// Si ya hay una reserva provisional con ese ida, borramos la anterior
 		if (provisionalBookingDao.get(ida) != null) {
 			provisionalBookingDao.delete(ida);
 		}
-		
-		//Se crea una nueva reserva provisional
-		
+
+		// Se crea una nueva reserva provisional
+
 		provisionalBooking = new ProvisionalBookings();
 
 		provisionalBooking.setIda(ida);
 		provisionalBooking.setNum(num);
+
+		// Obtengo el accommodation al que se refiere el provisional booking
+		AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
+		accommodationDao.setConnection(conn);
+
+		Accommodation accommodation = accommodationDao.get(ida);
+
+		// Meto el idp y el precio
+		provisionalBooking.setIdp(accommodation.getIdp());
+
+		int precio = accommodation.getPrice() * num;
+		provisionalBooking.setPrice(precio);
+		provisionalBooking.setName(accommodation.getName());
+
 		provisionalBookingDao.add(provisionalBooking);
 
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
-	
-	
+
+	// Post para añadir una reserva, en la tabla de reseva se añade el id del
+	// usuario con el total price de todas las habitaciones de la tabla provisional
+	// bookings
+	// Posteriormente, en la tabla de bookings accommodations se añaden todas las
+	// habitaciones de la tabla provisional bookings con el id de la reserva
+	// No se necesita parametros ya que la tabla de provisional bookings tiene todas
+	// las habitaciones que se quieren reservar
+	// No es necesario borrar las reservas provisionales ya que se borran
+	// automaticamente al hacer una reserva
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response postBooking(@Context HttpServletRequest request) {
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+
+		ProvisionalBookingsDAO provisionalBookingDao = new JDBCProvisionalBookingsDAOImpl();
+		provisionalBookingDao.setConnection(conn);
+
+		BookingDAO bookingDao = new JDBCBookingDAOImpl();
+		bookingDao.setConnection(conn);
+
+		BookingsAccommodationsDAO bookingsAccommodationsDao = new JDBCBookingsAccommodationsDAOImpl();
+		bookingsAccommodationsDao.setConnection(conn);
+
+		AccommodationDAO accommodationDao = new JDBCAccommodationDAOImpl();
+		accommodationDao.setConnection(conn);
+
+		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+		propertyDao.setConnection(conn);
+
+		// Se obtiene el usuario de la sesion
+		User user = (User) request.getSession().getAttribute("user");
+
+		// Se obtienen todas las reservas provisionales del usuario
+		List<ProvisionalBookings> provisionalBookings = provisionalBookingDao.getAll();
+
+		// Se crea una nueva reserva
+
+		Booking booking = new Booking();
+		booking.setIdu(user.getId());
+
+		int totalPrice = 0;
+
+		for (int i = 0; i < provisionalBookings.size(); i++) {
+			ProvisionalBookings provisionalBooking = provisionalBookings.get(i);
+			totalPrice += provisionalBooking.getPrice();
+		}
+
+		booking.setTotalPrice(totalPrice);
+
+		bookingDao.add(booking);
+
+		// Se obtiene la reserva creada
+		booking = bookingDao.getLatestBooking(user.getId(), totalPrice);
+
+		// Se añaden todas las habitaciones de las reservas provisionales a la tabla de
+		// bookings accommodations
+		for(int i = 0; i < provisionalBookings.size(); i++) {
+			ProvisionalBookings provisionalBooking = provisionalBookings.get(i);
+			BookingsAccommodations bookingAccommodation = new BookingsAccommodations();
+			bookingAccommodation.setIdb(booking.getId());
+
+			Accommodation accommodation = accommodationDao.get(provisionalBooking.getIda());
+			bookingAccommodation.setIdacc(accommodation.getId());
+			bookingAccommodation.setNumAccommodations(provisionalBooking.getNum());
+
+			bookingsAccommodationsDao.add(bookingAccommodation);
+
+			// Se resta la cantidad de alojamientos reservados a la cantidad disponible
+			accommodation.setNumAccommodations(accommodation.getNumAccommodations() - provisionalBooking.getNum());
+			accommodationDao.update(accommodation);
+		}
+
+		return Response.created(uriInfo.getAbsolutePath()).build();
+	}
+
 	@DELETE
 	@Path("/provisional/{ida:[0-9]+}")
 	public Response deleteProvisionalBookings(@PathParam("ida") long ida, @Context HttpServletRequest request) {
@@ -180,8 +265,7 @@ public class BookingsResource {
 
 		return Response.noContent().build();
 	}
-	
-	
+
 	@DELETE
 	@Path("/provisional")
 	public Response deleteAllProvisionalBookings(@Context HttpServletRequest request) {

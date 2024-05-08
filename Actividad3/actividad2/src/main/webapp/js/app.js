@@ -88,6 +88,13 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "bookingCtrl",
 				controllerAs: "bookingVM",
 				templateUrl: "BookingsListTemplate.html",
+				resolve: {
+					delay: function($q, $timeout) {
+						var delay = $q.defer();
+						$timeout(delay.resolve, 500);
+						return delay.promise;
+					}
+				},
 			})
 			.when("/propertyDetails/:ID", {
 				controller: "propertyCtrl",
@@ -103,5 +110,12 @@ angular.module('bookingApp', ['ngRoute'])
 				controller: "bookingCtrl",
 				controllerAs: "bookingVM",
 				templateUrl: "ShoppingCartTemplate.html",
+				resolve: {
+					delay: function($q, $timeout) {
+						var delay = $q.defer();
+						$timeout(delay.resolve, 500);
+						return delay.promise;
+					}
+				},
 			})
 	});

@@ -1,11 +1,12 @@
 angular.module('bookingApp')
-	.controller('bookingCtrl', ['bookingsFactory', 'accommodationsFactory', '$routeParams', '$location',
-		function(bookingsFactory, accommodationsFactory, $routeParams, $location) {
+	.controller('bookingCtrl', ['bookingsFactory', 'accommodationsFactory', '$routeParams', '$location', '$window', '$scope',
+		function(bookingsFactory, accommodationsFactory, $routeParams, $location, $window, $scope) {
 
 			var bookingVM = this;
 			bookingVM.bookings = {};
-			bookingVM.accommodations = {};
 			bookingVM.property = {}; // solo para el carrito de compras
+			bookingVM.totalPrice = 0;
+			bookingVM.provisionalBookings = {}; // Son objetos que constan de un ida, un num, un idp y un price 
 			bookingVM.functions = {
 
 				where: function(route) {
@@ -24,24 +25,22 @@ angular.module('bookingApp')
 				getProvisionalBookings: function() {
 					bookingsFactory.getProvisionalBookings()
 						.then(function(response) {
-							bookingVM.bookings = response;
-							//Por cada reserva, utilizo el ida para obtener la habitacion a la que se refiere y las voy añadiendo a accommodations
-							for (var i = 0; i < bookingVM.bookings.length; i++) {
-								accommodationsFactory.getAccommodation(bookingVM.bookings[i].ida)
-									.then(function(response) {
-										bookingVM.accommodations.push(response);
-									}, function(error) {
-										console.log(error);
-									});
+							// Cambio: Almacena directamente el mapa de reservas provisionales
+							bookingVM.provisionalBookings = response;
+							console.log("Provisional bookings: ", bookingVM.provisionalBookings);
+
+							if (bookingVM.provisionalBookings.length > 0) {
+								bookingVM.functions.getProperty();
+								bookingVM.functions.calculateTotalPrice();
 							}
 						}, function(error) {
 							console.log(error);
 						});
 				},
 
-				// Obtengo la propiedad que se quiere reservar, para ello uso el parametro "ida" de la primera habitacion de bookingVM.bookings
+				// getProperty: function(ida) {
 				getProperty: function() {
-					bookingsFactory.getProperty(bookingVM.bookings[0].ida)
+					bookingsFactory.getProperty(bookingVM.provisionalBookings[0].idp)
 						.then(function(response) {
 							bookingVM.property = response;
 						}, function(error) {
@@ -49,14 +48,50 @@ angular.module('bookingApp')
 						});
 				},
 
+				// Para el precio total solo hay que sumar los precios de todas las habitaciones
+				calculateTotalPrice: function() {
+					bookingVM.totalPrice = 0;
+					for (var i = 0; i < bookingVM.provisionalBookings.length; i++) {
+						bookingVM.totalPrice += bookingVM.provisionalBookings[i].price;
+					}
+				},
+
+				deleteBooking: function(ida) {
+					console.log("Deleting booking with ida: ", ida);
+					bookingsFactory.deleteProvisionalBooking(ida)
+						.then(function(response) {
+							$window.location.reload();
+						}, function(error) {
+							console.log(error);
+						});
+				},
+
+				confirmBooking: function() {
+					console.log("Confirming booking");
+					bookingsFactory.confirmBooking()
+						.then(function(response) {
+							bookingsFactory.deleteAllProvisionalBookings()
+								.then(function(response) {
+									console.log("Provisional bookings deleted");
+								}, function(error) {
+									console.log(error);
+								});
+						}, function(error) {
+							console.log(error);
+						});
+					$location.path('/myBookings');
+				}
+			}
+
+
+			$scope.isEmpty = function(obj) {
+				return Object.keys(obj).length === 0;
 			}
 
 			if (bookingVM.functions.where('/myBookings')) {
 				bookingVM.functions.getBookings();
 			} else if (bookingVM.functions.where('/shoppingCart')) {
 				bookingVM.functions.getProvisionalBookings();
-				bookingVM.functions.getProperty();
 			}
-
-
-		}]);
+		}
+	]);
