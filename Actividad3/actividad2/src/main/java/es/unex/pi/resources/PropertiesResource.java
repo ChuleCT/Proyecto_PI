@@ -75,7 +75,7 @@ public class PropertiesResource {
 
 	// Get para una propiedad en concreto
 	@GET
-	@Path("/2/{propertyid: [0-9]+}")
+	@Path("/property/{propertyid: [0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Property getPropertyJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
 		Property property = null;
@@ -88,7 +88,6 @@ public class PropertiesResource {
 		return property;
 	}
 	
-
 	// Post para añadir una propiedad
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)

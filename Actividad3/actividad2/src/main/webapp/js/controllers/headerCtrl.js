@@ -12,6 +12,9 @@ angular.module('bookingApp')
 						function(response) {
 							console.log('Error: ' + response);
 						});
+			},
+			logout: function() {
+				window.location.pathname = '/actividad2/LogoutServlet.do';
 			}
 		}
 		headerViewModel.functions.readUser();

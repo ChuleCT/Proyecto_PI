@@ -13,7 +13,7 @@ angular.module('bookingApp')
 			
 			//get property by id
 			getProperty: function(id) {
-				return $http.get(url + "2/" + id)
+				return $http.get(url + "property/" + id)
 					.then(function(response) {
 						return response.data;
 					});

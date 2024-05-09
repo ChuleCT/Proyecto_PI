@@ -66,9 +66,9 @@
 						<h6 class="fw-bold">Información sobre el precio</h6>
 						<p>
 							<i class="fa fa-credit-card" aria-hidden="true"></i> Incluye €
-							{{totalPrice * 0.10}} de impuestos y cargos
+							{{bookingVM.totalPrice * 0.10}} de impuestos y cargos
 						</p>
-						<p>10% de IVA // € {{totalPrice * 0.10}}</p>
+						<p>10% de IVA // € {{bookingVM.totalPrice * 0.10}}</p>
 						<form data-ng-submit="bookingVM.functions.confirmBooking()">
 							<button type="submit" class="btn btn-primary w-100 mb-2">Reservar</button>
 						</form>

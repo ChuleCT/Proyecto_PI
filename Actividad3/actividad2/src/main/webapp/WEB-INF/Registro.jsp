@@ -55,11 +55,13 @@
 						<div class="mb-3">
 							<label class="form-label">Nombre</label> <input type="text"
 								class="form-control" placeholder="Indica tu nombre" name="name"
-								id="name" value="${user.name}" required> <label
-								class="form-label">Apellidos</label> <input type="text"
-								class="form-control" placeholder="Indica tus apellidos"
-								name="surname" id="surname" value="${user.surname}" required>
-							<label class="form-label">Email</label> <input type="email"
+								id="name" value="${user.name}" pattern="[A-Za-z0-9]+"
+								title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
+								required> <label class="form-label">Apellidos</label> <input
+								type="text" class="form-control"
+								placeholder="Indica tus apellidos" name="surname" id="surname"
+								value="${user.surname}" required> <label
+								class="form-label">Email</label> <input type="email"
 								class="form-control" placeholder="Indica tu dirección de email"
 								name="email" id="email" value="${user.email}" required>
 							<label class="form-label">Password</label> <input type="password"
@@ -92,8 +94,8 @@
 			<c:if test="${empty user.name}">
 				<div class="row mt-2">
 					<div class="col-5 mx-auto">
-						<a href="LoginServlet.do" class="text-primary">¿Ya
-							tienes cuenta?</a>
+						<a href="LoginServlet.do" class="text-primary">¿Ya tienes
+							cuenta?</a>
 					</div>
 				</div>
 			</c:if>
