@@ -1,5 +1,5 @@
 angular.module('bookingApp')
-	.controller('headerCtrl', ['usersFactory', function(usersFactory) {
+	.controller('headerCtrl', ['usersFactory', '$window', function(usersFactory, $window) {
 		var headerViewModel = this;
 		headerViewModel.user = {};
 		headerViewModel.functions = {

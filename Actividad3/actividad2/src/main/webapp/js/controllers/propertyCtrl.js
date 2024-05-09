@@ -411,14 +411,9 @@ angular.module('bookingApp')
 						});
 				},
 
-			},
+			}
 
-
-
-
-
-
-				propertyVM.search = $routeParams.Search;
+			propertyVM.search = $routeParams.Search;
 			if (propertyVM.functions.where('/editProperty/' + $routeParams.ID)) {
 				propertyVM.functions.getProperty($routeParams.ID);
 			}
@@ -448,6 +443,14 @@ angular.module('bookingApp')
 				propertyVM.functions.getFavoritesProperties();
 				console.log("Property en el else if este : ", propertyVM.property);
 
+			} else if (propertyVM.functions.where('/')) {
+				if (localStorage.getItem("Recarga") == '1') {
+					//recargar la pagina
+					console.log("Recarga: ", localStorage.getItem('Recarga'));
+					$window.location.reload();
+					localStorage.setItem('Recarga', '0');
+					console.log("Recarga: ", localStorage.getItem('Recarga'));
+				}
 			}
 
 

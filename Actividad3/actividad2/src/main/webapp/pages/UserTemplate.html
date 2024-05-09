@@ -5,11 +5,14 @@
 <div class="container mx-auto my-3">
 	<div class="row">
 		<div class="col-5 mx-auto">
-			<h3 class="mb-3">Editar Cuenta</h3>
+			<h3 class="mb-3" data-ng-show="userVM.functions.where('/editUser')">Editar Cuenta</h3>
+			<h3 class="mb-3" data-ng-show="userVM.functions.where('/deleteUser')">Borrar Cuenta</h3>
+			<h3 class="mb-3" data-ng-show="userVM.functions.where('/createUser')">Crear Cuenta</h3>
 			<!-- <h4 class="mb-2 text-danger">${messages.error}</h4> -->
 			<form data-ng-submit="userVM.functions.userHandlerMethod()">
 				<!-- 						<input type="hidden" name="id" value="${user.id}"> -->
 				<div class="mb-3">
+				<h3 class="text-danger fw-5">{{userVM.message}}</h3>
 					<label class="form-label">Nombre</label> <input type="text" class="form-control"
 						placeholder="Indica tu nombre" name="name" id="name" data-ng-model="userVM.user.name" 
 						pattern="[A-Za-z0-9]+" title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
@@ -28,6 +31,8 @@
 						value="Confirmar cambios" data-ng-show="userVM.functions.where('/editUser')">
 						<input type="submit" class="form-control btn btn-primary col-12 mt-2"
 						value="Borrar cuenta" data-ng-show="userVM.functions.where('/deleteUser')">
+						<input type="submit" class="form-control btn btn-primary col-12 mt-2"
+						value="Crear cuenta" data-ng-show="userVM.functions.where('/createUser')">
 					<a href="#!/deleteUser" class="btn btn-danger col-12 btn-block border-0 text-truncate my-3 mt-2" data-ng-show="userVM.functions.where('/editUser')">
 						<span class="negrita m-5 fw-bold">BORRAR cuenta</span>
 					</a>
