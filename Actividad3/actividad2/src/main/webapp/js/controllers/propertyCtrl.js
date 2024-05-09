@@ -355,17 +355,70 @@ angular.module('bookingApp')
 
 				crearReservaProvisional: function() {
 					console.log("Reserva provisional: ", propertyVM.accommodationsSelected);
-					  for (var clave in propertyVM.accommodationsSelected) {
-						  	bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave])
-						  }
-						  $location.path('/shoppingCart');
-				}
-			}
+					for (var clave in propertyVM.accommodationsSelected) {
+						bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave])
+					}
+					$location.path('/shoppingCart');
+				},
+
+				orderByRating: function() {
+					console.log("Propiedades sin ordenar: ", propertyVM.property);
+					propertyVM.property.sort(function(a, b) {
+						return b.gradesAverage - a.gradesAverage;
+					});
+					console.log("Ordenadas por rating: ", propertyVM.property);
+
+				},
+
+				propertiesByAvailability: function(availability) {
+					propertiesAux = [];
+					propertiesFactory.getPropertyBySearch(propertyVM.search)
+						.then(function(response) {
+							propertyVM.functions.getFavorites();
+							propertyVM.property = response;
+							propertyVM.size = propertyVM.property.length;
+
+							switch (availability) {
+								case 0:
+									// Sin disponibilidad 
+									for (let i = 0; i < propertyVM.property.length; i++) {
+										if (propertyVM.property[i].available == 0) {
+											propertiesAux.push(propertyVM.property[i]);
+										}
+									}
+									break;
+								case 1:
+									// Con disponibilidad
+									for (let i = 0; i < propertyVM.property.length; i++) {
+										if (propertyVM.property[i].available == 1) {
+											propertiesAux.push(propertyVM.property[i]);
+										}
+									}
+									break;
+								case 2:
+									// Todas
+									propertiesAux = propertyVM.property;
+									break;
+								default:
+									console.log("Error en la selección de disponibilidad");
+									break;
+							}
+							propertyVM.property = propertiesAux;
+							console.log("Propiedades filtradas por disponibilidad: ", propertyVM.property);
+						})
+						.catch(function(error) {
+							console.log("Error al obtener las propiedades:", error);
+						});
+				},
+
+			},
 
 
 
 
-			propertyVM.search = $routeParams.Search;
+
+
+				propertyVM.search = $routeParams.Search;
 			if (propertyVM.functions.where('/editProperty/' + $routeParams.ID)) {
 				propertyVM.functions.getProperty($routeParams.ID);
 			}

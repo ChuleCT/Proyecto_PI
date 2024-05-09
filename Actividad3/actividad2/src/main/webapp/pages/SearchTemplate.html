@@ -37,19 +37,25 @@
 							<div class="btn-group-vertical" data-toggle="buttons">
 								<label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion1"
-									value="Todos"> Todos
+									value="Todos" ng-click="propertyVM.functions.propertiesByAvailability(2)">
+									Todos
 								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion2"
-									value="Con disponibilidad"> Con disponibilidad
+									value="Con disponibilidad"
+									ng-click="propertyVM.functions.propertiesByAvailability(1)"> Con
+									disponibilidad
 								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion3"
-									value="Sin disponibilidad"> Sin disponibilidad
+									value="Sin disponibilidad"
+									ng-click="propertyVM.functions.propertiesByAvailability(0)"> Sin
+									disponibilidad
 								</label>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 
 
 
@@ -69,7 +75,8 @@
 					<!-- 						</c:otherwise> -->
 					<!-- 					</c:choose> -->
 					<button type="button" class="btn btn-primary mt-3"
-						onclick="ordenar(true)">Ordenar por valoración</button>
+						data-ng-click="propertyVM.functions.orderByRating()">Ordenar
+						por valoración</button>
 
 				</div>
 
@@ -84,14 +91,14 @@
 							<!-- Propiedades favoritas -->
 							<input type="checkbox" id="like-checkbox-{{alojamiento.id}}"
 								class="heart-checkbox" data-ng-model="alojamiento.favorite"
-								data-ng-change="propertyVM.functions.toggleFavorite(alojamiento.id)"> <label
-								for="like-checkbox-{{alojamiento.id}}" class="heart-label">
+								data-ng-change="propertyVM.functions.toggleFavorite(alojamiento.id)">
+							<label for="like-checkbox-{{alojamiento.id}}" class="heart-label">
 								<span class="heart-icon"
 								data-ng-class="{'heart-red': alojamiento.favorite, 'heart-gray': !alojamiento.favorite}">
 									<i class="fas fa-heart"></i>
 							</span>
-							</label> 
-							
+							</label>
+
 
 
 							<!-- 							Corazón  -->
