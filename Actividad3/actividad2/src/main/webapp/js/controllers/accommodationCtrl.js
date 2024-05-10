@@ -1,19 +1,43 @@
 angular.module('bookingApp')
-	.controller('accommodationCtrl', ['accommodationsFactory', '$routeParams', '$location',
-		function(accommodationsFactory, $routeParams, $location) {
+	.controller('accommodationCtrl', ['accommodationsFactory', 'usersFactory', 'propertiesFactory','$routeParams', '$location',
+		function(accommodationsFactory, usersFactory, propertiesFactory, $routeParams, $location) {
 
 			var accommodationVM = this;
 			accommodationVM.accommodations = {};
+			accommodationVM.user = {};
+			accommodationVM.property = {};
 			accommodationVM.propertyID = undefined;
 			accommodationVM.functions = {
 
 				where: function(route) {
 					return $location.path() == route;
 				},
+				
+				getUser: function() {
+					usersFactory.getUser()
+						.then(function(response) {
+							accommodationVM.user = response;
+							
+							if (accommodationVM.property.idu != accommodationVM.user.id) {
+								$location.path('/noPermission');
+							}
+							console.log(accommodationVM.user);
+						});
+				},
+				
+				getProperty: function(id) {
+					propertiesFactory.getProperty(id)
+						.then(function(response) {
+							accommodationVM.property = response;
+							accommodationVM.functions.getUser();
+							console.log(accommodationVM.property);
+						});
+				},
 
 				getAccommodationsByProperty: function(id) {
 					accommodationsFactory.getAccommodations(id)
 						.then(function(response) {
+							accommodationVM.functions.getProperty(id);
 							accommodationVM.accommodations = response;
 							console.log(accommodationVM.accommodations);
 						});
@@ -24,6 +48,11 @@ angular.module('bookingApp')
 					accommodationsFactory.getAccommodation(id)
 						.then(function(response) {
 							accommodationVM.accommodations = response;
+							
+							//Cojo una de las accommodations para obtener el id de la propiedad
+							accommodationVM.propertyID = accommodationVM.accommodations.idp;
+							accommodationVM.functions.getProperty(accommodationVM.propertyID);
+							
 							console.log(accommodationVM.accommodations);
 						});
 				},
@@ -82,6 +111,9 @@ angular.module('bookingApp')
 			} else if (accommodationVM.functions.where('/editAccommodation/' + $routeParams.ID) || accommodationVM.functions.where('/deleteAccommodation/' + $routeParams.ID)) {
 				console.log("He entrado en el if");
 				accommodationVM.functions.getAccommodation($routeParams.ID);
+			} else if (accommodationVM.functions.where('/createAccommodation/' + $routeParams.ID)) {
+				console.log("He entrado en el if");
+				accommodationVM.functions.getProperty($routeParams.ID);
 			}
 		}]);
 

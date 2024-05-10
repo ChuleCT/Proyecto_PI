@@ -118,4 +118,9 @@ angular.module('bookingApp', ['ngRoute'])
 					}
 				},
 			})
+			.when("/noPermission", {
+				controller: "propertyCtrl",
+				controllerAs: "propertyVM",
+				templateUrl: "NoPermissionTemplate.html",
+			})
 	});

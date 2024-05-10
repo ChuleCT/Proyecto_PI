@@ -37,17 +37,17 @@
 							<div class="btn-group-vertical" data-toggle="buttons">
 								<label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion1"
-									value="Todos" ng-click="propertyVM.functions.propertiesByAvailability(2)">
+									value="Todos" data-ng-click="propertyVM.functions.propertiesByAvailability(2)" checked>
 									Todos
 								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion2"
 									value="Con disponibilidad"
-									ng-click="propertyVM.functions.propertiesByAvailability(1)"> Con
+									data-ng-click="propertyVM.functions.propertiesByAvailability(1)"> Con
 									disponibilidad
 								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
 									<input type="radio" name="filtro" id="filtro_opcion3"
 									value="Sin disponibilidad"
-									ng-click="propertyVM.functions.propertiesByAvailability(0)"> Sin
+									data-ng-click="propertyVM.functions.propertiesByAvailability(0)"> Sin
 									disponibilidad
 								</label>
 							</div>
@@ -66,14 +66,7 @@
 
 
 				<div class="row mb-5">
-					<!-- 					<c:choose> -->
-					<!-- 						<c:when test="${size eq 1}"> -->
-					<!-- 							<h4 class="negrita">${size} alojamiento encontrados</h4> -->
-					<!-- 						</c:when> -->
-					<!-- 						<c:otherwise> -->
-					<!-- 							<h4 class="negrita">${size} alojamientos encontrados</h4> -->
-					<!-- 						</c:otherwise> -->
-					<!-- 					</c:choose> -->
+					<h4 class="negrita">{{propertyVM.size}} alojamiento encontrados</h4>
 					<button type="button" class="btn btn-primary mt-3"
 						data-ng-click="propertyVM.functions.orderByRating()">Ordenar
 						por valoración</button>
@@ -98,53 +91,6 @@
 									<i class="fas fa-heart"></i>
 							</span>
 							</label>
-
-
-
-							<!-- 							Corazón  -->
-							<!-- 							<c:if test="${not empty user.name}"> -->
-							<!-- 								<form action="FavoritesPropertiesServlet.do" method="post"> -->
-
-							<!-- 									<input type="hidden" name="propertieId" -->
-							<!-- 										value="${alojamiento.id}"> <input type="hidden" -->
-							<!-- 										name="desdeAlojamiento" value="si"> -->
-							<!-- 									<input type="hidden" name="opcionParaFavoritos" -->
-							<!-- 										value="${opcionDisponibilidad}"> -->
-							<!-- 										<input type="hidden" name="seOrdena" -->
-							<!-- 										value="${seOrdena}"> -->
-
-							<!-- 									<c:if test="${fn:length(ListaFavoritos) > 0}"> -->
-							<!-- 										<c:forEach var="favorito" items="${ListaFavoritos}"> -->
-							<!-- 											<c:if test="${favorito.idp eq alojamiento.id}"> -->
-							<!-- 												<c:set var="checked" value="yes" /> -->
-							<!-- 											</c:if> -->
-							<!-- 										</c:forEach> -->
-							<!-- 									</c:if> -->
-							<!-- 									<c:choose> -->
-							<!-- 										<c:when test="${checked == 'yes'}"> -->
-							<!-- 											<label for="like-checkbox-${alojamiento.id}" -->
-							<!-- 												class="heart-label"> <input type="checkbox" -->
-							<!-- 												id="like-checkbox-${alojamiento.id}" checked -->
-							<!-- 												class="heart-checkbox" name="favorito${alojamiento.id}" -->
-							<!-- 												onchange="submitForm('like-checkbox-${alojamiento.id}')"> -->
-							<!-- 												<span class="heart-icon"> <i class="fas fa-heart"></i> -->
-							<!-- 											</span> -->
-							<!-- 											</label> -->
-							<!-- 										</c:when> -->
-							<!-- 										<c:otherwise> -->
-							<!-- 											<label for="like-checkbox-${alojamiento.id}" -->
-							<!-- 												class="heart-label"> <input type="checkbox" -->
-							<!-- 												id="like-checkbox-${alojamiento.id}" class="heart-checkbox" -->
-							<!-- 												name="favorito${alojamiento.id}" -->
-							<!-- 												onchange="submitForm('like-checkbox-${alojamiento.id}')"> -->
-							<!-- 												<span class="heart-icon"> <i class="fas fa-heart"></i> -->
-							<!-- 											</span> -->
-							<!-- 											</label> -->
-							<!-- 										</c:otherwise> -->
-							<!-- 									</c:choose> -->
-							<!-- 								</form> -->
-							<!-- 							</c:if> -->
-
 						</div>
 
 						<div class="col-6 pt-1">
@@ -251,70 +197,6 @@
 		</div>
 
 	</div>
-
-
-	<script>
-			function submitForm(checkboxId) {
-				document.getElementById(checkboxId).form.submit();
-			}
-		</script>
-
-	<script>
-			function ordenar(seOrdena) {
-				// Crea un formulario oculto
-				var form = document.createElement("form");
-				form.setAttribute("method", "get");
-				form.setAttribute("action", "AlojamientosServlet.do");
-				
-				var inputOpcion = document.createElement("input");
-				inputOpcion.setAttribute("type", "hidden");
-				inputOpcion.setAttribute("name", "opcion");
-				inputOpcion.setAttribute("value", "${opcionDisponibilidad}");
-				form.appendChild(inputOpcion);
-	
-				// Crea un campo oculto para indicar si se debe eliminar la habitación
-				var inputEliminar = document.createElement("input");
-				inputEliminar.setAttribute("type", "hidden");
-				inputEliminar.setAttribute("name", "seOrdena");
-				inputEliminar.setAttribute("value", seOrdena);
-				form.appendChild(inputEliminar);
-	
-				// Agrega el formulario al cuerpo del documento y envíalo
-				document.body.appendChild(form);
-				form.submit();
-			}
-		</script>
-
-	<script>
-		function enviarFiltro(opcionSeleccionada) {
-	 
-			var form = document.createElement("form");
-			form.setAttribute("method", "get");
-			form.setAttribute("action", "AlojamientosServlet.do");
-	
-			var inputOpcion = document.createElement("input");
-			inputOpcion.setAttribute("type", "hidden"); // Aquí estaba el error
-			inputOpcion.setAttribute("name", "opcion");
-			inputOpcion.setAttribute("value", opcionSeleccionada);
-			form.appendChild(inputOpcion);
-	
-			document.body.appendChild(form);
-			form.submit();
-		}
-	
-		// Obtener los radio buttons
-		const radioButtons = document.querySelectorAll('input[name="filtro"]');
-		
-		radioButtons.forEach(radioButton => {
-			radioButton.addEventListener('click', function () {
-				// Obtener el valor del radio button seleccionado
-				const selectedValue = this.value;
-				// Llamar a la función para enviar el filtro seleccionado al servlet
-				enviarFiltro(selectedValue);
-			});
-		});
-	</script>
-
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

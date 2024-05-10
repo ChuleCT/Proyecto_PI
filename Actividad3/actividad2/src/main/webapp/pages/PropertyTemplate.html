@@ -5,7 +5,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				<h1 class="mb-3">Edición de Alojamiento</h1>
+				<h1 class="mb-3" data-ng-show="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)">Edición de Alojamiento</h1>
+				<h1 class="mb-3" data-ng-show="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)">Borrado de Alojamiento</h1>
+				<h1 class="mb-3" data-ng-show="propertyVM.functions.where('/createProperty')">Creación de Alojamiento</h1>
+				
 				<form data-ng-submit="propertyVM.functions.propertyHandlerMethod()">
 
 					<div class="mb-3">

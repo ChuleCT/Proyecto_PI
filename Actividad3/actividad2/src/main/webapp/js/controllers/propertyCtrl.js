@@ -5,6 +5,7 @@ angular.module('bookingApp')
 			var propertyVM = this;
 			propertyVM.user = {}; // en el propertyDetails se usa para mostrar el nombre del usuario de las reviews y controlar si es el dueño de la propiedad
 			propertyVM.property = {};
+			propertyVM.size = 0;
 			propertyVM.search = "";
 			propertyVM.servicesChecked = [];
 			propertyVM.allServices = [];
@@ -18,6 +19,20 @@ angular.module('bookingApp')
 
 				where: function(route) {
 					return $location.path() == route;
+				},
+				
+				
+				getUserAndCheck: function() {
+					usersFactory.getUser()
+						.then(function(response) {
+							propertyVM.user = response;
+							if (propertyVM.property.idu != propertyVM.user.id) {
+								$location.path('/noPermission');
+							} else {
+								propertyVM.functions.getAllServices();
+							}
+							console.log("User: ", propertyVM.user);
+						});
 				},
 
 				getUser: function() {
@@ -39,8 +54,16 @@ angular.module('bookingApp')
 					propertiesFactory.getProperty(id)
 						.then(function(response) {
 							propertyVM.property = response;
+							if (propertyVM.functions.where('/editProperty/' + id)) {
+								console.log("He entrado en la comprobacion");
+								propertyVM.functions.getUserAndCheck();
+							}
+							
+							if (propertyVM.functions.where('/deleteProperty/' + id)) {
+								console.log("He entrado en la comprobacion");
+								propertyVM.functions.getUserAndCheck();
+							}
 							console.log("Property: ", propertyVM.property);
-
 							// Obtener servicios asociados a la propiedad seleccionada
 							servicesFactory.getServicesByPropertyId(id)
 								.then(function(response) {
@@ -376,7 +399,6 @@ angular.module('bookingApp')
 						.then(function(response) {
 							propertyVM.functions.getFavorites();
 							propertyVM.property = response;
-							propertyVM.size = propertyVM.property.length;
 
 							switch (availability) {
 								case 0:
@@ -404,6 +426,7 @@ angular.module('bookingApp')
 									break;
 							}
 							propertyVM.property = propertiesAux;
+							propertyVM.size = propertyVM.property.length;
 							console.log("Propiedades filtradas por disponibilidad: ", propertyVM.property);
 						})
 						.catch(function(error) {
