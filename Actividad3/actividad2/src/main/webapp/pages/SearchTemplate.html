@@ -95,26 +95,21 @@
 
 						<div class="col-6 pt-1">
 							<h4 class="negrita azul">{{alojamiento.name}}</h4>
-							<!-- 							<div> -->
-							<!-- 								<%-- Valoracion ESTRELLAS --%> -->
-							<!-- 								<c:set var="estrellaEntera" -->
-							<!-- 									value="${fn:split(alojamiento.gradesAverage, '.')[0]}" /> -->
-							<!-- 								<c:set var="estrellaMedia" -->
-							<!-- 									value="${fn:split(alojamiento.gradesAverage, '.')[1]}" /> -->
-							<!-- 								<%-- Itera sobre la parte entera --%> -->
-							<!-- 								<c:forEach var="i" begin="1" end="${estrellaEntera}"> -->
-							<!-- 									<i class="fas fa-star" -->
-							<!-- 										style="color: #b8b814; position: relative; top: -0.5em;"></i> -->
-							<!-- 								</c:forEach> -->
-							<!-- 								<%-- Verifica si hay una parte decimal --%> -->
-							<!-- 								<c:if test="${not empty estrellaMedia}"> -->
-							<!-- 										<%-- Si la parte decimal es .5, añade una estrella media --%> -->
-							<!-- 										<c:if test="${estrellaMedia ge '5'}"> -->
-							<!-- 											<i class="fas fa-star-half-alt" -->
-							<!-- 												style="color: #b8b814; position: relative; top: -0.5em;"></i> -->
-							<!-- 										</c:if> -->
-							<!-- 								</c:if> -->
-							<!-- 							</div> -->
+							<div class="row">
+								<div>
+									<i class="fas fa-star"
+										data-ng-repeat="star in propertyVM.functions.getStars(alojamiento.gradesAverage) track by $index"
+										data-ng-if="star == 'Entera'"
+										style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+
+									<i class="fas fa-star-half-alt"
+										data-ng-repeat="star in propertyVM.functions.getStars(alojamiento.gradesAverage) track by $index"
+										data-ng-if="star == 'Media'"
+										style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+								</div>
+							</div>
+
+
 							<div class="row">
 								<div class="col-auto">
 									<p class="contenido-info negrita azul">
@@ -132,24 +127,20 @@
 									<div class="texto-con-linea negrita text-truncate">
 										{{alojamiento.description}}</div>
 									<div class="texto-con-linea">
-										<!-- 										<c:choose> -->
-										<!-- 											<c:when test="${alojamiento.petFriendly eq 1}"> -->
-										<!--                                                 Permite mascotas -->
-										<!--                                             </c:when> -->
-										<!-- 											<c:otherwise> -->
-										<!--                                                 No permite mascotas -->
-										<!--                                             </c:otherwise> -->
-										<!-- 										</c:choose> -->
+										<div data-ng-if="alojamiento.petFriendly == 1">
+											<i class="fa-solid fa-paw"></i> Admite mascotas
+										</div>
+										<div data-ng-if="alojamiento.petFriendly == 0">
+											<i class="fa-solid fa-paw"></i> No admite mascotas
+										</div>
 									</div>
 									<div class="texto-con-linea negrita rojo">
-										<!-- 										<c:choose> -->
-										<!-- 											<c:when test="${alojamiento.available eq 1}"> -->
-										<!--                                                 Disponible al menos una habitación -->
-										<!--                                             </c:when> -->
-										<!-- 											<c:otherwise> -->
-										<!--                                                 No disponible en el momento -->
-										<!--                                             </c:otherwise> -->
-										<!-- 										</c:choose> -->
+									    <div data-ng-if="alojamiento.available == 1">
+                                            Disponible al menos una habitación
+                                        </div>
+                                        <div data-ng-if="alojamiento.available == 0">
+                                            No disponible en el momento
+                                        </div>
 									</div>
 								</div>
 							</div>
@@ -159,19 +150,15 @@
 						<div class="col-3">
 							<div class="row pt-1">
 								<div class="col-8 text-end puntuacionTexto pt-2">
-									<!-- 									<c:choose> -->
-									<!-- 										<c:when test="${alojamiento.gradesAverage ge 4}"> -->
-									<!-- 											<b>Fabuloso</b><br> -->
-									<!-- 										</c:when> -->
-									<!-- 										<c:when test="${alojamiento.gradesAverage ge 2.5}"> -->
-									<!-- 											<b>Aceptable</b> -->
-									<!-- 											<br> -->
-									<!-- 										</c:when> -->
-									<!-- 										<c:otherwise> -->
-									<!-- 											<b>Regular</b> -->
-									<!-- 											<br> -->
-									<!-- 										</c:otherwise> -->
-									<!-- 									</c:choose> -->
+								    <div data-ng-if="alojamiento.gradesAverage >= 4">
+                                        <b>Fabuloso</b><br>
+                                    </div>
+                                    <div data-ng-if="alojamiento.gradesAverage >= 2.5 && alojamiento.gradesAverage < 4">
+                                        <b>Aceptable</b><br>
+                                    </div>
+                                    <div data-ng-if="alojamiento.gradesAverage < 2.5">
+                                        <b>Regular</b><br>
+                                    </div>
 								</div>
 								<div class="col-3">
 									<p

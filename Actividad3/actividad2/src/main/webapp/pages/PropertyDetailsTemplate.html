@@ -10,30 +10,23 @@
 			<div class="col-12">
 				<div class="row ms-1 ">
 					<div class="col-10 ">
-						<!-- 						<div> -->
-						<!-- 							<%-- Valoracion ESTRELLAS --%> -->
-						<!-- 							<c:set var="estrellaEntera" -->
-						<!-- 								value="${fn:split(property.gradesAverage, '.')[0]}" /> -->
-						<!-- 							<c:set var="estrellaMedia" -->
-						<!-- 								value="${fn:split(property.gradesAverage, '.')[1]}" /> -->
-						<!-- 							<%-- Itera sobre la parte entera --%> -->
-						<!-- 							<c:forEach var="i" begin="1" end="${estrellaEntera}"> -->
-						<!-- 								<i class="fas fa-star" -->
-						<!-- 									style="color: #b8b814; position: relative; top: -0.5em;"></i> -->
-						<!-- 							</c:forEach> -->
-						<!-- 							<%-- Verifica si hay una parte decimal --%> -->
-						<!-- 							<c:if test="${not empty estrellaMedia}"> -->
-
-						<!-- 								<%-- Si la parte decimal es .5, añade una estrella media --%> -->
-						<!-- 								<c:if test="${estrellaMedia ge '5'}"> -->
-						<!-- 									<i class="fas fa-star-half-alt" -->
-						<!-- 										style="color: #b8b814; position: relative; top: -0.5em;"></i> -->
-						<!-- 								</c:if> -->
 
 
-						<!-- 							</c:if> -->
-						<!-- 						</div> -->
 						<h4 class="negrita">{{propertyVM.property.name}}</h4>
+						<div class="row">
+							<div>
+								<i class="fas fa-star"
+									data-ng-repeat="star in propertyVM.stars track by $index"
+									data-ng-if="star == 'Entera'"
+									style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+
+								<i class="fas fa-star-half-alt"
+									data-ng-repeat="star in propertyVM.stars track by $index"
+									data-ng-if="star == 'Media'"
+									style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+							</div>
+						</div>
+
 						<div class="d-flex align-items-center">
 							<i class="fa-solid fa-location-dot"></i> <span>
 								{{propertyVM.property.address}}</span> <i
@@ -259,32 +252,6 @@
 			</div>
 		</div>
 	</div>
-
-	<script>
-		function eliminar(seBorra) {
-			// Crea un formulario oculto
-			var form = document.createElement("form");
-			form.setAttribute("method", "post");
-			form.setAttribute("action", "ReviewServlet.do");
-
-			var inputId = document.createElement("input");
-			inputId.setAttribute("type", "hidden");
-			inputId.setAttribute("name", "idPropertyReviewed");
-			inputId.setAttribute("value", "${property.id}");
-			form.appendChild(inputId);
-
-			// Crea un campo oculto para indicar si se debe eliminar la habitación
-			var inputEliminar = document.createElement("input");
-			inputEliminar.setAttribute("type", "hidden");
-			inputEliminar.setAttribute("name", "seBorra");
-			inputEliminar.setAttribute("value", seBorra);
-			form.appendChild(inputEliminar);
-
-			// Agrega el formulario al cuerpo del documento y envíalo
-			document.body.appendChild(form);
-			form.submit();
-		}
-	</script>
 
 
 

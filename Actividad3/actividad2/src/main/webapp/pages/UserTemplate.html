@@ -18,6 +18,7 @@
 						pattern="[A-Za-z0-9]+" title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
 						data-ng-readonly="userVM.functions.where('/deleteUser')" required>
 					<label class="form-label">Apellidos</label> <input type="text" class="form-control"
+					pattern="[A-Za-z0-9\s]+"
 						placeholder="Indica tus apellidos" name="surname" id="surname" data-ng-model="userVM.user.surname" data-ng-readonly="userVM.functions.where('/deleteUser')"
 						required>
 					<label class="form-label">Email</label> <input type="email" class="form-control"

@@ -15,6 +15,7 @@ angular.module('bookingApp')
 			propertyVM.userFavorites = [];
 			propertyVM.accommodations = [];
 			propertyVM.accommodationsSelected = {};
+			propertyVM.stars = [];
 			propertyVM.functions = {
 
 				where: function(route) {
@@ -51,7 +52,7 @@ angular.module('bookingApp')
 				},
 
 				getProperty: function(id) {
-					propertiesFactory.getProperty(id)
+					return propertiesFactory.getProperty(id)
 						.then(function(response) {
 							propertyVM.property = response;
 							if (propertyVM.functions.where('/editProperty/' + id)) {
@@ -62,6 +63,11 @@ angular.module('bookingApp')
 							if (propertyVM.functions.where('/deleteProperty/' + id)) {
 								console.log("He entrado en la comprobacion");
 								propertyVM.functions.getUserAndCheck();
+							}
+							
+							if (propertyVM.functions.where('/propertyDetails/' + id)) {
+								console.log("He entrado en la comprobacion");
+								propertyVM.stars = propertyVM.functions.getStars(propertyVM.property.gradesAverage);
 							}
 							console.log("Property: ", propertyVM.property);
 							// Obtener servicios asociados a la propiedad seleccionada
@@ -336,37 +342,6 @@ angular.module('bookingApp')
 						});
 				},
 
-
-				//Habría que hacer ahora el switch para las distintas rutas
-				propertyHandlerMethod: function() {
-					if (propertyVM.functions.where('/myProperties')) {
-						propertyVM.functions.getPropertiesByUser();
-					} else if (propertyVM.functions.where('/createProperty')) {
-						propertyVM.functions.createProperty();
-						$location.path('/myProperties');
-					} else if (propertyVM.functions.where('/editProperty/' + propertyVM.property.id)) {
-						propertyVM.functions.updateProperty();
-						$location.path('/myProperties');
-					} else if (propertyVM.functions.where('/properties/' + propertyVM.search)) {
-						propertyVM.functions.getPropertiesBySearch(propertyVM.search);
-					} else if (propertyVM.functions.where('/deleteProperty/' + propertyVM.property.id)) {
-						propertyVM.functions.deleteProperty(propertyVM.property.id);
-						$location.path('/myProperties');
-					}
-				},
-
-				//Metodos para las reviews
-				reviewHandlerMethod: function() {
-					if (propertyVM.yaValorada) {
-						propertyVM.functions.updateOpinion(propertyVM.myOpinion, propertyVM.property.id);
-						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
-					} else {
-						propertyVM.functions.createOpinion(propertyVM.myOpinion, propertyVM.property.id);
-						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
-					}
-					$window.location.reload();
-				},
-
 				//Metodo para gestionar las reservas de habitaciones
 				getAccommodations: function(propertyId) {
 					accommodationsFactory.getAccommodations(propertyId)
@@ -434,7 +409,58 @@ angular.module('bookingApp')
 						});
 				},
 
+				getStars: function(gradesAverage) {
+					var stars = [];
+					var entera = Math.floor(gradesAverage); // Parte entera del promedio
+					var decimal = gradesAverage - entera; // Parte decimal del promedio
+
+					console.log("Propiedad al llamar a getStars: ", propertyVM.property);
+					// Iterar para agregar estrellas completas
+					for (var i = 0; i < entera; i++) {
+						stars.push('Entera');
+					}
+
+					// Agregar estrella media si corresponde
+					if (decimal >= 0.5) {
+						stars.push('Media');
+					}
+
+					console.log("Estrellas: ", stars);
+					return stars;
+				},
+				
+				propertyHandlerMethod: function() {
+					if (propertyVM.functions.where('/myProperties')) {
+						propertyVM.functions.getPropertiesByUser();
+					} else if (propertyVM.functions.where('/createProperty')) {
+						propertyVM.functions.createProperty();
+						$location.path('/myProperties');
+					} else if (propertyVM.functions.where('/editProperty/' + propertyVM.property.id)) {
+						propertyVM.functions.updateProperty();
+						$location.path('/myProperties');
+					} else if (propertyVM.functions.where('/properties/' + propertyVM.search)) {
+						propertyVM.functions.getPropertiesBySearch(propertyVM.search);
+					} else if (propertyVM.functions.where('/deleteProperty/' + propertyVM.property.id)) {
+						propertyVM.functions.deleteProperty(propertyVM.property.id);
+						$location.path('/myProperties');
+					}
+				},
+
+				//Metodos para las reviews
+				reviewHandlerMethod: function() {
+					if (propertyVM.yaValorada) {
+						propertyVM.functions.updateOpinion(propertyVM.myOpinion, propertyVM.property.id);
+						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
+					} else {
+						propertyVM.functions.createOpinion(propertyVM.myOpinion, propertyVM.property.id);
+						//Para que se recargue la pagina y se vea la review actualizada recargamos la pagina
+					}
+					$window.location.reload();
+				},
+
 			}
+			
+			
 
 			propertyVM.search = $routeParams.Search;
 			if (propertyVM.functions.where('/editProperty/' + $routeParams.ID)) {

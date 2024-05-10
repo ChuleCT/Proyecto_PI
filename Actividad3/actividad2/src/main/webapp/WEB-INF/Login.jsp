@@ -40,9 +40,9 @@
                             <div class="col-5">
                                 <a href="pages/Index.html#!/createUser" class="text-primary">¿No estás registrado?</a>
                             </div>
-                            <div class="col-6 offset-1">
-                                <a href="BusquedaServlet.do" class="text-primary">Acceder sin iniciar sesión</a>
-                            </div>
+<!--                             <div class="col-6 offset-1"> -->
+<!--                                 <a href="BusquedaServlet.do" class="text-primary">Acceder sin iniciar sesión</a> -->
+<!--                             </div> -->
                         </div>
 
                     </div>

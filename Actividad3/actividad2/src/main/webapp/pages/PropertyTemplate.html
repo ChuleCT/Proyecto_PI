@@ -17,7 +17,7 @@
 							placeholder="Indica el nombre del alojamiento" name="name"
 							id="name" data-ng-model="propertyVM.property.name"
 							data-ng-readonly="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)"
-							pattern="[A-Za-z0-9]+"
+							pattern="[A-Za-z0-9\s]+"
 							title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
 							required>
 					</div>
@@ -80,22 +80,41 @@
 							</div>
 						</div>
 					</fieldset>
+					
+					
+					<fieldset
+						data-ng-disabled="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)">
+						<div class="mb-3">
+							<p>Permite mascotas</p>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="petFriendly"
+									id="si" data-ng-model="propertyVM.property.petFriendly"
+									data-ng-value="1" required> <label
+									class="form-check label" for="si">Sí</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="petFriendly"
+									id="no" data-ng-model="propertyVM.property.petFriendly" 
+									data-ng-value="0" required> <label
+									class="form-check label" for="no">No</label>
+							</div>
+						</div>
+					</fieldset>
 
 
 					<input type="submit"
-						class="form-control btn btn-primary col-12 mt-2"
-						value="Confirmar cambios"
-						data-ng-show="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)">
+							class="form-control btn btn-primary col-12 mt-2"
+							value="Confirmar cambios"
+							data-ng-show="propertyVM.functions.where('/editProperty/'+propertyVM.property.id)">
 
-					<input type="submit"
-						class="form-control btn btn-danger col-12 mt-2"
-						value="Borrar alojamiento"
-						data-ng-show="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)">
-					<input type="submit"
-						class="form-control btn btn-primary col-12 mt-2"
-						value="Crear alojamiento"
-						data-ng-show="propertyVM.functions.where('/createProperty')">
-
+						<input type="submit"
+							class="form-control btn btn-danger col-12 mt-2"
+							value="Borrar alojamiento"
+							data-ng-show="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)">
+						<input type="submit"
+							class="form-control btn btn-primary col-12 mt-2"
+							value="Crear alojamiento"
+							data-ng-show="propertyVM.functions.where('/createProperty')">
 				</form>
 			</div>
 		</div>
