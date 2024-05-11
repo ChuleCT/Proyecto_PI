@@ -150,15 +150,6 @@
                         <div data-ng-show="accommodation.numAccommodations === 1">
                             <p class="text-warning negrita texto-default">Solo queda 1 habitación en nuestra web!</p>
                         </div>
-                        <div class="container-fluid mt-3 border-2">
-                            <div class="row d-inline-flex align-items-center">
-                                <div data-ng-repeat="service in propertyVM.servicesChecked">
-                                    <div class="col-auto">
-                                        <i class="fa-solid fa-check verde"></i> <span class="texto-default">{{service.name}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </td>
                     <td class="item-align-center"><span class="negrita">€ {{accommodation.price}}</span> <span class="texto-default">Incluye impuestos y cargos</span></td>
                     <td><input type="number" name="cantidad" min="0" max="{{accommodation.numAccommodations}}" step="1" data-ng-model="propertyVM.accommodationsSelected[accommodation.id]" class="mt-2"></td>

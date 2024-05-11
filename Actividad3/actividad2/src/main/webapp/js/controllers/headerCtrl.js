@@ -1,8 +1,13 @@
 angular.module('bookingApp')
-	.controller('headerCtrl', ['usersFactory', '$window', function(usersFactory, $window) {
+	.controller('headerCtrl', ['usersFactory', '$window', '$location', function(usersFactory, $window, $location) {
 		var headerViewModel = this;
 		headerViewModel.user = {};
 		headerViewModel.functions = {
+
+			where: function(route) {
+				return $location.path() == route;
+			},
+			
 			readUser: function() {
 				usersFactory.getUser()
 					.then(function(response) {
@@ -14,7 +19,7 @@ angular.module('bookingApp')
 						});
 			},
 			logout: function() {
-				window.location.pathname = '/actividad2/LogoutServlet.do';
+				$window.location.pathname = '/actividad2/LogoutServlet.do';
 			}
 		}
 		headerViewModel.functions.readUser();

@@ -33,7 +33,12 @@
 <body>
     <!-- navbar -->
     <div class="container-fluid color-navbar pt-3 " data-ng-controller="headerCtrl as headerVM">
-        <div class="row" id="navbar">
+    	<div class="row" id="navbar-crearCuenta" data-ng-show="headerVM.functions.where('/createUser')">
+            <div class="col-4">
+                <a class="navbar-brand text-light fs-4 fw-bold" href="#!/">Booking.com</a>
+            </div>
+        </div>
+        <div class="row" id="navbar" data-ng-hide="headerVM.functions.where('/createUser')">
             <div class="col-4 offset-2">
                 <a class="navbar-brand text-light fs-4 fw-bold" href="#!/">Booking.com</a>
             </div>

@@ -354,7 +354,9 @@ angular.module('bookingApp')
 				crearReservaProvisional: function() {
 					console.log("Reserva provisional: ", propertyVM.accommodationsSelected);
 					for (var clave in propertyVM.accommodationsSelected) {
-						bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave])
+						if (propertyVM.accommodationsSelected[clave] > 0) {
+							bookingsFactory.postProvisionalBooking(clave, propertyVM.accommodationsSelected[clave]);
+						}
 					}
 					$location.path('/shoppingCart');
 				},
