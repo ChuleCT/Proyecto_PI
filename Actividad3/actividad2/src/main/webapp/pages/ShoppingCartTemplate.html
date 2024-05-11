@@ -1,0 +1,134 @@
+<body>
+
+	<link rel="stylesheet" href="../css/Carrito.css">
+
+	<div class="container mt-5"
+		data-ng-show="!isEmpty(bookingVM.provisionalBookings)">
+		<div class="row">
+			<div class="col-4 mx-auto">
+				<div class="row">
+					<div class="col border rounded">
+						<h5 class="fw-bold mt-3">{{bookingVM.property.name}}</h5>
+						<p>{{bookingVM.property.address}}</p>
+						<p>
+							<span
+								class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">{{bookingVM.property.gradesAverage}}</span>
+							Fabuloso
+						</p>
+
+						<!-- 								<c:forEach var="service" items="${services}"> -->
+						<!-- 									<p class="me-2"> -->
+						<!-- 										<i class="${service.icon} me-2" aria-hidden="true"></i>${service.name}</p> -->
+						<!-- 								</c:forEach> -->
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col border rounded">
+						<h5 class="fw-bold mb-3 mt-3">Los datos de tu reserva</h5>
+						<p>Has seleccionado:</p>
+						<div class="list-group list-group-flush mb-2">
+							<div data-ng-repeat="entry in bookingVM.provisionalBookings">
+								<div
+									class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+									<div class="row w-100">
+										<div class="col-9 d-flex align-items-center text-truncate">
+											<span>{{entry.name}}</span>
+										</div>
+										<div
+											class="col-3 d-flex justify-content-end align-items-center">
+											<span class="badge bg-primary rounded-pill">{{entry.num}}
+												Habitaciones</span>
+											<button type="button" class="btn btn-link ms-2"
+												data-ng-click="bookingVM.functions.deleteBooking(entry.ida)">
+												<i class="fa fa-trash text-danger"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-3 mb-5">
+					<div class="col border rounded">
+						<h5 class="fw-bold mb-3 mt-3">Desglose del precio</h5>
+						<div class="row fondo mb-3">
+							<div class="col">
+								<h4 class="fw-bold mt-3">Total</h4>
+							</div>
+							<div class="col">
+								<h4 class="fw-bold text-end mt-3">€
+									{{bookingVM.totalPrice}}</h4>
+								<p>Incluye impuestos y cargos</p>
+							</div>
+						</div>
+						<h6 class="fw-bold">Información sobre el precio</h6>
+						<p>
+							<i class="fa fa-credit-card" aria-hidden="true"></i> Incluye €
+							{{bookingVM.totalPrice * 0.10}} de impuestos y cargos
+						</p>
+						<p>10% de IVA // € {{bookingVM.totalPrice * 0.10}}</p>
+						<form data-ng-submit="bookingVM.functions.confirmBooking()">
+							<button type="submit" class="btn btn-primary w-100 mb-2">Reservar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-5"
+		data-ng-show="isEmpty(bookingVM.provisionalBookings)">
+		<div class="row">
+			<div class="col-4 mx-auto">
+				<div class="row">
+					<div class="col border 
+								rounded">
+						<h5 class="fw-bold mt-3">No hay datos de reserva</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script>
+		function eliminar(id, eliminarHabitacion) {
+			// Crea un formulario oculto
+			var form = document.createElement("form");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "ShoppingCartServlet.do");
+
+			// Crea un campo oculto para enviar el ID del alojamiento
+			var inputId = document.createElement("input");
+			inputId.setAttribute("type", "hidden");
+			inputId.setAttribute("name", "accommodationId");
+			inputId.setAttribute("value", id);
+			form.appendChild(inputId);
+
+			// Crea un campo oculto para indicar si se debe eliminar la habitación
+			var inputEliminar = document.createElement("input");
+			inputEliminar.setAttribute("type", "hidden");
+			inputEliminar.setAttribute("name", "eliminarHabitacion");
+			inputEliminar.setAttribute("value", eliminarHabitacion);
+			form.appendChild(inputEliminar);
+
+			// Agrega el formulario al cuerpo del documento y envíalo
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,56 @@
+<body>
+
+<link rel="stylesheet" href="../css/Reserva.css">
+
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-10 offset-2">
+				<h3 class="fw-bold">Mis alojamientos</h3>
+			</div>
+			<a data-ng-href="#!/createProperty"
+				class="btn btn-primary col-2 offset-2">Nuevo alojamiento</a>
+		</div>
+
+		<div class="row mt-4" data-ng-repeat="property in propertyVM.property">
+			<div class="col-8 offset-2">
+				<h4 class="fw-bold">{{ property.city }}</h4>
+				<fieldset class="shadow rounded">
+					<div class="row py-3 ps-2">
+						<div class="col-2 ps-4">
+							<img class="rounded mt-2" src="../images/ilunion.jpg"
+								alt="foto Ilunion Suites Madrid">
+						</div>
+						<div class="col">
+							<p>
+								<span class="fw-bold">{{ property.name }} </span>
+							</p>
+							<span>{{ property.address }}</span>
+							<p>{{ property.telephone }}</p>
+							<p class="contenido-info">a {{ property.centerDistance }} km
+								del centro</p>
+						</div>
+						<div class="col-2 text-end pe-5">
+							
+							<a data-ng-href="#!/editProperty/{{property.id}}"
+								class="btn btn-primary mt-4">Editar</a> <a
+								data-ng-href="#!/deleteProperty/{{property.id}}"
+								class="btn btn-danger mt-3">Eliminar</a>
+
+						</div>
+					</div>
+						<div class="row ps-2 pb-3">
+							<div class="col-4 ps-4">
+								<a data-ng-href="#!/myAccommodations/{{property.id}}"
+									class="btn btn-primary mt-4">Gestionar habitaciones</a>
+							</div>
+						</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

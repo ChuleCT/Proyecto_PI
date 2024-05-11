@@ -1,0 +1,48 @@
+<body>
+
+<link rel="stylesheet" href="../css/DetalleAlojamiento.css">
+
+	<div class="container mb-5 pagina">
+		<div class="row">
+			<div class="col-12">
+				<h3 class="fw-bold">Gestión de habitaciones</h3>
+			</div>
+			<a data-ng-href="#!/createAccommodation/{{accommodationVM.propertyID}}"
+				class="btn btn-primary col-2 fw-bold">Nueva habitación +</a>
+		</div>
+		<div class="row" data-ng-repeat="accommodation in accommodationVM.accommodations">
+				<div class="col-6 mt-4">
+					<fieldset class="shadow rounded">
+						<div class="row pt-3 mb-4">
+							<div class="col-8 ps-4">
+								<p class="azul negrita">{{accommodation.name}}</p>
+								<p class="negrita text-truncate">{{accommodation.description}}</p>
+								<p>
+									Precio de la habitación:<span class="negrita">
+										{{accommodation.price}}€</span>
+								</p>
+
+								<span class="verde negrita" data-ng-show="accommodation.numAccommodations > 1">Número de habitaciones
+											disponibles: {{accommodation.numAccommodations}}</span>
+								<span class=" negrita text-warning" data-ng-show="accommodation.numAccommodations == 1">Número de
+											habitaciones disponibles: {{accommodation.numAccommodations}}
+										</span>
+								<span class="rojo negrita" data-ng-show="accommodation.numAccommodations == 0">No quedan habitaciones
+											disponibles</span>
+							</div>
+							<div class="col text-end pe-5 mt-5">
+								<a
+									data-ng-href="#!/editAccommodation/{{accommodation.id}}"
+									class="btn btn-primary mb-2 negrita">Editar</a> <br> <br>
+								<a
+									data-ng-href="#!/deleteAccommodation/{{accommodation.id}}"
+									class="btn btn-danger">Eliminar</a>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+		</div>
+	</div>
+
+
+</body>

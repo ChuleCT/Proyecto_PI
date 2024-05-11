@@ -64,15 +64,16 @@ input {
     top: -1.5em;
 
 }
-#imagenGoogleMaps {
-    width: 15.1em;
-    border-radius: 0.8em;
+
+.opiniones {
+	position: relative;
+	left: -7em;
 }
 
-#botonImagenGoogleMaps {
-    position: relative;
-    top: -1em;
-    width: 100%;
+.miOpinion {
+	position: relative;
+	left: 0em;
+	top: -1em;
 }
 
 .fa-star {

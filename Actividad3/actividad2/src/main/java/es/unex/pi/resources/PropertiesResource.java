@@ -55,9 +55,9 @@ public class PropertiesResource {
 
 	// Get para todas las propiedades por el destino (getALLBySearchDestination)
 	@GET
-	@Path("/{search}")
+	@Path("/{search: [a-zA-Z0-9\s%20]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Property> getPropertiesByDestinationJSON(@PathParam("search") String search) {
+	public List<Property> getPropertiesByDestinationJSON(@PathParam("search") String search, @Context HttpServletRequest request) {
 		List<Property> properties = null;
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
@@ -65,15 +65,19 @@ public class PropertiesResource {
 		propertyDao.setConnection(conn);
 
 		properties = propertyDao.getAllBySearchDestination(search);
+		
+		for (Property p : properties) {
+			System.out.println("Property: " + p);
+		}
 
 		return properties;
 	}
 
 	// Get para una propiedad en concreto
 	@GET
-	@Path("/{propertyid: [0-9]+}")
+	@Path("/property/{propertyid: [0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Property getPropertyJSON(@PathParam("propertyid") long propertyid) {
+	public Property getPropertyJSON(@PathParam("propertyid") long propertyid, @Context HttpServletRequest request) {
 		Property property = null;
 		Connection conn = (Connection) sc.getAttribute("dbConn");
 
@@ -81,31 +85,32 @@ public class PropertiesResource {
 		propertyDao.setConnection(conn);
 
 		property = propertyDao.get(propertyid);
-
 		return property;
 	}
-
+	
 	// Post para añadir una propiedad
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response post(Property property, @Context HttpServletRequest request) {
-		Response res = null;
-		Connection conn = (Connection) sc.getAttribute("dbConn");
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response post(Property property, @Context HttpServletRequest request) {
+			Response res = null;
+			Connection conn = (Connection) sc.getAttribute("dbConn");
 
-		PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
-		propertyDao.setConnection(conn);
+			PropertyDAO propertyDao = new JDBCPropertyDAOImpl();
+			propertyDao.setConnection(conn);
 
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
 
-		property.setIdu(user.getId());
-		long id = propertyDao.add(property);
+			property.setIdu(user.getId());
+			long id = propertyDao.add(property);
 
-		String message = "Property added";
-		return Response.status(Response.Status.CREATED)
-				.entity("{\"status\" : \"201\", \"message\" : \"" + message + "\"}")
-				.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build()).build();
-	}
+			String message = "Property added";
+			
+			// Devuelve el id de la propiedad creada
+			return Response.status(Response.Status.CREATED)
+					.entity("{\"status\" : \"201\", \"message\" : \"" + message + "\", \"id\" : " + id + "}")
+					.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(id)).build()).build();
+		}
 	
 	// Post para añadir una propiedad con un formulario
 	@POST

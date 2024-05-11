@@ -8,28 +8,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Busqueda.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/Busqueda.css">
     <script src="../js/angular/angular.js"></script>
     <script src="../js/angular/angular-route.js"></script>
     <script src="../js/app.js"></script>
     <script src="../js/factories/usersFactory.js"></script>
+    <script src="../js/factories/propertiesFactory.js"></script>
+    <script src="../js/factories/accommodationsFactory.js"></script>
+    <script src="../js/factories/servicesFactory.js"></script>
+    <script src="../js/factories/bookingsFactory.js"></script>
+    <script src="../js/factories/reviewsFactory.js"></script>
+    <script src="../js/factories/favoritesFactory.js"></script>
     <script src="../js/controllers/headerCtrl.js"></script>
     <script src="../js/controllers/userCtrl.js"></script>
+    <script src="../js/controllers/propertyCtrl.js"></script>
+    <script src="../js/controllers/accommodationCtrl.js"></script>
+    <script src="../js/controllers/bookingCtrl.js"></script>
+   
 
 
 </head>
 
 <body>
     <!-- navbar -->
-    <div class="container-fluid color-navbar bg-primary pt-3 pb-5" data-ng-controller="headerCtrl as headerVM">
-        <div class="row" id="navbar">
+    <div class="container-fluid color-navbar pt-3 " data-ng-controller="headerCtrl as headerVM">
+    	<div class="row" id="navbar-crearCuenta" data-ng-show="headerVM.functions.where('/createUser')">
+            <div class="col-4">
+                <a class="navbar-brand text-light fs-4 fw-bold" href="#!/">Booking.com</a>
+            </div>
+        </div>
+        <div class="row" id="navbar" data-ng-hide="headerVM.functions.where('/createUser')">
             <div class="col-4 offset-2">
                 <a class="navbar-brand text-light fs-4 fw-bold" href="#!/">Booking.com</a>
             </div>
 
             <div class="col-1 offset-1">
-                <a href="ShoppingCartServlet.do" class="btn btn-light ms-4 fw-bold"><i
+                <a href="#!/shoppingCart" class="btn btn-light ms-4 fw-bold"><i
                         class="fa-solid fa-cart-shopping"></i> Carrito </a>
             </div>
             <div class="col-1">
@@ -41,14 +56,14 @@
                     <div class="dropdown-menu bg-secondary">
                         <a class="dropdown-item fw-bold" href="#!/editUser"><i class="fa-solid fa-user"></i>Mi
                             perfil</a>
-                        <a class="dropdown-item fw-bold" href="ListaAlojamientosServlet.do"><i
+                        <a class="dropdown-item fw-bold" href="#!/myProperties"><i
                                 class="fa-solid fa-house"></i> Mis alojamientos</a>
-                        <a class="dropdown-item fw-bold" href="BookingsServlet.do"><i class="fa-solid fa-list"></i> Mis
+                        <a class="dropdown-item fw-bold" href="#!/myBookings"><i class="fa-solid fa-list"></i> Mis
                             reservas</a>
-                        <a class="dropdown-item fw-bold" href="FavoritesPropertiesServlet.do"><i
+                        <a class="dropdown-item fw-bold" href="#!/favoritesProperties"><i
                                 class="fa-solid fa-heart"></i> Mis favoritos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item fw-bold" href="LogoutServlet.do"><i class="fa-solid fa-power-off"></i>
+                        <a class="dropdown-item fw-bold" href="" data-ng-click="headerVM.functions.logout()"><i class="fa-solid fa-power-off"></i>
                             Logout</a>
                     </div>
                 </div>

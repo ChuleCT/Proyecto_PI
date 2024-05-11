@@ -1,0 +1,201 @@
+<body>
+
+	<link rel="stylesheet" href="../css/Alojamientos.css">
+
+	<div class="container mt-5">
+
+		<form class="row" id="busqueda"
+			data-ng-submit="propertyVM.functions.getPropertiesBySearch(propertyVM.search)">
+
+			<input type="text" id="destino" name="destino"
+				class="col bg-primary offset-1 pt-2 bg-light border border-3 border-warning rounded"
+				placeholder="¿A dónde vas?" data-ng-model="propertyVM.search"
+				required>
+
+			<div class="col-lg-1 col-md-1 col-sm-1 pt-1">
+				<input type="submit"
+					class="btn btn-primary border border-3 border-warning text-truncate"
+					id="btn-buscar" value="buscar">
+			</div>
+		</form>
+
+	</div>
+	</div>
+
+	<!-- Parte sobre el fondo blanco de la página: -->
+	<div class="container">
+		<div class="row px-5" id="fondoBlanco">
+
+
+			<div class="col-3">
+				<div class="row">
+					<div class="col-12">
+						<div class="bordered-box p-2 tablaIzquierda">
+							<p class="font-weight-bold mb-0">Filtrar por:</p>
+						</div>
+						<div class="bordered-box p-2 tablaIzquierdaSiguientes">
+							<div class="btn-group-vertical" data-toggle="buttons">
+								<label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion1"
+									value="Todos" data-ng-click="propertyVM.functions.propertiesByAvailability(2)" checked>
+									Todos
+								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion2"
+									value="Con disponibilidad"
+									data-ng-click="propertyVM.functions.propertiesByAvailability(1)"> Con
+									disponibilidad
+								</label> <label class="btn btn-outline-primary mb-0 w-100 text-start">
+									<input type="radio" name="filtro" id="filtro_opcion3"
+									value="Sin disponibilidad"
+									data-ng-click="propertyVM.functions.propertiesByAvailability(0)"> Sin
+									disponibilidad
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<!-- ################################################ -->
+			<!-- Columna principal -->
+			<!-- ################################################ -->
+			<div class="col-8">
+
+
+				<div class="row mb-5">
+					<h4 class="negrita">{{propertyVM.size}} alojamiento encontrados</h4>
+					<button type="button" class="btn btn-primary mt-3"
+						data-ng-click="propertyVM.functions.orderByRating()">Ordenar
+						por valoración</button>
+
+				</div>
+
+				<div data-ng-repeat="alojamiento in propertyVM.property">
+					<!-- Imágenes, nombre, precio, disponibilidad... de los alojamientos -->
+					<div class="row bordered-box informacionAlojamiento mb-3">
+
+						<div class="col-3">
+							<img src="../images/PalacioOquendo.png"
+								class="my-2 imagenesPreview" id="imagenPalacio"
+								alt="fachada Palacio de Oquendo">
+							<!-- Propiedades favoritas -->
+							<input type="checkbox" id="like-checkbox-{{alojamiento.id}}"
+								class="heart-checkbox" data-ng-model="alojamiento.favorite"
+								data-ng-change="propertyVM.functions.toggleFavorite(alojamiento.id)">
+							<label for="like-checkbox-{{alojamiento.id}}" class="heart-label">
+								<span class="heart-icon"
+								data-ng-class="{'heart-red': alojamiento.favorite, 'heart-gray': !alojamiento.favorite}">
+									<i class="fas fa-heart"></i>
+							</span>
+							</label>
+						</div>
+
+						<div class="col-6 pt-1">
+							<h4 class="negrita azul">{{alojamiento.name}}</h4>
+							<div class="row">
+								<div>
+									<i class="fas fa-star"
+										data-ng-repeat="star in propertyVM.functions.getStars(alojamiento.gradesAverage) track by $index"
+										data-ng-if="star == 'Entera'"
+										style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+
+									<i class="fas fa-star-half-alt"
+										data-ng-repeat="star in propertyVM.functions.getStars(alojamiento.gradesAverage) track by $index"
+										data-ng-if="star == 'Media'"
+										style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-auto">
+									<p class="contenido-info negrita azul">
+										{{alojamiento.city}}</p>
+								</div>
+								<div class="col-auto">
+									<p class="contenido-info">
+										<i class="fa-solid fa-location-dot"></i> a
+										{{alojamiento.centerDistance}} km del centro
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="bordered-box border-left">
+									<div class="texto-con-linea negrita text-truncate">
+										{{alojamiento.description}}</div>
+									<div class="texto-con-linea">
+										<div data-ng-if="alojamiento.petFriendly == 1">
+											<i class="fa-solid fa-paw"></i> Admite mascotas
+										</div>
+										<div data-ng-if="alojamiento.petFriendly == 0">
+											<i class="fa-solid fa-paw"></i> No admite mascotas
+										</div>
+									</div>
+									<div class="texto-con-linea negrita rojo">
+									    <div data-ng-if="alojamiento.available == 1">
+                                            Disponible al menos una habitación
+                                        </div>
+                                        <div data-ng-if="alojamiento.available == 0">
+                                            No disponible en el momento
+                                        </div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-3">
+							<div class="row pt-1">
+								<div class="col-8 text-end puntuacionTexto pt-2">
+								    <div data-ng-if="alojamiento.gradesAverage >= 4">
+                                        <b>Fabuloso</b><br>
+                                    </div>
+                                    <div data-ng-if="alojamiento.gradesAverage >= 2.5 && alojamiento.gradesAverage < 4">
+                                        <b>Aceptable</b><br>
+                                    </div>
+                                    <div data-ng-if="alojamiento.gradesAverage < 2.5">
+                                        <b>Regular</b><br>
+                                    </div>
+								</div>
+								<div class="col-3">
+									<p
+										class="bg-primary text-light px-1 rounded fw-bold puntuacionMedia">{{alojamiento.gradesAverage}}</p>
+								</div>
+
+
+							</div>
+							<div class="row">
+								<div class="col pt-5 me-1 text-end  pb-4">
+									<i class="fa-solid fa-phone ms-2"></i> <span>{{alojamiento.telephone}}</span>
+									<a data-ng-href="#!/propertyDetails/{{alojamiento.id}}"
+										class="btn btn-primary col-12"> Ver disponibilidad </a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+
+</body>

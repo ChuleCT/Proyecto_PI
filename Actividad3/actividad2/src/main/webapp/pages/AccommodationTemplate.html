@@ -1,0 +1,66 @@
+<body>
+
+	<link rel="stylesheet" href="../css/Edicion.css">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8 mx-auto">
+				<h1 class="mb-3"
+					data-ng-show="accommodationVM.functions.where('/createAccommodation')">Crear
+					Habitación</h1>
+				<h1 class="mb-3"
+					data-ng-show="accommodationVM.functions.where('/editAccommodation/'+accommodationVM.accommodations.id)">Editar
+					Habitación</h1>
+				<h1 class="mb-3"
+					data-ng-show="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)">Borrar
+					Habitación</h1>
+				<!-- 				<h4 class="mb-2 text-danger">${messages.error}</h4> -->
+				<form
+					data-ng-submit="accommodationVM.functions.accommodationHandlerMethod()">
+					<div class="mb-3">
+						<label for="nombreHabitacion" class="form-label">Nombre de
+							la habitación</label> <input type="text" class="form-control" id="name"
+							name="name" data-ng-model="accommodationVM.accommodations.name"
+							pattern="[A-Za-z0-9\s]+"
+							title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
+							data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="precio" class="form-label">Precio</label> <input
+							type="number" class="form-control" id="price" name="price"
+							step="1" min="0" max="999999999"
+							data-ng-model="accommodationVM.accommodations.price"
+							data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="descripcion" class="form-label">Descripción</label> <input
+							type="text" class="form-control" id="description"
+							name="description"
+							data-ng-model="accommodationVM.accommodations.description"
+							data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="precio" class="form-label">Número de
+							habitaciones disponibles</label> <input type="number"
+							class="form-control" id="numAccommodations"
+							name="numAccommodations" step="1" min="0" max="999999999"
+							data-ng-model="accommodationVM.accommodations.numAccommodations"
+							" 
+					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
+							required>
+					</div>
+
+
+					<input type="submit" class="form-control btn btn-primary col-12"
+						value="Guardar">
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>

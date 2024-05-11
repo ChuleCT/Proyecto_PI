@@ -1,0 +1,49 @@
+<body>
+
+<link rel="stylesheet"
+	href="../css/Reserva.css">
+	
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-10 offset-2">
+				<h3 class="fw-bold">Mis alojamientos favoritos</h3>
+			</div>
+		</div>
+		<div class="row mt-4" data-ng-repeat="property in propertyVM.property">
+			<div class="col-8 offset-2">
+				<h4 class="fw-bold"> {{ property.city }} </h4>
+					<fieldset class="shadow rounded">
+						<div class="row py-3 ps-2">
+							<div class="col-2 ps-4">
+								<img class="rounded mt-2" src="../images/ilunion.jpg"
+									alt="foto Ilunion Suites Madrid">
+							</div>
+							<div class="col">
+								<p>
+									<span class="fw-bold"> {{ property.name }} </span>
+								</p>
+								<span>{{property.address}}</span>
+								<p>{{property.telephone}}</p>
+								<p class="contenido-info">a {{ property.centerDistance }}km
+									del centro</p>
+							</div>
+							<div class="col text-end pe-5">
+								
+										<a
+											data-ng-href="#!/propertyDetails/{{property.id}}"
+											class="btn btn-primary mt-4">Ver alojamiento</a>
+										<br>
+										<button data-ng-click="propertyVM.functions.deleteFavorite(property.id)"
+											class="btn btn-danger mt-3">Eliminar de favoritos</button>
+									
+							</div>
+						</div>
+						
+					</fieldset>
+				</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

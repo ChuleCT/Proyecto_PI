@@ -92,8 +92,20 @@ public class UsersResource {
 
 		UserDAO userDao = new JDBCUserDAOImpl();
 		userDao.setConnection(conn);
+		
+		//Compruebo si el email ya existe
+		User u = userDao.getUserByEmail(user.getEmail());
+		if (u != null) {
+			throw new WebApplicationException(Response.Status.CONFLICT);
+		}
 
 		long id = userDao.add(user);
+		
+		//Recupero el usuario que acabo de añadir para meterlo en la sesion
+		
+		User u2 = userDao.getUserByEmail(user.getEmail());
+		HttpSession session = request.getSession();
+		session.setAttribute("user", u2);
 		
 		String message = "User added";
 		return Response.status(Response.Status.CREATED)

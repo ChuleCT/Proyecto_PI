@@ -1,6 +1,6 @@
 angular.module('bookingApp')
 	.factory("propertiesFactory", ['$http', function($http) {
-		var url = 'https://localhost:8443/actividad2/rest/orders/';
+		var url = 'https://localhost:8443/actividad2/rest/properties/';
 		var propertiesInterface = {
 			
 			//get all properties
@@ -13,7 +13,7 @@ angular.module('bookingApp')
 			
 			//get property by id
 			getProperty: function(id) {
-				return $http.get(url + id)
+				return $http.get(url + "property/" + id)
 					.then(function(response) {
 						return response.data;
 					});
@@ -27,11 +27,12 @@ angular.module('bookingApp')
 					});
 			},
 			
+		
 			//create a new property
 			postProperty: function(property) {
 				return $http.post(url, property)
 					.then(function(response) {
-						return response.status;
+						return response.data;
 					});
 			},
 			
