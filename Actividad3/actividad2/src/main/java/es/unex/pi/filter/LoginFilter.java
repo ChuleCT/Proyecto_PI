@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(urlPatterns = { "/orders/*","/rest/*","/pages/*" })
+//@WebFilter(urlPatterns = { "/orders/*","/rest/*","/pages/*" })
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
