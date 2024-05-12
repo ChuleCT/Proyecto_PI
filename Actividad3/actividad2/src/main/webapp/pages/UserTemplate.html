@@ -15,7 +15,7 @@
 				<h3 class="text-danger fw-5">{{userVM.message}}</h3>
 					<label class="form-label">Nombre</label> <input type="text" class="form-control"
 						placeholder="Indica tu nombre" name="name" id="name" data-ng-model="userVM.user.name" 
-						pattern="[A-Za-z0-9]+" title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
+						pattern="^(?! )[A-Za-z0-9 ]+(?<! )$" title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
 						data-ng-readonly="userVM.functions.where('/deleteUser')" required>
 					<label class="form-label">Apellidos</label> <input type="text" class="form-control"
 					pattern="[A-Za-z0-9\s]+"
