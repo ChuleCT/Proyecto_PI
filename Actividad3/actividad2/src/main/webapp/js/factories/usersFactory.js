@@ -16,7 +16,7 @@ angular.module('bookingApp')
 			},
 			postUser: function(user) {
 				url = url;
-				return $http.post(url + "createUser", user)
+				return $http.post(url, user)
 					.then(function(response) {
 						return response.status;
 					});

@@ -21,7 +21,7 @@
 						<label for="nombreHabitacion" class="form-label">Nombre de
 							la habitación</label> <input type="text" class="form-control" id="name"
 							name="name" data-ng-model="accommodationVM.accommodations.name"
-							pattern="^(?! )[A-Za-z0-9 ]+(?<! )$"
+							pattern="[A-Za-z0-9\s]+"
 							title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
 							data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
 							required>
