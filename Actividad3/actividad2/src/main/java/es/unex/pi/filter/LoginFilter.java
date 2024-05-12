@@ -3,6 +3,7 @@ package es.unex.pi.filter;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
 /**
  * Servlet Filter implementation class LoginFilter
  */
+@WebFilter(urlPatterns = { "/orders/*","/rest/*","/pages/*" })
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
@@ -42,7 +44,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(true);
 		if (session.getAttribute("user") == null) {
-		res.sendRedirect(req.getContextPath() + "/LoginServlet.do");
+			res.sendRedirect(req.getContextPath() + "/LoginServlet.do");
 		}
 		else {
 		//pass the request along the filter chain

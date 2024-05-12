@@ -29,6 +29,11 @@ angular.module('bookingApp')
 				usersFactory.putUser(userVM.user)
 					.then(function(response) {
 						console.log("User updated, status: " + response);
+						localStorage.setItem("Recarga", 1);
+						$location.path("/");
+					}, function(error) {
+						console.log("Error updating user, status: " + error);
+						userVM.message = "Ya existe un usuario con ese email, por favor, elija otro";
 					});
 			},
 			deleteUser: function() {
@@ -46,7 +51,6 @@ angular.module('bookingApp')
 				if (userVM.functions.where("/editUser")) {
 					console.log("Edit user, path:" + $location.path());
 					userVM.functions.updateUser();
-					$location.path("/");
 				}
 				if (userVM.functions.where("/deleteUser")) {
 					console.log("Delete user, path:" + $location.path());

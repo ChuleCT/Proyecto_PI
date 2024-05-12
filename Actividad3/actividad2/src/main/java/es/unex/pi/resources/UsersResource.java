@@ -139,31 +139,6 @@ public class UsersResource {
 	}
 	
 	@PUT
-	@Path("/{userid: [0-9]+}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response put(User user, @PathParam("userid") long userid, @Context HttpServletRequest request) {
-		Response response = null;
-
-		Connection conn = (Connection) sc.getAttribute("dbConn");
-
-		UserDAO userDao = new JDBCUserDAOImpl();
-		userDao.setConnection(conn);
-
-		User u = userDao.get(userid);
-		if (u != null) {
-			user.setId(userid);
-			userDao.update(user);
-			String message = "User updated";
-			return Response.status(Response.Status.OK)
-					.entity("{\"status\" : \"200\", \"message\" : \"" + message + "\"}")
-					.contentLocation(uriInfo.getAbsolutePathBuilder().path(Long.toString(userid)).build()).build();
-		} else {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
-		}
-	}
-	
-	// Put sin path, ya que no se necesita id porque se modifica el usuario de la sesion
-	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response put(User user, @Context HttpServletRequest request) {
 		Response response = null;
@@ -177,6 +152,14 @@ public class UsersResource {
 		User u = (User) session.getAttribute("user");
 		if (u != null) {
 			user.setId(u.getId());
+			String oldEmail = u.getEmail();
+			if (!oldEmail.equals(user.getEmail())) {
+				User u2 = userDao.getUserByEmail(user.getEmail());
+				if (u2 != null) {
+					throw new WebApplicationException(Response.Status.CONFLICT);
+				}
+			}
+			
 			userDao.update(user);
 			String message = "User updated";
 			return Response.status(Response.Status.OK)
