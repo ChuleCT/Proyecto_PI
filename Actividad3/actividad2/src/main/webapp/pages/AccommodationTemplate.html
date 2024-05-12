@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-8 mx-auto">
 				<h1 class="mb-3"
-					data-ng-show="accommodationVM.functions.where('/createAccommodation')">Crear
+					data-ng-show="accommodationVM.functions.where('/createAccommodation/'+accommodationVM.propertyID)">Crear
 					Habitación</h1>
 				<h1 class="mb-3"
 					data-ng-show="accommodationVM.functions.where('/editAccommodation/'+accommodationVM.accommodations.id)">Editar
@@ -48,14 +48,25 @@
 							class="form-control" id="numAccommodations"
 							name="numAccommodations" step="1" min="0" max="999999999"
 							data-ng-model="accommodationVM.accommodations.numAccommodations"
-							" 
+							 
 					data-ng-readonly="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)"
 							required>
 					</div>
 
 
-					<input type="submit" class="form-control btn btn-primary col-12"
-						value="Guardar">
+						<input type="submit"
+							class="form-control btn btn-primary col-12 mt-2"
+							value="Confirmar cambios"
+							data-ng-show="accommodationVM.functions.where('/editAccommodation/'+accommodationVM.accommodations.id)">
+
+						<input type="submit"
+							class="form-control btn btn-danger col-12 mt-2"
+							value="Borrar habitación"
+							data-ng-show="accommodationVM.functions.where('/deleteAccommodation/'+accommodationVM.accommodations.id)">
+						<input type="submit"
+							class="form-control btn btn-primary col-12 mt-2"
+							value="Crear habitación"
+							data-ng-show="accommodationVM.functions.where('/createAccommodation/'+accommodationVM.propertyID)">
 				</form>
 			</div>
 		</div>

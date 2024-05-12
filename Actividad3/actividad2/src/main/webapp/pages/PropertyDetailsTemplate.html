@@ -17,13 +17,11 @@
 							<div>
 								<i class="fas fa-star"
 									data-ng-repeat="star in propertyVM.stars track by $index"
-									data-ng-if="star == 'Entera'"
-									style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+									data-ng-if="star == 'Entera'"></i>
 
 								<i class="fas fa-star-half-alt"
 									data-ng-repeat="star in propertyVM.stars track by $index"
-									data-ng-if="star == 'Media'"
-									style="color: #b8b814; position: relative; top: -0.5em; margin-right: 5px;"></i>
+									data-ng-if="star == 'Media'"></i>
 							</div>
 						</div>
 
@@ -145,7 +143,7 @@
                             <p class="rojo negrita texto-default">No quedan habitaciones en nuestra web</p>
                         </div>
                         <div data-ng-show="accommodation.numAccommodations > 1">
-                            <p class="verde negrita texto-default">Quedan {{key.numAccommodations}} habitaciones en nuestra web</p>
+                            <p class="verde negrita texto-default">Quedan {{accommodation.numAccommodations}} habitaciones en nuestra web</p>
                         </div>
                         <div data-ng-show="accommodation.numAccommodations === 1">
                             <p class="text-warning negrita texto-default">Solo queda 1 habitación en nuestra web!</p>

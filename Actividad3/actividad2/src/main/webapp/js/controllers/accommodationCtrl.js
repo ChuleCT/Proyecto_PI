@@ -112,6 +112,7 @@ angular.module('bookingApp')
 				console.log("He entrado en el if");
 				accommodationVM.functions.getAccommodation($routeParams.ID);
 			} else if (accommodationVM.functions.where('/createAccommodation/' + $routeParams.ID)) {
+				accommodationVM.propertyID = $routeParams.ID;
 				console.log("He entrado en el if");
 				accommodationVM.functions.getProperty($routeParams.ID);
 			}

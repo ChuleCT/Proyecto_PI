@@ -197,6 +197,7 @@ public class ReviewsResource {
 		propertyDao.setConnection(conn);
 
 		Property property = propertyDao.get(propertyid);
+		
 
 		if (property != null) {
 			ReviewDAO reviewDao = new JDBCReviewDAOImpl();
@@ -236,14 +237,19 @@ public class ReviewsResource {
 			List<Review> reviews = reviewDao.getAllByProperty(propertyid);
 
 			double gradesAverage = 0;
-			for (int i = 0; i < reviews.size(); i++) {
-				gradesAverage += reviews.get(i).getGrade();
-			}
-			gradesAverage = gradesAverage / reviews.size();
-			
-			// 1 decimal
-			gradesAverage = Math.floor(gradesAverage * 10) / 10;
+			if (reviews.size() != 0) {
+				for (int i = 0; i < reviews.size(); i++) {
+					gradesAverage += reviews.get(i).getGrade();
+				}
+				
+				gradesAverage = gradesAverage / reviews.size();
+				
+				// 1 decimal
+				gradesAverage = Math.floor(gradesAverage * 10) / 10;
 
+			}
+			
+			
 			property.setGradesAverage(gradesAverage);
 
 			propertyDao.update(property);
