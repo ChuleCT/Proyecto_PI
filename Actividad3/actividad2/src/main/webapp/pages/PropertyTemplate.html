@@ -17,7 +17,7 @@
 							placeholder="Indica el nombre del alojamiento" name="name"
 							id="name" data-ng-model="propertyVM.property.name"
 							data-ng-readonly="propertyVM.functions.where('/deleteProperty/'+propertyVM.property.id)"
-							pattern="[A-Za-z0-9\s]+"
+							pattern="^(?! )[A-Za-z0-9 ]+(?<! )$"
 							title="El nombre solo puede contener letras mayúsculas, minúsculas y números."
 							required>
 					</div>

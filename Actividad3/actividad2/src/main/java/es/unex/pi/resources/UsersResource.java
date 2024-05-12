@@ -84,6 +84,7 @@ public class UsersResource {
 	}
 	
 	@POST
+	@Path("/createUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response post(User user, @Context HttpServletRequest request) throws Exception{
 		Response response = null;

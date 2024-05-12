@@ -18,7 +18,22 @@ import java.io.IOException;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(urlPatterns = { "/orders/*","/rest/*","/pages/*" })
+@WebFilter(urlPatterns = {"/pages/Index.html#!/shoppingCart",
+		"/pages/Index.html#!/editUser",
+		"/pages/Index.html#!/deleteUser",
+		"/pages/Index.html#!/myProperties",
+		"/pages/Index.html#!/createProperty",
+		"/pages/Index.html#!/editProperty/*",
+		"/pages/Index.html#!/deleteProperty/*",
+		"/pages/Index.html#!/myAccommodations/*",
+		"/pages/Index.html#!/createAccommodation/*",
+		"/pages/Index.html#!/editAccommodation/*",
+		"/pages/Index.html#!/deleteAccommodation/*",
+		"/pages/Index.html#!/myBookings/*",
+		"/pages/Index.html#!/favoritesProperties",
+		"/pages/Index.html#!/search/*",
+		"/pages/Index.html#!/propertyDetails/*"
+		})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**

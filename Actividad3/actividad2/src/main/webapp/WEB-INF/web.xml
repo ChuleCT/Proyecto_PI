@@ -238,7 +238,7 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
-    <servlet-name>BookingsServlet</servlet-name>
+    <url-pattern>BookingsServlet</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
